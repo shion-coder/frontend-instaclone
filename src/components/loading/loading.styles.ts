@@ -50,7 +50,7 @@ export const Bounce = styled.div<IBounceProps>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme, color }) => color || theme.colors.secondary};
+  background-color: ${({ theme, color }) => color || theme.material.palette.info.light};
   border-radius: 50%;
   opacity: 0.6;
   animation: ${bounce} 2s ${({ theme, delay }) => delay || theme.animation.delay} infinite

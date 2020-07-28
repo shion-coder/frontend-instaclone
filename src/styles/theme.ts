@@ -1,9 +1,11 @@
 import { DefaultTheme } from 'styled-components';
+import { Theme, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 /* -------------------------------------------------------------------------- */
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    material: Theme;
     colors: {
       primary: string;
       secondary: string;
@@ -23,16 +25,17 @@ declare module 'styled-components' {
 }
 
 export const theme: DefaultTheme = {
+  material: responsiveFontSizes(createMuiTheme()),
   colors: {
+    black: '#000',
+    white: '#fff',
+    dark: '#0c0c0c',
+    light: '#f8f4f4',
     primary: '#fc5c65',
     secondary: '#4ecdc4',
-    black: '#000',
     nero: '#181818',
-    white: '#fff',
     medium: '#6e6969',
-    light: '#f8f4f4',
     danger: '#ff5252',
-    dark: '#0c0c0c',
     corn: '#ffe66d',
   },
   animation: {

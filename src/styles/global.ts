@@ -1,11 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-import { normalize } from 'styled-normalize';
 
 /* -------------------------------------------------------------------------- */
 
 export const GlobalStyle = createGlobalStyle`
-  ${normalize}
-
   * {
     box-sizing: border-box;
   }
@@ -19,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: sans-serif;
+    background: ${({ theme }) => theme.colors.light};
   }
 
   a {

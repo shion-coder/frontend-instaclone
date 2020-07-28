@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Lottie from 'react-lottie-player';
-import plane from 'assets/animations/plane.json';
+import meow from 'assets/animations/meow.json';
 
 import { Container } from './loading-lottie.styles';
 
@@ -8,7 +8,7 @@ import { Container } from './loading-lottie.styles';
 
 const LoadingLottie: FC = () => (
   <Container>
-    <Lottie loop animationData={plane} play style={{ width: 150, height: 150 }} />
+    <Lottie loop animationData={meow} play style={{ width: 200, height: 200 }} />
   </Container>
 );
 
