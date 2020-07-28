@@ -1,7 +1,7 @@
 import React, { FC, Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Loading from 'components/loading';
+import LoadingLottie from 'components/loading-lottie';
 
 /* -------------------------------------------------------------------------- */
 
@@ -12,7 +12,7 @@ import Loading from 'components/loading';
 const Home = lazy(() => import('pages/home'));
 
 const App: FC = () => (
-  <Suspense fallback={<Loading />}>
+  <Suspense fallback={<LoadingLottie />}>
     <Switch>
       <Route exact path="/" component={Home} />
     </Switch>
