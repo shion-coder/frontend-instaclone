@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import PropTypes from 'prop-types';
 import {
   StylesProvider,
   ThemeProvider as MaterialThemeProvider,
   CssBaseline,
 } from '@material-ui/core';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import { theme, GlobalStyle } from 'styles';
 
@@ -13,15 +14,19 @@ import { theme, GlobalStyle } from 'styles';
 const Theme: FC = ({ children }) => (
   <StylesProvider injectFirst>
     <MaterialThemeProvider theme={theme.material}>
-      <ThemeProvider theme={theme}>
+      <StyledThemeProvider theme={theme}>
         <CssBaseline />
 
         <GlobalStyle />
 
         {children}
-      </ThemeProvider>
+      </StyledThemeProvider>
     </MaterialThemeProvider>
   </StylesProvider>
 );
+
+Theme.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Theme;
