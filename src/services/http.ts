@@ -15,8 +15,7 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    const expectedError =
-      error.response && error.response.status >= 400 && error.response.status < 500;
+    const expectedError = error.response && error.response.status >= 400 && error.response.status < 500;
 
     if (!expectedError) {
       logger.log(error);

@@ -1,18 +1,19 @@
 import React, { FC, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import FadeIn from 'react-fade-in';
 
 import { LOADING_DELAY, BOUNCE_DELAY } from 'config';
 
-import { Container, Spinner, Bounce } from './loading.styles';
+import { Container, Spinner, Bounce } from './loader.styles';
 
 /* -------------------------------------------------------------------------- */
 
-interface IProps {
+type Props = {
   color?: string;
   delay?: string;
-}
+};
 
-const Loading: FC<IProps> = ({ color, delay }) => {
+const Loader: FC<Props> = ({ color, delay }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -35,4 +36,9 @@ const Loading: FC<IProps> = ({ color, delay }) => {
   );
 };
 
-export default Loading;
+Loader.propTypes = {
+  color: PropTypes.string,
+  delay: PropTypes.string,
+};
+
+export default Loader;
