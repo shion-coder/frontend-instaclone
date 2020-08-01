@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { store, persistor } from 'redux/store';
+import { store, persistor } from 'store';
 
 /* -------------------------------------------------------------------------- */
 
-const Redux: FC = ({ children }) => (
+const Store: FC = ({ children }) => (
   <Provider store={store}>
     <PersistGate persistor={persistor}>{children}</PersistGate>
   </Provider>
 );
 
-Redux.propTypes = {
+Store.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-export default Redux;
+export default Store;
