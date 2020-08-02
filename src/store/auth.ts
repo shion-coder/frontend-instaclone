@@ -22,8 +22,6 @@ export const register = createAsyncThunk('auth/register', async (user: RegisterD
     if (exception.response && exception.response.status === 400) {
       return rejectWithValue(exception.response.data.errors);
     }
-
-    return rejectWithValue(null);
   }
 });
 
