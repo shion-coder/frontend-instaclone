@@ -12,7 +12,7 @@ import { StyledToastContainer as ToastContainer } from './root.styles';
 const Root: FC = () => (
   <Store>
     <Theme>
-      <ToastContainer />
+      <ToastContainer limit={3} />
 
       <Router>
         <App />

@@ -10,4 +10,4 @@ const log = (error: unknown): void => {
   Sentry.captureException(error);
 };
 
-export default { init, log };
+export const logger = { init, log };

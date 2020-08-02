@@ -3,11 +3,12 @@ import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 
 import { Environment } from 'types';
+import { authReducer } from './auth';
 
 /* -------------------------------------------------------------------------- */
 
 const rootReducer = combineReducers({
-  temp: () => ({}),
+  auth: authReducer,
 });
 
 export type RootStateProps = ReturnType<typeof rootReducer>;
@@ -29,5 +30,7 @@ export const store = configureStore({
   }),
   devTools: process.env.NODE_ENV !== Environment.PRODUCTION,
 });
+
+export type Dispatch = typeof store.dispatch;
 
 export const persistor = persistStore(store);

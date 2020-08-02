@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
-import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { Formik, FormikHelpers, FormikErrors } from 'formik';
+import { toast } from 'react-toastify';
 import { Grid } from '@material-ui/core';
 import Account from '@material-ui/icons/AccountCircle';
 
-import Field from 'components/formik-field';
+import { RegisterDataProps } from 'types';
+import { Dispatch, register } from 'store';
 import { validateRegister } from 'config';
+import Field from 'components/formik-field';
 
 import {
   StyledContainer as Container,
@@ -18,6 +22,25 @@ import {
 /* -------------------------------------------------------------------------- */
 
 const Register: FC = () => {
+  const dispatch: Dispatch = useDispatch();
+
+  const handleSubmit = async (values: RegisterDataProps, formikHelpers: FormikHelpers<RegisterDataProps>) => {
+    const result = await dispatch(register(values));
+
+    register.fulfilled.match(result)
+      ? toast.success(`Welcome ${result.payload?.user.firstName}`, { toastId: 'login-fulfilled' })
+      : result.payload && formikHelpers.setErrors(result.payload as FormikErrors<RegisterDataProps>);
+  };
+
+  const initialValues: RegisterDataProps = {
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
+
   return (
     <Container>
       <Avatar>
@@ -26,18 +49,7 @@ const Register: FC = () => {
 
       <Typography>Register</Typography>
 
-      <Formik
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          username: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-        }}
-        validationSchema={validateRegister}
-        onSubmit={(value) => console.log(value)}
-      >
+      <Formik initialValues={initialValues} validationSchema={validateRegister} onSubmit={handleSubmit}>
         <Form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import { toast } from 'react-toastify';
 
 import { logger } from 'services';
@@ -10,6 +11,9 @@ const instance = axios.create({
   timeout: Number(process.env.REACT_APP_API_TIMEOUT) || 0,
 });
 
+// Intercepts failed axios requests and retries them
+axiosRetry(instance, { retryDelay: axiosRetry.exponentialDelay });
+
 instance.interceptors.response.use(
   (response) => {
     return response;
@@ -19,14 +23,14 @@ instance.interceptors.response.use(
 
     if (!expectedError) {
       logger.log(error);
-      toast.error('An unexpected error occurred');
+      toast.error('An unexpected error occurred', { toastId: 'unexpected-error' });
     }
 
     return Promise.reject(error);
   },
 );
 
-export default {
+export const http = {
   get: instance.get,
   post: instance.post,
   put: instance.put,
