@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Path } from 'types';
 import Header from 'components/header';
 import Footer from 'components/footer';
-import Loader from 'components/loader-lottie';
+import Loader from 'components/loader/lottie-loader';
 import GuestRoute from 'components/route/guest-route';
 import ProtectedRoute from 'components/route/protected-route';
 

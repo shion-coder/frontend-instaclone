@@ -8,7 +8,7 @@ import Account from '@material-ui/icons/AccountCircle';
 import { RegisterDataProps } from 'types';
 import { Dispatch, register } from 'store';
 import { validateRegister } from 'config';
-import Field from 'components/formik-field';
+import Field from 'components/common/formik-field';
 
 import {
   StyledContainer as Container,

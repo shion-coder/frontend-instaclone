@@ -10,7 +10,7 @@ import Account from '@material-ui/icons/AccountCircle';
 import { LoginDataProps } from 'types';
 import { Dispatch, login } from 'store';
 import { validateLogin } from 'config';
-import Field from 'components/formik-field';
+import Field from 'components/common/formik-field';
 
 import {
   StyledContainer as Container,

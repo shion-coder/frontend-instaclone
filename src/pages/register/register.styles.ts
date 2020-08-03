@@ -3,7 +3,7 @@ import { Form } from 'formik';
 import { Link } from 'react-router-dom';
 import { Container, Avatar, Typography } from '@material-ui/core';
 
-import Button from 'components/formik-button';
+import Button from 'components/common/formik-button';
 
 /* -------------------------------------------------------------------------- */
 
