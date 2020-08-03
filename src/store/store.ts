@@ -16,7 +16,7 @@ export type RootStateProps = ReturnType<typeof rootReducer>;
 const persistConfig = {
   storage,
   key: 'root',
-  whitelist: [''],
+  whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

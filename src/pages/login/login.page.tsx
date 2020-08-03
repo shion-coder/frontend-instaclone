@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { StaticContext } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Formik, FormikHelpers, FormikErrors } from 'formik';
 import { toast } from 'react-toastify';
@@ -21,15 +23,25 @@ import {
 
 /* -------------------------------------------------------------------------- */
 
-const Login: FC = () => {
+type LocationState = {
+  from: Location;
+};
+
+type Props = RouteComponentProps<Record<string, string | undefined>, StaticContext, LocationState>;
+
+const Login: FC<Props> = ({ history, location: { state } }) => {
   const dispatch: Dispatch = useDispatch();
 
   const handleSubmit = async (values: LoginDataProps, formikHelpers: FormikHelpers<LoginDataProps>) => {
     const result = await dispatch(login(values));
 
-    login.fulfilled.match(result)
-      ? toast.success(`Welcome ${result.payload?.user.firstName}`, { toastId: 'login-fulfilled' })
-      : result.payload && formikHelpers.setErrors(result.payload as FormikErrors<LoginDataProps>);
+    if (login.fulfilled.match(result)) {
+      toast.success(`Welcome ${result.payload?.user.firstName}`, { toastId: 'login-fulfilled' });
+
+      return !state ? history.push('/') : history.push(state.from.pathname);
+    }
+
+    result.payload && formikHelpers.setErrors(result.payload as FormikErrors<LoginDataProps>);
   };
 
   const initialValues: LoginDataProps = {

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import { RegisterDataProps, LoginDataProps, AuthResultProps, AuthErrors } from 'types';
-import { http } from 'services';
+import { http, setAuthorizationHeader } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
@@ -19,9 +19,11 @@ export const register = createAsyncThunk('auth/register', async (user: RegisterD
   } catch (error) {
     const exception: AxiosError<AuthErrors> = error;
 
-    if (exception.response && exception.response.status === 400) {
-      return rejectWithValue(exception.response.data.errors);
+    if (!exception.response) {
+      throw exception;
     }
+
+    return rejectWithValue(exception.response.data.errors);
   }
 });
 
@@ -34,9 +36,11 @@ export const login = createAsyncThunk('auth/login', async (user: LoginDataProps,
   } catch (error) {
     const exception: AxiosError<AuthErrors> = error;
 
-    if (exception.response && exception.response.status === 400) {
-      return rejectWithValue(exception.response.data.errors);
+    if (!exception.response) {
+      throw exception;
     }
+
+    return rejectWithValue(exception.response.data.errors);
   }
 });
 
@@ -61,21 +65,34 @@ const initialState: StateProps = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = {};
+      state.token = null;
+
+      setAuthorizationHeader();
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(register.fulfilled, (state, { payload }) => {
       if (payload) {
         state.user = payload.user;
         state.token = payload.token;
+
+        setAuthorizationHeader(payload.token);
       }
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
       if (payload) {
         state.user = payload.user;
         state.token = payload.token;
+
+        setAuthorizationHeader(payload.token);
       }
     });
   },
 });
+
+export const { logout } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

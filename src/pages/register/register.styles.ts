@@ -11,7 +11,6 @@ export const StyledContainer = styled(Container).attrs(() => ({
   component: 'main',
   maxWidth: 'xs',
 }))`
-  margin-top: ${({ theme }) => theme.material.spacing(8) + 'px'};
   display: flex;
   flex-direction: column;
   align-items: center;

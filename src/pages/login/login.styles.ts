@@ -11,7 +11,6 @@ export const StyledContainer = styled(Container).attrs(() => ({
   component: 'main',
   maxWidth: 'xs',
 }))`
-  margin-top: ${({ theme }) => theme.material.spacing(8) + 'px'};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +32,7 @@ export const StyledAvatar = styled(Avatar)`
 
 export const StyledForm = styled(Form)`
   width: '100%';
-  margin-top: ${({ theme }) => theme.material.spacing(3) + 'px'};
+  margin-top: ${({ theme }) => theme.material.spacing(1) + 'px'};
 `;
 
 export const StyledButton = styled(Button)`
