@@ -12,11 +12,11 @@ import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
+const { HOME, REGISTER, LOGIN, DASHBOARD } = Path;
+
 /**
  * Lazy loading
  */
-
-const { HOME, REGISTER, LOGIN, DASHBOARD } = Path;
 
 const Home = lazy(() => import('pages/home'));
 const NotFound = lazy(() => import('pages/not-found'));
