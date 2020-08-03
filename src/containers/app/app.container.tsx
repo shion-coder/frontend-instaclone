@@ -1,5 +1,5 @@
 import React, { FC, Suspense, lazy } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { Path } from 'types';
 import Header from 'components/header';
@@ -19,10 +19,10 @@ const { HOME, REGISTER, LOGIN, DASHBOARD } = Path;
  */
 
 const Home = lazy(() => import('pages/home'));
-const NotFound = lazy(() => import('pages/not-found'));
 const Register = lazy(() => import('pages/register'));
 const Login = lazy(() => import('pages/login'));
 const Dashboard = lazy(() => import('pages/dashboard'));
+// const NotFound = lazy(() => import('pages/not-found'));
 
 const App: FC = () => (
   <Container>
@@ -38,7 +38,8 @@ const App: FC = () => (
 
           <ProtectedRoute exact path={DASHBOARD} component={Dashboard} />
 
-          <Route component={NotFound} />
+          {/* <Route component={NotFound} /> */}
+          <Redirect from="*" to="/" />
         </Switch>
       </Suspense>
     </Body>
