@@ -18,11 +18,35 @@ const { HOME, REGISTER, LOGIN, DASHBOARD } = Path;
  * Lazy loading
  */
 
-const Home = lazy(() => import('pages/home'));
-const Register = lazy(() => import('pages/register'));
-const Login = lazy(() => import('pages/login'));
-const Dashboard = lazy(() => import('pages/dashboard'));
-// const NotFound = lazy(() => import('pages/not-found'));
+const Home = lazy(() =>
+  Promise.all([import('pages/home'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
+const Register = lazy(() =>
+  Promise.all([import('pages/register'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
+const Login = lazy(() =>
+  Promise.all([import('pages/login'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
+const Dashboard = lazy(() =>
+  Promise.all([import('pages/dashboard'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
+// const NotFound = lazy(() =>
+//   Promise.all([import('pages/not-found'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+//     ([moduleExports]) => moduleExports,
+//   ),
+// );
 
 const App: FC = () => (
   <Container>
@@ -39,6 +63,7 @@ const App: FC = () => (
           <ProtectedRoute exact path={DASHBOARD} component={Dashboard} />
 
           {/* <Route component={NotFound} /> */}
+
           <Redirect from="*" to="/" />
         </Switch>
       </Suspense>
