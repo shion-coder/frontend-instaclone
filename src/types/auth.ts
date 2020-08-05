@@ -9,6 +9,10 @@ export type AuthResultProps = {
   token: string;
 };
 
+export type UserConfirmProps = {
+  message: string;
+};
+
 export type AuthErrors = {
   errors: Record<string, unknown>;
 };

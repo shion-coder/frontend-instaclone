@@ -12,7 +12,7 @@ import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const { HOME, REGISTER, LOGIN, DASHBOARD } = Path;
+const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM } = Path;
 
 /**
  * Lazy loading
@@ -42,6 +42,12 @@ const Dashboard = lazy(() =>
   ),
 );
 
+const Confirm = lazy(() =>
+  Promise.all([import('pages/confirm'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
 // const NotFound = lazy(() =>
 //   Promise.all([import('pages/not-found'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
 //     ([moduleExports]) => moduleExports,
@@ -56,6 +62,7 @@ const App: FC = () => (
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route exact path={HOME} component={Home} />
+          <Route exact path={CONFIRM} component={Confirm} />
 
           <GuestRoute exact path={REGISTER} component={Register} />
           <GuestRoute exact path={LOGIN} component={Login} />

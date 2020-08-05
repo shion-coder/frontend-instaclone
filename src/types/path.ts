@@ -3,4 +3,5 @@ export enum Path {
   REGISTER = '/register',
   LOGIN = '/login',
   DASHBOARD = '/dashboard',
+  CONFIRM = '/confirm/:id',
 }

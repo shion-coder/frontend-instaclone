@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ReactQueryDevtools } from 'react-query-devtools';
 
 import Store from 'containers/store';
 import Theme from 'containers/theme';
@@ -17,6 +18,8 @@ const Root: FC = () => (
       <Router>
         <App />
       </Router>
+
+      <ReactQueryDevtools initialIsOpen={false} />
     </Theme>
   </Store>
 );

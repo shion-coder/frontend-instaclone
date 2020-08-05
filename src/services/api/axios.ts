@@ -6,7 +6,7 @@ import { logger } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
-const instance = axios.create({
+export const http = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: Number(process.env.REACT_APP_API_TIMEOUT) || 0,
 });
@@ -17,21 +17,21 @@ const instance = axios.create({
 
 export const setAuthorizationHeader = (token: string | null = null): void => {
   token
-    ? (instance.defaults.headers.common['Authorization'] = `Bearer ${token}`)
-    : delete instance.defaults.headers.common['Authorization'];
+    ? (http.defaults.headers.common['Authorization'] = `Bearer ${token}`)
+    : delete http.defaults.headers.common['Authorization'];
 };
 
 /**
  *  Intercepts failed axios requests and retries them
  */
 
-axiosRetry(instance, { retryDelay: axiosRetry.exponentialDelay });
+axiosRetry(http, { retryDelay: axiosRetry.exponentialDelay });
 
 /**
  * Handling global response error
  */
 
-instance.interceptors.response.use(
+http.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -48,10 +48,3 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-export const http = {
-  get: instance.get,
-  post: instance.post,
-  put: instance.put,
-  delete: instance.delete,
-};
