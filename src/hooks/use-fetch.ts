@@ -26,6 +26,7 @@ export const useFetch = <T>(
 
   useDeepCompareEffect(() => {
     isMounted.current = true;
+
     const source = axios.CancelToken.source();
 
     (async () => {

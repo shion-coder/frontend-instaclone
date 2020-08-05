@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 import { UserConfirmProps } from 'types';
-// import { useFetch } from 'hooks';
-import { useQuery } from 'react-query';
 import { http } from 'services';
 import Loader from 'components/loader/lottie-loader';
 
@@ -18,21 +17,13 @@ type PramsProps = {
 const Confirm: FC = () => {
   const { id }: PramsProps = useParams();
 
-  /**
-   * Using useFetch custom hook
-   */
-  // const { isLoading, error, data } = useFetch<UserConfirmProps>({
-  //   method: 'put',
-  //   baseURL: `${process.env.REACT_APP_API_URL}/users/email/confirm/${id}`,
-  // });
-
   const requestConfirm = async () => {
     const { data } = await http.put<UserConfirmProps>(`/users/email/confirm/${id}`);
 
     return data;
   };
 
-  const { isLoading, error, data } = useQuery('confirm', requestConfirm);
+  const { isLoading, data, error } = useQuery('confirm', requestConfirm);
 
   if (isLoading) return <Loader />;
 

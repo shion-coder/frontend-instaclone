@@ -1,31 +1,33 @@
 import React, { FC } from 'react';
 import { Route, Redirect, RouteProps as Props } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
 
-import { RootStateProps } from 'store';
+import { RootStateProps, logout } from 'store';
 import { setAuthorizationHeader } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
 const ProtectedRoute: FC<Props> = (props) => {
+  const dispatch = useDispatch();
+
   const token = useSelector((state: RootStateProps) => state.auth.token);
 
-  /**
-   * Set default header with token
-   */
+  type DecodeProps = {
+    id: string;
+    exp: number;
+    iat: number;
+  };
 
-  setAuthorizationHeader(token);
+  if (token) {
+    const decoded = decode<DecodeProps>(token);
 
-  return token ? (
-    <Route {...props} />
-  ) : (
-    <Redirect
-      to={{
-        pathname: '/login',
-        state: { from: props.location },
-      }}
-    />
-  );
+    decoded.exp < Date.now() / 1000 ? dispatch(logout()) : setAuthorizationHeader(token);
+
+    return <Route {...props} />;
+  }
+
+  return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
 };
 
 export default ProtectedRoute;

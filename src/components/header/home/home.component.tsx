@@ -11,6 +11,7 @@ import { Icon } from './home.styles';
 const Home: FC = () => {
   const history = useHistory();
   const { pathname } = useLocation();
+
   const { HOME } = Path;
 
   const goHome = () => history.push('/');

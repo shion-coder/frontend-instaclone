@@ -14,6 +14,7 @@ const Auth: FC = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+
   const { DASHBOARD } = Path;
 
   const goDashboard = () => history.push('/dashboard');

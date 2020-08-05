@@ -11,6 +11,7 @@ import { Register, Login } from './guest.styles';
 const Guest: FC = () => {
   const history = useHistory();
   const { pathname } = useLocation();
+
   const { REGISTER, LOGIN } = Path;
 
   const goRegister = () => history.push('/register');
