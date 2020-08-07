@@ -12,7 +12,7 @@ import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM } = Path;
+const { HOME, REGISTER, LOGIN, LIST, DASHBOARD, CONFIRM } = Path;
 
 /**
  * Lazy loading
@@ -48,11 +48,11 @@ const Confirm = lazy(() =>
   ),
 );
 
-// const NotFound = lazy(() =>
-//   Promise.all([import('pages/not-found'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-//     ([moduleExports]) => moduleExports,
-//   ),
-// );
+const List = lazy(() =>
+  Promise.all([import('pages/list'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
 
 const App: FC = () => (
   <Container>
@@ -63,13 +63,12 @@ const App: FC = () => (
         <Switch>
           <Route exact path={HOME} component={Home} />
           <Route exact path={CONFIRM} component={Confirm} />
+          <Route exact path={LIST} component={List} />
 
           <GuestRoute exact path={REGISTER} component={Register} />
           <GuestRoute exact path={LOGIN} component={Login} />
 
           <ProtectedRoute exact path={DASHBOARD} component={Dashboard} />
-
-          {/* <Route component={NotFound} /> */}
 
           <Redirect from="*" to="/" />
         </Switch>

@@ -1,1 +1,1 @@
-export * from './use-fetch';
+export * from './user-intersection-observes';

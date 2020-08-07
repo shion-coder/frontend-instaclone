@@ -36,7 +36,12 @@ export const StyledForm = styled(Form)`
 `;
 
 export const StyledButton = styled(Button)`
-  margin: ${({ theme }) => theme.material.spacing(3, 0, 2)};
+  margin: ${({ theme }) => theme.material.spacing(1, 0, 2)};
+  padding: ${({ theme }) => theme.material.spacing(1) + 'px'};
+`;
+
+export const GoogleButton = styled(Button)`
+  margin: ${({ theme }) => theme.material.spacing(1, 0, 2)};
   padding: ${({ theme }) => theme.material.spacing(1) + 'px'};
 `;
 

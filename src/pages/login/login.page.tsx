@@ -18,6 +18,7 @@ import {
   StyledAvatar as Avatar,
   StyledForm as Form,
   StyledButton as Button,
+  GoogleButton as Google,
   StyledLink as Link,
 } from './login.styles';
 
@@ -83,6 +84,10 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Login
           </Button>
+
+          <Google variant="contained" color="primary" fullWidth>
+            Login with Google
+          </Google>
 
           <Grid container>
             <Grid item xs>
