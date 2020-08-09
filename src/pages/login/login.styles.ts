@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form } from 'formik';
 import { Link } from 'react-router-dom';
-import { Container, Avatar, Typography } from '@material-ui/core';
+import { Container, Avatar, Typography, Button as DefaultButton } from '@material-ui/core';
 
 import Button from 'components/common/formik-button';
 
@@ -40,7 +40,7 @@ export const StyledButton = styled(Button)`
   padding: ${({ theme }) => theme.material.spacing(1) + 'px'};
 `;
 
-export const GoogleButton = styled(Button)`
+export const GoogleButton = styled(DefaultButton)`
   margin: ${({ theme }) => theme.material.spacing(1, 0, 2)};
   padding: ${({ theme }) => theme.material.spacing(1) + 'px'};
 `;
