@@ -85,7 +85,7 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
             Login
           </Button>
 
-          <Google variant="contained" color="primary" fullWidth>
+          <Google provider="google" variant="contained" color="primary" fullWidth>
             Login with Google
           </Google>
 

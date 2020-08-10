@@ -11,13 +11,13 @@ import { Container } from './header.styles';
 /* -------------------------------------------------------------------------- */
 
 const Header: FC = () => {
-  const token = useSelector((state: RootStateProps) => state.auth.token);
+  const isAuthenticated = useSelector((state: RootStateProps) => state.auth.isAuthenticated);
 
   return (
     <Container>
       <HomeIcon />
 
-      {!token ? <Guest /> : <Auth />}
+      {!isAuthenticated ? <Guest /> : <Auth />}
     </Container>
   );
 };

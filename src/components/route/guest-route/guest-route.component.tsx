@@ -7,9 +7,9 @@ import { RootStateProps } from 'store';
 /* -------------------------------------------------------------------------- */
 
 const GuestRoute: FC<Props> = (props) => {
-  const token = useSelector((state: RootStateProps) => state.auth.token);
+  const isAuthenticated = useSelector((state: RootStateProps) => state.auth.isAuthenticated);
 
-  return token ? <Redirect to="/" /> : <Route {...props} />;
+  return isAuthenticated ? <Redirect to="/" /> : <Route {...props} />;
 };
 
 export default GuestRoute;

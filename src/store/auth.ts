@@ -51,11 +51,13 @@ export const login = createAsyncThunk('auth/login', async (user: LoginDataProps,
 type StateProps = {
   user: Record<string, unknown>;
   token: string | null;
+  isAuthenticated: boolean;
 };
 
 const initialState: StateProps = {
   user: {},
   token: null,
+  isAuthenticated: false,
 };
 
 /**
@@ -69,6 +71,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = {};
       state.token = null;
+      state.isAuthenticated = false;
 
       setAuthorizationHeader();
     },
@@ -78,6 +81,7 @@ const authSlice = createSlice({
       if (payload) {
         state.user = payload.user;
         state.token = payload.token;
+        state.isAuthenticated = true;
 
         setAuthorizationHeader(payload.token);
       }
@@ -86,6 +90,7 @@ const authSlice = createSlice({
       if (payload) {
         state.user = payload.user;
         state.token = payload.token;
+        state.isAuthenticated = true;
 
         setAuthorizationHeader(payload.token);
       }
