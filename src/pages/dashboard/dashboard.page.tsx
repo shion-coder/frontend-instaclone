@@ -16,7 +16,10 @@ const Dashboard: FC = () => {
     return data;
   };
 
-  const { isLoading, data, error } = useQuery('me', requestMe);
+  const { isLoading, data, error } = useQuery('me', requestMe, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
 
   if (isLoading) return <Loader />;
 

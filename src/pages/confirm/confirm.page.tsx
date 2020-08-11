@@ -23,7 +23,10 @@ const Confirm: FC = () => {
     return data;
   };
 
-  const { isLoading, data, error } = useQuery('confirm', requestConfirm);
+  const { isLoading, data, error } = useQuery('confirm', requestConfirm, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
 
   if (isLoading) return <Loader />;
 
