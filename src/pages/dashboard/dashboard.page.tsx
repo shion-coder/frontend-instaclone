@@ -9,13 +9,13 @@ import { Container, StyledTypography as Text } from './dashboard.styles';
 
 /* -------------------------------------------------------------------------- */
 
+const requestMe = async () => {
+  const { data } = await http.get<MeProps>('/users/me');
+
+  return data;
+};
+
 const Dashboard: FC = () => {
-  const requestMe = async () => {
-    const { data } = await http.get<MeProps>('/users/me');
-
-    return data;
-  };
-
   const { isLoading, data, error } = useQuery('me', requestMe, {
     retry: false,
     refetchOnWindowFocus: false,

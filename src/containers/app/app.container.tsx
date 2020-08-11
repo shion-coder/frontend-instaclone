@@ -1,7 +1,9 @@
-import React, { FC, Suspense, lazy } from 'react';
+import React, { FC, Suspense, lazy, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { Path } from 'types';
+import { API_URL } from 'config';
+import { http } from 'services';
 import Header from 'components/header';
 import Footer from 'components/footer';
 import Loader from 'components/loader/lottie-loader';
@@ -54,29 +56,41 @@ const List = lazy(() =>
   ),
 );
 
-const App: FC = () => (
-  <Container>
-    <Header />
+const App: FC = () => {
+  /**
+   * Catch a start up request so that a sleepy Heroku instance can be responsive as soon as possible
+   */
 
-    <Body>
-      <Suspense fallback={<Loader />}>
-        <Switch>
-          <Route exact path={HOME} component={Home} />
-          <Route exact path={CONFIRM} component={Confirm} />
-          <Route exact path={LIST} component={List} />
+  useEffect(() => {
+    (async () => {
+      await http.get(`${API_URL}/wake-up`);
+    })();
+  }, []);
 
-          <GuestRoute exact path={REGISTER} component={Register} />
-          <GuestRoute exact path={LOGIN} component={Login} />
+  return (
+    <Container>
+      <Header />
 
-          <ProtectedRoute exact path={DASHBOARD} component={Dashboard} />
+      <Body>
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route exact path={HOME} component={Home} />
+            <Route exact path={CONFIRM} component={Confirm} />
+            <Route exact path={LIST} component={List} />
 
-          <Redirect from="*" to="/" />
-        </Switch>
-      </Suspense>
-    </Body>
+            <GuestRoute exact path={REGISTER} component={Register} />
+            <GuestRoute exact path={LOGIN} component={Login} />
 
-    <Footer />
-  </Container>
-);
+            <ProtectedRoute exact path={DASHBOARD} component={Dashboard} />
+
+            <Redirect from="*" to="/" />
+          </Switch>
+        </Suspense>
+      </Body>
+
+      <Footer />
+    </Container>
+  );
+};
 
 export default App;
