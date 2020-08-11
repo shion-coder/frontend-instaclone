@@ -3,7 +3,6 @@ import { StaticContext } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Formik, FormikHelpers, FormikErrors } from 'formik';
-// import { toast } from 'react-toastify';
 import { Grid } from '@material-ui/core';
 import Account from '@material-ui/icons/AccountCircle';
 
@@ -37,8 +36,6 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
     const result = await dispatch(login(values));
 
     if (login.fulfilled.match(result)) {
-      // toast.success(`Welcome ${result.payload?.user.firstName}`, { toastId: 'login-fulfilled' });
-
       return !state ? history.push('/') : history.push(state.from.pathname);
     }
 
