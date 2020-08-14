@@ -16,3 +16,9 @@ export type UserConfirmProps = {
 export type AuthErrors = {
   errors: Record<string, unknown>;
 };
+
+export type DecodeProps = {
+  id: string;
+  exp: number;
+  iat: number;
+};

@@ -11,7 +11,7 @@ export const SocketProvider: FC = ({ children }) => {
   const [io, setIo] = useState<SocketIOClient.Socket | null>(null);
 
   useEffect(() => {
-    const socket = socketIo(API_URL);
+    const socket = socketIo(`${API_URL}`);
 
     setIo(socket);
 
