@@ -2,14 +2,14 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import { toast } from 'react-toastify';
 
-import { API_URL } from 'config';
+import { API_URL, API_TIMEOUT } from 'config';
 import { logger } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
 export const http = axios.create({
   baseURL: `${API_URL}/api`,
-  timeout: Number(process.env.REACT_APP_API_TIMEOUT) || 0,
+  timeout: API_TIMEOUT,
 });
 
 /**

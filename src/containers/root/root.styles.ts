@@ -10,7 +10,7 @@ export const StyledToastContainer = styled(ToastContainer)`
   }
 
   .Toastify__toast-body {
-    padding-left: 20px;
+    padding: 0 10px;
     letter-spacing: 1px;
   }
 `;

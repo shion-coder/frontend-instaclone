@@ -6,7 +6,15 @@ import Root from 'containers/root';
 
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Setup Sentry
+ */
+
 logger.init();
+
+/**
+ * React Dom
+ */
 
 ReactDOM.render(
   <React.StrictMode>

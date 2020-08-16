@@ -28,7 +28,9 @@ const Register: FC = () => {
     const result = await dispatch(register(values));
 
     register.fulfilled.match(result)
-      ? toast.success(`Welcome ${result.payload?.user.firstName}`, { toastId: 'register-fulfilled' })
+      ? toast.success(`Welcome ${result.payload?.user.firstName}. Please check your email for confirmation`, {
+          toastId: 'register-fulfilled',
+        })
       : result.payload && formikHelpers.setErrors(result.payload as FormikErrors<RegisterDataProps>);
   };
 

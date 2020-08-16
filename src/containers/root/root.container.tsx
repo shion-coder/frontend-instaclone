@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query-devtools';
+import { ModalProvider as Modal } from 'styled-react-modal';
 
 import Store from 'containers/store';
 import Contexts from 'containers/contexts';
@@ -15,13 +16,15 @@ const Root: FC = () => (
   <Store>
     <Contexts>
       <Theme>
-        <ToastContainer limit={3} />
+        <Modal>
+          <ToastContainer limit={3} />
 
-        <Router>
-          <App />
-        </Router>
+          <Router>
+            <App />
+          </Router>
 
-        <ReactQueryDevtools initialIsOpen={false} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Modal>
       </Theme>
     </Contexts>
   </Store>

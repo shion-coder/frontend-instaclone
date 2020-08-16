@@ -36,11 +36,11 @@
     "@types/lodash-es": "^4.17.3",
     "@types/react-fade-in": "^0.1.0",
     "@types/react-lottie": "^1.2.5",
-    "@types/react-portal": "^4.0.2",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/socket.io-client": "^1.4.33",
     "@types/styled-components": "^5.1.1",
+    "@types/styled-react-modal": "^1.2.0",
     "@types/yup": "^0.29.3",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
@@ -70,7 +70,6 @@
     "react-dom": "^16.13.1",
     "react-fade-in": "^1.1.0",
     "react-lottie-player": "^1.0.1",
-    "react-portal": "^4.2.1",
     "react-query": "^2.5.7-tsnext.1",
     "react-query-devtools": "^2.4.2",
     "react-redux": "^7.2.1",
@@ -81,6 +80,7 @@
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.1",
     "styled-normalize": "^8.0.7",
+    "styled-react-modal": "^2.0.1",
     "typescript": "^3.7.5",
     "yup": "^0.29.2"
   }
