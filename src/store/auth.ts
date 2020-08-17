@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import { RegisterDataProps, LoginDataProps, AuthResultProps, AuthErrors } from 'types';
-import { http, setAuthorizationHeader } from 'services';
+import { http } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
@@ -70,15 +70,11 @@ const authSlice = createSlice({
       if (payload) {
         state.user = payload.user;
         state.token = payload.token;
-
-        setAuthorizationHeader(payload.token);
       }
     },
     logout: (state) => {
       state.user = {};
       state.token = null;
-
-      setAuthorizationHeader();
     },
   },
   extraReducers: (builder) => {
@@ -86,16 +82,12 @@ const authSlice = createSlice({
       if (payload) {
         state.user = payload.user;
         state.token = payload.token;
-
-        setAuthorizationHeader(payload.token);
       }
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
       if (payload) {
         state.user = payload.user;
         state.token = payload.token;
-
-        setAuthorizationHeader(payload.token);
       }
     });
   },

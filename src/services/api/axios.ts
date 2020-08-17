@@ -3,6 +3,8 @@ import axiosRetry from 'axios-retry';
 import { toast } from 'react-toastify';
 
 import { API_URL, API_TIMEOUT } from 'config';
+import { history } from 'utils';
+import { store, logout } from 'store';
 import { logger } from 'services';
 
 /* -------------------------------------------------------------------------- */
@@ -13,23 +15,27 @@ export const http = axios.create({
 });
 
 /**
- * Set default header with token
- */
-
-export const setAuthorizationHeader = (token: string | null = null): void => {
-  token
-    ? (http.defaults.headers.common['Authorization'] = `Bearer ${token}`)
-    : delete http.defaults.headers.common['Authorization'];
-};
-
-/**
  *  Intercepts failed axios requests and retries them
  */
 
 axiosRetry(http, { retryDelay: axiosRetry.exponentialDelay });
 
 /**
- * Handling global response error
+ * Handling global request
+ */
+
+http.interceptors.request.use((config) => {
+  const token = store.getState().auth.token;
+
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+/**
+ * Handling global response
  */
 
 http.interceptors.response.use(
@@ -44,6 +50,12 @@ http.interceptors.response.use(
 
       toast.dismiss('unexpected-error');
       toast.error('An unexpected error occurred', { toastId: 'unexpected-error' });
+    }
+
+    if (error.response && error.response.status === 401) {
+      store.dispatch(logout());
+
+      history.push('/login');
     }
 
     return Promise.reject(error);

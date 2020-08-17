@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { ModalProvider as Modal } from 'styled-react-modal';
 
+import { history } from 'utils';
 import Store from 'containers/store';
 import Contexts from 'containers/contexts';
 import Theme from 'containers/theme';
@@ -19,7 +20,7 @@ const Root: FC = () => (
         <Modal>
           <ToastContainer limit={3} />
 
-          <Router>
+          <Router history={history}>
             <App />
           </Router>
 

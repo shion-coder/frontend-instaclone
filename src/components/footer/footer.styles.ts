@@ -15,4 +15,5 @@ export const Span = styled.span`
   padding-left: 0.5rem;
   color: ${({ theme }) => theme.colors.black};
   letter-spacing: 0.1rem;
+  font-weight: bold;
 `;

@@ -1,11 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
 import { http } from 'services';
+import { filters } from 'utils';
 
-import { Container, Header, Close, Next, Title, Image } from './new-post-modal.style';
+import {
+  Container,
+  Header,
+  Close,
+  Next,
+  Title,
+  Preview,
+  FilterList,
+  Filter,
+  Name,
+  Image,
+} from './new-post-modal.style';
 
 /* -------------------------------------------------------------------------- */
 
@@ -15,14 +27,29 @@ type Props = {
   handleClose: () => void;
 };
 
+const requestCreate = (data: FormData | undefined) => http.post('/post', data);
+
 const NewPostModal: FC<Props> = ({ formData, preview, handleClose }) => {
-  const [createNewPost] = useMutation((data: FormData | undefined) => http.post('/post', data), {
+  const [selectedFilter, setSelectedFilter] = useState({
+    name: 'Normal',
+    filter: 'none',
+  });
+
+  const [createNewPost] = useMutation(requestCreate, {
     onError: (err: AxiosError) => {
       toast.error(err.response?.data.error, { toastId: 'upload-error' });
     },
   });
 
-  const handleSubmit = () => createNewPost(formData);
+  const handleSubmit = () => {
+    if (selectedFilter.filter !== 'none') {
+      formData?.set('filter', selectedFilter.filter);
+    }
+
+    createNewPost(formData);
+  };
+
+  const handleSelected = (name: string, filter: string) => setSelectedFilter({ name, filter });
 
   return (
     <Container>
@@ -34,7 +61,23 @@ const NewPostModal: FC<Props> = ({ formData, preview, handleClose }) => {
         <Next fontSize="small" onClick={handleSubmit} />
       </Header>
 
-      <Image alt="upload-image" src={preview} />
+      <Preview alt="upload-image" src={preview} filter={selectedFilter.filter} />
+
+      <FilterList>
+        {filters.map(({ name, filter }) => (
+          <Filter key={name}>
+            <Name selected={selectedFilter.name === name}>{name}</Name>
+
+            <Image
+              alt="filter-image"
+              src={preview}
+              filter={filter}
+              selected={selectedFilter.name === name}
+              onClick={() => handleSelected(name, filter)}
+            />
+          </Filter>
+        ))}
+      </FilterList>
     </Container>
   );
 };

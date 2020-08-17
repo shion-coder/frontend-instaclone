@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, ReactText, useState } from 'react';
+import React, { FC, ChangeEvent, ReactText, useState, useRef } from 'react';
 import { Fab } from '@material-ui/core';
 import Modal from 'styled-react-modal';
 import { toast } from 'react-toastify';
@@ -14,6 +14,8 @@ const NewPostButton: FC = () => {
   const [formData, setFormData] = useState<FormData | undefined>(undefined);
   const [preview, setPreview] = useState<string | undefined>(undefined);
   const [error, setError] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   /**
    * Handle uploading multiple files but only allow one file in here
@@ -31,27 +33,28 @@ const NewPostButton: FC = () => {
        * There are too many files
        */
 
-      if (fileArray.length > 3) {
-        setError(true);
+      // if (fileArray.length > 1) {
+      //   setError(true);
 
-        return toast.error('Only one image can be uploaded at a time', { toastId: 'upload-error' });
-      }
+      //   return toast.error('Only one image can be uploaded at a time', { toastId: 'upload-error' });
+      // }
 
       /**
        * Catching wrong file types on the client
        */
 
       const data = new FormData();
-      const types = ['image/png', 'image/jpeg', 'image/gif'];
+
+      // const types = ['image/png', 'image/jpeg', 'image/gif'];
 
       fileArray.forEach((file) => {
-        if (types.every((type) => file.type !== type)) {
-          setError(true);
+        // if (types.every((type) => file.type !== type)) {
+        //   setError(true);
 
-          return toast.error('File type is not supported for upload', { toastId: 'upload-error' });
-        }
+        //   return toast.error('File type is not supported for upload', { toastId: 'upload-error' });
+        // }
 
-        if (file.size > 150000) {
+        if (file.size > 1500000) {
           setError(true);
 
           return toast.error('File is too large, please pick a smaller file', { toastId: 'upload-error' });
@@ -70,11 +73,28 @@ const NewPostButton: FC = () => {
     }
   };
 
-  const handleClose = (): void => setFormData(undefined);
+  const handleClose = (): void => {
+    setFormData(undefined);
+
+    /**
+     * Resetting the input value so you are able to use the same file twice
+     */
+
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+  };
 
   return (
     <Container htmlFor="upload-photo">
-      <Input type="file" accept="image/*" id="upload-photo" name="upload-photo" onChange={handleChange} />
+      <Input
+        type="file"
+        accept="image/*"
+        id="upload-photo"
+        name="upload-photo"
+        onChange={handleChange}
+        ref={inputRef}
+      />
 
       <Fab color="primary" size="small" component="span">
         <AddPhotoAlternateIcon />
