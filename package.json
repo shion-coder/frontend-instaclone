@@ -29,7 +29,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": "eslint --cache --fix"
+    "*.{ts,tsx}": "eslint --fix"
   },
   "devDependencies": {
     "@types/jwt-decode": "^2.2.1",
