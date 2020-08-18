@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import axiosRetry from 'axios-retry';
 import { toast } from 'react-toastify';
 
@@ -42,22 +42,33 @@ http.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
-    const expectedError = error.response && error.response.status >= 400 && error.response.status < 500;
-
-    if (!expectedError) {
-      logger.log(error);
-
-      toast.dismiss('unexpected-error');
-      toast.error('An unexpected error occurred', { toastId: 'unexpected-error' });
+  (error: AxiosError) => {
+    if (axios.isCancel(error)) {
+      return;
     }
 
-    if (error.response && error.response.status === 401) {
-      store.dispatch(logout());
-
-      history.push('/login');
+    if (error.code === 'ECONNABORTED') {
+      return toast.error('Request Timeout', { toastId: 'timeout-error' });
     }
 
-    return Promise.reject(error);
+    if (error.response) {
+      const { status } = error.response;
+
+      if (status === 401) {
+        store.dispatch(logout());
+
+        return history.push('/login');
+      }
+
+      if (status >= 500 || status < 400) {
+        logger.log(error);
+
+        toast.dismiss('unexpected-error');
+
+        return toast.error('An unexpected error occurred', { toastId: 'unexpected-error' });
+      }
+
+      return Promise.reject(error);
+    }
   },
 );

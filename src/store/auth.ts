@@ -49,7 +49,15 @@ export const login = createAsyncThunk('auth/login', async (user: LoginDataProps,
  */
 
 type StateProps = {
-  user: Record<string, unknown>;
+  user: {
+    firstName?: string;
+    lastName?: string;
+    fullName?: string;
+    username?: string;
+    email?: string;
+    avatar?: string;
+    confirmed?: boolean;
+  };
   token: string | null;
 };
 

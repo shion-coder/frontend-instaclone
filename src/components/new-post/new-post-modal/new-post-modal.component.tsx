@@ -1,23 +1,10 @@
 import React, { FC, useState } from 'react';
-import { useMutation } from 'react-query';
-import { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
+import { CancelTokenSource } from 'axios';
 
-import { http } from 'services';
-import { filters } from 'utils';
-
-import {
-  Container,
-  Header,
-  Close,
-  Next,
-  Title,
-  Preview,
-  FilterList,
-  Filter,
-  Name,
-  Image,
-} from './new-post-modal.style';
+import { Modal } from 'types';
+import NewPostFilter from 'components/new-post/new-post-filter';
+import NewPostCaption from 'components/new-post/new-post-caption';
 
 /* -------------------------------------------------------------------------- */
 
@@ -25,61 +12,30 @@ type Props = {
   formData: FormData | undefined;
   preview: string | undefined;
   handleClose: () => void;
+  source: CancelTokenSource;
 };
 
-const requestCreate = (data: FormData | undefined) => http.post('/post', data);
+const NewPostModal: FC<Props> = ({ formData, preview, handleClose, source }) => {
+  const [filter, setFilter] = useState('none');
+  const [activeModal, setActiveModal] = useState(Modal.Filter);
 
-const NewPostModal: FC<Props> = ({ formData, preview, handleClose }) => {
-  const [selectedFilter, setSelectedFilter] = useState({
-    name: 'Normal',
-    filter: 'none',
-  });
-
-  const [createNewPost] = useMutation(requestCreate, {
-    onError: (err: AxiosError) => {
-      toast.error(err.response?.data.error, { toastId: 'upload-error' });
-    },
-  });
-
-  const handleSubmit = () => {
-    if (selectedFilter.filter !== 'none') {
-      formData?.set('filter', selectedFilter.filter);
-    }
-
-    createNewPost(formData);
-  };
-
-  const handleSelected = (name: string, filter: string) => setSelectedFilter({ name, filter });
-
-  return (
-    <Container>
-      <Header>
-        <Close fontSize="small" onClick={handleClose} />
-
-        <Title>New Post</Title>
-
-        <Next fontSize="small" onClick={handleSubmit} />
-      </Header>
-
-      <Preview alt="upload-image" src={preview} filter={selectedFilter.filter} />
-
-      <FilterList>
-        {filters.map(({ name, filter }) => (
-          <Filter key={name}>
-            <Name selected={selectedFilter.name === name}>{name}</Name>
-
-            <Image
-              alt="filter-image"
-              src={preview}
-              filter={filter}
-              selected={selectedFilter.name === name}
-              onClick={() => handleSelected(name, filter)}
-            />
-          </Filter>
-        ))}
-      </FilterList>
-    </Container>
+  return activeModal === Modal.Filter ? (
+    <NewPostFilter preview={preview} handleClose={handleClose} setFilter={setFilter} setActiveModal={setActiveModal} />
+  ) : (
+    <NewPostCaption
+      filter={filter}
+      formData={formData}
+      preview={preview}
+      setActiveModal={setActiveModal}
+      handleClose={handleClose}
+      source={source}
+    />
   );
+};
+
+NewPostModal.propTypes = {
+  preview: PropTypes.string,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default NewPostModal;

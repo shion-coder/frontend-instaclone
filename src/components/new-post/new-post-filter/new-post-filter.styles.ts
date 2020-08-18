@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import CloseIcon from '@material-ui/icons/Close';
-import NextIcon from '@material-ui/icons/NavigateNext';
 
 /* -------------------------------------------------------------------------- */
 
@@ -30,28 +28,27 @@ export const Container = styled.div`
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 40px;
-`;
-
-export const Close = styled(CloseIcon)`
-  cursor: pointer;
-`;
-
-export const Next = styled(NextIcon)`
-  cursor: pointer;
+  margin-bottom: 1rem;
 `;
 
 export const Title = styled.span`
   font-weight: bold;
   letter-spacing: 1px;
+  color: ${({ theme }) => theme.colors.dark};
+`;
+
+export const Button = styled.span`
+  font-weight: bold;
+  letter-spacing: 1px;
   color: ${({ theme }) => theme.material.palette.primary.main};
+  cursor: pointer;
 `;
 
 export const Preview = styled.img<PreviewProps>`
   object-fit: contain;
   min-width: 40vw;
   max-width: 80vw;
-  max-height: calc(80vh - 7.6rem - 44px);
+  max-height: calc(80vh - 8.6rem - 24px);
   filter: ${({ filter }) => (filter ? filter : 'none')};
 `;
 

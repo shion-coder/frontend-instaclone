@@ -3,6 +3,7 @@ import { Fab } from '@material-ui/core';
 import Modal from 'styled-react-modal';
 import { toast } from 'react-toastify';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import axios from 'axios';
 
 import NewPostModal from 'components/new-post/new-post-modal';
 
@@ -14,6 +15,7 @@ const NewPostButton: FC = () => {
   const [formData, setFormData] = useState<FormData | undefined>(undefined);
   const [preview, setPreview] = useState<string | undefined>(undefined);
   const [error, setError] = useState(false);
+  const source = axios.CancelToken.source();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -74,6 +76,9 @@ const NewPostButton: FC = () => {
   };
 
   const handleClose = (): void => {
+    // Cancel axios request
+    source.cancel();
+
     setFormData(undefined);
 
     /**
@@ -101,7 +106,7 @@ const NewPostButton: FC = () => {
       </Fab>
 
       <Modal isOpen={!!formData && !error} onBackgroundClick={handleClose} onEscapeKeydown={handleClose}>
-        <NewPostModal formData={formData} preview={preview} handleClose={handleClose} />
+        <NewPostModal formData={formData} preview={preview} handleClose={handleClose} source={source} />
       </Modal>
     </Container>
   );
