@@ -55,16 +55,47 @@ const Register: FC = () => {
         <Form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <Field id="firstName" name="firstName" label="First Name" variant="outlined" fullWidth required />
+              <Field
+                id="firstName"
+                name="firstName"
+                label="First Name"
+                variant="outlined"
+                autoComplete="firstName"
+                fullWidth
+                required
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field id="lastName" name="lastName" label="Last Name" variant="outlined" fullWidth />
+              <Field
+                id="lastName"
+                name="lastName"
+                label="Last Name"
+                variant="outlined"
+                autoComplete="lastName"
+                fullWidth
+              />
             </Grid>
             <Grid item xs={12}>
-              <Field id="username" name="username" label="Username" variant="outlined" fullWidth required />
+              <Field
+                id="username"
+                name="username"
+                label="Username"
+                variant="outlined"
+                autoComplete="username"
+                fullWidth
+                required
+              />
             </Grid>
             <Grid item xs={12}>
-              <Field id="email" name="email" label="Email Address" variant="outlined" fullWidth required />
+              <Field
+                id="email"
+                name="email"
+                label="Email Address"
+                variant="outlined"
+                autoComplete="email"
+                fullWidth
+                required
+              />
             </Grid>
             <Grid item xs={12}>
               <Field
@@ -73,6 +104,7 @@ const Register: FC = () => {
                 label="Password"
                 variant="outlined"
                 type="password"
+                autoComplete="password"
                 fullWidth
                 required
               />
@@ -84,6 +116,7 @@ const Register: FC = () => {
                 label="Confirm Password"
                 variant="outlined"
                 type="password"
+                autoComplete="confirmPassword"
                 fullWidth
                 required
               />

@@ -63,6 +63,7 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
             label="Email Address"
             variant="outlined"
             margin="normal"
+            autoComplete="account"
             fullWidth
             required
           />
@@ -74,6 +75,7 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
             variant="outlined"
             margin="normal"
             type="password"
+            autoComplete="password"
             fullWidth
             required
           />
