@@ -51,6 +51,7 @@ export const Body = styled.div`
   align-items: center;
   padding: 1rem;
   border: ${({ theme }) => `1px solid ${theme.colors.solitude}`};
+  border-radius: 2px;
 `;
 
 export const StyledAvatar = styled(Avatar)`
