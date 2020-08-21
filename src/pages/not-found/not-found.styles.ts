@@ -9,9 +9,11 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  width: 100%;
+  height: 100%;
 `;
 
 export const StyledLottie = styled(Lottie)`
-  width: 40%;
-  height: 40%;
+  width: 44vw;
+  height: 44vh;
 `;

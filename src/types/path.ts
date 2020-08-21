@@ -5,4 +5,5 @@ export enum Path {
   LIST = '/list',
   DASHBOARD = '/dashboard',
   CONFIRM = '/confirm/:id',
+  PROFILE = '/:username',
 }

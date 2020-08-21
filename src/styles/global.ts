@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: sans-serif;
+    font-family: ff-tisa-sans-web-pro, sans-serif;
   }
 
   a {

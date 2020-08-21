@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Button, Fab } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
@@ -13,6 +13,10 @@ export const StyledTypography = styled(Typography)`
   margin-right: 10px;
   font-weight: bold;
   cursor: pointer;
+`;
+
+export const Profile = styled(Fab)`
+  margin-right: 10px;
 `;
 
 export const Logout = styled(StyledButton)``;
