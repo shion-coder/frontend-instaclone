@@ -14,7 +14,7 @@ import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM, PROFILE } = Path;
+const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM, PROFILE, TEST } = Path;
 
 /**
  * Lazy loading
@@ -56,6 +56,12 @@ const Profile = lazy(() =>
   ),
 );
 
+const Test = lazy(() =>
+  Promise.all([import('pages/test'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
 const App: FC = () => {
   /**
    * Catch a start up request so that a sleepy Heroku instance can be responsive as soon as possible
@@ -76,6 +82,7 @@ const App: FC = () => {
           <Switch>
             <Route exact path={HOME} component={Home} />
             <Route exact path={CONFIRM} component={Confirm} />
+            <Route exact path={TEST} component={Test} />
 
             <GuestRoute exact path={REGISTER} component={Register} />
             <GuestRoute exact path={LOGIN} component={Login} />

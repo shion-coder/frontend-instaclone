@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
-import { Container } from './list.styles';
+import { Container } from './test.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const List: FC = () => <Container>{}</Container>;
+const Test: FC = () => <Container>{}</Container>;
 
-export default List;
+export default Test;
