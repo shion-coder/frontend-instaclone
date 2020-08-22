@@ -1,18 +1,10 @@
 import styled from 'styled-components';
-import { Avatar, Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 /* -------------------------------------------------------------------------- */
 
 export const Container = styled(Grid)``;
-
-export const Image = styled(Grid)``;
-
-export const StyledAvatar = styled(Avatar)`
-  width: 8rem;
-  height: 8rem;
-  cursor: pointer;
-`;
 
 export const Info = styled(Grid)`
   height: 8rem;

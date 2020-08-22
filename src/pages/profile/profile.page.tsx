@@ -22,7 +22,7 @@ const Dashboard: FC = () => {
     return data;
   };
 
-  const { isFetching, data, error, refetch } = useQuery('get-user', getUser, {
+  const { isLoading, data, error, refetch } = useQuery('get-user', getUser, {
     retry: false,
     refetchOnWindowFocus: false,
   });
@@ -31,7 +31,7 @@ const Dashboard: FC = () => {
     refetch();
   }, [username, refetch]);
 
-  if (isFetching) return <Loader />;
+  if (isLoading) return <Loader />;
 
   if (!data || error) return <NotFound />;
 
@@ -39,7 +39,7 @@ const Dashboard: FC = () => {
     <Wrapper>
       <Container container spacing={3}>
         <Grid item xs={12}>
-          <ProfileHeader user={data.user} />
+          <ProfileHeader user={data.user} refetch={refetch} />
         </Grid>
       </Container>
     </Wrapper>

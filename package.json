@@ -34,6 +34,7 @@
   "devDependencies": {
     "@types/jwt-decode": "^2.2.1",
     "@types/lodash-es": "^4.17.3",
+    "@types/react-avatar-editor": "^10.3.5",
     "@types/react-fade-in": "^0.1.0",
     "@types/react-lottie": "^1.2.5",
     "@types/react-redux": "^7.1.9",

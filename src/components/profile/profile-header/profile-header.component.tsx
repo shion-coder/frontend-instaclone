@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux';
 
 import { UserProps } from 'types';
 import { RootStateProps } from 'store';
+import Avatar from 'components/profile/profile-header/profile-header-avatar';
 
 import {
   Container,
-  Image,
-  StyledAvatar as Avatar,
   Info,
   Meta,
   Name,
@@ -27,18 +26,18 @@ import {
 
 type Props = {
   user: UserProps;
+  refetch: () => Promise<void>;
 };
 
 const ProfileHeader: FC<Props> = ({
   user: { avatar, username, fullName, postCount, followerCount, followingCount, bio },
+  refetch,
 }) => {
   const currentUsername = useSelector((state: RootStateProps) => state.auth.user.username);
 
   return (
     <Container container justify="center" alignItems="center">
-      <Image item xs={4} container direction="row" justify="center" alignItems="center">
-        <Avatar src={avatar} />
-      </Image>
+      <Avatar avatar={avatar} isCurrentUser={currentUsername === username} refetch={refetch} />
 
       <Info item xs={8} container direction="column" justify="space-between">
         <Meta container alignItems="center">
