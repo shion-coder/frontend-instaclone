@@ -14,7 +14,7 @@ import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM, PROFILE, TEST } = Path;
+const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM, PROFILE, SETTINGS, TEST } = Path;
 
 /**
  * Lazy loading
@@ -56,6 +56,12 @@ const Profile = lazy(() =>
   ),
 );
 
+const Settings = lazy(() =>
+  Promise.all([import('pages/settings'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
 const Test = lazy(() =>
   Promise.all([import('pages/test'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
     ([moduleExports]) => moduleExports,
@@ -88,6 +94,7 @@ const App: FC = () => {
             <GuestRoute exact path={LOGIN} component={Login} />
 
             <ProtectedRoute exact path={DASHBOARD} component={Dashboard} />
+            <ProtectedRoute exact path={SETTINGS} component={Settings} />
             <ProtectedRoute exact path={PROFILE} component={Profile} />
 
             <Redirect from="*" to="/" />

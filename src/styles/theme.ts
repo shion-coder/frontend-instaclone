@@ -18,6 +18,10 @@ declare module 'styled-components' {
       medium: string;
       danger: string;
       corn: string;
+      grey1: string;
+      grey2: string;
+      grey3: string;
+      grey4: string;
     };
     animation: {
       delay: string;
@@ -38,6 +42,10 @@ export const theme: DefaultTheme = {
     medium: '#6e6969',
     danger: '#ff5252',
     corn: '#ffe66d',
+    grey1: '#999',
+    grey2: '#dbdbdb',
+    grey3: '#fafafa',
+    grey4: '#efefef',
   },
   animation: {
     delay: '0s',

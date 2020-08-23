@@ -11,6 +11,7 @@ import loading from 'assets/animations/loading.json';
 
 import {
   Container,
+  Layer,
   Header,
   Back,
   Title,
@@ -77,6 +78,8 @@ const NewPostCaption: FC<Props> = ({ filter, formData, preview, setActiveModal, 
       </Header>
 
       <Body>
+        {isLoading && <Layer />}
+
         <Avatar alt="avatar" src={avatar} />
 
         <Text placeholder="Write a caption ..." onChange={handleChange} disabled={isLoading} />

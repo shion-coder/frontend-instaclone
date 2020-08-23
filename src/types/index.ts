@@ -6,6 +6,8 @@ export * from './register';
 
 export * from './login';
 
+export * from './change-password';
+
 export * from './auth';
 
 export * from './modal';

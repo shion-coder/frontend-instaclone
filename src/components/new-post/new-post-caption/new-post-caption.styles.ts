@@ -51,7 +51,18 @@ export const Body = styled.div`
   align-items: center;
   padding: 1rem;
   border: ${({ theme }) => `1px solid ${theme.colors.solitude}`};
-  border-radius: 2px;
+  border-radius: 4px;
+  position: relative;
+`;
+
+export const Layer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(247, 248, 249, 0.6);
+  z-index: 1;
 `;
 
 export const StyledAvatar = styled(Avatar)`
@@ -74,6 +85,7 @@ export const Preview = styled.img<PreviewProps>`
   height: 3rem;
   object-fit: cover;
   filter: ${({ filter }) => (filter ? filter : 'none')};
+  border-radius: 2px;
 `;
 
 export const StyledLottie = styled(Lottie)`

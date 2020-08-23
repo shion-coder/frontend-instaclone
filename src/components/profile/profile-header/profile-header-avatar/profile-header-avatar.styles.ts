@@ -26,7 +26,7 @@ export const Layer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 1;
 `;
 
 export const Input = styled.input`
