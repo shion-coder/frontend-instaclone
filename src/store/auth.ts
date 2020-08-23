@@ -1,7 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
-import { RegisterDataProps, LoginDataProps, AuthResultProps, AuthErrors } from 'types';
+import {
+  RegisterDataProps,
+  LoginDataProps,
+  UserProps,
+  AuthResultProps,
+  Errors,
+  UpdateProfileProps,
+  ProfileProps,
+} from 'types';
 import { http } from 'services';
 
 /* -------------------------------------------------------------------------- */
@@ -17,7 +25,7 @@ export const register = createAsyncThunk('auth/register', async (user: RegisterD
 
     return data;
   } catch (error) {
-    const exception: AxiosError<AuthErrors> = error;
+    const exception: AxiosError<Errors> = error;
 
     if (!exception.response) {
       throw exception;
@@ -34,7 +42,24 @@ export const login = createAsyncThunk('auth/login', async (user: LoginDataProps,
 
     return data;
   } catch (error) {
-    const exception: AxiosError<AuthErrors> = error;
+    const exception: AxiosError<Errors> = error;
+
+    if (!exception.response) {
+      throw exception;
+    }
+
+    return rejectWithValue(exception.response.data.errors);
+  }
+});
+
+export const profile = createAsyncThunk('auth/profile', async (profile: UpdateProfileProps, { rejectWithValue }) => {
+  try {
+    const endpoint = '/users/profile';
+    const { data } = await http.put<ProfileProps>(endpoint, profile);
+
+    return data;
+  } catch (error) {
+    const exception: AxiosError<Errors> = error;
 
     if (!exception.response) {
       throw exception;
@@ -49,15 +74,7 @@ export const login = createAsyncThunk('auth/login', async (user: LoginDataProps,
  */
 
 type StateProps = {
-  user: {
-    firstName?: string;
-    lastName?: string;
-    fullName?: string;
-    username?: string;
-    email?: string;
-    avatar?: string;
-    confirmed?: boolean;
-  };
+  user: Partial<UserProps>;
   token: string | null;
 };
 
@@ -96,6 +113,11 @@ const authSlice = createSlice({
       if (payload) {
         state.user = payload.user;
         state.token = payload.token;
+      }
+    });
+    builder.addCase(profile.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.user = payload.user;
       }
     });
   },

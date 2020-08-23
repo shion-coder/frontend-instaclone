@@ -2,4 +2,6 @@ export * from './register';
 
 export * from './login';
 
-export * from './change-password';
+export * from './update-profile';
+
+export * from './update-password';

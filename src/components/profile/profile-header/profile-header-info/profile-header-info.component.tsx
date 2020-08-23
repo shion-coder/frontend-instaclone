@@ -14,6 +14,8 @@ import {
   Number,
   Followers,
   Following,
+  Other,
+  Website,
   Bio,
 } from './profile-header-info.styles';
 
@@ -25,22 +27,29 @@ type Props = {
   postCount: number;
   followerCount: number;
   followingCount: number;
+  website: string;
   bio: string;
 };
 
-const ProfileHeaderInfo: FC<Props> = ({ isCurrentUser, fullName, postCount, followerCount, followingCount, bio }) => {
+const ProfileHeaderInfo: FC<Props> = ({
+  isCurrentUser,
+  fullName,
+  postCount,
+  followerCount,
+  followingCount,
+  website,
+  bio,
+}) => {
   const history = useHistory();
 
   const goSettings = () => history.push('/settings');
 
   return (
-    <Container item xs={8} container direction="column" justify="space-between">
-      <Meta container alignItems="center">
-        <Name item xs={8}>
-          {fullName}
-        </Name>
+    <Container item xs={8} container direction="column">
+      <Meta>
+        <Name>{fullName}</Name>
 
-        <Setting item xs={4} container alignItems="center">
+        <Setting>
           {isCurrentUser ? (
             <>
               <Edit variant="outlined" color="primary" size="small" onClick={goSettings}>
@@ -74,7 +83,13 @@ const ProfileHeaderInfo: FC<Props> = ({ isCurrentUser, fullName, postCount, foll
         </Following>
       </Stats>
 
-      <Bio>{bio}</Bio>
+      <Other>
+        <Bio>{bio}</Bio>
+
+        <Website href={website} target="_blank">
+          {website}
+        </Website>
+      </Other>
     </Container>
   );
 };

@@ -1,3 +1,22 @@
+export type AuthResultProps = {
+  user: UserProps;
+  token: string;
+};
+
+export type UserConfirmProps = {
+  message: string;
+};
+
+export type Errors = {
+  errors: Record<string, unknown>;
+};
+
+export type DecodeProps = {
+  id: string;
+  exp: number;
+  iat: number;
+};
+
 export type PostProps = {
   image: string;
   thumbnail?: string;
@@ -47,5 +66,9 @@ export type GetUserProps = {
 };
 
 export type MeProps = {
+  user: UserProps;
+};
+
+export type ProfileProps = {
   user: UserProps;
 };

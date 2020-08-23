@@ -1,4 +1,4 @@
-export type ChangePasswordProps = {
+export type UpdatePasswordProps = {
   password: string;
   newPassword: string;
   confirmNewPassword: string;

@@ -6,9 +6,9 @@ export * from './register';
 
 export * from './login';
 
-export * from './change-password';
+export * from './update-profile';
 
-export * from './auth';
+export * from './update-password';
 
 export * from './modal';
 

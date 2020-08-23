@@ -16,7 +16,7 @@ type Props = {
 };
 
 const ProfileHeader: FC<Props> = ({
-  user: { avatar, username, fullName, postCount, followerCount, followingCount, bio },
+  user: { avatar, username, fullName, postCount, followerCount, followingCount, website, bio },
   refetch,
 }) => {
   const currentUsername = useSelector((state: RootStateProps) => state.auth.user.username);
@@ -31,6 +31,7 @@ const ProfileHeader: FC<Props> = ({
         postCount={postCount}
         followerCount={followerCount}
         followingCount={followingCount}
+        website={website}
         bio={bio}
       />
     </Container>

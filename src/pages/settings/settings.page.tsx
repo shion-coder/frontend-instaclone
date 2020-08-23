@@ -2,7 +2,8 @@ import React, { FC, ChangeEvent, useState } from 'react';
 import { Grid } from '@material-ui/core';
 
 import Panel from 'components/common/material-tab-panel';
-import ChangePassword from 'components/settings/change-password';
+import UpdateProfile from 'components/settings/update-profile';
+import UpdatePassword from 'components/settings/update-password';
 
 import { Wrapper, Container, StyledTabs as Tabs, StyledTab as Tab } from './settings.styles';
 
@@ -25,11 +26,11 @@ const Setting: FC = () => {
 
         <Grid item xs={8}>
           <Panel value={value} index={0}>
-            Edit Profile
+            <UpdateProfile />
           </Panel>
 
           <Panel value={value} index={1}>
-            <ChangePassword />
+            <UpdatePassword />
           </Panel>
         </Grid>
       </Container>

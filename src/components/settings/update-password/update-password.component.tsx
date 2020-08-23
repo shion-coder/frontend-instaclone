@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import { Formik, FormikHelpers } from 'formik';
 
-import { ChangePasswordProps } from 'types';
-import { validateChangePassword } from 'config';
+import { UpdatePasswordProps } from 'types';
+import { validateUpdatePassword } from 'config';
 import { http } from 'services';
 import Field from 'components/common/formik-field';
 
@@ -12,16 +12,16 @@ import {
   HiddenField,
   StyledButton as Button,
   Text,
-} from './change-password.styles';
+} from './update-password.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const ChangePassword: FC = () => {
+const UpdatePassword: FC = () => {
   const [message, setMessage] = useState('');
 
-  const handleSubmit = async (values: ChangePasswordProps, formikHelpers: FormikHelpers<ChangePasswordProps>) => {
+  const handleSubmit = async (values: UpdatePasswordProps, formikHelpers: FormikHelpers<UpdatePasswordProps>) => {
     try {
-      const { data } = await http.put('/auth/password', values);
+      const { data } = await http.put('/users/password', values);
 
       setMessage(data.message);
     } catch (error) {
@@ -29,7 +29,7 @@ const ChangePassword: FC = () => {
     }
   };
 
-  const initialValues: ChangePasswordProps = {
+  const initialValues: UpdatePasswordProps = {
     password: '',
     newPassword: '',
     confirmNewPassword: '',
@@ -40,7 +40,7 @@ const ChangePassword: FC = () => {
       {message ? (
         <Text>{message}</Text>
       ) : (
-        <Formik initialValues={initialValues} validationSchema={validateChangePassword} onSubmit={handleSubmit}>
+        <Formik initialValues={initialValues} validationSchema={validateUpdatePassword} onSubmit={handleSubmit}>
           <Form noValidate>
             <HiddenField id="username" name="username" type="text" autoComplete="username" />
 
@@ -84,7 +84,7 @@ const ChangePassword: FC = () => {
             />
 
             <Button type="submit" size="small" variant="contained" color="primary" fullWidth>
-              Change Password
+              Update Password
             </Button>
           </Form>
         </Formik>
@@ -93,4 +93,4 @@ const ChangePassword: FC = () => {
   );
 };
 
-export default ChangePassword;
+export default UpdatePassword;

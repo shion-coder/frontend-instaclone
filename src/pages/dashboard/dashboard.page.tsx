@@ -10,7 +10,7 @@ import { Container, StyledTypography as Text } from './dashboard.styles';
 /* -------------------------------------------------------------------------- */
 
 const requestMe = async () => {
-  const { data } = await http.get<MeProps>('/users/me');
+  const { data } = await http.get<MeProps>('/auth/me');
 
   return data;
 };

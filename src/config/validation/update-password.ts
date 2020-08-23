@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 /* -------------------------------------------------------------------------- */
 
-export const validateChangePassword = Yup.object({
+export const validateUpdatePassword = Yup.object({
   password: Yup.string().required('Current password is required'),
   newPassword: Yup.string().min(6, 'Password must be at least 6 characters').required('New password is required'),
   confirmNewPassword: Yup.string()
