@@ -51,9 +51,13 @@ export const Number = styled.span`
 
 export const Posts = styled(Grid)``;
 
-export const Followers = styled(Grid)``;
+export const Followers = styled(Grid)`
+  cursor: pointer;
+`;
 
-export const Following = styled(Grid)``;
+export const Following = styled(Grid)`
+  cursor: pointer;
+`;
 
 export const Other = styled(Grid)``;
 
