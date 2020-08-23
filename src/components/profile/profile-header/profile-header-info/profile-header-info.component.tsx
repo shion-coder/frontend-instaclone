@@ -1,5 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Modal from 'styled-react-modal';
+
+import SettingsModal from 'components/profile/profile-header/profile-settings-modal';
 
 import {
   Container,
@@ -40,9 +43,12 @@ const ProfileHeaderInfo: FC<Props> = ({
   website,
   bio,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
   const goSettings = () => history.push('/settings');
+
+  const toggleModal = () => setIsOpen((isOpen) => !isOpen);
 
   return (
     <Container item xs={8} container direction="column">
@@ -56,7 +62,11 @@ const ProfileHeaderInfo: FC<Props> = ({
                 Edit Profile
               </Edit>
 
-              <Icon color="primary" />
+              <Icon color="primary" onClick={toggleModal} />
+
+              <Modal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
+                <SettingsModal toggleModal={toggleModal} />
+              </Modal>
             </>
           ) : (
             <Follow variant="contained" color="primary" size="small">
