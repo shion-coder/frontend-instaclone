@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, ReactText } from 'react';
+import React, { FC, ChangeEvent, ReactText, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
@@ -25,9 +25,14 @@ type Props = {
 
 const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser, refetch }) => {
   const requestUpdateAvatar = (data: FormData | undefined) => http.put('/users/avatar', data);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [updateAvatar, { isLoading }] = useMutation(requestUpdateAvatar, {
     onError: (err: AxiosError) => {
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
+
       toast.error(err.response?.data.error, { toastId: 'upload-error' });
     },
     onSuccess: () => refetch(),
@@ -69,7 +74,14 @@ const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser, refetch }) => {
         <Avatar src={avatar} role={isCurrentUser ? 'me' : 'guest'} />
 
         {isCurrentUser && (
-          <Input type="file" accept="image/*" id="upload-avatar" name="upload-avatar" onChange={handleChange} />
+          <Input
+            type="file"
+            accept="image/*"
+            id="upload-avatar"
+            name="upload-avatar"
+            onChange={handleChange}
+            ref={inputRef}
+          />
         )}
       </Label>
     </Container>

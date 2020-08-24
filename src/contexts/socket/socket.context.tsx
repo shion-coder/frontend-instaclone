@@ -1,5 +1,5 @@
 import React, { FC, createContext, useEffect, useState, useContext } from 'react';
-import socketIo, { Socket } from 'socket.io-client';
+import socketIo from 'socket.io-client';
 import { useSelector } from 'react-redux';
 
 import { API_URL } from 'config';
@@ -38,4 +38,16 @@ export const useSocket = (): SocketIOClient.Socket | null => {
   const io = useContext(SocketContext);
 
   return io;
+};
+
+export const useSocketListener = <T extends Record<string, unknown>>(event: string, fn: (value: T) => void): void => {
+  const io = useSocket();
+
+  useEffect(() => {
+    io?.on(event, fn);
+
+    return () => {
+      io?.off(event, fn);
+    };
+  }, [event, fn, io]);
 };

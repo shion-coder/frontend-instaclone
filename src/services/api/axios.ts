@@ -48,7 +48,9 @@ http.interceptors.response.use(
     }
 
     if (error.code === 'ECONNABORTED') {
-      return toast.error('Request Timeout', { toastId: 'timeout-error' });
+      toast.error('Request Timeout', { toastId: 'timeout-error' });
+
+      return Promise.reject(error);
     }
 
     if (error.response) {

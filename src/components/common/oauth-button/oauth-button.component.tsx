@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, ButtonProps } from '@material-ui/core';
 
-import { useSocket } from 'contexts/socket';
+import { useSocket, useSocketListener } from 'contexts/socket';
 import { API_URL } from 'config';
 import { oauthLogin } from 'store';
 
@@ -25,6 +25,32 @@ const OauthButton: FC<Props> = ({ provider, state, children, ...otherProps }) =>
   const popup = useRef<Window | null>(null);
   const isMounted = useRef<boolean | null>(null);
   const [disabled, setDisabled] = useState(false);
+
+  /**
+   * Set isMounted value to prevent update state on unmounted component
+   */
+
+  useEffect(() => {
+    isMounted.current = true;
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  /**
+   * Listening socket response to login, close popup
+   */
+
+  const handleOauth = (user: Record<string, unknown>) => {
+    dispatch(oauthLogin(user));
+
+    !state ? history.push('/') : history.push(state.from.pathname);
+
+    popup.current?.close();
+  };
+
+  useSocketListener(provider, handleOauth);
 
   /**
    * Launches the popup by making a request to the server and then passes along the socket id
@@ -72,26 +98,6 @@ const OauthButton: FC<Props> = ({ provider, state, children, ...otherProps }) =>
       isMounted.current && setDisabled(true);
     }
   };
-
-  /**
-   * Listening socket response to login, close popup and set isMounted value to prevent update state on unmounted component
-   */
-
-  useEffect(() => {
-    isMounted.current = true;
-
-    io?.on(provider, (user: Record<string, unknown>) => {
-      dispatch(oauthLogin(user));
-
-      !state ? history.push('/') : history.push(state.from.pathname);
-
-      popup.current?.close();
-    });
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, [io, provider, dispatch, state, history]);
 
   return (
     <Button onClick={startAuth} {...otherProps}>

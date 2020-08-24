@@ -103,6 +103,7 @@ const UpdatePassword: FC = () => {
             type="text"
             autoComplete="bio"
             size="small"
+            rows={4}
             multiline
             fullWidth
             required
