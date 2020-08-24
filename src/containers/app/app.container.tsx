@@ -14,7 +14,7 @@ import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM, PROFILE, SETTINGS, TEST } = Path;
+const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM, EXPLORE, PROFILE, SETTINGS, TEST } = Path;
 
 /**
  * Lazy loading
@@ -46,6 +46,12 @@ const Dashboard = lazy(() =>
 
 const Confirm = lazy(() =>
   Promise.all([import('pages/confirm'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
+const Explore = lazy(() =>
+  Promise.all([import('pages/explore'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
     ([moduleExports]) => moduleExports,
   ),
 );
@@ -94,6 +100,7 @@ const App: FC = () => {
             <GuestRoute exact path={LOGIN} component={Login} />
 
             <ProtectedRoute exact path={DASHBOARD} component={Dashboard} />
+            <ProtectedRoute exact path={EXPLORE} component={Explore} />
             <ProtectedRoute exact path={SETTINGS} component={Settings} />
             <ProtectedRoute exact path={PROFILE} component={Profile} />
 

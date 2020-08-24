@@ -5,6 +5,7 @@ export enum Path {
   LIST = '/list',
   DASHBOARD = '/dashboard',
   CONFIRM = '/confirm/:id',
+  EXPLORE = '/explore',
   PROFILE = '/:username',
   SETTINGS = '/settings',
   TEST = '/test',
