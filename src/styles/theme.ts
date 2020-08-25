@@ -29,7 +29,7 @@ declare module 'styled-components' {
   }
 }
 export const theme: DefaultTheme = {
-  material: responsiveFontSizes(createMuiTheme()),
+  material: responsiveFontSizes(createMuiTheme({})),
   colors: {
     white: '#fff',
     black: '#000',

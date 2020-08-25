@@ -39,7 +39,7 @@ const Dashboard: FC = () => {
     <Wrapper>
       <Container container spacing={3}>
         <Grid item xs={12}>
-          <ProfileHeader user={data.user} refetch={refetch} />
+          <ProfileHeader data={data} refetch={refetch} />
         </Grid>
       </Container>
     </Wrapper>

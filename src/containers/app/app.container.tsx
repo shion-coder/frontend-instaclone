@@ -1,9 +1,9 @@
 import React, { FC, Suspense, lazy, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { Path } from 'types';
-import { API_URL } from 'config';
-import { http } from 'services';
+import { RootStateProps, fetchNotifications } from 'store';
 import Header from 'components/header';
 import Footer from 'components/footer';
 import Loader from 'components/loader/lottie-loader';
@@ -75,15 +75,12 @@ const Test = lazy(() =>
 );
 
 const App: FC = () => {
-  /**
-   * Catch a start up request so that a sleepy Heroku instance can be responsive as soon as possible
-   */
+  const dispatch = useDispatch();
+  const token = useSelector((state: RootStateProps) => state.auth.token);
 
   useEffect(() => {
-    (async () => {
-      await http.get(`${API_URL}/wake-up`);
-    })();
-  }, []);
+    token && dispatch(fetchNotifications());
+  }, [token, dispatch]);
 
   return (
     <Container>

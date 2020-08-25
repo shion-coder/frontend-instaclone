@@ -1,7 +1,13 @@
 import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
 import Modal from 'styled-react-modal';
+import { toast } from 'react-toastify';
 
+import { GetUserProps } from 'types';
+import { http } from 'services';
+import loading from 'assets/animations/dot-loading.json';
 import SettingsModal from 'components/profile/profile-header/profile-settings-modal';
 
 import {
@@ -12,6 +18,8 @@ import {
   Edit,
   Icon,
   Follow,
+  Layer,
+  StyledLottie as Lottie,
   Stats,
   Posts,
   Number,
@@ -26,29 +34,59 @@ import {
 
 type Props = {
   isCurrentUser: boolean;
-  fullName: string;
-  postCount: number;
-  followerCount: number;
-  followingCount: number;
-  website: string;
-  bio: string;
+  data: GetUserProps;
+  refetch: () => Promise<GetUserProps | undefined>;
 };
 
 const ProfileHeaderInfo: FC<Props> = ({
   isCurrentUser,
-  fullName,
-  postCount,
-  followerCount,
-  followingCount,
-  website,
-  bio,
+  data: {
+    user: { _id, fullName, postCount, followerCount, followingCount, bio, website },
+    isFollowing,
+  },
+  refetch,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenSettingsModal, setIsOpenSettingsModal] = useState(false);
   const history = useHistory();
 
   const goSettings = () => history.push('/settings');
 
-  const toggleModal = () => setIsOpen((isOpen) => !isOpen);
+  const toggleSettingsModal = () => setIsOpenSettingsModal((previous) => !previous);
+
+  const requestFollow = () => http.post(`/users/${_id}/follow`);
+
+  const [followUser, { isLoading }] = useMutation(requestFollow, {
+    onError: (err: AxiosError) => {
+      toast.error(err.response?.data.error, { toastId: 'follow-error' });
+    },
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  const handleFollow = () => followUser();
+
+  const renderFollowButton = () => {
+    return isFollowing ? (
+      <Follow variant="outlined" color="primary" size="small" onClick={handleFollow}>
+        {isLoading && (
+          <Layer>
+            <Lottie play loop animationData={loading} />
+          </Layer>
+        )}
+        Following
+      </Follow>
+    ) : (
+      <Follow variant="contained" color="primary" size="small" onClick={handleFollow}>
+        {isLoading && (
+          <Layer>
+            <Lottie play loop animationData={loading} />
+          </Layer>
+        )}
+        Follow
+      </Follow>
+    );
+  };
 
   return (
     <Container item xs={8} container direction="column">
@@ -62,16 +100,18 @@ const ProfileHeaderInfo: FC<Props> = ({
                 Edit Profile
               </Edit>
 
-              <Icon color="primary" onClick={toggleModal} />
+              <Icon color="primary" onClick={toggleSettingsModal} />
 
-              <Modal isOpen={isOpen} onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
-                <SettingsModal toggleModal={toggleModal} />
+              <Modal
+                isOpen={isOpenSettingsModal}
+                onBackgroundClick={toggleSettingsModal}
+                onEscapeKeydown={toggleSettingsModal}
+              >
+                <SettingsModal toggleModal={toggleSettingsModal} />
               </Modal>
             </>
           ) : (
-            <Follow variant="contained" color="primary" size="small">
-              Follow
-            </Follow>
+            renderFollowButton()
           )}
         </Setting>
       </Meta>

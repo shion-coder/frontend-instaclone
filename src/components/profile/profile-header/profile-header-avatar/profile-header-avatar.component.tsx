@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 
+import { GetUserProps } from 'types';
 import { http } from 'services';
 import loading from 'assets/animations/dot-loading.json';
 
@@ -20,12 +21,12 @@ import {
 type Props = {
   avatar: string;
   isCurrentUser: boolean;
-  refetch: () => Promise<void>;
+  refetch: () => Promise<GetUserProps | undefined>;
 };
 
 const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser, refetch }) => {
-  const requestUpdateAvatar = (data: FormData | undefined) => http.put('/users/avatar', data);
   const inputRef = useRef<HTMLInputElement>(null);
+  const requestUpdateAvatar = (data: FormData | undefined) => http.put('/users/avatar', data);
 
   const [updateAvatar, { isLoading }] = useMutation(requestUpdateAvatar, {
     onError: (err: AxiosError) => {
@@ -35,7 +36,9 @@ const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser, refetch }) => {
 
       toast.error(err.response?.data.error, { toastId: 'upload-error' });
     },
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+    },
   });
 
   /**

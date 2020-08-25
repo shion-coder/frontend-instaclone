@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { API_URL, API_TIMEOUT } from 'config';
 import { history } from 'utils';
-import { store, logout } from 'store';
+import { store, logout, clearNotification } from 'store';
 import { logger } from 'services';
 
 /* -------------------------------------------------------------------------- */
@@ -58,6 +58,7 @@ http.interceptors.response.use(
 
       if (status === 401) {
         store.dispatch(logout());
+        store.dispatch(clearNotification());
 
         return history.push('/login');
       }

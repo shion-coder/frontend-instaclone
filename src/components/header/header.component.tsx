@@ -6,7 +6,7 @@ import HomeIcon from './home';
 import Guest from './guest';
 import Auth from './auth';
 
-import { Container } from './header.styles';
+import { Wrapper, Container } from './header.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -14,11 +14,13 @@ const Header: FC = () => {
   const token = useSelector((state: RootStateProps) => state.auth.token);
 
   return (
-    <Container>
-      <HomeIcon />
+    <Wrapper>
+      <Container>
+        <HomeIcon />
 
-      {!token ? <Guest /> : <Auth />}
-    </Container>
+        {!token ? <Guest /> : <Auth />}
+      </Container>
+    </Wrapper>
   );
 };
 

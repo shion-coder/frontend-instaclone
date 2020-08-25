@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Grid, Button } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
+import Lottie from 'react-lottie-player';
 
 /* -------------------------------------------------------------------------- */
 
@@ -38,6 +39,25 @@ export const Icon = styled(SettingsIcon)`
 export const Follow = styled(Button)`
   font-weight: bold;
   text-transform: capitalize;
+  position: relative;
+`;
+
+export const Layer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+`;
+
+export const StyledLottie = styled(Lottie)`
+  width: 25px;
+  height: 25px;
 `;
 
 export const Stats = styled(Grid)`

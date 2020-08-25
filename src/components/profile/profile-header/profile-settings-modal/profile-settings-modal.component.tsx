@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { logout } from 'store';
+import { logout, clearNotification } from 'store';
 
 import { Container, Item, Text } from './profile-settings-modal.styles';
 
@@ -18,7 +18,10 @@ const ProfileSettingsModal: FC<Props> = ({ toggleModal }) => {
 
   const goSettings = () => history.push('/settings');
 
-  const logOut = () => dispatch(logout());
+  const logOut = () => {
+    dispatch(logout());
+    dispatch(clearNotification());
+  };
 
   return (
     <Container>
