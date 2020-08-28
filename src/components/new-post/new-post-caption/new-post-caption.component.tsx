@@ -1,17 +1,17 @@
 import React, { FC, Dispatch, SetStateAction, ChangeEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { AxiosError, CancelTokenSource } from 'axios';
 import { toast } from 'react-toastify';
 
+import { PostModal, Path } from 'types';
 import { RootStateProps } from 'store';
-import { Modal } from 'types';
 import { http } from 'services';
-import loading from 'assets/animations/loading.json';
+import Loader from 'components/loader/layer-loader';
 
 import {
   Container,
-  Layer,
   Header,
   Back,
   Title,
@@ -20,28 +20,35 @@ import {
   StyledAvatar as Avatar,
   Text,
   Preview,
-  StyledLottie as Lottie,
 } from './new-post-caption.styles';
 
 /* -------------------------------------------------------------------------- */
 
 type Props = {
-  filter: string;
   formData: FormData | undefined;
   preview: string | undefined;
-  setActiveModal: Dispatch<SetStateAction<Modal>>;
   handleClose: () => void;
   source: CancelTokenSource;
+  filter: string;
+  setActiveModal: Dispatch<SetStateAction<PostModal>>;
 };
 
-const NewPostCaption: FC<Props> = ({ filter, formData, preview, setActiveModal, handleClose, source }) => {
-  const avatar = useSelector((state: RootStateProps) => state.auth.user.avatar);
+const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, filter, setActiveModal }) => {
+  const avatar = useSelector((state: RootStateProps) => state.user.info.avatar);
   const [caption, setCaption] = useState('');
+  const history = useHistory();
 
-  const requestCreate = (data: FormData | undefined) =>
-    http.post('/post', data, {
+  /**
+   * Request post image data with filter and caption
+   */
+
+  const requestCreate = async (formData: FormData | undefined) => {
+    const { data } = await http.post('/post', formData, {
       cancelToken: source.token,
     });
+
+    return data;
+  };
 
   const [createNewPost, { isLoading }] = useMutation(requestCreate, {
     onError: (err: AxiosError) => {
@@ -49,10 +56,12 @@ const NewPostCaption: FC<Props> = ({ filter, formData, preview, setActiveModal, 
     },
     onSuccess: () => {
       handleClose();
+
+      history.push(Path.HOME);
     },
   });
 
-  const handleBack = () => setActiveModal(Modal.Filter);
+  const handleBack = () => setActiveModal(PostModal.Filter);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => setCaption(e.target.value);
 
@@ -66,19 +75,15 @@ const NewPostCaption: FC<Props> = ({ filter, formData, preview, setActiveModal, 
   return (
     <Container>
       <Header>
-        <Back fontSize="small" color="primary" onClick={handleBack} loading={isLoading ? 'loading' : ''} />
+        <Back fontSize="small" color="primary" onClick={handleBack} loading={isLoading ? 'yes' : 'no'} />
 
         <Title>New Post</Title>
 
-        {isLoading ? (
-          <Lottie play loop animationData={loading} />
-        ) : (
-          <Submit fontSize="small" color="primary" onClick={handleSubmit} />
-        )}
+        <Submit fontSize="small" color="primary" onClick={handleSubmit} loading={isLoading ? 'yes' : 'no'} />
       </Header>
 
       <Body>
-        {isLoading && <Layer />}
+        {isLoading && <Loader color="light" width="60px" height="60px" />}
 
         <Avatar alt="avatar" src={avatar} />
 

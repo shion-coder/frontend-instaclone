@@ -1,12 +1,11 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, ButtonProps } from '@material-ui/core';
 
-import { useSocket, useSocketListener } from 'contexts/socket';
 import { API_URL } from 'config';
 import { oauthLogin } from 'store';
+import { useSocket, useSocketListener } from 'contexts/socket';
 
 /* -------------------------------------------------------------------------- */
 
@@ -39,7 +38,7 @@ const OauthButton: FC<Props> = ({ provider, state, children, ...otherProps }) =>
   }, []);
 
   /**
-   * Listening socket response to login, close popup
+   * Listening socket response to login, return to previous protected route and close popup
    */
 
   const handleOauth = (user: Record<string, unknown>) => {
@@ -100,15 +99,10 @@ const OauthButton: FC<Props> = ({ provider, state, children, ...otherProps }) =>
   };
 
   return (
-    <Button onClick={startAuth} {...otherProps}>
+    <Button variant="contained" color="primary" onClick={startAuth} {...otherProps}>
       {children}
     </Button>
   );
-};
-
-OauthButton.propTypes = {
-  provider: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
 };
 
 export default OauthButton;

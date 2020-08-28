@@ -25,7 +25,7 @@ axiosRetry(http, { retryDelay: axiosRetry.exponentialDelay });
  */
 
 http.interceptors.request.use((config) => {
-  const token = store.getState().auth.token;
+  const token = store.getState().user.token;
 
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;

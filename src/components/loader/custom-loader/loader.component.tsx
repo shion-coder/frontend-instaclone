@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import FadeIn from 'react-fade-in';
 
 import { LOADING_DELAY, BOUNCE_DELAY } from 'config';
@@ -29,16 +28,12 @@ const Loader: FC<Props> = ({ color, delay }) => {
       <Container>
         <Spinner>
           <Bounce color={color} />
+
           <Bounce color={color} delay={delay || BOUNCE_DELAY} />
         </Spinner>
       </Container>
     </FadeIn>
   );
-};
-
-Loader.propTypes = {
-  color: PropTypes.string,
-  delay: PropTypes.string,
 };
 
 export default Loader;

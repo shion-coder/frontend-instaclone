@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { Formik, FormikHelpers } from 'formik';
 
 import { UpdatePasswordProps } from 'types';
-import { validateUpdatePassword } from 'config';
+import { validateUpdatePassword } from 'utils';
 import { http } from 'services';
 import Field from 'components/common/formik-field';
 
@@ -42,48 +42,15 @@ const UpdatePassword: FC = () => {
       ) : (
         <Formik initialValues={initialValues} validationSchema={validateUpdatePassword} onSubmit={handleSubmit}>
           <Form noValidate>
-            <HiddenField id="username" name="username" type="text" autoComplete="username" />
+            <HiddenField name="hidden" />
 
-            <Field
-              id="password"
-              name="password"
-              label="Current Password"
-              variant="outlined"
-              margin="normal"
-              type="password"
-              autoComplete="password"
-              size="small"
-              fullWidth
-              required
-            />
+            <Field name="password" type="password" fullWidth required />
 
-            <Field
-              id="newPassword"
-              name="newPassword"
-              label="New Password"
-              variant="outlined"
-              margin="normal"
-              type="password"
-              autoComplete="new-password"
-              size="small"
-              fullWidth
-              required
-            />
+            <Field name="newPassword" type="password" fullWidth required />
 
-            <Field
-              id="confirmNewPassword"
-              name="confirmNewPassword"
-              label="Confirm New Password"
-              variant="outlined"
-              margin="normal"
-              type="password"
-              autoComplete="confirm-new-password"
-              size="small"
-              fullWidth
-              required
-            />
+            <Field name="confirmNewPassword" type="password" fullWidth required />
 
-            <Button type="submit" size="small" variant="contained" color="primary" fullWidth>
+            <Button type="submit" fullWidth>
               Update Password
             </Button>
           </Form>

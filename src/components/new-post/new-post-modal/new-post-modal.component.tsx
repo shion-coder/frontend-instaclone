@@ -1,9 +1,8 @@
 import React, { FC, useState } from 'react';
-import PropTypes from 'prop-types';
 import { CancelTokenSource } from 'axios';
 
-import { Modal } from 'types';
-import NewPostFilter from 'components/new-post/new-post-filter';
+import { PostModal } from 'types';
+import NewPostFilter from 'components/new-post/new-post-filters';
 import NewPostCaption from 'components/new-post/new-post-caption';
 
 /* -------------------------------------------------------------------------- */
@@ -17,25 +16,20 @@ type Props = {
 
 const NewPostModal: FC<Props> = ({ formData, preview, handleClose, source }) => {
   const [filter, setFilter] = useState('none');
-  const [activeModal, setActiveModal] = useState(Modal.Filter);
+  const [activeModal, setActiveModal] = useState(PostModal.Filter);
 
-  return activeModal === Modal.Filter ? (
+  return activeModal === PostModal.Filter ? (
     <NewPostFilter preview={preview} handleClose={handleClose} setFilter={setFilter} setActiveModal={setActiveModal} />
   ) : (
     <NewPostCaption
-      filter={filter}
       formData={formData}
       preview={preview}
-      setActiveModal={setActiveModal}
       handleClose={handleClose}
       source={source}
+      filter={filter}
+      setActiveModal={setActiveModal}
     />
   );
-};
-
-NewPostModal.propTypes = {
-  preview: PropTypes.string,
-  handleClose: PropTypes.func.isRequired,
 };
 
 export default NewPostModal;

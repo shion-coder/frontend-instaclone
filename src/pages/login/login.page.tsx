@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { StaticContext } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { Formik, FormikHelpers, FormikErrors } from 'formik';
 import { Grid } from '@material-ui/core';
 import Account from '@material-ui/icons/AccountCircle';
 
 import { LoginDataProps } from 'types';
 import { Dispatch, login } from 'store';
-import { validateLogin } from 'config';
+import { validateLogin } from 'utils';
 import Field from 'components/common/formik-field';
 
 import {
@@ -57,41 +57,23 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
 
       <Formik initialValues={initialValues} validationSchema={validateLogin} onSubmit={handleSubmit}>
         <Form noValidate>
-          <Field
-            id="usernameOrEmail"
-            name="usernameOrEmail"
-            label="Email Address"
-            variant="outlined"
-            margin="normal"
-            autoComplete="account"
-            fullWidth
-            required
-          />
+          <Field name="usernameOrEmail" label="Email" size="medium" fullWidth required />
 
-          <Field
-            id="password"
-            name="password"
-            label="Password"
-            variant="outlined"
-            margin="normal"
-            type="password"
-            autoComplete="password"
-            fullWidth
-            required
-          />
+          <Field name="password" size="medium" type="password" fullWidth required />
 
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <Button type="submit" size="medium" fullWidth>
             Login
           </Button>
 
-          <Google provider="google" state={state} variant="contained" color="primary" fullWidth>
-            Login with Google
+          <Google provider="google" color="primary" state={state} fullWidth>
+            Sign in with Google
           </Google>
 
           <Grid container>
             <Grid item xs>
               <Link to="/login">Forgot password?</Link>
             </Grid>
+
             <Grid item>
               <Link to="/register">Don't have an account? Register</Link>
             </Grid>

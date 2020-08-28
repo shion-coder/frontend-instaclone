@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   /* Custom toast top right position */
-  .Toastify__toast-container--top-right {
-    top: 4.5rem;
+  .Toastify__toast-container--bottom-right {
+    bottom: 3rem;
   }
 `;

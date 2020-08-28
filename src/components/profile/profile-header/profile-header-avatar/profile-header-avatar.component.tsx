@@ -1,32 +1,40 @@
-import React, { FC, ChangeEvent, ReactText, useRef } from 'react';
-import { toast } from 'react-toastify';
+import React, { FC, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
-import { GetUserProps } from 'types';
+import { AvatarProps } from 'types';
+import { changeAvatar } from 'store';
 import { http } from 'services';
-import loading from 'assets/animations/dot-loading.json';
+import { useFiles } from 'hooks';
+import Avatar from 'components/avatar';
+import Loader from 'components/loader/layer-loader';
 
-import {
-  Container,
-  Label,
-  Layer,
-  StyledAvatar as Avatar,
-  Input,
-  StyledLottie as Lottie,
-} from './profile-header-avatar.styles';
+import { Container, Label, Input } from './profile-header-avatar.styles';
 
 /* -------------------------------------------------------------------------- */
 
 type Props = {
   avatar: string;
   isCurrentUser: boolean;
-  refetch: () => Promise<GetUserProps | undefined>;
 };
 
-const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser, refetch }) => {
+const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const requestUpdateAvatar = (data: FormData | undefined) => http.put('/users/avatar', data);
+  const [newAvatar, setNewAvatar] = useState(avatar);
+
+  const dispatch = useDispatch();
+
+  /**
+   * Request update new avatar
+   */
+
+  const requestUpdateAvatar = async (formData: FormData | undefined) => {
+    const { data } = await http.put<AvatarProps>('/users/avatar', formData);
+
+    return data;
+  };
 
   const [updateAvatar, { isLoading }] = useMutation(requestUpdateAvatar, {
     onError: (err: AxiosError) => {
@@ -36,45 +44,20 @@ const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser, refetch }) => {
 
       toast.error(err.response?.data.error, { toastId: 'upload-error' });
     },
-    onSuccess: () => {
-      refetch();
+    onSuccess: (data) => {
+      setNewAvatar(data.avatar);
+      dispatch(changeAvatar({ avatar: data.avatar }));
     },
   });
 
-  /**
-   * Handle uploading multiple files but only allow one file in here
-   */
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): ReactText | void => {
-    const { files } = e.target;
-
-    if (files) {
-      const fileArray = Array.from(files);
-
-      const data = new FormData();
-
-      fileArray.forEach((file) => {
-        if (file.size > 1500000) {
-          return toast.error('File is too large, please pick a smaller file', { toastId: 'upload-error' });
-        }
-
-        data.append('image', file);
-      });
-
-      updateAvatar(data);
-    }
-  };
+  const { handleChange } = useFiles(inputRef, updateAvatar);
 
   return (
     <Container item xs={4} container direction="row" justify="center" alignItems="center">
       <Label htmlFor="upload-avatar">
-        {isLoading && (
-          <Layer>
-            <Lottie play loop animationData={loading} />
-          </Layer>
-        )}
+        {isLoading && <Loader color="dark" width="50px" height="50px" radius="50%" />}
 
-        <Avatar src={avatar} role={isCurrentUser ? 'me' : 'guest'} />
+        <Avatar src={newAvatar} width="8rem" height="8rem" cursor={isCurrentUser ? 'pointer' : 'auto'} />
 
         {isCurrentUser && (
           <Input
@@ -83,6 +66,7 @@ const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser, refetch }) => {
             id="upload-avatar"
             name="upload-avatar"
             onChange={handleChange}
+            disabled={isLoading}
             ref={inputRef}
           />
         )}

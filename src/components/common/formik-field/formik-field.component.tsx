@@ -1,7 +1,8 @@
 import React, { FC, ChangeEvent } from 'react';
-import PropTypes from 'prop-types';
 import { useFormikContext } from 'formik';
 import { TextField as Field, TextFieldProps } from '@material-ui/core';
+
+import { camelToTitle } from 'utils';
 
 /* -------------------------------------------------------------------------- */
 
@@ -14,15 +15,13 @@ type FormikProps = {
 };
 
 const FormikField: FC<Props> = ({ name, ...otherProps }) => {
-  const { values, setFieldValue, setFieldTouched, touched, errors, isSubmitting } = useFormikContext<FormikProps>();
+  const { values, setFieldValue, touched, setFieldTouched, errors, isSubmitting } = useFormikContext<FormikProps>();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setFieldValue(name, e.target.value);
-  };
+  const label = camelToTitle(name);
 
-  const handleBlue = (): void => {
-    setFieldTouched(name);
-  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => setFieldValue(name, e.target.value);
+
+  const handleBlue = () => setFieldTouched(name);
 
   return (
     <Field
@@ -32,13 +31,14 @@ const FormikField: FC<Props> = ({ name, ...otherProps }) => {
       error={touched[name] && !!errors[name]}
       helperText={touched[name] && !!errors[name] && errors[name]}
       disabled={isSubmitting}
+      id={name}
+      autoComplete={name}
+      label={label}
+      variant="outlined"
+      margin="normal"
       {...otherProps}
     />
   );
-};
-
-FormikField.propTypes = {
-  name: PropTypes.string.isRequired,
 };
 
 export default FormikField;

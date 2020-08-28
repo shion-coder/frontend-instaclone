@@ -2,11 +2,6 @@ import styled, { keyframes } from 'styled-components';
 
 /* -------------------------------------------------------------------------- */
 
-type BounceProps = {
-  color?: string;
-  delay?: string;
-};
-
 const bounce = keyframes`
   0%,
 
@@ -20,6 +15,11 @@ const bounce = keyframes`
     -webkit-transform: scale(1);
   }
 `;
+
+type BounceProps = {
+  color?: string;
+  delay?: string;
+};
 
 export const Container = styled.div`
   display: flex;

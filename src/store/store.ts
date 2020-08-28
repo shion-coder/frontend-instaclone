@@ -3,13 +3,13 @@ import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 
 import { Environment } from 'types';
-import { authReducer } from './auth';
+import { userReducer } from './user';
 import { notificationReducer } from './notification';
 
 /* -------------------------------------------------------------------------- */
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  user: userReducer,
   notification: notificationReducer,
 });
 
@@ -18,7 +18,7 @@ export type RootStateProps = ReturnType<typeof rootReducer>;
 const persistConfig = {
   storage,
   key: 'root',
-  whitelist: ['auth'],
+  whitelist: ['user'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

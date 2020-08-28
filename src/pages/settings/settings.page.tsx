@@ -20,6 +20,7 @@ const Setting: FC = () => {
         <Grid item xs={4}>
           <Tabs orientation="vertical" indicatorColor="primary" value={value} onChange={handleChange}>
             <Tab label="Edit Profile" />
+
             <Tab label="Change Password" />
           </Tabs>
         </Grid>

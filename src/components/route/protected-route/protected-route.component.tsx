@@ -7,7 +7,7 @@ import { RootStateProps } from 'store';
 /* -------------------------------------------------------------------------- */
 
 const ProtectedRoute: FC<Props> = (props) => {
-  const token = useSelector((state: RootStateProps) => state.auth.token);
+  const token = useSelector((state: RootStateProps) => state.user.token);
 
   return token ? <Route {...props} /> : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
 };

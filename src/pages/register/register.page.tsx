@@ -7,7 +7,7 @@ import Account from '@material-ui/icons/AccountCircle';
 
 import { RegisterDataProps } from 'types';
 import { Dispatch, register } from 'store';
-import { validateRegister } from 'config';
+import { validateRegister } from 'utils';
 import Field from 'components/common/formik-field';
 
 import {
@@ -29,6 +29,7 @@ const Register: FC = () => {
 
     register.fulfilled.match(result)
       ? toast.success(`Welcome ${result.payload?.user.firstName}. Please check your email for confirmation`, {
+          position: 'bottom-right',
           toastId: 'register-fulfilled',
         })
       : result.payload && formikHelpers.setErrors(result.payload as FormikErrors<RegisterDataProps>);
@@ -55,75 +56,23 @@ const Register: FC = () => {
         <Form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <Field
-                id="firstName"
-                name="firstName"
-                label="First Name"
-                variant="outlined"
-                autoComplete="firstName"
-                fullWidth
-                required
-              />
+              <Field name="firstName" fullWidth required />
             </Grid>
+
             <Grid item xs={12} sm={6}>
-              <Field
-                id="lastName"
-                name="lastName"
-                label="Last Name"
-                variant="outlined"
-                autoComplete="lastName"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                id="username"
-                name="username"
-                label="Username"
-                variant="outlined"
-                autoComplete="username"
-                fullWidth
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                id="email"
-                name="email"
-                label="Email Address"
-                variant="outlined"
-                autoComplete="email"
-                fullWidth
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                id="password"
-                name="password"
-                label="Password"
-                variant="outlined"
-                type="password"
-                autoComplete="password"
-                fullWidth
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                id="confirmPassword"
-                name="confirmPassword"
-                label="Confirm Password"
-                variant="outlined"
-                type="password"
-                autoComplete="confirmPassword"
-                fullWidth
-                required
-              />
+              <Field name="lastName" fullWidth />
             </Grid>
           </Grid>
 
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <Field name="username" fullWidth required />
+
+          <Field name="email" fullWidth required />
+
+          <Field name="password" type="password" fullWidth required />
+
+          <Field name="confirmPassword" type="password" fullWidth required />
+
+          <Button type="submit" fullWidth>
             Register
           </Button>
 

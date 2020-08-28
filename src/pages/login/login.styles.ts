@@ -34,10 +34,20 @@ export const StyledAvatar = styled(Avatar)`
 export const StyledForm = styled(Form)`
   width: '100%';
   margin-top: ${({ theme }) => theme.material.spacing(1) + 'px'};
+
+  .MuiButton-label {
+    text-transform: none;
+  }
+
+  .MuiFormLabel-root {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    top: 2px;
+  }
 `;
 
 export const StyledButton = styled(Button)`
-  margin: ${({ theme }) => theme.material.spacing(1, 0, 2)};
+  margin: ${({ theme }) => theme.material.spacing(2, 0, 2)};
   padding: ${({ theme }) => theme.material.spacing(1) + 'px'};
 `;
 

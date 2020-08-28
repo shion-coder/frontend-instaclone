@@ -14,7 +14,7 @@ import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const { HOME, REGISTER, LOGIN, DASHBOARD, CONFIRM, EXPLORE, PROFILE, SETTINGS, TEST } = Path;
+const { HOME, REGISTER, LOGIN, CONFIRM, EXPLORE, PROFILE, SETTINGS } = Path;
 
 /**
  * Lazy loading
@@ -34,12 +34,6 @@ const Register = lazy(() =>
 
 const Login = lazy(() =>
   Promise.all([import('pages/login'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
-
-const Dashboard = lazy(() =>
-  Promise.all([import('pages/dashboard'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
     ([moduleExports]) => moduleExports,
   ),
 );
@@ -68,15 +62,9 @@ const Settings = lazy(() =>
   ),
 );
 
-const Test = lazy(() =>
-  Promise.all([import('pages/test'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
-
 const App: FC = () => {
   const dispatch = useDispatch();
-  const token = useSelector((state: RootStateProps) => state.auth.token);
+  const token = useSelector((state: RootStateProps) => state.user.token);
 
   useEffect(() => {
     token && dispatch(fetchNotifications());
@@ -91,12 +79,10 @@ const App: FC = () => {
           <Switch>
             <Route exact path={HOME} component={Home} />
             <Route exact path={CONFIRM} component={Confirm} />
-            <Route exact path={TEST} component={Test} />
 
             <GuestRoute exact path={REGISTER} component={Register} />
             <GuestRoute exact path={LOGIN} component={Login} />
 
-            <ProtectedRoute exact path={DASHBOARD} component={Dashboard} />
             <ProtectedRoute exact path={EXPLORE} component={Explore} />
             <ProtectedRoute exact path={SETTINGS} component={Settings} />
             <ProtectedRoute exact path={PROFILE} component={Profile} />

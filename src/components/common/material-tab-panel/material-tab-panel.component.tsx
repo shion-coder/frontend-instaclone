@@ -11,7 +11,7 @@ interface Props {
 }
 
 const MaterialTabPanel: FC<Props> = ({ value, index, children }) => (
-  <Container hidden={value !== index}>{value === index && children}</Container>
+  <Container hidden={value !== index}>{children}</Container>
 );
 
 export default MaterialTabPanel;

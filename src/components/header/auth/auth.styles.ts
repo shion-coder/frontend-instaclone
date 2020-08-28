@@ -3,6 +3,8 @@ import { Fab } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
+export const Container = styled.div``;
+
 export const Profile = styled(Fab)`
   margin-right: 1rem;
 `;

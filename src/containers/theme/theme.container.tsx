@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 import { StylesProvider, ThemeProvider as MaterialThemeProvider, CssBaseline } from '@material-ui/core';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
@@ -20,9 +19,5 @@ const Theme: FC = ({ children }) => (
     </MaterialThemeProvider>
   </StylesProvider>
 );
-
-Theme.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Theme;

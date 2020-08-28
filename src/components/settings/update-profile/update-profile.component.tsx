@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { Formik, FormikHelpers, FormikErrors } from 'formik';
 
 import { UpdateProfileProps } from 'types';
-import { validateUpdateProfile } from 'config';
-import { RootStateProps, Dispatch, profile } from 'store';
+import { validateUpdateProfile } from 'utils';
+import { RootStateProps, Dispatch, updateProfile } from 'store';
 import Field from 'components/common/formik-field';
 
 import { StyledContainer as Container, StyledForm as Form, StyledButton as Button } from './update-profile.styles';
@@ -14,15 +14,15 @@ import { StyledContainer as Container, StyledForm as Form, StyledButton as Butto
 
 const UpdatePassword: FC = () => {
   const { firstName, lastName, username, website, bio, email } = useSelector(
-    (state: RootStateProps) => state.auth.user,
+    (state: RootStateProps) => state.user.info,
   );
   const dispatch: Dispatch = useDispatch();
   const history = useHistory();
 
   const handleSubmit = async (values: UpdateProfileProps, formikHelpers: FormikHelpers<UpdateProfileProps>) => {
-    const result = await dispatch(profile(values));
+    const result = await dispatch(updateProfile(values));
 
-    if (profile.fulfilled.match(result)) {
+    if (updateProfile.fulfilled.match(result)) {
       return history.push(`/${result.payload.user.username}`);
     }
 
@@ -42,87 +42,19 @@ const UpdatePassword: FC = () => {
     <Container>
       <Formik initialValues={initialValues} validationSchema={validateUpdateProfile} onSubmit={handleSubmit}>
         <Form noValidate>
-          <Field
-            id="firstName"
-            name="firstName"
-            label="First Name"
-            variant="outlined"
-            margin="normal"
-            type="text"
-            autoComplete="firstName"
-            size="small"
-            fullWidth
-            required
-          />
+          <Field name="firstName" fullWidth required />
 
-          <Field
-            id="lastName"
-            name="lastName"
-            label="Last Name"
-            variant="outlined"
-            margin="normal"
-            type="text"
-            autoComplete="lastName"
-            size="small"
-            fullWidth
-            required
-          />
+          <Field name="lastName" fullWidth />
 
-          <Field
-            id="username"
-            name="username"
-            label="Username"
-            variant="outlined"
-            margin="normal"
-            type="text"
-            autoComplete="username"
-            size="small"
-            fullWidth
-            required
-          />
+          <Field name="username" fullWidth required />
 
-          <Field
-            id="website"
-            name="website"
-            label="Website"
-            variant="outlined"
-            margin="normal"
-            type="text"
-            autoComplete="website"
-            size="small"
-            fullWidth
-            required
-          />
+          <Field name="website" fullWidth />
 
-          <Field
-            id="bio"
-            name="bio"
-            label="Bio"
-            variant="outlined"
-            margin="normal"
-            type="text"
-            autoComplete="bio"
-            size="small"
-            rows={4}
-            multiline
-            fullWidth
-            required
-          />
+          <Field name="bio" multiline rows={4} fullWidth />
 
-          <Field
-            id="email"
-            name="email"
-            label="Email"
-            variant="outlined"
-            margin="normal"
-            type="text"
-            autoComplete="email"
-            size="small"
-            fullWidth
-            required
-          />
+          <Field name="email" fullWidth required />
 
-          <Button type="submit" size="small" variant="contained" color="primary" fullWidth>
+          <Button type="submit" fullWidth>
             Update Profile
           </Button>
         </Form>

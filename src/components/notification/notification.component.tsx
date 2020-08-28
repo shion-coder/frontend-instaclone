@@ -5,7 +5,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 
 import { RootStateProps } from 'store';
-import { useOnClickOutside } from 'hooks';
+import { useClickOutside } from 'hooks';
 import Popup from 'components/notification/notification-popup';
 
 import { Container } from './notification.styles';
@@ -21,7 +21,7 @@ const Notification: FC = () => {
 
   const togglePopup = () => setOpen((previous) => !previous);
 
-  useOnClickOutside(ref, handleClose);
+  useClickOutside(ref, handleClose);
 
   return (
     <Container ref={ref} badgeContent={unread} color="error">

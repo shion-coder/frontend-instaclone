@@ -1,6 +1,6 @@
 import React, { FC, createContext, useEffect, useState, useContext } from 'react';
-import socketIo from 'socket.io-client';
 import { useSelector, useDispatch } from 'react-redux';
+import socketIo from 'socket.io-client';
 
 import { API_URL } from 'config';
 import { NotificationProps, SocketEvent } from 'types';
@@ -8,11 +8,15 @@ import { RootStateProps, addNotification } from 'store';
 
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Context
+ */
+
 const SocketContext = createContext<SocketIOClient.Socket | null>(null);
 
 export const SocketProvider: FC = ({ children }) => {
   const [io, setIo] = useState<SocketIOClient.Socket | null>(null);
-  const token = useSelector((state: RootStateProps) => state.auth.token);
+  const token = useSelector((state: RootStateProps) => state.user.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,11 +44,19 @@ export const SocketProvider: FC = ({ children }) => {
   return <SocketContext.Provider value={io}>{children}</SocketContext.Provider>;
 };
 
+/**
+ * Hook return socket io
+ */
+
 export const useSocket = (): SocketIOClient.Socket | null => {
   const io = useContext(SocketContext);
 
   return io;
 };
+
+/**
+ * Hook return socket event listener
+ */
 
 export const useSocketListener = <T extends Record<string, unknown>>(event: string, fn: (value: T) => void): void => {
   const io = useSocket();

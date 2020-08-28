@@ -5,9 +5,11 @@ import { useRef, useEffect, useState } from 'react';
 interface ExtendedEntry extends IntersectionObserverEntry {
   isVisible: boolean;
 }
+
 interface Args extends IntersectionObserverInit {
   onAppearOnly?: boolean;
 }
+
 type Return<T> = [(node: T) => void, ExtendedEntry?];
 
 export const useIntersectionObserver = <T extends HTMLElement = HTMLDivElement>({

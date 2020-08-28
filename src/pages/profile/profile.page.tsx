@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
@@ -14,7 +14,12 @@ import { Wrapper, Container } from './profile.styles';
 /* -------------------------------------------------------------------------- */
 
 const Dashboard: FC = () => {
+  const isFirstRun = useRef(true);
   const { username } = useParams();
+
+  /**
+   * Fetch user with username in params
+   */
 
   const getUser = async () => {
     const { data } = await http.get<GetUserProps>(`/users/${username}`);
@@ -22,24 +27,42 @@ const Dashboard: FC = () => {
     return data;
   };
 
-  const { isLoading, data, error, refetch } = useQuery('get-user', getUser, {
+  const { isFetching, data, error, refetch } = useQuery('get-user', getUser, {
     retry: false,
     refetchOnWindowFocus: false,
   });
 
+  /**
+   * Refetch page when username in params change, skip first render
+   */
+
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+
+      return;
+    }
+
     refetch();
   }, [username, refetch]);
 
-  if (isLoading) return <Loader />;
+  /**
+   * Display loader when fetching get user
+   */
+
+  if (isFetching) return <Loader />;
+
+  /**
+   * Display Not Found page if username is not exist or error happened
+   */
 
   if (!data || error) return <NotFound />;
 
   return (
     <Wrapper>
-      <Container container spacing={3}>
+      <Container container>
         <Grid item xs={12}>
-          <ProfileHeader data={data} refetch={refetch} />
+          <ProfileHeader data={data} />
         </Grid>
       </Container>
     </Wrapper>

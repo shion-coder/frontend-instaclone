@@ -3,14 +3,13 @@ import { Button } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
-const StyledButton = styled(Button)`
-  .MuiButton-label {
-    font-weight: bold;
-  }
-`;
+export const Container = styled.div``;
 
-export const Register = styled(StyledButton)`
+export const Register = styled(Button)`
   margin-right: 10px;
+  font-weight: bold;
 `;
 
-export const Login = styled(StyledButton)``;
+export const Login = styled(Button)`
+  font-weight: bold;
+`;

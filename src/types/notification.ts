@@ -16,5 +16,8 @@ export type NotificationProps = {
 };
 
 export type GetNotificationsProps = {
-  notifications: NotificationProps[];
+  user: {
+    _id: string;
+    notifications: NotificationProps[];
+  };
 };

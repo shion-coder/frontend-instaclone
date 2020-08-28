@@ -11,6 +11,8 @@ declare module 'styled-components' {
       black: string;
       light: string;
       dark: string;
+      lightLayer: string;
+      darkLayer: string;
       solitude: string;
       nero: string;
       primary: string;
@@ -35,6 +37,8 @@ export const theme: DefaultTheme = {
     black: '#000',
     light: '#f7f8f9',
     dark: '#181818',
+    lightLayer: 'rgba(247, 248, 249, 0.6)',
+    darkLayer: 'rgba(0, 0, 0, 0.4)',
     solitude: '#e8ebee',
     nero: '#292929',
     primary: '#fc5c65',

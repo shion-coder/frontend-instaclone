@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Avatar } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
-import Lottie from 'react-lottie-player';
 
 /* -------------------------------------------------------------------------- */
 
@@ -10,8 +9,8 @@ type PreviewProps = {
   filter?: string;
 };
 
-type BackProps = {
-  loading?: string;
+type LoadingProps = {
+  loading?: 'yes' | 'no';
 };
 
 export const Container = styled.div`
@@ -30,9 +29,9 @@ export const Header = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const Back = styled(ArrowBackIosIcon)<BackProps>`
-  cursor: ${({ loading }) => (loading === 'loading' ? 'auto' : 'pointer')};
-  pointer-events: ${({ loading }) => (loading === 'loading' ? 'none' : 'auto')};
+export const Back = styled(ArrowBackIosIcon)<LoadingProps>`
+  cursor: ${({ loading }) => (loading === 'yes' ? 'auto' : 'pointer')};
+  pointer-events: ${({ loading }) => (loading === 'yes' ? 'none' : 'auto')};
 `;
 
 export const Title = styled.span`
@@ -41,8 +40,9 @@ export const Title = styled.span`
   color: ${({ theme }) => theme.colors.dark};
 `;
 
-export const Submit = styled(CameraAltIcon)`
-  cursor: pointer;
+export const Submit = styled(CameraAltIcon)<LoadingProps>`
+  cursor: ${({ loading }) => (loading === 'yes' ? 'auto' : 'pointer')};
+  pointer-events: ${({ loading }) => (loading === 'yes' ? 'none' : 'auto')};
 `;
 
 export const Body = styled.div`
@@ -61,7 +61,7 @@ export const Layer = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(247, 248, 249, 0.6);
+  background-color: ${({ theme }) => theme.colors.lightLayer};
   z-index: 1;
 `;
 
@@ -84,11 +84,6 @@ export const Preview = styled.img<PreviewProps>`
   width: 4rem;
   height: 3rem;
   object-fit: cover;
-  filter: ${({ filter }) => (filter ? filter : 'none')};
   border-radius: 2px;
-`;
-
-export const StyledLottie = styled(Lottie)`
-  width: 20px;
-  height: 20px;
+  filter: ${({ filter }) => (filter ? filter : 'none')};
 `;

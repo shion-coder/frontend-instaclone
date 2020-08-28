@@ -76,8 +76,8 @@ const notificationSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchNotifications.fulfilled, (state, { payload }) => {
       if (payload) {
-        state.notifications = payload.notifications;
-        state.unread = payload.notifications.filter((notification) => notification.read === false).length;
+        state.notifications = payload.user.notifications;
+        state.unread = payload.user.notifications.filter((notification) => notification.read === false).length;
       }
     });
   },

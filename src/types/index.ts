@@ -4,16 +4,14 @@ export * from './path';
 
 export * from './socket';
 
-export * from './register';
-
-export * from './login';
-
-export * from './update-profile';
-
-export * from './update-password';
-
-export * from './modal';
+export * from './error';
 
 export * from './data';
 
+export * from './auth';
+
+export * from './user';
+
 export * from './notification';
+
+export * from './post-modal';
