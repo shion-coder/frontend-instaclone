@@ -50,7 +50,7 @@ const Register: FC = () => {
         <Account />
       </Avatar>
 
-      <Typography>Register</Typography>
+      <Typography>Create your account</Typography>
 
       <Formik initialValues={initialValues} validationSchema={validateRegister} onSubmit={handleSubmit}>
         <Form noValidate>
@@ -73,11 +73,11 @@ const Register: FC = () => {
           <Field name="confirmPassword" type="password" fullWidth required />
 
           <Button type="submit" fullWidth>
-            Register
+            Sign Up
           </Button>
 
           <Grid justify="flex-end" container>
-            <Link to="/login">Already have an account? Login</Link>
+            <Link to="/login">Already have an account? Sign In</Link>
           </Grid>
         </Form>
       </Formik>

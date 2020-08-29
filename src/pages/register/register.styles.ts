@@ -32,7 +32,7 @@ export const StyledAvatar = styled(Avatar)`
 
 export const StyledForm = styled(Form)`
   width: '100%';
-  margin-top: ${({ theme }) => theme.material.spacing(3) + 'px'};
+  margin-top: ${({ theme }) => theme.material.spacing(1) + 'px'};
 
   .MuiButton-label {
     text-transform: capitalize;

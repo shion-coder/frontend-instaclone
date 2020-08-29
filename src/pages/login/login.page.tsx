@@ -53,7 +53,7 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
         <Account />
       </Avatar>
 
-      <Typography>Login</Typography>
+      <Typography>Sign In</Typography>
 
       <Formik initialValues={initialValues} validationSchema={validateLogin} onSubmit={handleSubmit}>
         <Form noValidate>
@@ -62,7 +62,7 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
           <Field name="password" size="medium" type="password" fullWidth required />
 
           <Button type="submit" size="medium" fullWidth>
-            Login
+            Sign In
           </Button>
 
           <Google provider="google" color="primary" state={state} fullWidth>
@@ -75,7 +75,7 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
             </Grid>
 
             <Grid item>
-              <Link to="/register">Don't have an account? Register</Link>
+              <Link to="/register">Don't have an account? Sign Up</Link>
             </Grid>
           </Grid>
         </Form>
