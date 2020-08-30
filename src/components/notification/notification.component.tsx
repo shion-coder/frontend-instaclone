@@ -29,7 +29,7 @@ const Notification: FC = () => {
         {unread ? <NotificationsActiveIcon /> : <NotificationsIcon />}
       </Fab>
 
-      {open && <Popup />}
+      {open && <Popup handleClose={handleClose} />}
     </Container>
   );
 };

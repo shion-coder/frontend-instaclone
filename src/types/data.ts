@@ -1,3 +1,7 @@
+import { ReturnGetUserProps } from './return';
+
+/* -------------------------------------------------------------------------- */
+
 export type UserProps = {
   _id: string;
   firstName: string;
@@ -11,21 +15,17 @@ export type UserProps = {
   posts: PostProps[];
   postCount: number;
   bookmarks: PostProps[];
-  followers: FollowProps[];
+  followers: ReturnGetUserProps[];
   followerCount: number;
-  following: FollowProps[];
+  following: ReturnGetUserProps[];
   followingCount: number;
   isAdmin: boolean;
   confirmed: boolean;
   date: string;
 };
 
-export type FollowProps = {
-  user: UserProps;
-  isFollowing: boolean;
-};
-
 export type PostProps = {
+  _id: string;
   image: string;
   thumbnail?: string;
   filter?: string;
@@ -35,11 +35,12 @@ export type PostProps = {
   likeCount?: number;
   comments?: CommentProps[];
   commentCount?: number;
-  author: PostProps;
+  author: UserProps;
   date: string;
 };
 
 export type CommentProps = {
+  _id: string;
   message: string;
   post: PostProps;
   author: UserProps;
@@ -50,14 +51,7 @@ export type NotificationProps = {
   _id: string;
   notificationType: string;
   notificationData?: Record<string, unknown>;
-  sender: {
-    fistName: string;
-    lastName: string;
-    username: string;
-    email: string;
-    avatar: string;
-    followers: string[];
-  };
+  sender: UserProps;
   receiver: string;
   read: boolean;
   date: string;

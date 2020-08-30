@@ -24,6 +24,7 @@ declare module 'styled-components' {
       grey2: string;
       grey3: string;
       grey4: string;
+      unread: string;
     };
     animation: {
       delay: string;
@@ -50,6 +51,7 @@ export const theme: DefaultTheme = {
     grey2: '#dbdbdb',
     grey3: '#fafafa',
     grey4: '#efefef',
+    unread: '#82b1ff',
   },
   animation: {
     delay: '0s',

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
-import { ReturnGetNotificationsProps, Errors } from 'types';
+import { ReturnGetNotificationsProps, Errors, NotificationProps } from 'types';
 import { http } from 'services';
 
 /* -------------------------------------------------------------------------- */
@@ -12,7 +12,7 @@ import { http } from 'services';
 
 export const fetchNotifications = createAsyncThunk('notification/fetch', async () => {
   try {
-    const endpoint = '/notification';
+    const endpoint = '/notifications/0';
     const { data } = await http.get<ReturnGetNotificationsProps>(endpoint);
 
     return data;
@@ -30,28 +30,15 @@ export const fetchNotifications = createAsyncThunk('notification/fetch', async (
  */
 
 type StateProps = {
-  notifications: {
-    _id: string;
-    notificationType: string;
-    notificationData?: Record<string, unknown>;
-    sender: {
-      fistName: string;
-      lastName: string;
-      username: string;
-      email: string;
-      avatar: string;
-      followers: string[];
-    };
-    receiver: string;
-    read: boolean;
-    date: string;
-  }[];
+  notifications: NotificationProps[];
   unread: number;
+  next: number;
 };
 
 const initialState: StateProps = {
   notifications: [],
   unread: 0,
+  next: 0,
 };
 
 /**
@@ -64,25 +51,31 @@ const notificationSlice = createSlice({
   reducers: {
     addNotification: (state, { payload }) => {
       if (payload) {
-        state.notifications.push(payload);
+        state.notifications.unshift(payload);
         state.unread = state.unread + 1;
+        state.next = state.next + 1;
       }
     },
     clearNotification: (state) => {
       state.notifications = [];
       state.unread = 0;
     },
+    readNotification: (state) => {
+      state.unread = 0;
+      state.notifications.map((notification) => (notification.read = true));
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchNotifications.fulfilled, (state, { payload }) => {
       if (payload) {
-        state.notifications = payload.user.notifications;
-        state.unread = payload.user.notifications.filter((notification) => notification.read === false).length;
+        state.notifications = payload.notifications;
+        state.unread = payload.unread;
+        state.next = payload.next;
       }
     });
   },
 });
 
-export const { addNotification, clearNotification } = notificationSlice.actions;
+export const { addNotification, clearNotification, readNotification } = notificationSlice.actions;
 
 export const notificationReducer = notificationSlice.reducer;

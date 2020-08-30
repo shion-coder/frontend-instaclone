@@ -65,6 +65,7 @@
     "@types/react-dom": "^16.9.8",
     "axios": "^0.19.2",
     "axios-retry": "^3.1.8",
+    "date-fns": "^2.16.0",
     "formik": "^2.1.5",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",

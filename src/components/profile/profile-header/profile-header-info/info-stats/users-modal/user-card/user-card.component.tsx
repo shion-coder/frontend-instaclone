@@ -2,7 +2,7 @@ import React, { FC, Dispatch, SetStateAction, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { ReturnGetUserProps, FollowProps } from 'types';
+import { ReturnGetUserProps } from 'types';
 import { RootStateProps } from 'store';
 import { useFollow } from 'hooks';
 import FollowButton from 'components/common/follow-button';
@@ -12,7 +12,7 @@ import { Container, StyledAvatar as Avatar, Info, Name, Username, Button } from 
 /* -------------------------------------------------------------------------- */
 
 type Props = {
-  user: FollowProps;
+  user: ReturnGetUserProps;
   isCurrentUser?: boolean;
   profile: ReturnGetUserProps;
   setNewProfile: Dispatch<SetStateAction<ReturnGetUserProps>>;

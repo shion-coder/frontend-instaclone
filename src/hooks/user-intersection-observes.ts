@@ -2,13 +2,13 @@ import { useRef, useEffect, useState } from 'react';
 
 /* -------------------------------------------------------------------------- */
 
-interface ExtendedEntry extends IntersectionObserverEntry {
+type ExtendedEntry = {
   isVisible: boolean;
-}
+} & IntersectionObserverEntry;
 
-interface Args extends IntersectionObserverInit {
+type Args = {
   onAppearOnly?: boolean;
-}
+} & IntersectionObserverInit;
 
 type Return<T> = [(node: T) => void, ExtendedEntry?];
 
