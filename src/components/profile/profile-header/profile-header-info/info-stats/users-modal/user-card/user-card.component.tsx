@@ -1,8 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, Dispatch, SetStateAction, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { FollowerProps } from 'types';
+import { ReturnGetUserProps, FollowProps } from 'types';
 import { RootStateProps } from 'store';
 import { useFollow } from 'hooks';
 import FollowButton from 'components/common/follow-button';
@@ -12,42 +12,58 @@ import { Container, StyledAvatar as Avatar, Info, Name, Username, Button } from 
 /* -------------------------------------------------------------------------- */
 
 type Props = {
+  user: FollowProps;
   isCurrentUser?: boolean;
-  follower: FollowerProps;
-  onFollow: (isFollowing: boolean) => void;
-  onUnFollow: (isFollowing: boolean) => void;
-  closeFollowersModal: () => void;
+  profile: ReturnGetUserProps;
+  setNewProfile: Dispatch<SetStateAction<ReturnGetUserProps>>;
+  closeModal: () => void;
 };
 
-const User: FC<Props> = ({
-  isCurrentUser,
-  follower: {
+export const UserCard: FC<Props> = ({
+  user: {
     user: { _id, avatar, fullName, username },
     isFollowing,
   },
-  onFollow,
-  onUnFollow,
-  closeFollowersModal,
+  isCurrentUser,
+  profile,
+  setNewProfile,
+  closeModal,
 }) => {
+  const {
+    user: { followingCount },
+  } = profile;
+
+  /**
+   * Go to profile when click follower name
+   */
+
   const history = useHistory();
-  const [currentFollowing, setCurrentFollowing] = useState(isFollowing);
-  const currentUsername = useSelector((state: RootStateProps) => state.user.info.username);
 
   const handleClick = () => {
     history.push(`/${username}`);
 
-    closeFollowersModal();
+    closeModal();
   };
 
+  /**
+   * Handle follow / unfollow
+   */
+
+  const [currentFollowing, setCurrentFollowing] = useState(isFollowing);
+
   const follow = (isFollowing: boolean) => {
-    isCurrentUser && onFollow(isFollowing);
-    setCurrentFollowing((previous) => !previous);
+    isCurrentUser && setNewProfile({ user: { ...profile.user, followingCount: followingCount + 1 }, isFollowing });
+
+    setCurrentFollowing(isFollowing);
   };
 
   const unfollow = (isFollowing: boolean) => {
-    isCurrentUser && onUnFollow(isFollowing);
-    setCurrentFollowing((previous) => !previous);
+    isCurrentUser && setNewProfile({ user: { ...profile.user, followingCount: followingCount - 1 }, isFollowing });
+
+    setCurrentFollowing(isFollowing);
   };
+
+  const currentUsername = useSelector((state: RootStateProps) => state.user.info.username);
 
   const { handleFollow, isLoading } = useFollow(_id, follow, unfollow);
 
@@ -69,5 +85,3 @@ const User: FC<Props> = ({
     </Container>
   );
 };
-
-export default User;

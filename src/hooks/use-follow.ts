@@ -2,7 +2,7 @@ import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
-import { FollowProps } from 'types';
+import { ReturnFollowProps } from 'types';
 import { http } from 'services';
 
 /* -------------------------------------------------------------------------- */
@@ -17,24 +17,25 @@ export const useFollow = (
   onFollow: (isFollowing: boolean) => void,
   onUnfollow: (isFollowing: boolean) => void,
 ): Result => {
-  const requestFollow = async () => {
-    const { data } = await http.post<FollowProps>(`/users/${id}/follow`);
+  const [followUser, { isLoading }] = useMutation(
+    async () => {
+      const { data } = await http.post<ReturnFollowProps>(`/users/${id}/follow`);
 
-    return data;
-  };
-
-  const [followUser, { isLoading }] = useMutation(requestFollow, {
-    onError: (err: AxiosError) => {
-      toast.error(err.response?.data.error, { toastId: 'follow-error' });
+      return data;
     },
-    onSuccess: ({ isFollowing }) => {
-      if (isFollowing) {
-        onFollow(isFollowing);
-      } else {
-        onUnfollow(isFollowing);
-      }
+    {
+      onError: (err: AxiosError) => {
+        toast.error(err.response?.data.error, { toastId: 'follow-error' });
+      },
+      onSuccess: ({ isFollowing }) => {
+        if (isFollowing) {
+          onFollow(isFollowing);
+        } else {
+          onUnfollow(isFollowing);
+        }
+      },
     },
-  });
+  );
 
   const handleFollow = () => {
     followUser();

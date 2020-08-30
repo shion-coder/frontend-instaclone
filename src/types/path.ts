@@ -6,4 +6,5 @@ export enum Path {
   EXPLORE = '/explore',
   PROFILE = '/:username',
   SETTINGS = '/settings',
+  TEST = '/test',
 }

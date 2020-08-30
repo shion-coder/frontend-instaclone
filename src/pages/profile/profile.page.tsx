@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 
-import { GetUserProps } from 'types';
+import { ReturnGetUserProps } from 'types';
 import { http } from 'services';
 import Loader from 'components/loader/lottie-loader';
 import NotFound from 'pages/not-found';
@@ -21,16 +21,18 @@ const Dashboard: FC = () => {
    * Fetch user with username in params
    */
 
-  const getUser = async () => {
-    const { data } = await http.get<GetUserProps>(`/users/${username}`);
+  const { isFetching, data, error, refetch } = useQuery(
+    'get-user',
+    async () => {
+      const { data } = await http.get<ReturnGetUserProps>(`/users/${username}`);
 
-    return data;
-  };
-
-  const { isFetching, data, error, refetch } = useQuery('get-user', getUser, {
-    retry: false,
-    refetchOnWindowFocus: false,
-  });
+      return data;
+    },
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  );
 
   /**
    * Refetch page when username in params change, skip first render
@@ -62,7 +64,7 @@ const Dashboard: FC = () => {
     <Wrapper>
       <Container container>
         <Grid item xs={12}>
-          <ProfileHeader data={data} />
+          <ProfileHeader profile={data} />
         </Grid>
       </Container>
     </Wrapper>

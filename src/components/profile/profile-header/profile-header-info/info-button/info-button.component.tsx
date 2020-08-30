@@ -2,7 +2,7 @@ import React, { FC, Dispatch, SetStateAction, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Modal from 'styled-react-modal';
 
-import { GetUserProps } from 'types';
+import { ReturnGetUserProps } from 'types';
 import { useFollow } from 'hooks';
 import FollowButton from 'components/common/follow-button';
 import SettingsModal from './settings-modal';
@@ -13,18 +13,18 @@ import { Container, Name, Setting, Edit, Icon } from './info-button.styles';
 
 type Props = {
   isCurrentUser: boolean;
-  data: GetUserProps;
-  setNewData: Dispatch<SetStateAction<GetUserProps>>;
+  profile: ReturnGetUserProps;
+  setNewProfile: Dispatch<SetStateAction<ReturnGetUserProps>>;
 };
 
-const InfoButton: FC<Props> = ({ isCurrentUser, data, setNewData }) => {
+const InfoButton: FC<Props> = ({ isCurrentUser, profile, setNewProfile }) => {
   const history = useHistory();
   const goSettings = () => history.push('/settings');
 
   const {
     user: { _id, fullName, avatar, followerCount },
     isFollowing,
-  } = data;
+  } = profile;
 
   /**
    * Handle settings modal
@@ -39,10 +39,10 @@ const InfoButton: FC<Props> = ({ isCurrentUser, data, setNewData }) => {
    */
 
   const onFollow = (isFollowing: boolean) =>
-    setNewData({ user: { ...data.user, followerCount: followerCount + 1 }, isFollowing });
+    setNewProfile({ user: { ...profile.user, followerCount: followerCount + 1 }, isFollowing });
 
   const onUnfollow = (isFollowing: boolean) =>
-    setNewData({ user: { ...data.user, followerCount: followerCount - 1 }, isFollowing });
+    setNewProfile({ user: { ...profile.user, followerCount: followerCount - 1 }, isFollowing });
 
   const { handleFollow, isLoading } = useFollow(_id, onFollow, onUnfollow);
 

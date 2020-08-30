@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
-import { UserConfirmProps } from 'types';
+import { ReturnConfirmProps } from 'types';
 import { http } from 'services';
 import Loader from 'components/loader/lottie-loader';
 
@@ -17,16 +17,18 @@ type PramsProps = {
 const Confirm: FC = () => {
   const { id }: PramsProps = useParams();
 
-  const requestConfirm = async () => {
-    const { data } = await http.put<UserConfirmProps>(`/users/email/confirm/${id}`);
+  const { isLoading, data, error } = useQuery(
+    'confirm',
+    async () => {
+      const { data } = await http.put<ReturnConfirmProps>(`/users/email/confirm/${id}`);
 
-    return data;
-  };
-
-  const { isLoading, data, error } = useQuery('confirm', requestConfirm, {
-    retry: false,
-    refetchOnWindowFocus: false,
-  });
+      return data;
+    },
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  );
 
   if (isLoading) return <Loader />;
 

@@ -1,7 +1,3 @@
-export type UserConfirmProps = {
-  message: string;
-};
-
 export type UpdateProfileProps = {
   firstName: string;
   lastName: string;

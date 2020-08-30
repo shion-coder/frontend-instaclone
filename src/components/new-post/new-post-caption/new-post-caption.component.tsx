@@ -42,24 +42,25 @@ const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, fil
    * Request post image data with filter and caption
    */
 
-  const requestCreate = async (formData: FormData | undefined) => {
-    const { data } = await http.post('/post', formData, {
-      cancelToken: source.token,
-    });
+  const [createNewPost, { isLoading }] = useMutation(
+    async (formData: FormData | undefined) => {
+      const { data } = await http.post('/post', formData, {
+        cancelToken: source.token,
+      });
 
-    return data;
-  };
-
-  const [createNewPost, { isLoading }] = useMutation(requestCreate, {
-    onError: (err: AxiosError) => {
-      toast.error(err.response?.data.error, { toastId: 'upload-error' });
+      return data;
     },
-    onSuccess: () => {
-      handleClose();
+    {
+      onError: (err: AxiosError) => {
+        toast.error(err.response?.data.error, { toastId: 'upload-error' });
+      },
+      onSuccess: () => {
+        handleClose();
 
-      history.push(Path.HOME);
+        history.push(Path.HOME);
+      },
     },
-  });
+  );
 
   const handleBack = () => setActiveModal(PostModal.Filter);
 

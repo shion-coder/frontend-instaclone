@@ -1,9 +1,8 @@
 import React, { FC, Dispatch, SetStateAction, useState } from 'react';
 import Modal from 'styled-react-modal';
 
-import { GetUserProps } from 'types';
-import FollowersModal from './followers-modal';
-import FollowingModal from './following-modal';
+import { ReturnGetUserProps } from 'types';
+import UsersModal from './users-modal';
 
 import { Container, Posts, Number, Followers, Following } from './info-stats.styles';
 
@@ -11,17 +10,19 @@ import { Container, Posts, Number, Followers, Following } from './info-stats.sty
 
 type Props = {
   isCurrentUser: boolean;
-  data: GetUserProps;
-  setNewData: Dispatch<SetStateAction<GetUserProps>>;
+  profile: ReturnGetUserProps;
+  setNewProfile: Dispatch<SetStateAction<ReturnGetUserProps>>;
 };
 
-const InfoStats: FC<Props> = ({
-  isCurrentUser,
-  data: {
+const InfoStats: FC<Props> = ({ isCurrentUser, profile, setNewProfile }) => {
+  const {
     user: { postCount, followerCount, followingCount },
-  },
-  setNewData,
-}) => {
+  } = profile;
+
+  /**
+   * Handle Modal
+   */
+
   const [isOpenFollowersModal, setIsOpenFollowersModal] = useState(false);
   const [isOpenFollowingModal, setIsOpenFollowingModal] = useState(false);
 
@@ -47,7 +48,13 @@ const InfoStats: FC<Props> = ({
         onBackgroundClick={closeFollowersModal}
         onEscapeKeydown={closeFollowersModal}
       >
-        <FollowersModal isCurrentUser={isCurrentUser} closeFollowersModal={closeFollowersModal} />
+        <UsersModal
+          route="followers"
+          isCurrentUser={isCurrentUser}
+          profile={profile}
+          setNewProfile={setNewProfile}
+          closeModal={closeFollowersModal}
+        />
       </Modal>
 
       <Following item xs={4} onClick={openFollowingModal}>
@@ -60,7 +67,13 @@ const InfoStats: FC<Props> = ({
         onBackgroundClick={closeFollowingModal}
         onEscapeKeydown={closeFollowingModal}
       >
-        <FollowingModal isCurrentUser={isCurrentUser} closeFollowingModal={closeFollowingModal} />
+        <UsersModal
+          route="following"
+          isCurrentUser={isCurrentUser}
+          profile={profile}
+          setNewProfile={setNewProfile}
+          closeModal={closeFollowingModal}
+        />
       </Modal>
     </Container>
   );

@@ -14,7 +14,7 @@ import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const { HOME, REGISTER, LOGIN, CONFIRM, EXPLORE, PROFILE, SETTINGS } = Path;
+const { HOME, REGISTER, LOGIN, CONFIRM, EXPLORE, PROFILE, SETTINGS, TEST } = Path;
 
 /**
  * Lazy loading
@@ -62,6 +62,12 @@ const Settings = lazy(() =>
   ),
 );
 
+const Test = lazy(() =>
+  Promise.all([import('pages/test'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
+
 const App: FC = () => {
   const dispatch = useDispatch();
   const token = useSelector((state: RootStateProps) => state.user.token);
@@ -79,6 +85,7 @@ const App: FC = () => {
           <Switch>
             <Route exact path={HOME} component={Home} />
             <Route exact path={CONFIRM} component={Confirm} />
+            <Route exact path={TEST} component={Test} />
 
             <GuestRoute exact path={REGISTER} component={Register} />
             <GuestRoute exact path={LOGIN} component={Login} />

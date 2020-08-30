@@ -11,43 +11,17 @@ export type UserProps = {
   posts: PostProps[];
   postCount: number;
   bookmarks: PostProps[];
-  followers: FollowerProps[];
+  followers: FollowProps[];
   followerCount: number;
-  following: FollowingProps[];
+  following: FollowProps[];
   followingCount: number;
   isAdmin: boolean;
   confirmed: boolean;
   date: string;
 };
 
-export type FollowerProps = {
-  user: UserProps;
-  isFollowing: boolean;
-};
-
-export type FollowingProps = {
-  user: UserProps;
-  isFollowing: boolean;
-};
-
-export type MeProps = {
-  user: UserProps;
-};
-
-export type ProfileProps = {
-  user: UserProps;
-};
-
-export type AvatarProps = {
-  avatar: string;
-};
-
-export type GetUserProps = {
-  user: UserProps;
-  isFollowing: boolean;
-};
-
 export type FollowProps = {
+  user: UserProps;
   isFollowing: boolean;
 };
 
@@ -69,5 +43,22 @@ export type CommentProps = {
   message: string;
   post: PostProps;
   author: UserProps;
+  date: string;
+};
+
+export type NotificationProps = {
+  _id: string;
+  notificationType: string;
+  notificationData?: Record<string, unknown>;
+  sender: {
+    fistName: string;
+    lastName: string;
+    username: string;
+    email: string;
+    avatar: string;
+    followers: string[];
+  };
+  receiver: string;
+  read: boolean;
   date: string;
 };

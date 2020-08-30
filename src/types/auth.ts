@@ -1,12 +1,3 @@
-import { UserProps } from './data';
-
-/* -------------------------------------------------------------------------- */
-
-export type AuthResultProps = {
-  user: UserProps;
-  token: string;
-};
-
 export type RegisterDataProps = {
   firstName: string;
   lastName?: string;

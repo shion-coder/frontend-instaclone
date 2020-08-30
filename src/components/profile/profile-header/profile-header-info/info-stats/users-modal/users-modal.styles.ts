@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import CloseIcon from '@material-ui/icons/Close';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 /* -------------------------------------------------------------------------- */
 
@@ -9,6 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   background: ${({ theme }) => theme.colors.light};
   border-radius: 8px;
+  overflow: hidden;
 `;
 
 export const Title = styled.div`
@@ -36,17 +36,10 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   width: 30rem;
-  max-height: 40vh;
+  max-height: 13.8rem;
   overflow: auto;
 `;
 
-export const Empty = styled.div`
-  padding: 2rem;
-  text-align: center;
+export const LoadMore = styled.div`
+  margin-top: 1px;
 `;
-
-export const UserIcon = styled(PersonAddIcon)`
-  font-size: 3rem;
-`;
-
-export const Text = styled.p``;

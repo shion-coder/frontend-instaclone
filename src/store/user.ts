@@ -5,10 +5,10 @@ import {
   RegisterDataProps,
   LoginDataProps,
   UserProps,
-  AuthResultProps,
+  ReturnAuthProps,
   Errors,
   UpdateProfileProps,
-  ProfileProps,
+  ReturnUpdateProfileProps,
 } from 'types';
 import { http } from 'services';
 
@@ -21,7 +21,7 @@ import { http } from 'services';
 export const register = createAsyncThunk('user/register', async (user: RegisterDataProps, { rejectWithValue }) => {
   try {
     const endpoint = '/auth/register';
-    const { data } = await http.post<AuthResultProps>(endpoint, user);
+    const { data } = await http.post<ReturnAuthProps>(endpoint, user);
 
     return data;
   } catch (error) {
@@ -38,7 +38,7 @@ export const register = createAsyncThunk('user/register', async (user: RegisterD
 export const login = createAsyncThunk('user/login', async (user: LoginDataProps, { rejectWithValue }) => {
   try {
     const endpoint = '/auth/login';
-    const { data } = await http.post<AuthResultProps>(endpoint, user);
+    const { data } = await http.post<ReturnAuthProps>(endpoint, user);
 
     return data;
   } catch (error) {
@@ -57,7 +57,7 @@ export const updateProfile = createAsyncThunk(
   async (profile: UpdateProfileProps, { rejectWithValue }) => {
     try {
       const endpoint = '/users/profile';
-      const { data } = await http.put<ProfileProps>(endpoint, profile);
+      const { data } = await http.put<ReturnUpdateProfileProps>(endpoint, profile);
 
       return data;
     } catch (error) {

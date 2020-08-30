@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@types/jwt-decode": "^2.2.1",
+    "@types/lodash-es": "^4.17.3",
     "@types/react-fade-in": "^0.1.0",
     "@types/react-lottie": "^1.2.5",
     "@types/react-redux": "^7.1.9",
@@ -52,6 +53,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@reduxjs/toolkit": "^1.4.0",
     "@sentry/react": "^5.20.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -66,6 +68,7 @@
     "formik": "^2.1.5",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
+    "react-content-loader": "^5.1.0",
     "react-dom": "^16.13.1",
     "react-fade-in": "^1.1.0",
     "react-lottie-player": "^1.0.1",

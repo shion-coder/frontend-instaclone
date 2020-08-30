@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 
-import { GetUserProps } from 'types';
+import { ReturnGetUserProps } from 'types';
 import InfoButton from './info-button';
 import InfoStats from './info-stats';
 import InfoOther from './info-other';
@@ -11,19 +11,19 @@ import { Container } from './profile-header-info.styles';
 
 type Props = {
   isCurrentUser: boolean;
-  data: GetUserProps;
+  profile: ReturnGetUserProps;
 };
 
-const ProfileHeaderInfo: FC<Props> = ({ isCurrentUser, data }) => {
-  const [newData, setNewData] = useState(data);
+const ProfileHeaderInfo: FC<Props> = ({ isCurrentUser, profile }) => {
+  const [newProfile, setNewProfile] = useState(profile);
 
   return (
     <Container item xs={8} container direction="column">
-      <InfoButton isCurrentUser={isCurrentUser} data={newData} setNewData={setNewData} />
+      <InfoButton isCurrentUser={isCurrentUser} profile={newProfile} setNewProfile={setNewProfile} />
 
-      <InfoStats isCurrentUser={isCurrentUser} data={newData} setNewData={setNewData} />
+      <InfoStats isCurrentUser={isCurrentUser} profile={newProfile} setNewProfile={setNewProfile} />
 
-      <InfoOther data={newData} />
+      <InfoOther profile={newProfile} />
     </Container>
   );
 };

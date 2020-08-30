@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 
-import { GetUserProps } from 'types';
+import { ReturnGetUserProps } from 'types';
 
 import { Container, Bio, Website } from './info-other.styles';
 
 /* -------------------------------------------------------------------------- */
 
 type Props = {
-  data: GetUserProps;
+  profile: ReturnGetUserProps;
 };
 
 const InfoOther: FC<Props> = ({
-  data: {
+  profile: {
     user: { bio, website },
   },
 }) => (

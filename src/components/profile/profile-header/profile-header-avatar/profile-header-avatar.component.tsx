@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
-import { AvatarProps } from 'types';
+import { ReturnUpdateAvatarProps } from 'types';
 import { changeAvatar } from 'store';
 import { http } from 'services';
 import { useFiles } from 'hooks';
@@ -30,25 +30,26 @@ const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser }) => {
    * Request update new avatar
    */
 
-  const requestUpdateAvatar = async (formData: FormData | undefined) => {
-    const { data } = await http.put<AvatarProps>('/users/avatar', formData);
+  const [updateAvatar, { isLoading }] = useMutation(
+    async (formData: FormData | undefined) => {
+      const { data } = await http.put<ReturnUpdateAvatarProps>('/users/avatar', formData);
 
-    return data;
-  };
-
-  const [updateAvatar, { isLoading }] = useMutation(requestUpdateAvatar, {
-    onError: (err: AxiosError) => {
-      if (inputRef.current) {
-        inputRef.current.value = '';
-      }
-
-      toast.error(err.response?.data.error, { toastId: 'upload-error' });
+      return data;
     },
-    onSuccess: (data) => {
-      setNewAvatar(data.avatar);
-      dispatch(changeAvatar({ avatar: data.avatar }));
+    {
+      onError: (err: AxiosError) => {
+        if (inputRef.current) {
+          inputRef.current.value = '';
+        }
+
+        toast.error(err.response?.data.error, { toastId: 'upload-error' });
+      },
+      onSuccess: (data) => {
+        setNewAvatar(data.avatar);
+        dispatch(changeAvatar({ avatar: data.avatar }));
+      },
     },
-  });
+  );
 
   const { handleChange } = useFiles(inputRef, updateAvatar);
 
