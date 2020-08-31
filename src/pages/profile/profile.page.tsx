@@ -1,13 +1,13 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
 
 import { ReturnGetUserProps } from 'types';
 import { http } from 'services';
 import Loader from 'components/loader/lottie-loader';
 import NotFound from 'pages/not-found';
 import ProfileHeader from 'components/profile/profile-header';
+import ProfileContent from 'components/profile/profile-content';
 
 import { Wrapper, Container } from './profile.styles';
 
@@ -62,10 +62,10 @@ const Dashboard: FC = () => {
 
   return (
     <Wrapper>
-      <Container container>
-        <Grid item xs={12}>
-          <ProfileHeader profile={data} />
-        </Grid>
+      <Container>
+        <ProfileHeader profile={data} />
+
+        <ProfileContent />
       </Container>
     </Wrapper>
   );

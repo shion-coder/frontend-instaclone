@@ -62,11 +62,7 @@ const Settings = lazy(() =>
   ),
 );
 
-const Test = lazy(() =>
-  Promise.all([import('pages/test'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
+const Test = lazy(() => import('pages/test'));
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -90,8 +86,8 @@ const App: FC = () => {
             <GuestRoute exact path={REGISTER} component={Register} />
             <GuestRoute exact path={LOGIN} component={Login} />
 
+            <ProtectedRoute path={SETTINGS} component={Settings} />
             <ProtectedRoute exact path={EXPLORE} component={Explore} />
-            <ProtectedRoute exact path={SETTINGS} component={Settings} />
             <ProtectedRoute exact path={PROFILE} component={Profile} />
 
             <Redirect from="*" to="/" />

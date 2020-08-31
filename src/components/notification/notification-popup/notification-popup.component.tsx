@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootStateProps, readNotification } from 'store';
+import { RootStateProps, readNotification, clearUnreadNotification } from 'store';
 import { useGetNotifications } from 'hooks';
 import { http } from 'services';
 import EmptyNotification from './empty-notification';
@@ -25,10 +25,12 @@ const NotificationPopup: FC<Props> = ({ handleClose }) => {
    */
 
   useEffect(() => {
+    dispatch(readNotification());
+
     http.put('/notifications');
 
     return () => {
-      dispatch(readNotification());
+      dispatch(clearUnreadNotification());
     };
   }, [dispatch]);
 

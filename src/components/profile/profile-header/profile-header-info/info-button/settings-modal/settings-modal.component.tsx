@@ -18,7 +18,7 @@ const SettingsModal: FC<Props> = ({ avatar, name, closeSettingsModal }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const goSettings = () => history.push('/settings');
+  const goSettings = () => history.push('/settings/edit');
 
   const logOut = () => {
     dispatch(logout());

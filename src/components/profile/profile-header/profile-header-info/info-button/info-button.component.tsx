@@ -19,7 +19,7 @@ type Props = {
 
 const InfoButton: FC<Props> = ({ isCurrentUser, profile, setNewProfile }) => {
   const history = useHistory();
-  const goSettings = () => history.push('/settings');
+  const goEdit = () => history.push('/settings/edit');
 
   const {
     user: { _id, fullName, avatar, followerCount },
@@ -53,7 +53,7 @@ const InfoButton: FC<Props> = ({ isCurrentUser, profile, setNewProfile }) => {
       <Setting>
         {isCurrentUser ? (
           <>
-            <Edit variant="outlined" color="primary" size="small" onClick={goSettings}>
+            <Edit variant="outlined" color="primary" size="small" onClick={goEdit}>
               Edit Profile
             </Edit>
 

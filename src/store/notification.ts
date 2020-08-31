@@ -62,6 +62,8 @@ const notificationSlice = createSlice({
     },
     readNotification: (state) => {
       state.unread = 0;
+    },
+    clearUnreadNotification: (state) => {
       state.notifications.map((notification) => (notification.read = true));
     },
   },
@@ -76,6 +78,11 @@ const notificationSlice = createSlice({
   },
 });
 
-export const { addNotification, clearNotification, readNotification } = notificationSlice.actions;
+export const {
+  addNotification,
+  clearNotification,
+  readNotification,
+  clearUnreadNotification,
+} = notificationSlice.actions;
 
 export const notificationReducer = notificationSlice.reducer;

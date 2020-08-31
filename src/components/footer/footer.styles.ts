@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1.25rem;
+  margin-top: 1rem;
   background-color: ${({ theme }) => theme.colors.solitude};
 `;
 
