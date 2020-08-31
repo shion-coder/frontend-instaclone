@@ -1,8 +1,8 @@
 import React, { FC, ChangeEvent, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import AppsIcon from '@material-ui/icons/Apps';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 
-import Panel from 'components/common/material-tab-panel';
 import Posts from 'components/profile/profile-content/posts';
 import Saved from 'components/profile/profile-content/saved';
 
@@ -10,15 +10,39 @@ import { Container, Category, StyledTabs as Tabs, StyledTab as Tab, Content } fr
 
 /* -------------------------------------------------------------------------- */
 
-const ProfileContent: FC = () => {
-  const [value, setValue] = useState(0);
+type Params = {
+  username: string;
+  page: 'posts' | 'saved';
+};
 
-  const handleChange = (event: ChangeEvent<Record<string, unknown>>, newValue: number) => setValue(newValue);
+const ProfileContent: FC = () => {
+  const history = useHistory();
+  const { username, page }: Params = useParams();
+
+  const tab = page === 'posts' || page === 'saved' ? page : 'posts';
+
+  const indexToTabName = {
+    posts: 0,
+    saved: 1,
+  };
+
+  const tabNameToIndex = {
+    0: 'posts',
+    1: 'saved',
+  };
+
+  const [selectedTab, setSelectedTab] = useState(indexToTabName[tab]);
+
+  const handleChange = (event: ChangeEvent<Record<string, unknown>>, newValue: 0 | 1) => {
+    history.push(`/${username}/${tabNameToIndex[newValue]}`);
+
+    setSelectedTab(newValue);
+  };
 
   return (
     <Container>
       <Category>
-        <Tabs value={value} indicatorColor="primary" textColor="primary" centered onChange={handleChange}>
+        <Tabs value={selectedTab} indicatorColor="primary" textColor="primary" centered onChange={handleChange}>
           <Tab icon={<AppsIcon />} label="Posts" />
 
           <Tab icon={<BookmarkIcon />} label="Saved" />
@@ -26,13 +50,9 @@ const ProfileContent: FC = () => {
       </Category>
 
       <Content>
-        <Panel value={value} index={0}>
-          <Posts />
-        </Panel>
+        {selectedTab === 0 && <Posts />}
 
-        <Panel value={value} index={1}>
-          <Saved />
-        </Panel>
+        {selectedTab === 1 && <Saved />}
       </Content>
     </Container>
   );

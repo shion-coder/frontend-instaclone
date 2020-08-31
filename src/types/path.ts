@@ -4,7 +4,7 @@ export enum Path {
   LOGIN = '/login',
   CONFIRM = '/confirm/:id',
   EXPLORE = '/explore',
-  PROFILE = '/:username',
-  SETTINGS = '/settings/:page',
+  PROFILE = '/:username/:page?',
+  SETTINGS = '/settings/:page?',
   TEST = '/test',
 }
