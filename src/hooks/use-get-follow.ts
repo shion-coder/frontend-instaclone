@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 
 import { ReturnGetFollowProps } from 'types';
@@ -19,7 +18,7 @@ export const useGetFollow = (id: string, route: 'followers' | 'following'): Resu
    * Infinite query with react-query
    */
 
-  const { data, isLoading, clear, fetchMore, canFetchMore } = useInfiniteQuery(
+  const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
     'followers',
     async (_key, offset = 0) => {
       const { data } = await http.get<ReturnGetFollowProps>(`/users/${id}/${offset}/${route}`);
@@ -32,14 +31,6 @@ export const useGetFollow = (id: string, route: 'followers' | 'following'): Resu
       getFetchMore: (last) => last.next,
     },
   );
-
-  /**
-   * Remove query from cache when unmount to prevent error when unfollow ... ( Not found any solution than clear cache when unmount to refetch again )
-   */
-
-  useEffect(() => {
-    return () => clear();
-  }, [clear]);
 
   /**
    * Load more when scroll with intersection observer

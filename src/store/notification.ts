@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
-import { ReturnGetNotificationsProps, Errors, NotificationProps } from 'types';
+import { ReturnGetNotificationsProps, Errors } from 'types';
 import { http } from 'services';
 
 /* -------------------------------------------------------------------------- */
@@ -29,13 +29,7 @@ export const fetchNotifications = createAsyncThunk('notification/fetch', async (
  * Initial State type and values
  */
 
-type StateProps = {
-  notifications: NotificationProps[];
-  unread: number;
-  next: number;
-};
-
-const initialState: StateProps = {
+const initialState: ReturnGetNotificationsProps = {
   notifications: [],
   unread: 0,
   next: 0,

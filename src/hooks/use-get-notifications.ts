@@ -32,7 +32,6 @@ export const useGetNotifications = (): Result => {
     {
       retry: false,
       refetchOnWindowFocus: false,
-      refetchOnMount: false,
       enabled: Number.isInteger(next),
       getFetchMore: (last) => last.next,
     },
