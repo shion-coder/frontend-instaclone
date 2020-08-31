@@ -10,7 +10,7 @@ type PreviewProps = {
 };
 
 type LoadingProps = {
-  loading?: 'yes' | 'no';
+  loading?: number;
 };
 
 export const Container = styled.div`
@@ -30,8 +30,8 @@ export const Header = styled.div`
 `;
 
 export const Back = styled(ArrowBackIosIcon)<LoadingProps>`
-  cursor: ${({ loading }) => (loading === 'yes' ? 'auto' : 'pointer')};
-  pointer-events: ${({ loading }) => (loading === 'yes' ? 'none' : 'auto')};
+  cursor: ${({ loading }) => (loading === 1 ? 'auto' : 'pointer')};
+  pointer-events: ${({ loading }) => (loading === 1 ? 'none' : 'auto')};
 `;
 
 export const Title = styled.span`
@@ -41,8 +41,8 @@ export const Title = styled.span`
 `;
 
 export const Submit = styled(CameraAltIcon)<LoadingProps>`
-  cursor: ${({ loading }) => (loading === 'yes' ? 'auto' : 'pointer')};
-  pointer-events: ${({ loading }) => (loading === 'yes' ? 'none' : 'auto')};
+  cursor: ${({ loading }) => (loading === 1 ? 'auto' : 'pointer')};
+  pointer-events: ${({ loading }) => (loading === 1 ? 'none' : 'auto')};
 `;
 
 export const Body = styled.div`

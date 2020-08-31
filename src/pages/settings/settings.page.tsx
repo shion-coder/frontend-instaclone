@@ -9,9 +9,13 @@ import { Wrapper, Container, StyledTabs as Tabs, StyledTab as Tab } from './sett
 
 /* -------------------------------------------------------------------------- */
 
+type ParamsProps = {
+  page: 'edit' | 'password';
+};
+
 const Setting: FC = () => {
   const history = useHistory();
-  const { page }: { page: 'edit' | 'password' } = useParams();
+  const { page }: ParamsProps = useParams();
 
   const tab = page === 'edit' || page === 'password' ? page : 'edit';
 

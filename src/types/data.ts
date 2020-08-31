@@ -14,7 +14,7 @@ export type UserProps = {
   avatar: string;
   posts: PostProps[];
   postCount: number;
-  bookmarks: PostProps[];
+  saved: PostProps[];
   followers: ReturnGetUserProps[];
   followerCount: number;
   following: ReturnGetUserProps[];

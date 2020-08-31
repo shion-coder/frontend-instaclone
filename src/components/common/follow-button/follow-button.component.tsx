@@ -14,18 +14,12 @@ type Props = {
 
 const FollowButton: FC<Props> = ({ isFollowing, isLoading, handleFollow }) => {
   return isFollowing ? (
-    <Button
-      variant="contained"
-      color="secondary"
-      size="small"
-      loading={isLoading ? 'yes' : 'no'}
-      onClick={handleFollow}
-    >
+    <Button variant="contained" color="secondary" size="small" loading={isLoading ? 1 : 0} onClick={handleFollow}>
       {isLoading && <Loader color="dark" width="25px" height="25px" radius="4px" />}
       Following
     </Button>
   ) : (
-    <Button variant="contained" color="primary" size="small" loading={isLoading ? 'yes' : 'no'} onClick={handleFollow}>
+    <Button variant="contained" color="primary" size="small" loading={isLoading ? 1 : 0} onClick={handleFollow}>
       {isLoading && <Loader color="dark" width="25px" height="25px" radius="4px" />}
       Follow
     </Button>

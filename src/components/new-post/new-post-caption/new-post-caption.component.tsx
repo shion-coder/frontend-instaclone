@@ -76,11 +76,11 @@ const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, fil
   return (
     <Container>
       <Header>
-        <Back fontSize="small" color="primary" onClick={handleBack} loading={isLoading ? 'yes' : 'no'} />
+        <Back fontSize="small" color="primary" onClick={handleBack} loading={isLoading ? 1 : 0} />
 
         <Title>New Post</Title>
 
-        <Submit fontSize="small" color="primary" onClick={handleSubmit} loading={isLoading ? 'yes' : 'no'} />
+        <Submit fontSize="small" color="primary" onClick={handleSubmit} loading={isLoading ? 1 : 0} />
       </Header>
 
       <Body>

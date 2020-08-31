@@ -4,6 +4,6 @@ import { Container } from './explore.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const Explore: FC = () => <Container>{}</Container>;
+const Explore: FC = () => <Container></Container>;
 
 export default Explore;

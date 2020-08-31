@@ -13,9 +13,13 @@ import { Wrapper, Container } from './profile.styles';
 
 /* -------------------------------------------------------------------------- */
 
+type ParamsProps = {
+  username: string;
+};
+
 const Dashboard: FC = () => {
   const isFirstRun = useRef(true);
-  const { username } = useParams();
+  const { username }: ParamsProps = useParams();
 
   /**
    * Fetch user with username in params
@@ -65,7 +69,7 @@ const Dashboard: FC = () => {
       <Container>
         <ProfileHeader profile={data} />
 
-        <ProfileContent />
+        <ProfileContent profile={data} />
       </Container>
     </Wrapper>
   );

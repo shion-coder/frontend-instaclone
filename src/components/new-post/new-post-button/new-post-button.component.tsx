@@ -6,11 +6,15 @@ import AddPhoto from '@material-ui/icons/AddPhotoAlternate';
 import { useFiles } from 'hooks';
 import NewPostModal from 'components/new-post/new-post-modal';
 
-import { Container, Input } from './new-post-button.styles';
+import { Container, Input, Text } from './new-post-button.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const NewPostButton: FC = () => {
+type Props = {
+  text?: boolean;
+};
+
+const NewPostButton: FC<Props> = ({ text }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { handleChange, handleClose, formData, preview, error, source } = useFiles(inputRef);
@@ -26,9 +30,13 @@ const NewPostButton: FC = () => {
         ref={inputRef}
       />
 
-      <Fab color="primary" size="small" component="span">
-        <AddPhoto />
-      </Fab>
+      {text ? (
+        <Text>Share your first photo</Text>
+      ) : (
+        <Fab color="primary" size="small" component="span">
+          <AddPhoto />
+        </Fab>
+      )}
 
       <Modal isOpen={!!formData && !error} onBackgroundClick={handleClose} onEscapeKeydown={handleClose}>
         <NewPostModal formData={formData} preview={preview} handleClose={handleClose} source={source} />

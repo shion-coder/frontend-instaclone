@@ -4,6 +4,6 @@ import { Container } from './test.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const Test: FC = () => <Container>{}</Container>;
+const Test: FC = () => <Container></Container>;
 
 export default Test;
