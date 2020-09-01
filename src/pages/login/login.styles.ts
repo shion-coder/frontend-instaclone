@@ -54,6 +54,17 @@ export const StyledButton = styled(Button)`
 export const GoogleButton = styled(OauthButton)`
   margin: ${({ theme }) => theme.material.spacing(1, 0, 2)};
   padding: ${({ theme }) => theme.material.spacing(1) + 'px'};
+  background-color: ${({ theme }) => theme.colors.google};
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.google};
+    box-shadow: 0 0 6px ${({ theme }) => theme.colors.google};
+  }
+`;
+
+export const GoogleIcon = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 export const StyledLink = styled(Link)`

@@ -19,7 +19,7 @@ export const Container = styled(Grid)`
 `;
 
 export const StyledTabs = styled(Tabs)`
-  border-right: ${({ theme }) => `1px solid ${theme.colors.grey2}`};
+  border-right: ${({ theme }) => `1px solid ${theme.colors.grey}`};
 
   .MuiTab-textColorInherit.Mui-selected {
     font-weight: bold;

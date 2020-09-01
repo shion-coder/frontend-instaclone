@@ -17,7 +17,7 @@ export const Title = styled.div`
   grid-template-rows: min-content;
   align-items: center;
   padding: 0 1rem;
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey2}`};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
 `;
 
 export const Name = styled.p`

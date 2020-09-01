@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import {
-  RegisterDataProps,
-  LoginDataProps,
+  RegisterProps,
+  LoginProps,
   UserProps,
   ReturnAuthProps,
   Errors,
@@ -18,7 +18,7 @@ import { http } from 'services';
  * Handle async with thunk
  */
 
-export const register = createAsyncThunk('user/register', async (user: RegisterDataProps, { rejectWithValue }) => {
+export const register = createAsyncThunk('user/register', async (user: RegisterProps, { rejectWithValue }) => {
   try {
     const endpoint = '/auth/register';
     const { data } = await http.post<ReturnAuthProps>(endpoint, user);
@@ -35,7 +35,7 @@ export const register = createAsyncThunk('user/register', async (user: RegisterD
   }
 });
 
-export const login = createAsyncThunk('user/login', async (user: LoginDataProps, { rejectWithValue }) => {
+export const login = createAsyncThunk('user/login', async (user: LoginProps, { rejectWithValue }) => {
   try {
     const endpoint = '/auth/login';
     const { data } = await http.post<ReturnAuthProps>(endpoint, user);

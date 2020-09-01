@@ -9,7 +9,7 @@ export const Container = styled.div`
   left: 50%;
   transform: translateX(-90%);
   background-color: ${({ theme }) => theme.colors.light};
-  box-shadow: 0 0 30px 0px ${({ theme }) => theme.colors.grey2};
+  box-shadow: 0 0 30px 0px ${({ theme }) => theme.colors.grey};
   border-radius: 8px;
   z-index: 1;
 
@@ -23,7 +23,7 @@ export const Container = styled.div`
     bottom: 100%;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
     background-color: ${({ theme }) => theme.colors.light};
-    box-shadow: 0 0 30px 0px ${({ theme }) => theme.colors.grey2};
+    box-shadow: 0 0 30px 0px ${({ theme }) => theme.colors.grey};
   }
 `;
 
@@ -32,7 +32,7 @@ export const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey2}`};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
 `;
 
 export const Name = styled.span`

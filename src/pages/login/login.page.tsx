@@ -6,10 +6,11 @@ import { Formik, FormikHelpers, FormikErrors } from 'formik';
 import { Grid } from '@material-ui/core';
 import Account from '@material-ui/icons/AccountCircle';
 
-import { LoginDataProps } from 'types';
+import { LoginProps, Path } from 'types';
 import { Dispatch, login } from 'store';
 import { validateLogin } from 'utils';
 import Field from 'components/common/formik-field';
+import GoogleImage from 'assets/images/google-icon.svg';
 
 import {
   StyledContainer as Container,
@@ -19,6 +20,7 @@ import {
   StyledButton as Button,
   GoogleButton as Google,
   StyledLink as Link,
+  GoogleIcon,
 } from './login.styles';
 
 /* -------------------------------------------------------------------------- */
@@ -30,19 +32,20 @@ type LocationState = {
 type Props = RouteComponentProps<Record<string, string | undefined>, StaticContext, LocationState>;
 
 const Login: FC<Props> = ({ history, location: { state } }) => {
+  const { REGISTER, LOGIN } = Path;
   const dispatch: Dispatch = useDispatch();
 
-  const handleSubmit = async (values: LoginDataProps, formikHelpers: FormikHelpers<LoginDataProps>) => {
+  const handleSubmit = async (values: LoginProps, formikHelpers: FormikHelpers<LoginProps>) => {
     const result = await dispatch(login(values));
 
     if (login.fulfilled.match(result)) {
       return !state ? history.push('/') : history.push(state.from.pathname);
     }
 
-    result.payload && formikHelpers.setErrors(result.payload as FormikErrors<LoginDataProps>);
+    result.payload && formikHelpers.setErrors(result.payload as FormikErrors<LoginProps>);
   };
 
-  const initialValues: LoginDataProps = {
+  const initialValues: LoginProps = {
     usernameOrEmail: '',
     password: '',
   };
@@ -65,17 +68,23 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
             Sign In
           </Button>
 
-          <Google provider="google" color="primary" state={state} fullWidth>
+          <Google
+            provider="google"
+            startIcon={<GoogleIcon src={GoogleImage} />}
+            color="primary"
+            state={state}
+            fullWidth
+          >
             Sign in with Google
           </Google>
 
           <Grid container>
             <Grid item xs>
-              <Link to="/login">Forgot password?</Link>
+              <Link to={LOGIN}>Forgot password?</Link>
             </Grid>
 
             <Grid item>
-              <Link to="/register">Don't have an account? Sign Up</Link>
+              <Link to={REGISTER}>Don't have an account? Sign Up</Link>
             </Grid>
           </Grid>
         </Form>

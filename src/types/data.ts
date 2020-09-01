@@ -27,14 +27,14 @@ export type UserProps = {
 export type PostProps = {
   _id: string;
   image: string;
-  thumbnail?: string;
-  filter?: string;
-  caption?: string;
-  tags?: { type: string }[];
-  likes?: UserProps[];
-  likeCount?: number;
-  comments?: CommentProps[];
-  commentCount?: number;
+  thumbnail: string;
+  filter: string;
+  caption: string;
+  tags: { type: string }[];
+  likes: UserProps[];
+  likeCount: number;
+  comments: CommentProps[];
+  commentCount: number;
   author: UserProps;
   date: string;
 };
@@ -50,7 +50,7 @@ export type CommentProps = {
 export type NotificationProps = {
   _id: string;
   notificationType: string;
-  notificationData?: Record<string, unknown>;
+  notificationData: Record<string, unknown>;
   sender: UserProps;
   receiver: string;
   read: boolean;

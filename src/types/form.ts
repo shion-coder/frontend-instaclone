@@ -1,3 +1,17 @@
+export type RegisterProps = {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+export type LoginProps = {
+  usernameOrEmail: string;
+  password: string;
+};
+
 export type UpdateProfileProps = {
   firstName: string;
   lastName: string;

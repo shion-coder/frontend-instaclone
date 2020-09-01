@@ -14,17 +14,11 @@ declare module 'styled-components' {
       lightLayer: string;
       darkLayer: string;
       solitude: string;
-      nero: string;
-      primary: string;
-      secondary: string;
       medium: string;
-      danger: string;
+      grey: string;
       corn: string;
-      grey1: string;
-      grey2: string;
-      grey3: string;
-      grey4: string;
       unread: string;
+      google: string;
     };
     animation: {
       delay: string;
@@ -41,17 +35,11 @@ export const theme: DefaultTheme = {
     lightLayer: 'rgba(247, 248, 249, 0.6)',
     darkLayer: 'rgba(0, 0, 0, 0.4)',
     solitude: '#e8ebee',
-    nero: '#292929',
-    primary: '#fc5c65',
-    secondary: '#4ecdc4',
     medium: '#6e6969',
-    danger: '#ff5252',
+    grey: '#dbdbdb',
     corn: '#ffe66d',
-    grey1: '#999',
-    grey2: '#dbdbdb',
-    grey3: '#fafafa',
-    grey4: '#efefef',
     unread: '#82b1ff',
+    google: '#4285f4',
   },
   animation: {
     delay: '0s',

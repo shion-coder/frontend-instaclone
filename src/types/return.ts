@@ -40,7 +40,7 @@ export type ReturnGetFollowProps = {
 export type ReturnGetNotificationsProps = {
   notifications: NotificationProps[];
   unread: number;
-  next: number;
+  next?: number;
 };
 
 export type ReturnGetPostsProps = {

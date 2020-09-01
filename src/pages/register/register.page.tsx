@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { Grid } from '@material-ui/core';
 import Account from '@material-ui/icons/AccountCircle';
 
-import { RegisterDataProps } from 'types';
+import { RegisterProps, Path } from 'types';
 import { Dispatch, register } from 'store';
 import { validateRegister } from 'utils';
 import Field from 'components/common/formik-field';
@@ -22,9 +22,10 @@ import {
 /* -------------------------------------------------------------------------- */
 
 const Register: FC = () => {
+  const { LOGIN } = Path;
   const dispatch: Dispatch = useDispatch();
 
-  const handleSubmit = async (values: RegisterDataProps, formikHelpers: FormikHelpers<RegisterDataProps>) => {
+  const handleSubmit = async (values: RegisterProps, formikHelpers: FormikHelpers<RegisterProps>) => {
     const result = await dispatch(register(values));
 
     register.fulfilled.match(result)
@@ -32,10 +33,10 @@ const Register: FC = () => {
           position: 'bottom-right',
           toastId: 'register-fulfilled',
         })
-      : result.payload && formikHelpers.setErrors(result.payload as FormikErrors<RegisterDataProps>);
+      : result.payload && formikHelpers.setErrors(result.payload as FormikErrors<RegisterProps>);
   };
 
-  const initialValues: RegisterDataProps = {
+  const initialValues: RegisterProps = {
     firstName: '',
     lastName: '',
     username: '',
@@ -77,7 +78,7 @@ const Register: FC = () => {
           </Button>
 
           <Grid justify="flex-end" container>
-            <Link to="/login">Already have an account? Sign In</Link>
+            <Link to={LOGIN}>Already have an account? Sign In</Link>
           </Grid>
         </Form>
       </Formik>

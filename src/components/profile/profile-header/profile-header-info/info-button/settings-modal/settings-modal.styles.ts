@@ -17,7 +17,7 @@ export const Image = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1.5rem 0 0.625rem;
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey2}`};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
 `;
 
 export const StyledAvatar = styled(Avatar)`
@@ -31,7 +31,7 @@ export const Name = styled.p`
 
 export const Item = styled(ListItem)`
   width: 100%;
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey2}`};
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
 `;
 
 export const Text = styled(ListItemText)`
