@@ -21,9 +21,4 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-
-  /* Custom toast top right position */
-  .Toastify__toast-container--bottom-right {
-    bottom: 3rem;
-  }
 `;
