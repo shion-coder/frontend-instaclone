@@ -5,9 +5,9 @@ import { RootStateProps, readNotification, clearUnreadNotification } from 'store
 import { useGetNotifications } from 'hooks';
 import { http } from 'services';
 import EmptyNotification from './empty-notification';
-import { Notification, NotificationLoading } from './notification';
+import Notification, { NotificationLoading } from './notification';
 
-import { Container, Title, Name, Icon, Content, LoadMore } from './notification-popup.styles';
+import { Container, Title, Name, Icon, Content, LoadMore } from './notifications-popup.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -15,8 +15,8 @@ type Props = {
   handleClose: () => void;
 };
 
-const NotificationPopup: FC<Props> = ({ handleClose }) => {
-  const notifications = useSelector((state: RootStateProps) => state.notification.notifications);
+const NotificationsPopup: FC<Props> = ({ handleClose }) => {
+  const notifications = useSelector((state: RootStateProps) => state.notifications.notifications);
   const length = notifications.length;
   const dispatch = useDispatch();
 
@@ -114,4 +114,4 @@ const NotificationPopup: FC<Props> = ({ handleClose }) => {
   );
 };
 
-export default NotificationPopup;
+export default NotificationsPopup;

@@ -19,7 +19,7 @@ type Props = {
   closeModal: () => void;
 };
 
-export const UserCard: FC<Props> = ({
+const UserCard: FC<Props> = ({
   user: {
     user: { _id, avatar, fullName, username },
     isFollowing,
@@ -85,3 +85,5 @@ export const UserCard: FC<Props> = ({
     </Container>
   );
 };
+
+export default UserCard;

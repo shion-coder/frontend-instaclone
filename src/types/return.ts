@@ -1,4 +1,4 @@
-import { UserProps, NotificationProps } from './data';
+import { UserProps, NotificationProps, PostProps } from './data';
 
 /* -------------------------------------------------------------------------- */
 
@@ -34,11 +34,16 @@ export type ReturnGetUserProps = {
 
 export type ReturnGetFollowProps = {
   users: ReturnGetUserProps[];
-  next: number;
+  next?: number;
 };
 
 export type ReturnGetNotificationsProps = {
   notifications: NotificationProps[];
   unread: number;
   next: number;
+};
+
+export type ReturnGetPostsProps = {
+  posts: PostProps[];
+  next?: number;
 };

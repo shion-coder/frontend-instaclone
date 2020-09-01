@@ -9,3 +9,5 @@ export * from './user-intersection-observes';
 export * from './use-get-follow';
 
 export * from './use-get-notifications';
+
+export * from './use-get-posts';

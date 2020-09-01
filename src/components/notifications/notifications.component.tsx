@@ -6,16 +6,16 @@ import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 
 import { RootStateProps } from 'store';
 import { useClickOutside } from 'hooks';
-import Popup from 'components/notification/notification-popup';
+import Popup from 'components/notifications/notifications-popup';
 
-import { Container } from './notification.styles';
+import { Container } from './notifications.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const Notification: FC = () => {
+const Notifications: FC = () => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const unread = useSelector((state: RootStateProps) => state.notification.unread);
+  const unread = useSelector((state: RootStateProps) => state.notifications.unread);
 
   const handleClose = () => setOpen(false);
 
@@ -34,4 +34,4 @@ const Notification: FC = () => {
   );
 };
 
-export default Notification;
+export default Notifications;

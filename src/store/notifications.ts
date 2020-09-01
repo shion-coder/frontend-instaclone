@@ -79,4 +79,4 @@ export const {
   clearUnreadNotification,
 } = notificationSlice.actions;
 
-export const notificationReducer = notificationSlice.reducer;
+export const notificationsReducer = notificationSlice.reducer;

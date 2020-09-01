@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from 'react-query';
 
-import { ReturnGetFollowProps } from 'types';
+import { ReturnGetPostsProps, PostProps } from 'types';
 import { useIntersectionObserver } from 'hooks';
 import { http } from 'services';
 
@@ -8,26 +8,27 @@ import { http } from 'services';
 
 type Result = {
   ref: (node: HTMLDivElement) => void;
-  data: ReturnGetFollowProps[] | undefined;
+  data: ReturnGetPostsProps[] | undefined;
   isLoading: boolean;
   canFetchMore: boolean | undefined;
 };
 
-export const useGetFollow = (id: string, route: 'followers' | 'following'): Result => {
+export const useGetPosts = (username: string, posts: { posts: PostProps[]; next?: number }): Result => {
   /**
    * Infinite query with react-query
    */
 
   const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
-    'get-followers',
+    'get-posts',
     async (_key, offset = 0) => {
-      const { data } = await http.get<ReturnGetFollowProps>(`/users/${id}/${offset}/${route}`);
+      const { data } = await http.get<ReturnGetPostsProps>(`/users/${username}/posts/${offset}`);
 
       return data;
     },
     {
       retry: false,
       refetchOnWindowFocus: false,
+      initialData: [posts],
       getFetchMore: (last) => last.next,
     },
   );

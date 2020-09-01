@@ -16,14 +16,14 @@ type Result = {
 };
 
 export const useGetNotifications = (): Result => {
-  const next = useSelector((state: RootStateProps) => state.notification.next);
+  const next = useSelector((state: RootStateProps) => state.notifications.next);
 
   /**
    * Infinite query with react-query
    */
 
   const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
-    'notifications',
+    'get-notifications',
     async (_key, offset = next) => {
       const { data } = await http.get<ReturnGetNotificationsProps>(`/notifications/${offset}`);
 

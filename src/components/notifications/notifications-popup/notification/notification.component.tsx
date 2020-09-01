@@ -14,7 +14,7 @@ type Props = {
   handleClose: () => void;
 };
 
-export const Notification: FC<Props> = ({
+const Notification: FC<Props> = ({
   notification: {
     sender: { username, avatar, fullName },
     read,
@@ -46,3 +46,5 @@ export const Notification: FC<Props> = ({
     </Container>
   );
 };
+
+export default Notification;

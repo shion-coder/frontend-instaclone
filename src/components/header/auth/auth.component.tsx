@@ -3,7 +3,7 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import NewPost from 'components/new-post/new-post-button';
-import Notification from 'components/notification';
+import Notifications from 'components/notifications';
 
 import { Container, Explore, Profile } from './auth.styles';
 
@@ -24,7 +24,7 @@ const Auth: FC<Props> = ({ explorePath, profilePath, goExplore, goProfile }) => 
       <ExploreIcon />
     </Explore>
 
-    <Notification />
+    <Notifications />
 
     <Profile color={profilePath ? 'secondary' : 'primary'} size="small" onClick={goProfile}>
       <AccountCircleIcon />

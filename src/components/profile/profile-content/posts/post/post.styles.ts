@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DefaultCommentIcon from '@material-ui/icons/Comment';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 /* -------------------------------------------------------------------------- */
 
@@ -21,6 +22,15 @@ export const Image = styled.img<ImageProps>`
   cursor: pointer;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   filter: ${({ filter }) => (filter ? filter : 'none')};
+`;
+
+export const ImageSkeleton = styled(Skeleton).attrs(() => ({
+  animation: 'wave',
+  variant: 'rect',
+}))`
+  width: 100%;
+  border-radius: 4px;
+  padding-top: 100%;
 `;
 
 export const Overlay = styled.div`

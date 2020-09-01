@@ -3,7 +3,7 @@ import { isEmpty } from 'lodash-es';
 
 import { ReturnGetUserProps, ReturnGetFollowProps } from 'types';
 import { useGetFollow } from 'hooks';
-import { UserCard, UserCardLoading } from './user-card';
+import UserCard, { UserCardLoading } from './user-card';
 import { ContentLoading } from './users-modal.loading';
 import Empty from './empty-content';
 
