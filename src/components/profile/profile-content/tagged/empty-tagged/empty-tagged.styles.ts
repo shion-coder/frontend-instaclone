@@ -3,6 +3,10 @@ import AccountBoxOutlinedIcon from '@material-ui/icons/AccountBoxOutlined';
 
 /* -------------------------------------------------------------------------- */
 
+type TextProps = {
+  bold?: boolean;
+};
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,4 +24,6 @@ export const Title = styled.p`
   font-size: 1.2rem;
 `;
 
-export const Text = styled.p``;
+export const Text = styled.p<TextProps>`
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+`;

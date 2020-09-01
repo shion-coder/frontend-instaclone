@@ -30,6 +30,8 @@ const EmptyTagged: FC<Props> = ({ fullName }) => {
           <Title>Photos of you</Title>
 
           <Text>When people tag you in photos, they'll appear here</Text>
+
+          <Text bold>This feature is not yet implemented</Text>
         </>
       ) : (
         <>
@@ -38,6 +40,8 @@ const EmptyTagged: FC<Props> = ({ fullName }) => {
           <Title>No Photos</Title>
 
           <Text>When people tag {fullName} in photos, they'll appear here</Text>
+
+          <Text bold>This feature is not yet implemented</Text>
         </>
       )}
     </Container>

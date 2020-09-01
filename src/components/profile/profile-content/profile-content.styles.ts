@@ -23,6 +23,4 @@ export const StyledTab = styled(Tab)<TabProps>`
   display: ${({ display }) => (display === 0 ? 'none' : 'inline')};
 `;
 
-export const Content = styled.div`
-  margin-top: 1rem;
-`;
+export const Content = styled.div``;

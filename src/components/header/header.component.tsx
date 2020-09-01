@@ -27,7 +27,11 @@ const Header: FC = () => {
   const registerPath = pathname === REGISTER;
   const loginPath = pathname === LOGIN;
   const explorePath = pathname === EXPLORE;
-  const profilePath = pathname === `/${username}`;
+  const profilePath =
+    pathname === `/${username}` ||
+    pathname === `/${username}/posts` ||
+    pathname === `/${username}/saved` ||
+    pathname === `/${username}/tagged`;
 
   /**
    * Go to route
