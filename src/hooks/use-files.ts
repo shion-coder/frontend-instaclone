@@ -54,6 +54,10 @@ export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData
         if (types.every((type) => file.type !== type)) {
           setError(true);
 
+          if (ref?.current) {
+            ref.current.value = '';
+          }
+
           return toast.error('File type is not supported for upload', { toastId: 'upload-error' });
         }
 
@@ -63,6 +67,10 @@ export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData
 
         if (file.size > 2000000) {
           setError(true);
+
+          if (ref?.current) {
+            ref.current.value = '';
+          }
 
           return toast.error('File is too large, please pick a smaller file', { toastId: 'upload-error' });
         }
@@ -74,11 +82,13 @@ export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData
        * Set data to send server and set preview link on client
        */
 
-      setFormData(data);
+      if (ref?.current?.value) {
+        setFormData(data);
 
-      fn && fn(data);
+        fn && fn(data);
 
-      setPreview(URL.createObjectURL(files[0]));
+        setPreview(URL.createObjectURL(files[0]));
+      }
     }
   };
 

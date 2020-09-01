@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, FormikHelpers, FormikErrors } from 'formik';
+import { toast } from 'react-toastify';
 import { Grid } from '@material-ui/core';
 import Account from '@material-ui/icons/AccountCircle';
 
@@ -27,9 +28,11 @@ const Register: FC = () => {
   const handleSubmit = async (values: RegisterProps, formikHelpers: FormikHelpers<RegisterProps>) => {
     const result = await dispatch(register(values));
 
-    if (!register.fulfilled.match(result)) {
-      result.payload && formikHelpers.setErrors(result.payload as FormikErrors<RegisterProps>);
-    }
+    register.fulfilled.match(result)
+      ? toast.success(`Welcome ${result.payload?.user.firstName}. Please check your email for confirmation`, {
+          toastId: 'register-fulfilled',
+        })
+      : result.payload && formikHelpers.setErrors(result.payload as FormikErrors<RegisterProps>);
   };
 
   const initialValues: RegisterProps = {
