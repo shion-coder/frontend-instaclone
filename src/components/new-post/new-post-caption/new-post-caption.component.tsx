@@ -34,7 +34,7 @@ type Props = {
 };
 
 const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, filter, setActiveModal }) => {
-  const avatar = useSelector((state: RootStateProps) => state.user.info.avatar);
+  const avatar = useSelector((state: RootStateProps) => state.user.data.avatar);
   const [caption, setCaption] = useState('');
   const history = useHistory();
 

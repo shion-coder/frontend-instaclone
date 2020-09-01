@@ -77,12 +77,12 @@ export const updateProfile = createAsyncThunk(
  */
 
 type StateProps = {
-  info: Partial<UserProps>;
+  data: Partial<UserProps>;
   token: string | null;
 };
 
 const initialState: StateProps = {
-  info: {},
+  data: {},
   token: null,
 };
 
@@ -96,34 +96,34 @@ const userSlice = createSlice({
   reducers: {
     oauthLogin: (state, { payload }) => {
       if (payload) {
-        state.info = payload.user;
+        state.data = payload.user;
         state.token = payload.token;
       }
     },
     logout: (state) => {
-      state.info = {};
+      state.data = {};
       state.token = null;
     },
     changeAvatar: (state, { payload }) => {
-      state.info.avatar = payload.avatar;
+      state.data.avatar = payload.avatar;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(register.fulfilled, (state, { payload }) => {
       if (payload) {
-        state.info = payload.user;
+        state.data = payload.user;
         state.token = payload.token;
       }
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
       if (payload) {
-        state.info = payload.user;
+        state.data = payload.user;
         state.token = payload.token;
       }
     });
     builder.addCase(updateProfile.fulfilled, (state, { payload }) => {
       if (payload) {
-        state.info = payload.user;
+        state.data = payload.user;
       }
     });
   },

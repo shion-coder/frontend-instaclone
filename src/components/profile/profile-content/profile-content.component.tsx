@@ -28,7 +28,7 @@ const ProfileContent: FC<Props> = ({ profile }) => {
   const history = useHistory();
   const { username, page }: ParamsProps = useParams();
 
-  const isCurrentUser = useSelector((state: RootStateProps) => state.user.info.username) === username;
+  const isCurrentUser = useSelector((state: RootStateProps) => state.user.data.username) === username;
 
   const tab = page === 'posts' || page === 'saved' || page === 'tagged' ? page : 'posts';
 

@@ -63,7 +63,7 @@ const UserCard: FC<Props> = ({
     setCurrentFollowing(isFollowing);
   };
 
-  const currentUsername = useSelector((state: RootStateProps) => state.user.info.username);
+  const currentUsername = useSelector((state: RootStateProps) => state.user.data.username);
 
   const { handleFollow, isLoading } = useFollow(_id, follow, unfollow);
 

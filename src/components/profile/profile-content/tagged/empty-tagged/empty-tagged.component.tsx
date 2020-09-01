@@ -19,7 +19,7 @@ type Props = {
 const EmptyTagged: FC<Props> = ({ fullName }) => {
   const { username }: ParamsProps = useParams();
 
-  const isCurrentUser = useSelector((state: RootStateProps) => state.user.info.username) === username;
+  const isCurrentUser = useSelector((state: RootStateProps) => state.user.data.username) === username;
 
   return (
     <Container>

@@ -16,7 +16,7 @@ const Header: FC = () => {
   const { pathname } = useLocation();
 
   const token = useSelector((state: RootStateProps) => state.user.token);
-  const username = useSelector((state: RootStateProps) => state.user.info.username);
+  const username = useSelector((state: RootStateProps) => state.user.data.username);
 
   const { HOME, REGISTER, LOGIN, EXPLORE } = Path;
 

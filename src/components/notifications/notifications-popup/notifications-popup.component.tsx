@@ -16,7 +16,7 @@ type Props = {
 };
 
 const NotificationsPopup: FC<Props> = ({ handleClose }) => {
-  const notifications = useSelector((state: RootStateProps) => state.notifications.notifications);
+  const notifications = useSelector((state: RootStateProps) => state.notifications.data);
   const length = notifications.length;
   const dispatch = useDispatch();
 

@@ -14,7 +14,7 @@ import { StyledContainer as Container, StyledForm as Form, StyledButton as Butto
 
 const UpdatePassword: FC = () => {
   const { firstName, lastName, username, website, bio, email } = useSelector(
-    (state: RootStateProps) => state.user.info,
+    (state: RootStateProps) => state.user.data,
   );
   const dispatch: Dispatch = useDispatch();
   const history = useHistory();

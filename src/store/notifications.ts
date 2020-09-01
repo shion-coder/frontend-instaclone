@@ -30,13 +30,13 @@ export const fetchNotifications = createAsyncThunk('notification/fetch', async (
  */
 
 type StateProps = {
-  notifications: NotificationProps[];
+  data: NotificationProps[];
   unread: number;
   next: number;
 };
 
 const initialState: StateProps = {
-  notifications: [],
+  data: [],
   unread: 0,
   next: 0,
 };
@@ -51,26 +51,26 @@ const notificationSlice = createSlice({
   reducers: {
     addNotification: (state, { payload }) => {
       if (payload) {
-        state.notifications.unshift(payload);
+        state.data.unshift(payload);
         state.unread = state.unread + 1;
         state.next = state.next + 1;
       }
     },
     clearNotification: (state) => {
-      state.notifications = [];
+      state.data = [];
       state.unread = 0;
     },
     readNotification: (state) => {
       state.unread = 0;
     },
     clearUnreadNotification: (state) => {
-      state.notifications.map((notification) => (notification.read = true));
+      state.data.map((notification) => (notification.read = true));
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchNotifications.fulfilled, (state, { payload }) => {
       if (payload) {
-        state.notifications = payload.notifications;
+        state.data = payload.notifications;
         state.unread = payload.unread;
         if (payload.next) {
           state.next = payload.next;
