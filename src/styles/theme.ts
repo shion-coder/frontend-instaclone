@@ -16,6 +16,7 @@ declare module 'styled-components' {
       solitude: string;
       medium: string;
       grey: string;
+      danger: string;
       corn: string;
       unread: string;
       google: string;
@@ -37,6 +38,7 @@ export const theme: DefaultTheme = {
     solitude: '#e8ebee',
     medium: '#6e6969',
     grey: '#dbdbdb',
+    danger: '#ff5252',
     corn: '#ffe66d',
     unread: '#82b1ff',
     google: '#4285f4',

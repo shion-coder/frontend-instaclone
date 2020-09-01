@@ -29,3 +29,19 @@ export const StyledForm = styled(Form)`
 export const StyledButton = styled(Button)`
   margin: ${({ theme }) => theme.material.spacing(2, 0, 2)};
 `;
+
+export const Warn = styled.div`
+  text-align: center;
+  padding: 0.5rem;
+`;
+
+export const Message = styled.p`
+  color: ${({ theme }) => theme.colors.danger};
+  font-size: 0.8rem;
+`;
+
+export const Resend = styled(Button)`
+  color: ${({ theme }) => theme.material.palette.primary.main};
+  font-weight: bold;
+  font-size: 0.8rem;
+`;
