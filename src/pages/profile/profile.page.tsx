@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
@@ -18,30 +18,15 @@ type ParamsProps = {
 };
 
 const Dashboard: FC = () => {
-  const isFirstRun = useRef(true);
   const { username }: ParamsProps = useParams();
 
   /**
    * Fetch user with username in params
    */
 
-  const { isFetching, data, error, refetch } = useQuery('get-user', () =>
+  const { isFetching, data, error } = useQuery(['get-user', username], () =>
     http.get<ReturnGetUserProps>(`/users/${username}`).then((res) => res.data),
   );
-
-  /**
-   * Refetch page when username in params change, skip first render
-   */
-
-  useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
-
-      return;
-    }
-
-    refetch();
-  }, [username, refetch]);
 
   /**
    * Display loader when fetching get user

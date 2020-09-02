@@ -16,12 +16,10 @@ type Props = {
 
 const Posts: FC<Props> = ({
   profile: {
-    user: { posts, fullName, username },
+    user: { fullName, username },
   },
 }) => {
-  const next = posts.length === 9 ? 9 : undefined;
-
-  const { ref, data, isLoading, canFetchMore } = useGetPosts(username, { posts, next });
+  const { ref, data, isLoading, canFetchMore } = useGetPosts(username);
 
   const renderPosts = () =>
     isLoading ? (
@@ -35,7 +33,7 @@ const Posts: FC<Props> = ({
       ))
     );
 
-  return posts.length === 0 ? (
+  return data && data[0].posts?.length === 0 ? (
     <EmptyPost fullName={fullName} />
   ) : (
     <>

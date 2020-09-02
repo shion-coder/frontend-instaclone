@@ -26,7 +26,6 @@ export const useGetNotifications = (): Result => {
     'get-notifications',
     (_key, offset = next) => http.get<ReturnGetNotificationsProps>(`/notifications/${offset}`).then((res) => res.data),
     {
-      enabled: Number.isInteger(next),
       getFetchMore: (last) => last.next,
     },
   );

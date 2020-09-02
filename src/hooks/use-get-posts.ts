@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery, queryCache } from 'react-query';
 
-import { ReturnGetPostsProps } from 'types';
+import { ReturnGetPostsProps, ReturnGetUserProps } from 'types';
 import { useIntersectionObserver } from 'hooks';
 import { http } from 'services';
 
@@ -14,27 +13,24 @@ type Result = {
   canFetchMore: boolean | undefined;
 };
 
-export const useGetPosts = (username: string, posts: ReturnGetPostsProps): Result => {
+export const useGetPosts = (username: string): Result => {
   /**
    * Infinite query with react-query
    */
 
-  const { data, isLoading, fetchMore, canFetchMore, clear } = useInfiniteQuery(
-    'get-posts',
-    (_key, offset = 0) => http.get<ReturnGetPostsProps>(`/users/${username}/posts/${offset}`).then((res) => res.data),
+  const limit = 9;
+  const posts = queryCache.getQueryData<ReturnGetUserProps>(['get-user', username])?.user.posts;
+  const next = posts?.length === limit ? limit : undefined;
+
+  const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
+    ['get-posts', username],
+    (_key, username, offset = 0) =>
+      http.get<ReturnGetPostsProps>(`/users/${username}/posts/${offset}`).then((res) => res.data),
     {
-      initialData: [posts],
+      initialData: [{ posts, next }],
       getFetchMore: (last) => last.next,
     },
   );
-
-  /**
-   * Remove query from cache when unmount
-   */
-
-  useEffect(() => {
-    return () => clear();
-  }, [clear]);
 
   /**
    * Load more when scroll with intersection observer

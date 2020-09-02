@@ -44,6 +44,6 @@ export type ReturnGetNotificationsProps = {
 };
 
 export type ReturnGetPostsProps = {
-  posts: PostProps[];
+  posts?: PostProps[];
   next?: number;
 };

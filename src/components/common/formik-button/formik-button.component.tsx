@@ -9,14 +9,15 @@ import { StyledLottie as Lottie } from './formik-button.styles';
 /* -------------------------------------------------------------------------- */
 
 type Props = ButtonProps & {
+  isLoading?: boolean;
   children: string;
 };
 
-const FormikButton: FC<Props> = ({ children, ...otherProps }) => {
+const FormikButton: FC<Props> = ({ isLoading, children, ...otherProps }) => {
   const { isSubmitting } = useFormikContext();
 
   return (
-    <Button variant="contained" color="primary" disabled={isSubmitting} {...otherProps}>
+    <Button variant="contained" color="primary" disabled={isLoading ? isLoading : isSubmitting} {...otherProps}>
       {!isSubmitting ? children : <Lottie play loop animationData={loading} />}
     </Button>
   );

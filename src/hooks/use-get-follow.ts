@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 
 import { ReturnGetFollowProps } from 'types';
@@ -19,21 +18,13 @@ export const useGetFollow = (id: string, route: 'followers' | 'following'): Resu
    * Infinite query with react-query
    */
 
-  const { data, isLoading, fetchMore, canFetchMore, clear } = useInfiniteQuery(
-    'get-followers',
-    (_key, offset = 0) => http.get<ReturnGetFollowProps>(`/users/${id}/${offset}/${route}`).then((res) => res.data),
+  const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
+    ['get-followers', id],
+    (_key, id, offset = 0) => http.get<ReturnGetFollowProps>(`/users/${id}/${offset}/${route}`).then((res) => res.data),
     {
       getFetchMore: (last) => last.next,
     },
   );
-
-  /**
-   * Remove query from cache when unmount
-   */
-
-  useEffect(() => {
-    return () => clear();
-  }, [clear]);
 
   /**
    * Load more when scroll with intersection observer
