@@ -43,13 +43,12 @@ const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, fil
    */
 
   const [createNewPost, { isLoading }] = useMutation(
-    async (formData: FormData | undefined) => {
-      const { data } = await http.post('/post', formData, {
-        cancelToken: source.token,
-      });
-
-      return data;
-    },
+    (formData: FormData | undefined) =>
+      http
+        .post('/post', formData, {
+          cancelToken: source.token,
+        })
+        .then((res) => res.data),
     {
       onError: (err: AxiosError) => {
         toast.error(err.response?.data.error, { toastId: 'upload-error' });

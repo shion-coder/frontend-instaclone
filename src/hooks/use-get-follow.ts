@@ -21,14 +21,8 @@ export const useGetFollow = (id: string, route: 'followers' | 'following'): Resu
 
   const { data, isLoading, fetchMore, canFetchMore, clear } = useInfiniteQuery(
     'get-followers',
-    async (_key, offset = 0) => {
-      const { data } = await http.get<ReturnGetFollowProps>(`/users/${id}/${offset}/${route}`);
-
-      return data;
-    },
+    (_key, offset = 0) => http.get<ReturnGetFollowProps>(`/users/${id}/${offset}/${route}`).then((res) => res.data),
     {
-      retry: false,
-      refetchOnWindowFocus: false,
       getFetchMore: (last) => last.next,
     },
   );

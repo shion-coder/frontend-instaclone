@@ -25,17 +25,8 @@ const Dashboard: FC = () => {
    * Fetch user with username in params
    */
 
-  const { isFetching, data, error, refetch } = useQuery(
-    'get-user',
-    async () => {
-      const { data } = await http.get<ReturnGetUserProps>(`/users/${username}`);
-
-      return data;
-    },
-    {
-      retry: false,
-      refetchOnWindowFocus: false,
-    },
+  const { isFetching, data, error, refetch } = useQuery('get-user', () =>
+    http.get<ReturnGetUserProps>(`/users/${username}`).then((res) => res.data),
   );
 
   /**

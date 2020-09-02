@@ -17,17 +17,8 @@ type PramsProps = {
 const Confirm: FC = () => {
   const { id }: PramsProps = useParams();
 
-  const { isLoading, data, error } = useQuery(
-    'confirm',
-    async () => {
-      const { data } = await http.put<ReturnConfirmProps>(`/users/email/confirm/${id}`);
-
-      return data;
-    },
-    {
-      retry: false,
-      refetchOnWindowFocus: false,
-    },
+  const { isLoading, data, error } = useQuery('confirm', () =>
+    http.put<ReturnConfirmProps>(`/users/email/confirm/${id}`).then((res) => res.data),
   );
 
   if (isLoading) return <Loader />;

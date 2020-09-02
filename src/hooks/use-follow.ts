@@ -18,11 +18,7 @@ export const useFollow = (
   onUnfollow: (isFollowing: boolean) => void,
 ): Result => {
   const [followUser, { isLoading }] = useMutation(
-    async () => {
-      const { data } = await http.post<ReturnFollowProps>(`/users/${id}/follow`);
-
-      return data;
-    },
+    () => http.post<ReturnFollowProps>(`/users/${id}/follow`).then((res) => res.data),
     {
       onError: (err: AxiosError) => {
         toast.error(err.response?.data.error, { toastId: 'follow-error' });

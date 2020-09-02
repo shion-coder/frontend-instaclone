@@ -10,18 +10,7 @@ import { Container, StyledTypography as Text } from './dashboard.styles';
 /* -------------------------------------------------------------------------- */
 
 const Dashboard: FC = () => {
-  const { isLoading, data, error } = useQuery(
-    'me',
-    async () => {
-      const { data } = await http.get<ReturnMeProps>('/user/me');
-
-      return data;
-    },
-    {
-      retry: false,
-      refetchOnWindowFocus: false,
-    },
-  );
+  const { isLoading, data, error } = useQuery('me', () => http.get<ReturnMeProps>('/user/me').then((res) => res.data));
 
   if (isLoading) return <Loader />;
 

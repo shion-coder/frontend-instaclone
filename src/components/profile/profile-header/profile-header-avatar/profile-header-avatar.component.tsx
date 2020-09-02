@@ -31,11 +31,8 @@ const ProfileHeaderAvatar: FC<Props> = ({ avatar, isCurrentUser }) => {
    */
 
   const [updateAvatar, { isLoading }] = useMutation(
-    async (formData: FormData | undefined) => {
-      const { data } = await http.put<ReturnUpdateAvatarProps>('/users/avatar', formData);
-
-      return data;
-    },
+    (formData: FormData | undefined) =>
+      http.put<ReturnUpdateAvatarProps>('/users/avatar', formData).then((res) => res.data),
     {
       onError: (err: AxiosError) => {
         if (inputRef.current) {

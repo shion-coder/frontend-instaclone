@@ -21,14 +21,8 @@ export const useGetPosts = (username: string, posts: ReturnGetPostsProps): Resul
 
   const { data, isLoading, fetchMore, canFetchMore, clear } = useInfiniteQuery(
     'get-posts',
-    async (_key, offset = 0) => {
-      const { data } = await http.get<ReturnGetPostsProps>(`/users/${username}/posts/${offset}`);
-
-      return data;
-    },
+    (_key, offset = 0) => http.get<ReturnGetPostsProps>(`/users/${username}/posts/${offset}`).then((res) => res.data),
     {
-      retry: false,
-      refetchOnWindowFocus: false,
       initialData: [posts],
       getFetchMore: (last) => last.next,
     },

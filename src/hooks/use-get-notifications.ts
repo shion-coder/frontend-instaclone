@@ -24,14 +24,8 @@ export const useGetNotifications = (): Result => {
 
   const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
     'get-notifications',
-    async (_key, offset = next) => {
-      const { data } = await http.get<ReturnGetNotificationsProps>(`/notifications/${offset}`);
-
-      return data;
-    },
+    (_key, offset = next) => http.get<ReturnGetNotificationsProps>(`/notifications/${offset}`).then((res) => res.data),
     {
-      retry: false,
-      refetchOnWindowFocus: false,
       enabled: Number.isInteger(next),
       getFetchMore: (last) => last.next,
     },
