@@ -1,51 +1,38 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
-import { RootStateProps } from 'store';
 
 import { Container, Icon, Title, Text } from './empty-tagged.styles';
 
 /* -------------------------------------------------------------------------- */
 
-type ParamsProps = {
-  username: string;
-};
-
 type Props = {
+  isCurrentUser: boolean;
   fullName: string;
 };
 
-const EmptyTagged: FC<Props> = ({ fullName }) => {
-  const { username }: ParamsProps = useParams();
+const EmptyTagged: FC<Props> = ({ isCurrentUser, fullName }) => (
+  <Container>
+    {isCurrentUser ? (
+      <>
+        <Icon />
 
-  const isCurrentUser = useSelector((state: RootStateProps) => state.user.data.username) === username;
+        <Title>Photos of you</Title>
 
-  return (
-    <Container>
-      {isCurrentUser ? (
-        <>
-          <Icon />
+        <Text>When people tag you in photos, they'll appear here</Text>
 
-          <Title>Photos of you</Title>
+        <Text bold>This feature is not yet implemented</Text>
+      </>
+    ) : (
+      <>
+        <Icon />
 
-          <Text>When people tag you in photos, they'll appear here</Text>
+        <Title>No Photos</Title>
 
-          <Text bold>This feature is not yet implemented</Text>
-        </>
-      ) : (
-        <>
-          <Icon />
+        <Text>When people tag {fullName} in photos, they'll appear here</Text>
 
-          <Title>No Photos</Title>
-
-          <Text>When people tag {fullName} in photos, they'll appear here</Text>
-
-          <Text bold>This feature is not yet implemented</Text>
-        </>
-      )}
-    </Container>
-  );
-};
+        <Text bold>This feature is not yet implemented</Text>
+      </>
+    )}
+  </Container>
+);
 
 export default EmptyTagged;

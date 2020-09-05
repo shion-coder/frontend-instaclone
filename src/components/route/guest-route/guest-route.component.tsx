@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import { Route, Redirect, RouteProps as Props } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { RouteProps as Props, Route, Redirect } from 'react-router-dom';
 
-import { RootStateProps } from 'store';
+import { Path } from 'types';
+import { useUser } from 'hooks';
 
 /* -------------------------------------------------------------------------- */
 
 const GuestRoute: FC<Props> = (props) => {
-  const token = useSelector((state: RootStateProps) => state.user.token);
+  const { token } = useUser();
 
-  return token ? <Redirect to="/" /> : <Route {...props} />;
+  return token ? <Redirect to={Path.HOME} /> : <Route {...props} />;
 };
 
 export default GuestRoute;

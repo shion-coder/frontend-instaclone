@@ -9,8 +9,8 @@ export type UserProps = {
   fullName: string;
   username: string;
   email: string;
-  website: string;
   bio: string;
+  website: string;
   avatar: string;
   posts: PostProps[];
   postCount: number;
@@ -19,6 +19,7 @@ export type UserProps = {
   followerCount: number;
   following: ReturnGetUserProps[];
   followingCount: number;
+  notifications: NotificationProps[];
   isAdmin: boolean;
   confirmed: boolean;
   date: string;

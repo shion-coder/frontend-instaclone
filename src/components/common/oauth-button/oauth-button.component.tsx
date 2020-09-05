@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { Button, ButtonProps } from '@material-ui/core';
 
-import { API_URL } from 'config';
-import { oauthLogin } from 'store';
-import { useSocket, useSocketListener } from 'contexts/socket';
+import { ReturnAuthProps } from 'types';
+import { addUser } from 'store';
+import { useCustomHistory, usePopup } from 'hooks';
+import { useSocketListener } from 'contexts/socket';
 
 /* -------------------------------------------------------------------------- */
 
@@ -18,88 +18,35 @@ type Props = ButtonProps & {
 };
 
 const OauthButton: FC<Props> = ({ provider, state, children, ...otherProps }) => {
-  const io = useSocket();
-  const history = useHistory();
-  const dispatch = useDispatch();
   const popup = useRef<Window | null>(null);
-  const isMounted = useRef<boolean | null>(null);
-  const [disabled, setDisabled] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const { goHome, goPathname } = useCustomHistory(null, state?.from.pathname);
+  const { handlePopup } = usePopup(provider, popup);
 
   /**
-   * Set isMounted value to prevent update state on unmounted component
+   * Listening socket response to add new user, switch route and close popup
    */
 
-  useEffect(() => {
-    isMounted.current = true;
+  useSocketListener(provider, (data: ReturnAuthProps) => {
+    /**
+     * Save user data to user store in redux and switch route after login
+     */
 
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
+    dispatch(addUser(data));
 
-  /**
-   * Listening socket response to login, return to previous protected route and close popup
-   */
+    state ? goPathname() : goHome();
 
-  const handleOauth = (user: Record<string, unknown>) => {
-    dispatch(oauthLogin(user));
-
-    !state ? history.push('/') : history.push(state.from.pathname);
+    /**
+     * Close oauth popup
+     */
 
     popup.current?.close();
-  };
-
-  useSocketListener(provider, handleOauth);
-
-  /**
-   * Launches the popup by making a request to the server and then passes along the socket id
-   */
-
-  const openPopup = () => {
-    const width = 600;
-    const height = 600;
-    const left = window.innerWidth / 2 - width / 2;
-    const top = window.innerHeight / 2 - height / 2;
-    const url = `${API_URL}/api/auth/${provider}?socketId=${io?.id}`;
-
-    return window.open(
-      url,
-      '',
-      `toolbar=no, location=no, directories=no, status=no, menubar=no, 
-      scrollbars=no, resizable=no, copyhistory=no, width=${width}, 
-      height=${height}, top=${top}, left=${left}`,
-    );
-  };
-
-  /**
-   * Routinely checks the popup to re-enable the login button if the user closes the popup without authenticating.
-   */
-
-  const checkPopup = () => {
-    const check = setInterval(() => {
-      if (!popup.current || popup.current.closed || popup.current.closed === undefined) {
-        clearInterval(check);
-
-        isMounted.current && setDisabled(false);
-      }
-    }, 1000);
-  };
-
-  /**
-   * Kicks off the processes of opening the popup on the server and listening to the popup
-   */
-
-  const startAuth = () => {
-    if (!disabled) {
-      popup.current = openPopup();
-      checkPopup();
-
-      isMounted.current && setDisabled(true);
-    }
-  };
+  });
 
   return (
-    <Button variant="contained" color="primary" onClick={startAuth} {...otherProps}>
+    <Button variant="contained" color="primary" onClick={handlePopup} {...otherProps}>
       {children}
     </Button>
   );

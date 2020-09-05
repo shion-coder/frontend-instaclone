@@ -2,6 +2,7 @@ import React, { FC, ChangeEvent, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 
+import { Path } from 'types';
 import UpdateProfile from 'components/settings/update-profile';
 import UpdatePassword from 'components/settings/update-password';
 
@@ -17,6 +18,10 @@ const Setting: FC = () => {
   const history = useHistory();
   const { page }: ParamsProps = useParams();
 
+  /**
+   * Create material ui tab with router
+   */
+
   const tab = page === 'edit' || page === 'password' ? page : 'edit';
 
   const indexToTabName = {
@@ -31,8 +36,12 @@ const Setting: FC = () => {
 
   const [selectedTab, setSelectedTab] = useState(indexToTabName[tab]);
 
-  const handleChange = (event: ChangeEvent<Record<string, unknown>>, newValue: 0 | 1) => {
-    history.push(`/settings/${tabNameToIndex[newValue]}`);
+  /**
+   * Handle change tab
+   */
+
+  const handleChange = (_event: ChangeEvent<Record<string, unknown>>, newValue: 0 | 1) => {
+    history.push(`${Path.SETTINGS}/${tabNameToIndex[newValue]}`);
 
     setSelectedTab(newValue);
   };

@@ -1,12 +1,10 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { Formik, FormikHelpers, FormikErrors } from 'formik';
-import { toast } from 'react-toastify';
+import { Formik, FormikHelpers } from 'formik';
 import { Grid } from '@material-ui/core';
 import Account from '@material-ui/icons/AccountCircle';
 
 import { RegisterProps, Path } from 'types';
-import { Dispatch, register } from 'store';
+import { useRegister } from 'hooks';
 import { validateRegister } from 'utils';
 import Field from 'components/common/formik-field';
 
@@ -22,18 +20,17 @@ import {
 /* -------------------------------------------------------------------------- */
 
 const Register: FC = () => {
-  const { LOGIN } = Path;
-  const dispatch: Dispatch = useDispatch();
+  const { register, isLoading } = useRegister();
 
-  const handleSubmit = async (values: RegisterProps, formikHelpers: FormikHelpers<RegisterProps>) => {
-    const result = await dispatch(register(values));
+  /**
+   * Handle register
+   */
 
-    register.fulfilled.match(result)
-      ? toast.success(`Welcome ${result.payload?.user.firstName}. Please check your email for confirmation`, {
-          toastId: 'register-fulfilled',
-        })
-      : result.payload && formikHelpers.setErrors(result.payload as FormikErrors<RegisterProps>);
-  };
+  const handleSubmit = (values: RegisterProps, formik: FormikHelpers<RegisterProps>) => register({ values, formik });
+
+  /**
+   * Initial values in formik register form
+   */
 
   const initialValues: RegisterProps = {
     firstName: '',
@@ -72,12 +69,12 @@ const Register: FC = () => {
 
           <Field name="confirmPassword" type="password" fullWidth required />
 
-          <Button type="submit" fullWidth>
+          <Button type="submit" isLoading={isLoading} fullWidth>
             Sign Up
           </Button>
 
           <Grid justify="flex-end" container>
-            <Link to={LOGIN}>Already have an account? Sign In</Link>
+            <Link to={Path.LOGIN}>Already have an account? Sign In</Link>
           </Grid>
         </Form>
       </Formik>

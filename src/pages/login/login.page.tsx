@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { StaticContext } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
-import { Formik, FormikHelpers, FormikErrors } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import { Grid } from '@material-ui/core';
 import Account from '@material-ui/icons/AccountCircle';
 
 import { LoginProps, Path } from 'types';
-import { Dispatch, login } from 'store';
+import { useLogin } from 'hooks';
 import { validateLogin } from 'utils';
 import Field from 'components/common/formik-field';
 import GoogleImage from 'assets/images/google-icon.svg';
@@ -31,19 +30,18 @@ type LocationState = {
 
 type Props = RouteComponentProps<Record<string, string | undefined>, StaticContext, LocationState>;
 
-const Login: FC<Props> = ({ history, location: { state } }) => {
-  const { REGISTER, LOGIN } = Path;
-  const dispatch: Dispatch = useDispatch();
+const Login: FC<Props> = ({ location: { state } }) => {
+  const { login, isLoading } = useLogin(state);
 
-  const handleSubmit = async (values: LoginProps, formikHelpers: FormikHelpers<LoginProps>) => {
-    const result = await dispatch(login(values));
+  /**
+   * Handle login
+   */
 
-    if (login.fulfilled.match(result)) {
-      return !state ? history.push('/') : history.push(state.from.pathname);
-    }
+  const handleSubmit = (values: LoginProps, formik: FormikHelpers<LoginProps>) => login({ values, formik });
 
-    result.payload && formikHelpers.setErrors(result.payload as FormikErrors<LoginProps>);
-  };
+  /**
+   * Initial values in formik login form
+   */
 
   const initialValues: LoginProps = {
     usernameOrEmail: '',
@@ -64,7 +62,7 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
 
           <Field name="password" size="medium" type="password" fullWidth required />
 
-          <Button type="submit" size="medium" fullWidth>
+          <Button type="submit" isLoading={isLoading} fullWidth>
             Sign In
           </Button>
 
@@ -80,11 +78,11 @@ const Login: FC<Props> = ({ history, location: { state } }) => {
 
           <Grid container>
             <Grid item xs>
-              <Link to={LOGIN}>Forgot password?</Link>
+              <Link to={Path.LOGIN}>Forgot password?</Link>
             </Grid>
 
             <Grid item>
-              <Link to={REGISTER}>Don't have an account? Sign Up</Link>
+              <Link to={Path.REGISTER}>Don't have an account? Sign Up</Link>
             </Grid>
           </Grid>
         </Form>

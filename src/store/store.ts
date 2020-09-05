@@ -4,16 +4,22 @@ import storage from 'redux-persist/lib/storage';
 
 import { Environment } from 'types';
 import { userReducer } from './user';
-import { notificationsReducer } from './notifications';
 
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Root reducer
+ */
+
 const rootReducer = combineReducers({
   user: userReducer,
-  notifications: notificationsReducer,
 });
 
 export type RootStateProps = ReturnType<typeof rootReducer>;
+
+/**
+ * Persist store
+ */
 
 const persistConfig = {
   storage,
@@ -22,6 +28,10 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+/**
+ * Redux store
+ */
 
 export const store = configureStore({
   reducer: persistedReducer,

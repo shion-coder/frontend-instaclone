@@ -1,37 +1,36 @@
-import { useSelector } from 'react-redux';
 import { useInfiniteQuery } from 'react-query';
 
-import { ReturnGetNotificationsProps } from 'types';
-import { RootStateProps } from 'store';
-import { useIntersectionObserver } from 'hooks';
-import { http } from 'services';
+import { ReturnGetNotificationsProps, Query } from 'types';
+import { useUser, useIntersectionObserver } from 'hooks';
+import { requestGetNotifications } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
-type Result = {
+type ReturnProps = {
   ref: (node: HTMLDivElement) => void;
   data: ReturnGetNotificationsProps[] | undefined;
   isLoading: boolean;
   canFetchMore: boolean | undefined;
 };
 
-export const useGetNotifications = (): Result => {
-  const next = useSelector((state: RootStateProps) => state.notifications.next);
+export const useGetNotifications = (): ReturnProps => {
+  const { username, token } = useUser();
 
   /**
-   * Infinite query with react-query
+   * Infinite get notifications query
    */
 
   const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
-    'get-notifications',
-    (_key, offset = next) => http.get<ReturnGetNotificationsProps>(`/notifications/${offset}`).then((res) => res.data),
+    [Query.GET_NOTIFICATIONS, username],
+    (_key, _username, offset = 0) => requestGetNotifications(offset),
     {
       getFetchMore: (last) => last.next,
+      enabled: token,
     },
   );
 
   /**
-   * Load more when scroll with intersection observer
+   * Infinite scroll enabled when entry is visible and query can fetch more
    */
 
   const [ref, entry] = useIntersectionObserver({});

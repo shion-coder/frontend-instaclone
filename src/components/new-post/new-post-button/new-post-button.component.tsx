@@ -15,20 +15,13 @@ type Props = {
 };
 
 const NewPostButton: FC<Props> = ({ text }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLInputElement>(null);
 
-  const { handleChange, handleClose, formData, preview, error, source } = useFiles(inputRef);
+  const { handleChange, handleClose, formData, preview, error, source } = useFiles(ref);
 
   return (
     <Container htmlFor="upload-photo">
-      <Input
-        type="file"
-        accept="image/*"
-        id="upload-photo"
-        name="upload-photo"
-        onChange={handleChange}
-        ref={inputRef}
-      />
+      <Input type="file" accept="image/*" id="upload-photo" name="upload-photo" onChange={handleChange} ref={ref} />
 
       {text ? (
         <Text>Share your first photo</Text>

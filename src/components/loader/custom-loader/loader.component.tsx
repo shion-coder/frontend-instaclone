@@ -15,6 +15,10 @@ type Props = {
 const Loader: FC<Props> = ({ color, delay }) => {
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Loading with delay
+   */
+
   useEffect(() => {
     const timer = setTimeout(() => setLoading(true), LOADING_DELAY);
 

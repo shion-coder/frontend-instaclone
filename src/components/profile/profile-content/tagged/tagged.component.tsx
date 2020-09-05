@@ -12,7 +12,8 @@ type Props = {
 const Posts: FC<Props> = ({
   profile: {
     user: { fullName },
+    isCurrentUser,
   },
-}) => <EmptyTagged fullName={fullName} />;
+}) => <EmptyTagged isCurrentUser={isCurrentUser} fullName={fullName} />;
 
 export default Posts;

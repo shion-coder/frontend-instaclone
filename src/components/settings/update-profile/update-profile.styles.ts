@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Form } from 'formik';
+import { Button } from '@material-ui/core';
 
-import Button from 'components/common/formik-button';
+import FormikButton from 'components/common/formik-button';
 
 /* -------------------------------------------------------------------------- */
 
@@ -26,7 +27,7 @@ export const StyledForm = styled(Form)`
   }
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(FormikButton)`
   margin: ${({ theme }) => theme.material.spacing(2, 0, 2)};
 `;
 

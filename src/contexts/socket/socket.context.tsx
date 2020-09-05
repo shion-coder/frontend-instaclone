@@ -1,23 +1,23 @@
-import React, { FC, createContext, useEffect, useState, useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, createContext, useState, useContext, useEffect } from 'react';
+import { queryCache } from 'react-query';
 import socketIo from 'socket.io-client';
 
+import { SocketEvent, Query } from 'types';
 import { API_URL } from 'config';
-import { NotificationProps, SocketEvent } from 'types';
-import { RootStateProps, addNotification } from 'store';
+import { useUser } from 'hooks';
 
 /* -------------------------------------------------------------------------- */
-
-/**
- * Context
- */
 
 const SocketContext = createContext<SocketIOClient.Socket | null>(null);
 
 export const SocketProvider: FC = ({ children }) => {
   const [io, setIo] = useState<SocketIOClient.Socket | null>(null);
-  const token = useSelector((state: RootStateProps) => state.user.token);
-  const dispatch = useDispatch();
+
+  const { token } = useUser();
+
+  /**
+   * Set socket and listen for new notification event
+   */
 
   useEffect(() => {
     let socket: SocketIOClient.Socket;
@@ -29,8 +29,8 @@ export const SocketProvider: FC = ({ children }) => {
         query: { token },
       });
 
-      socket.on(SocketEvent.NEW_NOTIFICATION, (data: NotificationProps) => {
-        dispatch(addNotification(data));
+      socket.on(SocketEvent.NEW_NOTIFICATION, () => {
+        queryCache.invalidateQueries(Query.GET_NOTIFICATIONS);
       });
     }
 
@@ -39,7 +39,7 @@ export const SocketProvider: FC = ({ children }) => {
     return () => {
       socket.disconnect();
     };
-  }, [token, dispatch]);
+  }, [token]);
 
   return <SocketContext.Provider value={io}>{children}</SocketContext.Provider>;
 };

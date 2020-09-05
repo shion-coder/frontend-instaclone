@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { useQuery } from 'react-query';
 
-import { ReturnMeProps } from 'types';
-import { http } from 'services';
+import { Query } from 'types';
+import { requestGetMe } from 'services';
+import { errorMessage } from 'utils';
 import Loader from 'components/loader/lottie-loader';
 
 import { Container, StyledTypography as Text } from './dashboard.styles';
@@ -10,13 +11,13 @@ import { Container, StyledTypography as Text } from './dashboard.styles';
 /* -------------------------------------------------------------------------- */
 
 const Dashboard: FC = () => {
-  const { isLoading, data, error } = useQuery('me', () => http.get<ReturnMeProps>('/user/me').then((res) => res.data));
+  const { isLoading, data, error } = useQuery(Query.ME, requestGetMe);
 
   if (isLoading) return <Loader />;
 
   return (
     <Container>
-      <Text>{error ? 'An error has occurred' : data?.user.firstName}</Text>
+      <Text>{error ? errorMessage.wrong : data?.user.firstName}</Text>
     </Container>
   );
 };

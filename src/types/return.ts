@@ -11,18 +11,6 @@ export type ReturnConfirmProps = {
   message: string;
 };
 
-export type ReturnUpdateAvatarProps = {
-  avatar: string;
-};
-
-export type ReturnUpdateProfileProps = {
-  user: UserProps;
-};
-
-export type ReturnFollowProps = {
-  isFollowing: boolean;
-};
-
 export type ReturnMeProps = {
   user: UserProps;
 };
@@ -30,6 +18,7 @@ export type ReturnMeProps = {
 export type ReturnGetUserProps = {
   user: UserProps;
   isFollowing: boolean;
+  isCurrentUser: boolean;
 };
 
 export type ReturnGetFollowProps = {
@@ -46,4 +35,28 @@ export type ReturnGetNotificationsProps = {
 export type ReturnGetPostsProps = {
   posts?: PostProps[];
   next?: number;
+};
+
+export type ReturnCreatePost = {
+  post: PostProps;
+};
+
+export type ReturnUpdateAvatarProps = {
+  avatar: string;
+};
+
+export type ReturnUpdateProfileProps = {
+  user: UserProps;
+};
+
+export type ReturnReadNotificationsProps = {
+  message: string;
+};
+
+export type ReturnResendEmailProps = {
+  message: string;
+};
+
+export type ReturnFollowProps = {
+  isFollowing: boolean;
 };

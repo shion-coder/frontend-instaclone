@@ -13,10 +13,10 @@ type Props = {
   explorePath: boolean;
   profilePath: boolean;
   goExplore: () => void;
-  goProfile: () => void;
+  goUser: () => void;
 };
 
-const Auth: FC<Props> = ({ explorePath, profilePath, goExplore, goProfile }) => (
+const Auth: FC<Props> = ({ explorePath, profilePath, goExplore, goUser }) => (
   <Container>
     <NewPost />
 
@@ -26,7 +26,7 @@ const Auth: FC<Props> = ({ explorePath, profilePath, goExplore, goProfile }) => 
 
     <Notifications />
 
-    <Profile color={profilePath ? 'secondary' : 'primary'} size="small" onClick={goProfile}>
+    <Profile color={profilePath ? 'secondary' : 'primary'} size="small" onClick={goUser}>
       <AccountCircleIcon />
     </Profile>
   </Container>

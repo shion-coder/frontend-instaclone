@@ -8,11 +8,11 @@ import { StyledAvatar } from './avatar.styles';
 type Props = {
   width?: string;
   height?: string;
-  cursor?: string;
+  user?: number;
 } & AvatarProps;
 
-const Avatar: FC<Props> = ({ width, height, cursor, ...otherProps }) => (
-  <StyledAvatar width={width} height={height} cursor={cursor} {...otherProps} />
+const Avatar: FC<Props> = ({ width, height, user, ...otherProps }) => (
+  <StyledAvatar width={width} height={height} user={user} {...otherProps} />
 );
 
 export default Avatar;

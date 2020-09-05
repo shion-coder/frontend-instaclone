@@ -4,14 +4,18 @@ import { Container, Span } from './footer.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const Footer: FC = () => (
-  <Container>
-    <Span>&copy; {new Date().getFullYear()}</Span>
+const Footer: FC = () => {
+  const year = new Date().getFullYear();
 
-    <Span>|</Span>
+  return (
+    <Container>
+      <Span>&copy; {year}</Span>
 
-    <Span>Shion</Span>
-  </Container>
-);
+      <Span>|</Span>
+
+      <Span>Shion</Span>
+    </Container>
+  );
+};
 
 export default Footer;

@@ -1,41 +1,104 @@
-import { useMutation } from 'react-query';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { useMutation, queryCache } from 'react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
-import { ReturnFollowProps } from 'types';
-import { http } from 'services';
+import { ReturnGetUserProps, Query, Toast } from 'types';
+import { requestFollow } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
-type Result = {
+type ReturnProps = {
   handleFollow: () => void;
   isLoading: boolean;
+  userToFollow: ReturnGetUserProps;
 };
 
 export const useFollow = (
-  id: string,
-  onFollow: (isFollowing: boolean) => void,
-  onUnfollow: (isFollowing: boolean) => void,
-): Result => {
-  const [followUser, { isLoading }] = useMutation(
-    () => http.post<ReturnFollowProps>(`/users/${id}/follow`).then((res) => res.data),
-    {
-      onError: (err: AxiosError) => {
-        toast.error(err.response?.data.error, { toastId: 'follow-error' });
-      },
-      onSuccess: ({ isFollowing }) => {
-        if (isFollowing) {
-          onFollow(isFollowing);
-        } else {
-          onUnfollow(isFollowing);
-        }
-      },
+  userToFollow: ReturnGetUserProps,
+  userProfile: ReturnGetUserProps,
+  setUserProfile: Dispatch<SetStateAction<ReturnGetUserProps>>,
+  route?: 'followers' | 'following',
+): ReturnProps => {
+  const {
+    user: { username },
+  } = userToFollow;
+  const { isCurrentUser } = userProfile;
+
+  const [newUserToFollow, setNewUserToFollow] = useState(userToFollow);
+
+  /**
+   * Get follow function and handle it on error or on success
+   */
+
+  const [followUser, { isLoading }] = useMutation(() => requestFollow(username), {
+    onError: (err: AxiosError) => {
+      toast.error(err.response?.data.error, { toastId: Toast.FOLLOW_ERROR });
     },
-  );
+    onSuccess: (data) => {
+      /**
+       * If use follow button in profile page not in followers or following modal, update followerCount number and isFollowing state
+       */
+
+      if (!route) {
+        data.isFollowing
+          ? setUserProfile((previous) => ({
+              ...previous,
+              user: { ...previous.user, followerCount: previous.user.followerCount + 1 },
+              isFollowing: data.isFollowing,
+            }))
+          : setUserProfile((previous) => ({
+              ...previous,
+              user: { ...previous.user, followerCount: previous.user.followerCount - 1 },
+              isFollowing: data.isFollowing,
+            }));
+      } else {
+        /**
+         * Use follow button in follower modal or following modal, update new isFollowing of user to follow
+         */
+
+        setNewUserToFollow((previous) => ({
+          ...previous,
+          isFollowing: data.isFollowing,
+        }));
+
+        /**
+         * If use follow button in follower modal or following modal in current user profile page update following count and renew get follow except following,
+         * else update all get followers anf following
+         */
+
+        if (isCurrentUser) {
+          data.isFollowing
+            ? setUserProfile((previous) => ({
+                ...previous,
+                user: { ...previous.user, followingCount: previous.user.followingCount + 1 },
+              }))
+            : setUserProfile((previous) => ({
+                ...previous,
+                user: { ...previous.user, followingCount: previous.user.followingCount - 1 },
+              }));
+
+          route === 'followers' && queryCache.invalidateQueries([`get-${route}`, userProfile.user.username]);
+        } else {
+          queryCache.invalidateQueries([`get-${route}`, userProfile.user.username]);
+        }
+      }
+
+      /**
+       * Renew query cache of get user profile later
+       */
+
+      return queryCache.invalidateQueries([Query.GET_USER, userProfile.user.username]);
+    },
+  });
+
+  /**
+   * Handle follow / unfollow user
+   */
 
   const handleFollow = () => {
     followUser();
   };
 
-  return { handleFollow, isLoading };
+  return { handleFollow, isLoading, userToFollow: newUserToFollow };
 };

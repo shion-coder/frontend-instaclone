@@ -1,39 +1,33 @@
-import { useInfiniteQuery, queryCache } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 
-import { ReturnGetPostsProps, ReturnGetUserProps } from 'types';
+import { ReturnGetPostsProps, Query } from 'types';
 import { useIntersectionObserver } from 'hooks';
-import { http } from 'services';
+import { requestGetPosts } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
-type Result = {
+type ReturnProps = {
   ref: (node: HTMLDivElement) => void;
   data: ReturnGetPostsProps[] | undefined;
   isLoading: boolean;
   canFetchMore: boolean | undefined;
 };
 
-export const useGetPosts = (username: string): Result => {
+export const useGetPosts = (username: string): ReturnProps => {
   /**
-   * Infinite query with react-query
+   * Infinite get posts query
    */
 
-  const limit = 9;
-  const posts = queryCache.getQueryData<ReturnGetUserProps>(['get-user', username])?.user.posts;
-  const next = posts?.length === limit ? limit : undefined;
-
   const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
-    ['get-posts', username],
-    (_key, username, offset = 0) =>
-      http.get<ReturnGetPostsProps>(`/users/${username}/posts/${offset}`).then((res) => res.data),
+    [Query.GET_POSTS, username],
+    (_key, username: string, offset = 0) => requestGetPosts(username, offset),
     {
-      initialData: [{ posts, next }],
       getFetchMore: (last) => last.next,
     },
   );
 
   /**
-   * Load more when scroll with intersection observer
+   * Infinite scroll enabled when entry is visible and query can fetch more
    */
 
   const [ref, entry] = useIntersectionObserver({});

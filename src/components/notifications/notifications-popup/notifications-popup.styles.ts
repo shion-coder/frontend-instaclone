@@ -11,7 +11,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.light};
   box-shadow: 0 0 30px 0px ${({ theme }) => theme.colors.grey};
   border-radius: 8px;
-  z-index: 1;
+  z-index: 9;
 
   :before {
     content: '';

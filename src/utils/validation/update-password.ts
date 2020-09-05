@@ -1,12 +1,14 @@
 import * as Yup from 'yup';
 
+import { formMessage } from 'utils';
+
 /* -------------------------------------------------------------------------- */
 
 export const validateUpdatePassword = Yup.object({
-  password: Yup.string().required('Current password is required'),
-  newPassword: Yup.string().min(6, 'Password must be at least 6 characters').required('New password is required'),
+  password: Yup.string().required(formMessage.password.required),
+  newPassword: Yup.string().min(6, formMessage.newPassword.minlength).required(formMessage.newPassword.required),
   confirmNewPassword: Yup.string()
-    .oneOf([Yup.ref('newPassword')], 'Passwords must match')
-    .min(6, 'Password must be at least 6 characters')
-    .required('Confirm new password is required'),
+    .oneOf([Yup.ref('newPassword')], formMessage.confirmNewPassword.notMatch)
+    .min(6, formMessage.confirmNewPassword.minlength)
+    .required(formMessage.confirmNewPassword.required),
 });

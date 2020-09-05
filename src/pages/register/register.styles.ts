@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Form } from 'formik';
 import { Link } from 'react-router-dom';
+import { Form } from 'formik';
 import { Container, Avatar, Typography } from '@material-ui/core';
 
 import Button from 'components/common/formik-button';

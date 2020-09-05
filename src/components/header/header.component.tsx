@@ -1,57 +1,43 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Path } from 'types';
-import { RootStateProps } from 'store';
-import Guest from './guest';
+import { useUser, useCustomHistory } from 'hooks';
 import Auth from './auth';
+import Guest from './guest';
 
 import { Wrapper, Container, StyledHomeIcon as HomeIcon } from './header.styles';
 
 /* -------------------------------------------------------------------------- */
 
 const Header: FC = () => {
-  const history = useHistory();
   const { pathname } = useLocation();
 
-  const token = useSelector((state: RootStateProps) => state.user.token);
-  const username = useSelector((state: RootStateProps) => state.user.data.username);
-
-  const { HOME, REGISTER, LOGIN, EXPLORE } = Path;
+  const { username, token } = useUser();
+  const { goHome, goRegister, goLogin, goExplore, goUser } = useCustomHistory(username);
 
   /**
    * Check current pathname to switch icon color when in correct pathname
    */
 
-  const registerPath = pathname === REGISTER;
-  const loginPath = pathname === LOGIN;
-  const explorePath = pathname === EXPLORE;
+  const registerPath = pathname === Path.REGISTER;
+  const loginPath = pathname === Path.LOGIN;
+  const explorePath = pathname === Path.EXPLORE;
   const profilePath =
     pathname === `/${username}` ||
     pathname === `/${username}/posts` ||
     pathname === `/${username}/saved` ||
     pathname === `/${username}/tagged`;
 
-  /**
-   * Go to route
-   */
-
-  const goHome = () => history.push(HOME);
-  const goRegister = () => history.push(REGISTER);
-  const goLogin = () => history.push(LOGIN);
-  const goExplore = () => history.push(EXPLORE);
-  const goProfile = () => history.push(`/${username}`);
-
   return (
     <Wrapper>
       <Container>
-        <HomeIcon color={pathname === HOME ? 'secondary' : 'primary'} onClick={goHome} />
+        <HomeIcon color={pathname === Path.HOME ? 'secondary' : 'primary'} onClick={goHome} />
 
-        {!token ? (
-          <Guest registerPath={registerPath} loginPath={loginPath} goRegister={goRegister} goLogin={goLogin} />
+        {token ? (
+          <Auth explorePath={explorePath} profilePath={profilePath} goExplore={goExplore} goUser={goUser} />
         ) : (
-          <Auth explorePath={explorePath} profilePath={profilePath} goExplore={goExplore} goProfile={goProfile} />
+          <Guest registerPath={registerPath} loginPath={loginPath} goRegister={goRegister} goLogin={goLogin} />
         )}
       </Container>
     </Wrapper>

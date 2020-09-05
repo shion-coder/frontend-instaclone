@@ -1,15 +1,17 @@
 import * as Yup from 'yup';
 
+import { formMessage } from 'utils';
+
 /* -------------------------------------------------------------------------- */
 
 export const validateRegister = Yup.object({
-  firstName: Yup.string().max(30, 'First Name must be less than 30 characters').required('First Name is required'),
-  lastName: Yup.string().max(30, 'Last Name must be less than 30 characters'),
-  username: Yup.string().max(30, 'Username must be less than 30 characters').required('Username is required'),
-  email: Yup.string().email('Invalid email format').required('Email is required'),
-  password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+  firstName: Yup.string().max(30, formMessage.firstName.maxlength).required(formMessage.firstName.required),
+  lastName: Yup.string().max(30, formMessage.lastName.maxlength),
+  username: Yup.string().max(30, formMessage.username.maxlength).required(formMessage.username.required),
+  email: Yup.string().email(formMessage.email.invalid).required(formMessage.email.required),
+  password: Yup.string().min(6, formMessage.password.minlength).required(formMessage.password.required),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .min(6, 'Password must be at least 6 characters')
-    .required('Confirm password is required'),
+    .oneOf([Yup.ref('password')], formMessage.confirmPassword.notMatch)
+    .min(6, formMessage.confirmPassword.minlength)
+    .required(formMessage.confirmPassword.required),
 });

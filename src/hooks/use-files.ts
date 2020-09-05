@@ -1,10 +1,14 @@
-import { ChangeEvent, ReactText, useState, RefObject } from 'react';
+import { RefObject, ChangeEvent, ReactText, useState } from 'react';
 import axios, { CancelTokenSource } from 'axios';
 import { toast } from 'react-toastify';
 
+import { Toast } from 'types';
+import { MAX_FILE_UPLOAD } from 'config';
+import { toastMessage, imageTypes } from 'utils';
+
 /* -------------------------------------------------------------------------- */
 
-type Result = {
+type ReturnProps = {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => ReactText | void;
   handleClose: () => void;
   formData: FormData | undefined;
@@ -13,21 +17,23 @@ type Result = {
   source: CancelTokenSource;
 };
 
-export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData) => void): Result => {
+export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData) => void): ReturnProps => {
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState<FormData | undefined>(undefined);
   const [preview, setPreview] = useState<string | undefined>(undefined);
-  const [error, setError] = useState(false);
 
   const source = axios.CancelToken.source();
 
   /**
-   * Handle uploading multiple files but only allow one file in here
+   * Handle uploading
    */
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): ReactText | void => {
-    setError(false);
+  const handleChange = ({ target: { files } }: ChangeEvent<HTMLInputElement>): ReactText | void => {
+    /**
+     * Reset error to false each time input change
+     */
 
-    const { files } = e.target;
+    setError(false);
 
     if (files) {
       const fileArray = Array.from(files);
@@ -39,40 +45,38 @@ export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData
       if (fileArray.length > 1) {
         setError(true);
 
-        return toast.error('Only one image can be uploaded at a time', { toastId: 'upload-error' });
+        return toast.error(toastMessage.maxImages, { toastId: Toast.UPLOAD_ERROR });
       }
 
       const data = new FormData();
-
-      const types = ['image/png', 'image/jpeg', 'image/gif'];
 
       fileArray.forEach((file) => {
         /**
          * Catching wrong file types on the client
          */
 
-        if (types.every((type) => file.type !== type)) {
+        if (imageTypes.every((type) => file.type !== type)) {
           setError(true);
 
           if (ref?.current) {
             ref.current.value = '';
           }
 
-          return toast.error('File type is not supported for upload', { toastId: 'upload-error' });
+          return toast.error(toastMessage.fileType, { toastId: Toast.UPLOAD_ERROR });
         }
 
         /**
          * Handle maximum size of file to upload
          */
 
-        if (file.size > 2000000) {
+        if (file.size > MAX_FILE_UPLOAD) {
           setError(true);
 
           if (ref?.current) {
             ref.current.value = '';
           }
 
-          return toast.error('File is too large, please pick a smaller file', { toastId: 'upload-error' });
+          return toast.error(toastMessage.fileSize, { toastId: Toast.UPLOAD_ERROR });
         }
 
         data.append('image', file);
@@ -93,13 +97,13 @@ export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData
   };
 
   const handleClose = (): void => {
+    /**
+     * Cancel axios, remove form data and resetting the input value so you are able to use the same file twice
+     */
+
     source.cancel();
 
     setFormData(undefined);
-
-    /**
-     * Resetting the input value so you are able to use the same file twice
-     */
 
     if (ref?.current) {
       ref.current.value = '';

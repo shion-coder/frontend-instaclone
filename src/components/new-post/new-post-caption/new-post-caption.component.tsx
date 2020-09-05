@@ -1,13 +1,11 @@
 import React, { FC, Dispatch, SetStateAction, ChangeEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { AxiosError, CancelTokenSource } from 'axios';
 import { toast } from 'react-toastify';
 
-import { PostModal, Path } from 'types';
-import { RootStateProps } from 'store';
-import { http } from 'services';
+import { PostModal, Toast } from 'types';
+import { useUser, useCustomHistory } from 'hooks';
+import { requestCreatePost } from 'services';
 import Loader from 'components/loader/layer-loader';
 
 import {
@@ -34,32 +32,32 @@ type Props = {
 };
 
 const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, filter, setActiveModal }) => {
-  const avatar = useSelector((state: RootStateProps) => state.user.data.avatar);
   const [caption, setCaption] = useState('');
-  const history = useHistory();
+
+  const { avatar } = useUser();
+  const { goHome } = useCustomHistory();
 
   /**
-   * Request post image data with filter and caption
+   * Create new post and handle it on error or on success
    */
 
   const [createNewPost, { isLoading }] = useMutation(
-    (formData: FormData | undefined) =>
-      http
-        .post('/post', formData, {
-          cancelToken: source.token,
-        })
-        .then((res) => res.data),
+    (formData: FormData | undefined) => requestCreatePost(formData, source),
     {
       onError: (err: AxiosError) => {
-        toast.error(err.response?.data.error, { toastId: 'upload-error' });
+        toast.error(err.response?.data.error, { toastId: Toast.UPLOAD_ERROR });
       },
       onSuccess: () => {
         handleClose();
 
-        history.push(Path.HOME);
+        goHome();
       },
     },
   );
+
+  /**
+   * Handle back to filter modal, change caption and submit post
+   */
 
   const handleBack = () => setActiveModal(PostModal.Filter);
 

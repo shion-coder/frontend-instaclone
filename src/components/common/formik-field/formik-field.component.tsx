@@ -15,9 +15,17 @@ type FormikProps = {
 };
 
 const FormikField: FC<Props> = ({ name, ...otherProps }) => {
-  const { values, setFieldValue, touched, setFieldTouched, errors, isSubmitting } = useFormikContext<FormikProps>();
+  /**
+   * Change name from camel to capitalize to display as label
+   */
 
   const label = camelToTitle(name);
+
+  /**
+   * Set formik function in to field
+   */
+
+  const { values, setFieldValue, touched, setFieldTouched, errors, isSubmitting } = useFormikContext<FormikProps>();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setFieldValue(name, e.target.value);
 

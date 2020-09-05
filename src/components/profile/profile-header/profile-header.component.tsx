@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import { ReturnGetUserProps } from 'types';
-import { RootStateProps } from 'store';
 import Avatar from './profile-header-avatar';
 import Info from './profile-header-info';
 
@@ -14,20 +12,12 @@ type Props = {
   profile: ReturnGetUserProps;
 };
 
-const ProfileHeader: FC<Props> = ({ profile }) => {
-  const {
-    user: { avatar, username },
-  } = profile;
+const ProfileHeader: FC<Props> = ({ profile }) => (
+  <Container>
+    <Avatar profile={profile} />
 
-  const isCurrentUser = useSelector((state: RootStateProps) => state.user.data.username) === username;
-
-  return (
-    <Container>
-      <Avatar avatar={avatar} isCurrentUser={isCurrentUser} />
-
-      <Info isCurrentUser={isCurrentUser} profile={profile} />
-    </Container>
-  );
-};
+    <Info profile={profile} />
+  </Container>
+);
 
 export default ProfileHeader;

@@ -14,11 +14,17 @@ type Props = ButtonProps & {
 };
 
 const FormikButton: FC<Props> = ({ isLoading, children, ...otherProps }) => {
+  /**
+   * Get isSubmitting values from useFormikContext to disable button when submit or loading
+   */
+
   const { isSubmitting } = useFormikContext();
 
+  const sending = isLoading ? isLoading : isSubmitting;
+
   return (
-    <Button variant="contained" color="primary" disabled={isLoading ? isLoading : isSubmitting} {...otherProps}>
-      {!isSubmitting ? children : <Lottie play loop animationData={loading} />}
+    <Button variant="contained" color="primary" disabled={sending} {...otherProps}>
+      {!sending ? children : <Lottie play loop animationData={loading} />}
     </Button>
   );
 };

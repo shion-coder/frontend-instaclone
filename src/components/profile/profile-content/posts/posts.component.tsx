@@ -17,25 +17,34 @@ type Props = {
 const Posts: FC<Props> = ({
   profile: {
     user: { fullName, username },
+    isCurrentUser,
   },
 }) => {
   const { ref, data, isLoading, canFetchMore } = useGetPosts(username);
 
-  const renderPosts = () =>
-    isLoading ? (
-      <Loading />
-    ) : (
-      data &&
-      data.map((page, i) => (
+  /**
+   * Render posts
+   */
+
+  const renderPosts = () => {
+    if (isLoading) {
+      return <Loading />;
+    }
+
+    if (data) {
+      if (data[0].posts?.length === 0) {
+        return <EmptyPost isCurrentUser={isCurrentUser} fullName={fullName} />;
+      }
+
+      return data.map((page, i) => (
         <React.Fragment key={i}>
           {page.posts && page.posts.map((post) => <Post key={post._id} post={post} />)}
         </React.Fragment>
-      ))
-    );
+      ));
+    }
+  };
 
-  return data && data[0].posts?.length === 0 ? (
-    <EmptyPost fullName={fullName} />
-  ) : (
+  return (
     <>
       <Container>{renderPosts()}</Container>
 

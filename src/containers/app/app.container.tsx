@@ -1,9 +1,7 @@
-import React, { FC, Suspense, lazy, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { Path } from 'types';
-import { RootStateProps, fetchNotifications } from 'store';
 import Header from 'components/header';
 import Footer from 'components/footer';
 import Loader from 'components/loader/lottie-loader';
@@ -13,8 +11,6 @@ import ProtectedRoute from 'components/route/protected-route';
 import { Container, Body } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
-
-const { HOME, REGISTER, LOGIN, CONFIRM, EXPLORE, PROFILE, SETTINGS, TEST } = Path;
 
 /**
  * Lazy loading
@@ -64,40 +60,31 @@ const Settings = lazy(() =>
 
 const Test = lazy(() => import('pages/test'));
 
-const App: FC = () => {
-  const dispatch = useDispatch();
-  const token = useSelector((state: RootStateProps) => state.user.token);
+const App: FC = () => (
+  <Container>
+    <Header />
 
-  useEffect(() => {
-    token && dispatch(fetchNotifications());
-  }, [token, dispatch]);
+    <Body>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route exact path={Path.HOME} component={Home} />
+          <Route exact path={Path.CONFIRM} component={Confirm} />
+          <Route exact path={Path.TEST} component={Test} />
 
-  return (
-    <Container>
-      <Header />
+          <GuestRoute exact path={Path.REGISTER} component={Register} />
+          <GuestRoute exact path={Path.LOGIN} component={Login} />
 
-      <Body>
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            <Route exact path={HOME} component={Home} />
-            <Route exact path={CONFIRM} component={Confirm} />
-            <Route exact path={TEST} component={Test} />
+          <ProtectedRoute path={Path.SETTINGS} component={Settings} />
+          <ProtectedRoute exact path={Path.EXPLORE} component={Explore} />
+          <ProtectedRoute exact path={Path.PROFILE} component={Profile} />
 
-            <GuestRoute exact path={REGISTER} component={Register} />
-            <GuestRoute exact path={LOGIN} component={Login} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </Suspense>
+    </Body>
 
-            <ProtectedRoute path={SETTINGS} component={Settings} />
-            <ProtectedRoute exact path={EXPLORE} component={Explore} />
-            <ProtectedRoute exact path={PROFILE} component={Profile} />
-
-            <Redirect from="*" to="/" />
-          </Switch>
-        </Suspense>
-      </Body>
-
-      <Footer />
-    </Container>
-  );
-};
+    <Footer />
+  </Container>
+);
 
 export default App;

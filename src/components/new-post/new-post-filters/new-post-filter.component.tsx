@@ -18,6 +18,10 @@ type Props = {
 const NewPostFilter: FC<Props> = ({ preview, handleClose, setFilter, setActiveModal }) => {
   const [selectedFilter, setSelectedFilter] = useState(filters[0]);
 
+  /**
+   * Handle select filter and submit it then switch to caption modal
+   */
+
   const handleSelected = (name: string, filter: string) => setSelectedFilter({ name, filter });
 
   const handleSubmit = () => {

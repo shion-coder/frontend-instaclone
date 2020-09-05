@@ -1,12 +1,10 @@
 import React, { FC, ChangeEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import AppsIcon from '@material-ui/icons/Apps';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 import { ReturnGetUserProps } from 'types';
-import { RootStateProps } from 'store';
 import Posts from './posts';
 import Saved from './saved';
 import Tagged from './tagged';
@@ -28,7 +26,9 @@ const ProfileContent: FC<Props> = ({ profile }) => {
   const history = useHistory();
   const { username, page }: ParamsProps = useParams();
 
-  const isCurrentUser = useSelector((state: RootStateProps) => state.user.data.username) === username;
+  /**
+   * Create material ui tab with router
+   */
 
   const tab = page === 'posts' || page === 'saved' || page === 'tagged' ? page : 'posts';
 
@@ -44,9 +44,13 @@ const ProfileContent: FC<Props> = ({ profile }) => {
     2: 'tagged',
   };
 
+  /**
+   * Handle change tab
+   */
+
   const [selectedTab, setSelectedTab] = useState(indexToTabName[tab]);
 
-  const handleChange = (event: ChangeEvent<Record<string, unknown>>, newValue: 0 | 1) => {
+  const handleChange = (_event: ChangeEvent<Record<string, unknown>>, newValue: 0 | 1) => {
     history.push(`/${username}/${tabNameToIndex[newValue]}`);
 
     setSelectedTab(newValue);
@@ -58,7 +62,7 @@ const ProfileContent: FC<Props> = ({ profile }) => {
         <Tabs value={selectedTab} indicatorColor="primary" textColor="primary" centered onChange={handleChange}>
           <Tab icon={<AppsIcon />} label="Posts" />
 
-          <Tab icon={<BookmarkIcon />} label="Saved" display={isCurrentUser ? 1 : 0} />
+          <Tab icon={<BookmarkIcon />} label="Saved" display={profile.isCurrentUser ? 1 : 0} />
 
           <Tab icon={<AccountBoxIcon />} label="Tagged" />
         </Tabs>

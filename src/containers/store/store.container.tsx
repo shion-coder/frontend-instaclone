@@ -7,6 +7,10 @@ import { store, persistor } from 'store';
 
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Global config for react-query
+ */
+
 const queryConfig = {
   queries: {
     retry: false,

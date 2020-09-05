@@ -1,9 +1,7 @@
 import React, { FC, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
-import { RootStateProps, readNotification, clearUnreadNotification } from 'store';
-import { useGetNotifications } from 'hooks';
-import { http } from 'services';
+import { useGetNotifications, useReadNotifications } from 'hooks';
+import { NotificationsPopupLoading } from './notifications-popup.loading';
 import EmptyNotification from './empty-notification';
 import Notification, { NotificationLoading } from './notification';
 
@@ -16,84 +14,56 @@ type Props = {
 };
 
 const NotificationsPopup: FC<Props> = ({ handleClose }) => {
-  const notifications = useSelector((state: RootStateProps) => state.notifications.data);
-  const length = notifications.length;
-  const dispatch = useDispatch();
+  const { readNotifications } = useReadNotifications();
+  const { ref, data, isLoading, canFetchMore } = useGetNotifications();
 
   /**
-   * Read unread notifications
+   * Request read notifications when unmount
    */
 
   useEffect(() => {
-    dispatch(readNotification());
-
-    http.put('/notifications');
-
     return () => {
-      dispatch(clearUnreadNotification());
+      readNotifications();
     };
-  }, [dispatch]);
+  }, [readNotifications]);
 
   /**
-   * Handle get more notifications
+   * Render notifications
    */
 
-  const { ref, data, canFetchMore } = useGetNotifications();
+  const renderNotifications = () => {
+    if (isLoading) {
+      return <NotificationsPopupLoading />;
+    }
 
-  /**
-   * Render notifications already loaded in store redux
-   */
+    if (data) {
+      if (data[0].notifications.length === 0) {
+        return <EmptyNotification />;
+      }
 
-  const renderLoadedNotifications = () =>
-    length === 0 ? (
-      <EmptyNotification />
-    ) : (
-      notifications.map((notification) => {
-        let text = '';
+      return data.map((page, i) => (
+        <React.Fragment key={i}>
+          {page.notifications &&
+            page.notifications.map((notification) => {
+              let text = '';
 
-        if (notification.notificationType === 'follow') {
-          text = 'started following you';
-        }
+              if (notification.notificationType === 'follow') {
+                text = 'started following you';
+              }
 
-        return (
-          <Notification key={notification._id} notification={notification} text={text} handleClose={handleClose} />
-        );
-      })
-    );
-
-  /**
-   * Render more notifications when scroll
-   */
-
-  const renderMoreNotifications = () =>
-    data &&
-    data.map((page, i) => (
-      <React.Fragment key={i}>
-        {page.notifications &&
-          page.notifications.map((notification) => {
-            let text = '';
-
-            if (notification.notificationType === 'follow') {
-              text = 'started following you';
-            }
-
-            return (
-              <Notification key={notification._id} notification={notification} text={text} handleClose={handleClose} />
-            );
-          })}
-      </React.Fragment>
-    ));
-
-  /**
-   * Render notification skeleton at bottom of notification list when scroll to load more
-   */
-
-  const renderLoadMore = () =>
-    canFetchMore && (
-      <LoadMore ref={ref}>
-        <NotificationLoading />
-      </LoadMore>
-    );
+              return (
+                <Notification
+                  key={notification._id}
+                  notification={notification}
+                  text={text}
+                  handleClose={handleClose}
+                />
+              );
+            })}
+        </React.Fragment>
+      ));
+    }
+  };
 
   return (
     <Container>
@@ -104,11 +74,13 @@ const NotificationsPopup: FC<Props> = ({ handleClose }) => {
       </Title>
 
       <Content>
-        {renderLoadedNotifications()}
+        {renderNotifications()}
 
-        {renderMoreNotifications()}
-
-        {renderLoadMore()}
+        {canFetchMore && (
+          <LoadMore ref={ref}>
+            <NotificationLoading />
+          </LoadMore>
+        )}
       </Content>
     </Container>
   );
