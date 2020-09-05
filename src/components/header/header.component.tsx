@@ -30,7 +30,7 @@ const Header: FC = () => {
     pathname === `/${username}/tagged`;
 
   return (
-    <Wrapper>
+    <Wrapper position="static">
       <Container>
         <HomeIcon color={pathname === Path.HOME ? 'secondary' : 'primary'} onClick={goHome} />
 
