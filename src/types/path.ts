@@ -3,9 +3,10 @@ export enum Path {
   REGISTER = '/register',
   LOGIN = '/login',
   CONFIRM = '/confirm/:id',
+  POST = '/post/:id',
   EXPLORE = '/explore',
-  PROFILE = '/:username/:page?',
   SETTINGS = '/settings',
   SETTING_EDIT = '/settings/edit',
+  PROFILE = '/:username/:page?',
   TEST = '/test',
 }

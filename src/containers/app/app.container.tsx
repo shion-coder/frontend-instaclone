@@ -16,47 +16,21 @@ import { Container, Body } from './app.styles';
  * Lazy loading
  */
 
-const Home = lazy(() =>
-  Promise.all([import('pages/home'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
+const Home = lazy(() => import('pages/home'));
 
-const Register = lazy(() =>
-  Promise.all([import('pages/register'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
+const Register = lazy(() => import('pages/register'));
 
-const Login = lazy(() =>
-  Promise.all([import('pages/login'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
+const Login = lazy(() => import('pages/login'));
 
-const Confirm = lazy(() =>
-  Promise.all([import('pages/confirm'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
+const Confirm = lazy(() => import('pages/confirm'));
 
-const Explore = lazy(() =>
-  Promise.all([import('pages/explore'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
+const Explore = lazy(() => import('pages/explore'));
 
-const Profile = lazy(() =>
-  Promise.all([import('pages/profile'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
+const Profile = lazy(() => import('pages/profile'));
 
-const Settings = lazy(() =>
-  Promise.all([import('pages/settings'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
-    ([moduleExports]) => moduleExports,
-  ),
-);
+const Settings = lazy(() => import('pages/settings'));
+
+const Post = lazy(() => import('pages/post'));
 
 const Test = lazy(() => import('pages/test'));
 
@@ -74,6 +48,7 @@ const App: FC = () => (
           <GuestRoute exact path={Path.REGISTER} component={Register} />
           <GuestRoute exact path={Path.LOGIN} component={Login} />
 
+          <ProtectedRoute path={Path.POST} component={Post} />
           <ProtectedRoute path={Path.SETTINGS} component={Settings} />
           <ProtectedRoute exact path={Path.EXPLORE} component={Explore} />
           <ProtectedRoute exact path={Path.PROFILE} component={Profile} />
