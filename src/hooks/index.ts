@@ -30,6 +30,8 @@ export * from './use-update-avatar';
 
 export * from './use-update-profile';
 
+export * from './use-update-password';
+
 export * from './use-read-notifications';
 
 export * from './use-resend-email';

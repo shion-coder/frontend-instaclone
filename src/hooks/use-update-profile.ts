@@ -25,7 +25,7 @@ export const useUpdateProfile = (): ReturnProps => {
   const dispatch = useDispatch();
 
   /**
-   * Get update function and handle it on error or on success
+   * Get update profile function and handle it on error or on success
    */
 
   const [updateProfile, { isLoading }] = useMutation<ReturnUpdateProfileProps, AxiosError, Variables>(

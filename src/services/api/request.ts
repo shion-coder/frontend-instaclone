@@ -18,6 +18,7 @@ import {
   RegisterProps,
   LoginProps,
   UpdateProfileProps,
+  UpdatePasswordProps,
   Endpoint,
 } from 'types';
 
@@ -115,6 +116,13 @@ export const requestUpdateAvatar = (formData: FormData | undefined): Promise<Ret
 
 export const requestUpdateProfile = (profile: UpdateProfileProps): Promise<ReturnUpdateProfileProps> =>
   http.put<ReturnUpdateProfileProps>(Endpoint.UPDATE_PROFILE, profile).then((res) => res.data);
+
+/**
+ * Request update password
+ */
+
+export const requestUpdatePassword = (password: UpdatePasswordProps): Promise<null> =>
+  http.put(Endpoint.UPDATE_PASSWORD, password).then((res) => res.data);
 
 /**
  * Request read notifications

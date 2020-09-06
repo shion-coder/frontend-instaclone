@@ -34,9 +34,3 @@ export const HiddenField = styled(Field)`
 export const StyledButton = styled(Button)`
   margin: ${({ theme }) => theme.material.spacing(2, 0, 2)};
 `;
-
-export const Text = styled.p`
-  text-align: center;
-  letter-spacing: 1px;
-  color: ${({ theme }) => theme.material.palette.primary.main};
-`;

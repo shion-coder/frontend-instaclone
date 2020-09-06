@@ -33,10 +33,10 @@ const UpdateProfile: FC = () => {
 
   const initialValues: UpdateProfileProps = {
     firstName: firstName || '',
-    lastName: lastName || '',
+    lastName: lastName,
     username: username || '',
-    website: website || '',
-    bio: bio || '',
+    website: website,
+    bio: bio,
     email: email || '',
   };
 

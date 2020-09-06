@@ -1,6 +1,6 @@
 export type RegisterProps = {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   username: string;
   email: string;
   password: string;
@@ -14,10 +14,10 @@ export type LoginProps = {
 
 export type UpdateProfileProps = {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   username: string;
-  website: string;
-  bio: string;
+  website?: string;
+  bio?: string;
   email: string;
 };
 

@@ -7,6 +7,7 @@ export enum Endpoint {
   GET_USER = '/users',
   UPDATE_AVATAR = '/users/avatar',
   UPDATE_PROFILE = '/users/profile',
+  UPDATE_PASSWORD = '/users/password',
   RESEND_EMAIL = '/users/email/resend',
   POST = '/post',
 }

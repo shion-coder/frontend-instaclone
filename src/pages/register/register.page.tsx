@@ -34,7 +34,6 @@ const Register: FC = () => {
 
   const initialValues: RegisterProps = {
     firstName: '',
-    lastName: '',
     username: '',
     email: '',
     password: '',
