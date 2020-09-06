@@ -10,6 +10,7 @@ export const Wrapper = styled(AppBar)`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.solitude};
   box-shadow: none;
+  z-index: 8;
 `;
 
 export const Container = styled(Toolbar)`

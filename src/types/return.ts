@@ -37,6 +37,12 @@ export type ReturnGetPostsProps = {
   next?: number;
 };
 
+export type ReturnGetPostProps = {
+  post: PostProps & {
+    author: { isFollowing: boolean };
+  };
+};
+
 export type ReturnCreatePost = {
   post: PostProps;
 };
