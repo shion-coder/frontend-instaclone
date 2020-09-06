@@ -8,8 +8,10 @@ import { requestGetPost } from 'services';
 import Loader from 'components/loader/lottie-loader';
 import NotFound from 'pages/not-found';
 import InfoHeader from 'components/post/info-header';
+import Comment from 'components/post/comment';
+import Action from 'components/post/action';
 
-import { Container, Image, PostInfo } from './post.styles';
+import { Container, ImageContainer, Image, PostInfo } from './post.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -34,13 +36,17 @@ const Post: FC = () => {
       <Grid item xs={1} md={2} />
 
       <Container item container xs={10} md={8}>
-        <Grid item xs={12} sm={7}>
+        <ImageContainer item xs={7}>
           <Image alt="post-image" src={image} filter={filter} />
-        </Grid>
+        </ImageContainer>
 
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={5}>
           <PostInfo>
             <InfoHeader data={data} />
+
+            <Comment />
+
+            <Action />
           </PostInfo>
         </Grid>
       </Container>

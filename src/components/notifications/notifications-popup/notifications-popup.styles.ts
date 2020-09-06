@@ -39,10 +39,12 @@ export const Name = styled.span`
   font-weight: bold;
   letter-spacing: 1px;
   font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.dark};
 `;
 
 export const Icon = styled(NotificationsIcon)`
   margin-left: auto;
+  color: ${({ theme }) => theme.colors.dark};
 `;
 
 export const Content = styled.div`

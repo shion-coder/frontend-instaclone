@@ -21,13 +21,16 @@ declare module 'styled-components' {
       unread: string;
       google: string;
     };
-    animation: {
-      delay: string;
-    };
   }
 }
 export const theme: DefaultTheme = {
-  material: responsiveFontSizes(createMuiTheme({})),
+  material: responsiveFontSizes(
+    createMuiTheme({
+      palette: {
+        type: 'dark',
+      },
+    }),
+  ),
   colors: {
     white: '#fff',
     black: '#000',
@@ -42,8 +45,5 @@ export const theme: DefaultTheme = {
     corn: '#ffe66d',
     unread: '#82b1ff',
     google: '#4285f4',
-  },
-  animation: {
-    delay: '0s',
   },
 };
