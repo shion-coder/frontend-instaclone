@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { UserProps } from 'types';
+import { UserProps, ReturnAuthProps } from 'types';
 
 /* -------------------------------------------------------------------------- */
 
@@ -9,13 +9,13 @@ import { UserProps } from 'types';
  */
 
 type StateProps = {
-  data: Partial<UserProps>;
-  token: string | null;
+  data: Partial<UserProps> & {
+    token?: string;
+  };
 };
 
 const initialState: StateProps = {
   data: {},
-  token: null,
 };
 
 /**
@@ -26,16 +26,14 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    addUser: (state, { payload }) => {
-      state.data = payload.user;
-      state.token = payload.token;
+    addUser: (state, action: PayloadAction<ReturnAuthProps>) => {
+      state.data = action.payload.user;
     },
     updateUser: (state, action: PayloadAction<Partial<UserProps>>) => {
       state.data = { ...state.data, ...action.payload };
     },
     removeUser: (state) => {
       state.data = {};
-      state.token = null;
     },
   },
 });

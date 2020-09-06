@@ -1,7 +1,5 @@
 export * from './environment';
 
-export * from './error';
-
 export * from './toast-id';
 
 export * from './path';

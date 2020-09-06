@@ -27,7 +27,7 @@ export const theme: DefaultTheme = {
   material: responsiveFontSizes(
     createMuiTheme({
       palette: {
-        type: 'dark',
+        type: 'light',
       },
     }),
   ),

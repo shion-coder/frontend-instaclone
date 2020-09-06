@@ -13,15 +13,14 @@ type ReturnProps = {
   website?: string;
   avatar?: string;
   confirmed?: boolean;
-  token: string | null;
+  token?: string;
 };
 
 export const useUser = (): ReturnProps => {
   const user = useSelector((state: RootStateProps) => state.user);
 
   const {
-    data: { firstName, lastName, username, email, bio, website, avatar, confirmed },
-    token,
+    data: { firstName, lastName, username, email, bio, website, avatar, confirmed, token },
   } = user;
 
   return { firstName, lastName, username, email, bio, website, avatar, confirmed, token };

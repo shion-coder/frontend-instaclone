@@ -3,8 +3,9 @@ import { UserProps, NotificationProps, PostProps } from './data';
 /* -------------------------------------------------------------------------- */
 
 export type ReturnAuthProps = {
-  user: UserProps;
-  token: string;
+  user: UserProps & {
+    token: string;
+  };
 };
 
 export type ReturnConfirmProps = {
