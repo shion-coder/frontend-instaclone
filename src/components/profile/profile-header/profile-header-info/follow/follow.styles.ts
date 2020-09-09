@@ -1,11 +1,7 @@
 import styled from 'styled-components';
-import { Grid } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
-export const Content = styled(Grid)`
+export const Content = styled.div`
   cursor: pointer;
-`;
-export const Number = styled.span`
-  font-weight: bold;
 `;

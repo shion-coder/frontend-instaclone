@@ -1,22 +1,9 @@
 import styled from 'styled-components';
-import Lottie from 'react-lottie-player';
 
 /* -------------------------------------------------------------------------- */
 
-type StyledLottieProps = {
-  width?: string;
-  height?: string;
-};
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+export const Wrapper = styled.div`
   width: 100%;
-`;
-
-export const StyledLottie = styled(Lottie)<StyledLottieProps>`
-  width: ${({ width }) => (width ? width : '200px')};
-  height: ${({ height }) => (height ? height : '200px')};
+  display: flex;
+  justify-content: center;
 `;

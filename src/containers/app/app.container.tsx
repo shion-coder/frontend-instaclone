@@ -1,14 +1,14 @@
 import React, { FC, Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { Path } from 'types';
+import { PATH } from 'types';
 import Header from 'components/header';
 import Footer from 'components/footer';
 import Loader from 'components/loader/lottie-loader';
 import GuestRoute from 'components/route/guest-route';
 import ProtectedRoute from 'components/route/protected-route';
 
-import { Container, Body } from './app.styles';
+import { StyledParticles as Particles, Wrapper, Main } from './app.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -16,11 +16,23 @@ import { Container, Body } from './app.styles';
  * Lazy loading
  */
 
-const Home = lazy(() => import('pages/home'));
+const Home = lazy(() =>
+  Promise.all([import('pages/home'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
 
-const Register = lazy(() => import('pages/register'));
+const Register = lazy(() =>
+  Promise.all([import('pages/register'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
 
-const Login = lazy(() => import('pages/login'));
+const Login = lazy(() =>
+  Promise.all([import('pages/login'), new Promise((resolve) => setTimeout(resolve, 1000))]).then(
+    ([moduleExports]) => moduleExports,
+  ),
+);
 
 const Confirm = lazy(() => import('pages/confirm'));
 
@@ -35,31 +47,35 @@ const Post = lazy(() => import('pages/post'));
 const Test = lazy(() => import('pages/test'));
 
 const App: FC = () => (
-  <Container>
-    <Header />
+  <>
+    <Particles />
 
-    <Body>
-      <Suspense fallback={<Loader />}>
-        <Switch>
-          <Route exact path={Path.HOME} component={Home} />
-          <Route exact path={Path.CONFIRM} component={Confirm} />
-          <Route exact path={Path.TEST} component={Test} />
+    <Wrapper container direction="column">
+      <Header />
 
-          <GuestRoute exact path={Path.REGISTER} component={Register} />
-          <GuestRoute exact path={Path.LOGIN} component={Login} />
+      <Main>
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route exact path={PATH.HOME} component={Home} />
+            <Route exact path={PATH.CONFIRM} component={Confirm} />
+            <Route exact path={PATH.TEST} component={Test} />
 
-          <ProtectedRoute path={Path.POST} component={Post} />
-          <ProtectedRoute path={Path.SETTINGS} component={Settings} />
-          <ProtectedRoute exact path={Path.EXPLORE} component={Explore} />
-          <ProtectedRoute exact path={Path.PROFILE} component={Profile} />
+            <GuestRoute exact path={PATH.REGISTER} component={Register} />
+            <GuestRoute exact path={PATH.LOGIN} component={Login} />
 
-          <Redirect from="*" to="/" />
-        </Switch>
-      </Suspense>
-    </Body>
+            <ProtectedRoute path={PATH.POST} component={Post} />
+            <ProtectedRoute path={PATH.SETTINGS} component={Settings} />
+            <ProtectedRoute exact path={PATH.EXPLORE} component={Explore} />
+            <ProtectedRoute exact path={PATH.PROFILE} component={Profile} />
 
-    <Footer />
-  </Container>
+            <Redirect from="*" to="/" />
+          </Switch>
+        </Suspense>
+      </Main>
+
+      <Footer />
+    </Wrapper>
+  </>
 );
 
 export default App;

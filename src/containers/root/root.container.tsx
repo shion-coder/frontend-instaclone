@@ -8,7 +8,6 @@ import Store from 'containers/store';
 import Contexts from 'containers/contexts';
 import Theme from 'containers/theme';
 import App from 'containers/app';
-// import Test from 'pages/test';
 
 import { StyledToastContainer as ToastContainer } from './root.styles';
 
@@ -23,7 +22,6 @@ const Root: FC = () => (
 
           <Router history={history}>
             <App />
-            {/* <Test /> */}
           </Router>
 
           <ReactQueryDevtools initialIsOpen={false} />

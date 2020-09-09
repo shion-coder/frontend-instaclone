@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { List, ListItem, ListItemText, Avatar } from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
@@ -18,11 +18,6 @@ export const Image = styled.div`
   align-items: center;
   padding: 1.5rem 0 0.625rem;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
-`;
-
-export const StyledAvatar = styled(Avatar)`
-  width: 8rem;
-  height: 8rem;
 `;
 
 export const Name = styled.p`

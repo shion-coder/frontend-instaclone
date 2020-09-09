@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 
-import { Path } from 'types';
+import { PATH } from 'types';
 import { useUser } from 'hooks';
 
 /* -------------------------------------------------------------------------- */
@@ -22,23 +22,23 @@ export const useCustomHistory = (username?: string | null, pathname?: string): R
 
   const { username: currentUsername } = useUser();
 
-  const goHome = () => history.push(Path.HOME);
+  const goHome = () => history.push(PATH.HOME);
 
-  const goRegister = () => history.push(Path.REGISTER);
+  const goRegister = () => history.push(PATH.REGISTER);
 
-  const goLogin = () => history.push(Path.LOGIN);
+  const goLogin = () => history.push(PATH.LOGIN);
 
-  const goExplore = () => history.push(Path.EXPLORE);
+  const goExplore = () => history.push(PATH.EXPLORE);
 
   const goUser = () => history.push(`/${username}`);
 
   const goProfile = () => history.push(`/${currentUsername}`);
 
-  const goSettings = () => history.push(Path.SETTINGS);
+  const goSettings = () => history.push(PATH.SETTINGS);
 
-  const goEdit = () => history.push(Path.SETTING_EDIT);
+  const goEdit = () => history.push(PATH.SETTING_EDIT);
 
-  const goPathname = () => history.push(pathname || Path.HOME);
+  const goPathname = () => history.push(pathname || PATH.HOME);
 
   return { goHome, goRegister, goLogin, goExplore, goUser, goProfile, goSettings, goEdit, goPathname };
 };

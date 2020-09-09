@@ -3,8 +3,9 @@ import { useHistory } from 'react-router-dom';
 
 import { NotificationProps } from 'types';
 import { formatDateDistance } from 'utils';
+import Avatar from 'components/common/avatar';
 
-import { Container, StyledAvatar as Avatar, Info, Name, Text, Date } from './notification.styles';
+import { Container, Info, Name, Text, Date } from './notification.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -33,7 +34,7 @@ const Notification: FC<Props> = ({
 
   return (
     <Container read={read ? 'read' : 'unread'}>
-      <Avatar src={avatar} onClick={handleClick} />
+      <Avatar src={avatar} width="3rem" height="3rem" cursor onClick={handleClick} />
 
       <Info>
         <Text>

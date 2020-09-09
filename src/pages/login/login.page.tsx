@@ -3,23 +3,21 @@ import { StaticContext } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import { Formik, FormikHelpers } from 'formik';
 import { Grid } from '@material-ui/core';
-import Account from '@material-ui/icons/AccountCircle';
 
-import { LoginProps, Path } from 'types';
-import { useLogin } from 'hooks';
+import { LoginProps } from 'types';
+import { useLogin, useCustomHistory } from 'hooks';
 import { validateLogin } from 'utils';
+import Avatar from 'components/common/avatar';
 import Field from 'components/common/formik-field';
-import GoogleImage from 'assets/images/google-icon.svg';
+import Welcome from 'assets/images/welcome.jpeg';
 
 import {
   StyledContainer as Container,
-  StyledTypography as Typography,
-  StyledAvatar as Avatar,
   StyledForm as Form,
   StyledButton as Button,
   GoogleButton as Google,
-  StyledLink as Link,
-  GoogleIcon,
+  StyledBox as Box,
+  GoogleLogo,
 } from './login.styles';
 
 /* -------------------------------------------------------------------------- */
@@ -31,7 +29,8 @@ type LocationState = {
 type Props = RouteComponentProps<Record<string, string | undefined>, StaticContext, LocationState>;
 
 const Login: FC<Props> = ({ location: { state } }) => {
-  const { login, isLoading } = useLogin(state);
+  const { login } = useLogin(state);
+  const { goRegister, goLogin } = useCustomHistory();
 
   /**
    * Handle login
@@ -49,40 +48,30 @@ const Login: FC<Props> = ({ location: { state } }) => {
   };
 
   return (
-    <Container>
-      <Avatar>
-        <Account />
-      </Avatar>
-
-      <Typography>Sign In</Typography>
+    <Container maxWidth="xs">
+      <Avatar width="8rem" height="8rem" src={Welcome} />
 
       <Formik initialValues={initialValues} validationSchema={validateLogin} onSubmit={handleSubmit}>
         <Form noValidate>
-          <Field name="usernameOrEmail" label="Email" size="medium" fullWidth required />
+          <Field name="usernameOrEmail" label="Email" fullWidth required />
 
-          <Field name="password" size="medium" type="password" fullWidth required />
+          <Field name="password" type="password" fullWidth required />
 
-          <Button type="submit" isLoading={isLoading} fullWidth>
+          <Button size="large" fullWidth>
             Sign In
           </Button>
 
-          <Google
-            provider="google"
-            startIcon={<GoogleIcon src={GoogleImage} />}
-            color="primary"
-            state={state}
-            fullWidth
-          >
+          <Google provider="google" startIcon={<GoogleLogo />} state={state} size="large" fullWidth>
             Sign in with Google
           </Google>
 
           <Grid container>
-            <Grid item xs>
-              <Link to={Path.LOGIN}>Forgot password?</Link>
+            <Grid item xs={12} sm={6} onClick={goLogin}>
+              <Box>Forgot password?</Box>
             </Grid>
 
-            <Grid item>
-              <Link to={Path.REGISTER}>Don't have an account? Sign Up</Link>
+            <Grid item xs={12} sm={6} onClick={goRegister}>
+              <Box>Don't have an account? Sign Up</Box>
             </Grid>
           </Grid>
         </Form>

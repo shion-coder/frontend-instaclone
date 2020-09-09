@@ -1,6 +1,8 @@
 import { DefaultTheme } from 'styled-components';
 import { Theme, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
+import teal from '@material-ui/core/colors/teal';
+
 /* -------------------------------------------------------------------------- */
 
 declare module 'styled-components' {
@@ -27,7 +29,8 @@ export const theme: DefaultTheme = {
   material: responsiveFontSizes(
     createMuiTheme({
       palette: {
-        type: 'light',
+        type: 'dark',
+        primary: teal,
       },
     }),
   ),

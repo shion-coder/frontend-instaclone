@@ -1,6 +1,6 @@
 import React, { FC, Dispatch, SetStateAction, useState } from 'react';
 
-import { PostModal } from 'types';
+import { POST_MODAL } from 'types';
 import { filters } from 'utils';
 import Filter from './post-filter';
 
@@ -12,7 +12,7 @@ type Props = {
   preview: string | undefined;
   handleClose: () => void;
   setFilter: Dispatch<SetStateAction<string>>;
-  setActiveModal: Dispatch<SetStateAction<PostModal>>;
+  setActiveModal: Dispatch<SetStateAction<POST_MODAL>>;
 };
 
 const NewPostFilter: FC<Props> = ({ preview, handleClose, setFilter, setActiveModal }) => {
@@ -27,7 +27,7 @@ const NewPostFilter: FC<Props> = ({ preview, handleClose, setFilter, setActiveMo
   const handleSubmit = () => {
     setFilter(selectedFilter.filter);
 
-    setActiveModal(PostModal.Caption);
+    setActiveModal(POST_MODAL.CAPTION);
   };
 
   return (

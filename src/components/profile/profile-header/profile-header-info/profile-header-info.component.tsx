@@ -1,26 +1,15 @@
 import React, { FC, useState, useEffect } from 'react';
 import Modal from 'styled-react-modal';
+import { Grid, IconButton, Typography, Box, Link } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import { ReturnGetUserProps } from 'types';
 import { useCustomHistory, useModal, useFollow } from 'hooks';
-import FollowButton from 'components/common/follow-button';
+import FollowButton from 'components/common/button/follow-button';
 import SettingsModal from './settings-modal';
 import Follow from './follow';
 
-import {
-  Container,
-  Handle,
-  Name,
-  Settings,
-  Edit,
-  Icon,
-  Stats,
-  Number,
-  Posts,
-  Other,
-  Bio,
-  Website,
-} from './profile-header-info.styles';
+import { Name, Settings, StyledButton as Button, Stats, Count, Other } from './profile-header-info.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -48,24 +37,30 @@ const ProfileHeaderInfo: FC<Props> = ({ profile }) => {
    */
 
   const {
-    user: { fullName, bio, website, avatar, postCount, followerCount, followingCount },
+    user: { fullName, bio = '', website = '', avatar, postCount, followerCount, followingCount },
     isFollowing,
     isCurrentUser,
   } = userProfile;
 
   return (
-    <Container item xs={8} container direction="column">
-      <Handle>
-        <Name>{fullName}</Name>
+    <>
+      <Grid container alignItems="center">
+        <Name item xs={12} sm={6}>
+          <Box fontWeight="fontWeightBold" letterSpacing={1}>
+            {fullName}
+          </Box>
+        </Name>
 
-        <Settings>
+        <Settings item xs={12} sm={6} container justify="flex-end" alignItems="center">
           {isCurrentUser ? (
             <>
-              <Edit variant="outlined" color="primary" size="small" onClick={goEdit}>
+              <Button variant="outlined" size="small" onClick={goEdit}>
                 Edit Profile
-              </Edit>
+              </Button>
 
-              <Icon color="primary" onClick={openModal} />
+              <IconButton onClick={openModal}>
+                <SettingsIcon fontSize="small" />
+              </IconButton>
 
               <Modal isOpen={isOpen} onBackgroundClick={closeModal} onEscapeKeydown={closeModal}>
                 <SettingsModal profile={profile} closeModal={closeModal} />
@@ -81,28 +76,38 @@ const ProfileHeaderInfo: FC<Props> = ({ profile }) => {
             />
           )}
         </Settings>
-      </Handle>
+      </Grid>
 
-      <Stats>
-        <Posts item xs={4}>
-          <Number>{postCount}</Number>
+      <Stats container>
+        <Count item xs={4} sm={4}>
+          <Typography variant="body2">
+            <Box component="span" fontWeight="fontWeightBold">
+              {postCount}
+            </Box>
 
-          {` posts`}
-        </Posts>
+            <Box component="span" fontSize="0.8rem" letterSpacing={1}>
+              {` posts`}
+            </Box>
+          </Typography>
+        </Count>
 
-        <Follow route="followers" count={followerCount} profile={profile} setUserProfile={setUserProfile} />
+        <Count item xs={4} sm={4}>
+          <Follow route="followers" count={followerCount} profile={profile} setUserProfile={setUserProfile} />
+        </Count>
 
-        <Follow route="following" count={followingCount} profile={profile} setUserProfile={setUserProfile} />
+        <Count item xs={4} sm={4}>
+          <Follow route="following" count={followingCount} profile={profile} setUserProfile={setUserProfile} />
+        </Count>
       </Stats>
 
       <Other>
-        <Bio>{bio}</Bio>
+        <Box component="p">{bio}</Box>
 
-        <Website href={website} target="blank">
+        <Link href={website} target="_blank" color="textSecondary">
           {website}
-        </Website>
+        </Link>
       </Other>
-    </Container>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AxiosError } from 'axios';
 import { FormikHelpers } from 'formik';
 
-import { UpdateProfileProps, ReturnUpdateProfileProps, Query } from 'types';
+import { UpdateProfileProps, ReturnUpdateProfileProps, QUERY } from 'types';
 import { updateUser } from 'store';
 import { requestUpdateProfile } from 'services';
 
@@ -43,7 +43,7 @@ export const useUpdateProfile = (): ReturnProps => {
          * Update query cache of this user and update user data in redux store, after that switch to profile route
          */
 
-        queryCache.invalidateQueries([Query.GET_USER, data.user.username]);
+        queryCache.invalidateQueries([QUERY.GET_USER, data.user.username]);
 
         dispatch(updateUser({ ...data.user }));
 

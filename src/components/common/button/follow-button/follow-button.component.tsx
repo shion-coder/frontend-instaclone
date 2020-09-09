@@ -2,10 +2,8 @@ import React, { FC } from 'react';
 import Modal from 'styled-react-modal';
 
 import { useModal } from 'hooks';
-import Loader from 'components/loader/layer-loader';
-import UnfollowModal from './unfollow-modal';
-
-import { StyledButton as Button } from './follow-button.styles';
+import Button from 'components/common/button';
+import UnfollowModal from 'components/modal/unfollow-modal';
 
 /* -------------------------------------------------------------------------- */
 
@@ -31,8 +29,7 @@ const FollowButton: FC<Props> = ({ avatar, fullName, isFollowing, isLoading, han
 
   return isFollowing ? (
     <>
-      <Button variant="contained" color="secondary" size="small" loading={isLoading ? 1 : 0} onClick={openModal}>
-        {isLoading && <Loader color="dark" width="25px" height="25px" radius="4px" />}
+      <Button color="secondary" size="small" isLoading={isLoading} onClick={openModal}>
         Following
       </Button>
 
@@ -46,8 +43,7 @@ const FollowButton: FC<Props> = ({ avatar, fullName, isFollowing, isLoading, han
       </Modal>
     </>
   ) : (
-    <Button variant="contained" color="primary" size="small" loading={isLoading ? 1 : 0} onClick={handleFollow}>
-      {isLoading && <Loader color="dark" width="25px" height="25px" radius="4px" />}
+    <Button color="primary" size="small" isLoading={isLoading} onClick={handleFollow}>
       Follow
     </Button>
   );

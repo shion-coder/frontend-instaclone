@@ -1,76 +1,47 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Form } from 'formik';
-import { Container, Avatar, Typography } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
 
-import Button from 'components/common/formik-button';
-import OauthButton from 'components/common/oauth-button';
+import Button from 'components/common/button/formik-button';
+import OauthButton from 'components/common/button/oauth-button';
+import { Google } from 'components/common/icon';
 
 /* -------------------------------------------------------------------------- */
 
-export const StyledContainer = styled(Container).attrs(() => ({
-  component: 'main',
-  maxWidth: 'xs',
-}))`
+export const StyledContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const StyledTypography = styled(Typography).attrs(() => ({
-  component: 'h1',
-  variant: 'h5',
-}))`
-  letter-spacing: 2px;
-`;
-
-export const StyledAvatar = styled(Avatar)`
-  margin: ${({ theme }) => theme.material.spacing(2) + 'px'};
-  background-color: ${({ theme }) => theme.material.palette.primary.main};
-  width: ${({ theme }) => theme.material.spacing(6) + 'px'};
-  height: ${({ theme }) => theme.material.spacing(6) + 'px'};
+  justify-content: center;
 `;
 
 export const StyledForm = styled(Form)`
-  width: '100%';
-  margin-top: ${({ theme }) => theme.material.spacing(1) + 'px'};
-
-  .MuiButton-label {
-    text-transform: none;
-  }
-
-  .MuiFormLabel-root {
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    top: 2px;
-  }
+  margin-top: ${({ theme }) => theme.material.spacing(3) + 'px'};
 `;
 
 export const StyledButton = styled(Button)`
-  margin: ${({ theme }) => theme.material.spacing(2, 0, 2)};
-  padding: ${({ theme }) => theme.material.spacing(1) + 'px'};
+  margin: ${({ theme }) => theme.material.spacing(2, 0, 1)};
 `;
 
 export const GoogleButton = styled(OauthButton)`
-  margin: ${({ theme }) => theme.material.spacing(1, 0, 2)};
-  padding: ${({ theme }) => theme.material.spacing(1) + 'px'};
-  background-color: ${({ theme }) => theme.colors.google};
-
-  :hover {
-    background-color: ${({ theme }) => theme.colors.google};
-    box-shadow: 0 0 6px ${({ theme }) => theme.colors.google};
-  }
+  margin: ${({ theme }) => theme.material.spacing(1, 0, 3)};
 `;
 
-export const GoogleIcon = styled.img`
-  width: 24px;
-  height: 24px;
+export const GoogleLogo = styled(Google)`
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
-export const StyledLink = styled(Link)`
-  color: ${({ theme }) => theme.material.palette.primary.main};
+export const StyledBox = styled(Box)`
+  color: ${({ theme }) => theme.material.palette.text.secondary};
+  font-size: 0.8rem;
+  cursor: pointer;
 
   :hover {
     text-decoration: underline;
+  }
+
+  @media screen and (max-width: 599px) {
+    margin: ${({ theme }) => theme.material.spacing(1, 0)};
   }
 `;

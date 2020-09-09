@@ -1,8 +1,10 @@
 import React, { FC, ChangeEvent } from 'react';
 import { useFormikContext } from 'formik';
-import { TextField as Field, TextFieldProps } from '@material-ui/core';
+import { TextFieldProps } from '@material-ui/core';
 
 import { camelToTitle } from 'utils';
+
+import { StyledTextField } from './formik-field.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -22,7 +24,7 @@ const FormikField: FC<Props> = ({ name, ...otherProps }) => {
   const label = camelToTitle(name);
 
   /**
-   * Set formik function in to field
+   * Set formik function into field
    */
 
   const { values, setFieldValue, touched, setFieldTouched, errors, isSubmitting } = useFormikContext<FormikProps>();
@@ -32,7 +34,7 @@ const FormikField: FC<Props> = ({ name, ...otherProps }) => {
   const handleBlue = () => setFieldTouched(name);
 
   return (
-    <Field
+    <StyledTextField
       value={values[name]}
       onChange={handleChange}
       onBlur={handleBlue}

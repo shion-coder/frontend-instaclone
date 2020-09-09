@@ -1,12 +1,12 @@
 import React, { FC, useRef, useState } from 'react';
-import { Fab } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 
 import { useGetNotifications, useClickOutside } from 'hooks';
 import Popup from './notifications-popup';
 
-import { Container } from './notifications.styles';
+import { StyledBadge as Badge } from './notifications.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -33,13 +33,11 @@ const Notifications: FC = () => {
   useClickOutside(ref, handleClose);
 
   return (
-    <Container ref={ref} badgeContent={unread} color="error">
-      <Fab color="primary" size="small" component="span" onClick={togglePopup}>
-        {unread ? <NotificationsActiveIcon /> : <NotificationsIcon />}
-      </Fab>
+    <Badge ref={ref} badgeContent={unread} color="error">
+      <IconButton onClick={togglePopup}>{unread ? <NotificationsActiveIcon /> : <NotificationsIcon />}</IconButton>
 
       {open && <Popup handleClose={handleClose} />}
-    </Container>
+    </Badge>
   );
 };
 

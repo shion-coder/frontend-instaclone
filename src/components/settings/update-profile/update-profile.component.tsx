@@ -73,9 +73,7 @@ const UpdateProfile: FC = () => {
             </Warn>
           )}
 
-          <Button type="submit" fullWidth>
-            Update Profile
-          </Button>
+          <Button fullWidth>Update Profile</Button>
         </Form>
       </Formik>
     </Container>

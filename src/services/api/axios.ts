@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import axiosRetry from 'axios-retry';
 import { toast } from 'react-toastify';
 
-import { Path, Toast } from 'types';
+import { PATH, TOAST } from 'types';
 import { API_URL, API_TIMEOUT } from 'config';
 import { store, removeUser } from 'store';
 import { logger } from 'services';
@@ -57,7 +57,7 @@ http.interceptors.response.use(
      */
 
     if (error.code === 'ECONNABORTED') {
-      toast.error(toastMessage.timeout, { toastId: Toast.TIMEOUT_ERROR });
+      toast.error(toastMessage.timeout, { toastId: TOAST.TIMEOUT_ERROR });
 
       return Promise.reject(error);
     }
@@ -72,7 +72,7 @@ http.interceptors.response.use(
       if (status === 401) {
         store.dispatch(removeUser());
 
-        return history.push(Path.LOGIN);
+        return history.push(PATH.LOGIN);
       }
 
       /**
@@ -82,9 +82,9 @@ http.interceptors.response.use(
       if (status >= 500 || status < 400) {
         logger.log(error);
 
-        toast.dismiss(Toast.UNEXPECTED_ERROR);
+        toast.dismiss(TOAST.UNEXPECTED_ERROR);
 
-        return toast.error(toastMessage.unexpectedError, { toastId: Toast.UNEXPECTED_ERROR });
+        return toast.error(toastMessage.unexpectedError, { toastId: TOAST.UNEXPECTED_ERROR });
       }
 
       return Promise.reject(error);

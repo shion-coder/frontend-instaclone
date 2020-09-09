@@ -1,27 +1,24 @@
 import styled from 'styled-components';
 import { AppBar, Toolbar } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
+
+import { Logo as DefaultLogo } from 'components/common/icon';
 
 /* -------------------------------------------------------------------------- */
 
-export const Wrapper = styled(AppBar)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.solitude};
-  box-shadow: none;
-  z-index: 8;
+export const StyledAppBar = styled(AppBar)`
+  background-color: ${({ theme }) => theme.material.palette.background.paper};
 `;
 
-export const Container = styled(Toolbar)`
-  width: 80vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem;
+export const StyledToolbar = styled(Toolbar)`
+  padding: 0;
 `;
 
-export const StyledHomeIcon = styled(HomeIcon)`
-  font-size: 40px;
+export const LogoContainer = styled.div`
+  flex: 1;
   cursor: pointer;
+`;
+
+export const Logo = styled(DefaultLogo).attrs(({ theme }) => ({ fill: theme.material.palette.text.secondary }))`
+  width: 2rem;
+  height: 2rem;
 `;

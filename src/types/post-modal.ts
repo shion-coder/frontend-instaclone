@@ -1,4 +1,4 @@
-export enum PostModal {
-  Filter,
-  Caption,
+export enum POST_MODAL {
+  FILTER,
+  CAPTION,
 }

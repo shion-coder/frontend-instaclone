@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import Modal from 'styled-react-modal';
-import { Fab } from '@material-ui/core';
-import AddPhoto from '@material-ui/icons/AddPhotoAlternate';
+import { IconButton } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { useFiles } from 'hooks';
 import NewPostModal from 'components/new-post/new-post-modal';
@@ -26,9 +26,9 @@ const NewPostButton: FC<Props> = ({ text }) => {
       {text ? (
         <Text>Share your first photo</Text>
       ) : (
-        <Fab color="primary" size="small" component="span">
-          <AddPhoto />
-        </Fab>
+        <IconButton component="span">
+          <AddCircleIcon />
+        </IconButton>
       )}
 
       <Modal isOpen={!!formData && !error} onBackgroundClick={handleClose} onEscapeKeydown={handleClose}>

@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import { Query } from 'types';
+import { QUERY } from 'types';
 import { useUser } from 'hooks';
 import { requestGetMe } from 'services';
 
@@ -9,7 +9,7 @@ import { requestGetMe } from 'services';
 export const useGetMe = (): void => {
   const { token } = useUser();
 
-  useQuery(Query.ME, () => requestGetMe(), {
+  useQuery(QUERY.ME, () => requestGetMe(), {
     enabled: token,
   });
 };

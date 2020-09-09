@@ -1,21 +1,11 @@
 import React, { FC } from 'react';
-import {
-  Container,
-  AppBar,
-  Toolbar,
-  Typography,
-  Link,
-  Grid,
-  CardActionArea,
-  CardContent,
-  Card,
-  CardMedia,
-} from '@material-ui/core';
+import { Container, Typography, Grid, CardActionArea, CardContent, Card, CardMedia } from '@material-ui/core';
+
+import { Main } from './test.styles';
+
 import { makeStyles } from '@material-ui/core/styles';
-
-import { ReactComponent as Logo } from 'assets/images/logo-camera.svg';
-
-import { Main, Footer } from './test.styles';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 
 /* -------------------------------------------------------------------------- */
 
@@ -49,21 +39,81 @@ const useStyles = makeStyles((theme) => ({
   comment: {
     height: '60%',
   },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    // backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    width: '80vw',
+    height: '80vh',
+  },
 }));
+
+const tileData = [
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+  {
+    img: 'https://source.unsplash.com/random',
+    title: 'Image',
+    author: 'author',
+    cols: 1,
+  },
+];
 
 const Test: FC = () => {
   const classes = useStyles();
 
   return (
     <Grid container direction="column" className={classes.container}>
-      <AppBar position="relative" color="transparent">
-        <Toolbar>
-          <Container maxWidth="lg">
-            <Logo className={classes.logo} />
-          </Container>
-        </Toolbar>
-      </AppBar>
-
       <Main>
         <Container maxWidth="lg">
           <Grid container>
@@ -112,17 +162,15 @@ const Test: FC = () => {
         </Container>
       </Main>
 
-      <Footer>
-        <Typography variant="body2" color="textSecondary" align="center">
-          <Link color="inherit" href="https://material-ui.com/">
-            Shion
-          </Link>
-
-          {' | '}
-
-          {new Date().getFullYear()}
-        </Typography>
-      </Footer>
+      <div className={classes.root}>
+        <GridList cellHeight={260} className={classes.gridList} cols={3} spacing={20}>
+          {tileData.map((tile) => (
+            <GridListTile key={tile.img} cols={tile.cols || 1}>
+              <img src={tile.img} alt={tile.title} />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
     </Grid>
   );
 };

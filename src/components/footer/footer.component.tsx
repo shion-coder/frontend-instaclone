@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Divider } from '@material-ui/core';
 
 import { Container, Span } from './footer.styles';
 
@@ -9,11 +10,15 @@ const Footer: FC = () => {
 
   return (
     <Container>
-      <Span>&copy; {year}</Span>
+      <Span variant="subtitle2" color="textSecondary">
+        &copy; {year}
+      </Span>
 
-      <Span>|</Span>
+      <Divider orientation="vertical" variant="middle" flexItem />
 
-      <Span>Shion</Span>
+      <Span variant="subtitle2" color="textSecondary">
+        Shion
+      </Span>
     </Container>
   );
 };

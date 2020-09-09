@@ -2,9 +2,10 @@ import React, { FC, Dispatch, SetStateAction } from 'react';
 
 import { ReturnGetUserProps } from 'types';
 import { useCustomHistory, useFollow } from 'hooks';
-import FollowButton from 'components/common/follow-button';
+import Avatar from 'components/common/avatar';
+import FollowButton from 'components/common/button/follow-button';
 
-import { Container, StyledAvatar as Avatar, Info, Name, Username, Button } from './user-card.styles';
+import { Container, Info, Name, Username, Button } from './user-card.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -36,7 +37,7 @@ const UserCard: FC<Props> = ({ route, user, profile, setUserProfile, closeModal 
 
   return (
     <Container>
-      <Avatar src={avatar} />
+      <Avatar src={avatar} width="3rem" height="3rem" />
 
       <Info>
         <Name onClick={handleClickName}>{fullName}</Name>

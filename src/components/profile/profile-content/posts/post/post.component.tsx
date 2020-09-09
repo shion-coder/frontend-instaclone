@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Post: FC<Props> = ({ post: { thumbnail, filter, likeCount, commentCount } }) => (
-  <Container>
+  <Container item xs={6} sm={4}>
     <Image src={thumbnail} filter={filter} />
 
     <Overlay>

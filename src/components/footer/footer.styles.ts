@@ -1,20 +1,17 @@
 import styled from 'styled-components';
+import { Typography } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled.div`
+export const Container = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.25rem;
-  margin-top: 1rem;
-  background-color: ${({ theme }) => theme.colors.solitude};
+  background-color: ${({ theme }) => theme.material.palette.background.paper};
+  padding: ${({ theme }) => theme.material.spacing(2, 2)};
 `;
 
-export const Span = styled.span`
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  color: ${({ theme }) => theme.colors.black};
-  letter-spacing: 0.1rem;
+export const Span = styled(Typography)`
+  padding: ${({ theme }) => theme.material.spacing(1, 1)};
   font-weight: bold;
 `;

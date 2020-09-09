@@ -1,3 +1,15 @@
+export type RegisterInformationStageProps = {
+  firstName: string;
+  lastName?: string;
+  username: string;
+  email: string;
+};
+
+export type RegisterPasswordStageProps = {
+  password: string;
+  confirmPassword: string;
+};
+
 export type RegisterProps = {
   firstName: string;
   lastName?: string;

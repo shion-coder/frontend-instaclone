@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Avatar } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
@@ -65,14 +64,10 @@ export const Layer = styled.div`
   z-index: 1;
 `;
 
-export const StyledAvatar = styled(Avatar)`
-  margin-right: 1rem;
-`;
-
 export const Text = styled.textarea`
   height: 3rem;
   width: 30vw;
-  margin-right: 1rem;
+  margin: 0 1rem;
   resize: none;
   border: none;
   outline: none;

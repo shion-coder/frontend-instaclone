@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from 'react-query';
 
-import { ReturnGetNotificationsProps, Query } from 'types';
+import { ReturnGetNotificationsProps, QUERY } from 'types';
 import { useUser, useIntersectionObserver } from 'hooks';
 import { requestGetNotifications } from 'services';
 
@@ -21,7 +21,7 @@ export const useGetNotifications = (): ReturnProps => {
    */
 
   const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
-    [Query.GET_NOTIFICATIONS, username],
+    [QUERY.GET_NOTIFICATIONS, username],
     (_key, _username, offset = 0) => requestGetNotifications(offset),
     {
       getFetchMore: (last) => last.next,

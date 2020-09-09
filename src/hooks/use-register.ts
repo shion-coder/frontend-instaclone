@@ -1,22 +1,17 @@
 import { MutateFunction, useMutation } from 'react-query';
 import { useDispatch } from 'react-redux';
-import { FormikHelpers } from 'formik';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
-import { RegisterProps, ReturnAuthProps, Toast } from 'types';
+import { RegisterProps, ReturnAuthProps, TOAST } from 'types';
 import { addUser } from 'store';
 import { requestRegister } from 'services';
+import { errorMessage } from 'utils';
 
 /* -------------------------------------------------------------------------- */
 
-type Variables = {
-  values: RegisterProps;
-  formik: FormikHelpers<RegisterProps>;
-};
-
 type ReturnProps = {
-  register: MutateFunction<ReturnAuthProps, AxiosError, Variables>;
+  register: MutateFunction<ReturnAuthProps, AxiosError, RegisterProps>;
   isLoading: boolean;
 };
 
@@ -27,15 +22,15 @@ export const useRegister = (): ReturnProps => {
    * Get register function and handle it on error or on success
    */
 
-  const [register, { isLoading }] = useMutation<ReturnAuthProps, AxiosError, Variables>(
-    (variables) => requestRegister(variables.values),
+  const [register, { isLoading }] = useMutation<ReturnAuthProps, AxiosError, RegisterProps>(
+    (variables) => requestRegister(variables),
     {
-      onError: (error, variables) => {
+      onError: () => {
         /**
-         * Set formik form errors when error exist
+         * If error something weird happened because all of your register properties validated
          */
 
-        variables.formik.setErrors(error.response?.data.errors);
+        toast.error(errorMessage.wrong, { toastId: TOAST.WRONG });
       },
       onSuccess: (data) => {
         /**
@@ -45,7 +40,7 @@ export const useRegister = (): ReturnProps => {
         dispatch(addUser(data));
 
         toast.success(`Welcome ${data.user.fullName}. Please check your email for confirmation`, {
-          toastId: Toast.WELCOME,
+          toastId: TOAST.WELCOME,
         });
       },
     },

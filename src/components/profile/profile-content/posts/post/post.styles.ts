@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Grid } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DefaultCommentIcon from '@material-ui/icons/Comment';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -9,9 +10,8 @@ type ImageProps = {
   filter?: string;
 };
 
-export const Container = styled.div`
+export const Container = styled(Grid)`
   position: relative;
-  height: 100%;
 `;
 
 export const Image = styled.img<ImageProps>`

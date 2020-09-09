@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 
-import { Container, Image, StyledAvatar as Avatar, Name, Item, Text } from './unfollow-modal.styles';
+import Avatar from 'components/common/avatar';
+
+import { Container, Image, Name, Item, Text } from './unfollow-modal.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -14,7 +16,7 @@ type Props = {
 const UnfollowModal: FC<Props> = ({ avatar, fullName, handleFollow, closeUnfollowModal }) => (
   <Container>
     <Image>
-      <Avatar src={avatar} />
+      <Avatar src={avatar} width="8rem" height="8rem" />
 
       <Name>{fullName}</Name>
     </Image>

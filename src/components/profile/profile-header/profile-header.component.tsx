@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { Paper, Grid } from '@material-ui/core';
 
 import { ReturnGetUserProps } from 'types';
 import Avatar from './profile-header-avatar';
 import Info from './profile-header-info';
 
-import { Container } from './profile-header.styles';
+import { AvatarContainer, InfoContainer } from './profile-header.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -13,11 +14,17 @@ type Props = {
 };
 
 const ProfileHeader: FC<Props> = ({ profile }) => (
-  <Container>
-    <Avatar profile={profile} />
+  <Paper elevation={4}>
+    <Grid container>
+      <AvatarContainer item xs={12} sm={4} container justify="center" alignItems="center">
+        <Avatar profile={profile} />
+      </AvatarContainer>
 
-    <Info profile={profile} />
-  </Container>
+      <InfoContainer item xs={12} sm={8}>
+        <Info profile={profile} />
+      </InfoContainer>
+    </Grid>
+  </Paper>
 );
 
 export default ProfileHeader;

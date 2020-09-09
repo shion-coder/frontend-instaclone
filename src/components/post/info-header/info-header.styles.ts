@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Avatar } from '@material-ui/core';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Skeleton from '@material-ui/lab/Skeleton';
 
@@ -11,13 +10,6 @@ export const Container = styled.div`
   padding: 0.6rem 1.5rem;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
-`;
-
-export const StyledAvatar = styled(Avatar)`
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-right: 1rem;
-  cursor: pointer;
 `;
 
 export const AvatarSkeleton = styled(Skeleton).attrs(() => ({

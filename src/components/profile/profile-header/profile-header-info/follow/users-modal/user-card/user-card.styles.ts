@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Avatar } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 /* -------------------------------------------------------------------------- */
@@ -9,11 +8,6 @@ export const Container = styled.div`
   align-items: center;
   padding: 0.8rem 1.5rem;
   width: 100%;
-`;
-
-export const StyledAvatar = styled(Avatar)`
-  width: 3rem;
-  height: 3rem;
 `;
 
 export const AvatarSkeleton = styled(Skeleton).attrs(() => ({

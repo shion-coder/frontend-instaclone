@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
+import { Grid } from '@material-ui/core';
 
 import { ReturnGetUserProps } from 'types';
 import { useGetPosts } from 'hooks';
 import Post from './post';
-import EmptyPost from './empty-post';
 import { PostsLoading, Loading } from './posts.loading';
+import EmptyPost from './empty-post';
 
-import { Container, LoadMore } from './posts.styles';
+import { Content, Load } from './posts.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -45,15 +46,17 @@ const Posts: FC<Props> = ({
   };
 
   return (
-    <>
-      <Container>{renderPosts()}</Container>
+    <Content>
+      <Grid container spacing={2}>
+        {renderPosts()}
+      </Grid>
 
       {canFetchMore && (
-        <LoadMore ref={ref}>
+        <Load container spacing={2} ref={ref}>
           <PostsLoading />
-        </LoadMore>
+        </Load>
       )}
-    </>
+    </Content>
   );
 };
 

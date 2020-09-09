@@ -2,7 +2,7 @@ import React, { FC, createContext, useState, useContext, useEffect } from 'react
 import { queryCache } from 'react-query';
 import socketIo from 'socket.io-client';
 
-import { SocketEvent, Query } from 'types';
+import { SOCKET_EVENT, QUERY } from 'types';
 import { API_URL } from 'config';
 import { useUser } from 'hooks';
 
@@ -29,8 +29,8 @@ export const SocketProvider: FC = ({ children }) => {
         query: { token },
       });
 
-      socket.on(SocketEvent.NEW_NOTIFICATION, () => {
-        queryCache.invalidateQueries(Query.GET_NOTIFICATIONS);
+      socket.on(SOCKET_EVENT.NEW_NOTIFICATION, () => {
+        queryCache.invalidateQueries(QUERY.GET_NOTIFICATIONS);
       });
     }
 

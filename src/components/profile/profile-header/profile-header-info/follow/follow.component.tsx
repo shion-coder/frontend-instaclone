@@ -1,11 +1,12 @@
 import React, { FC, Dispatch, SetStateAction } from 'react';
 import Modal from 'styled-react-modal';
+import { Typography, Box } from '@material-ui/core';
 
 import { ReturnGetUserProps } from 'types';
 import { useModal } from 'hooks';
 import UsersModal from './users-modal';
 
-import { Content, Number } from './follow.styles';
+import { Content } from './follow.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -20,17 +21,21 @@ const Follow: FC<Props> = ({ route, count, profile, setUserProfile }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
-    <>
-      <Content item xs={4} onClick={openModal}>
-        <Number>{count}</Number>
+    <Content>
+      <Typography variant="body2" onClick={openModal}>
+        <Box component="span" fontWeight="fontWeightBold">
+          {count}
+        </Box>
 
-        {` ${route}`}
-      </Content>
+        <Box component="span" fontSize="0.8rem" letterSpacing={1}>
+          {` ${route}`}
+        </Box>
+      </Typography>
 
       <Modal isOpen={isOpen} onBackgroundClick={closeModal} onEscapeKeydown={closeModal}>
         <UsersModal route={route} profile={profile} setUserProfile={setUserProfile} closeModal={closeModal} />
       </Modal>
-    </>
+    </Content>
   );
 };
 

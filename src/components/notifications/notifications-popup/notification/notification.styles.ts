@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Avatar } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 /* -------------------------------------------------------------------------- */
@@ -14,12 +13,6 @@ export const Container = styled.div<ReadProps>`
   padding: 0.8rem 1.5rem;
   width: 100%;
   background: ${({ theme, read }) => (read === 'unread' ? theme.colors.unread : theme.colors.light)};
-`;
-
-export const StyledAvatar = styled(Avatar)`
-  width: 3rem;
-  height: 3rem;
-  cursor: pointer;
 `;
 
 export const AvatarSkeleton = styled(Skeleton).attrs(() => ({

@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from 'react-query';
 
-import { ReturnGetPostsProps, Query } from 'types';
+import { ReturnGetPostsProps, QUERY } from 'types';
 import { useIntersectionObserver } from 'hooks';
 import { requestGetPosts } from 'services';
 
@@ -19,7 +19,7 @@ export const useGetPosts = (username: string): ReturnProps => {
    */
 
   const { data, isLoading, fetchMore, canFetchMore } = useInfiniteQuery(
-    [Query.GET_POSTS, username],
+    [QUERY.GET_POSTS, username],
     (_key, username: string, offset = 0) => requestGetPosts(username, offset),
     {
       getFetchMore: (last) => last.next,

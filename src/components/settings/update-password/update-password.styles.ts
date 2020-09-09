@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form } from 'formik';
 
-import Button from 'components/common/formik-button';
+import Button from 'components/common/button/formik-button';
 import Field from 'components/common/formik-field';
 
 /* -------------------------------------------------------------------------- */

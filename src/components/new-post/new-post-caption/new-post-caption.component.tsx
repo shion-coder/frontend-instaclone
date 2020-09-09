@@ -3,22 +3,13 @@ import { useMutation } from 'react-query';
 import { AxiosError, CancelTokenSource } from 'axios';
 import { toast } from 'react-toastify';
 
-import { PostModal, Toast } from 'types';
+import { POST_MODAL, TOAST } from 'types';
 import { useUser, useCustomHistory } from 'hooks';
 import { requestCreatePost } from 'services';
+import Avatar from 'components/common/avatar';
 import Loader from 'components/loader/layer-loader';
 
-import {
-  Container,
-  Header,
-  Back,
-  Title,
-  Submit,
-  Body,
-  StyledAvatar as Avatar,
-  Text,
-  Preview,
-} from './new-post-caption.styles';
+import { Container, Header, Back, Title, Submit, Body, Text, Preview } from './new-post-caption.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -28,7 +19,7 @@ type Props = {
   handleClose: () => void;
   source: CancelTokenSource;
   filter: string;
-  setActiveModal: Dispatch<SetStateAction<PostModal>>;
+  setActiveModal: Dispatch<SetStateAction<POST_MODAL>>;
 };
 
 const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, filter, setActiveModal }) => {
@@ -45,7 +36,7 @@ const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, fil
     (formData: FormData | undefined) => requestCreatePost(formData, source),
     {
       onError: (err: AxiosError) => {
-        toast.error(err.response?.data.error, { toastId: Toast.UPLOAD_ERROR });
+        toast.error(err.response?.data.error, { toastId: TOAST.UPLOAD_ERROR });
       },
       onSuccess: () => {
         handleClose();
@@ -59,7 +50,7 @@ const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, fil
    * Handle back to filter modal, change caption and submit post
    */
 
-  const handleBack = () => setActiveModal(PostModal.Filter);
+  const handleBack = () => setActiveModal(POST_MODAL.FILTER);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => setCaption(e.target.value);
 

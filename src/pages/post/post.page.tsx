@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Grid } from '@material-ui/core';
 
-import { Query } from 'types';
+import { QUERY } from 'types';
 import { requestGetPost } from 'services';
 import Loader from 'components/loader/lottie-loader';
 import NotFound from 'pages/not-found';
@@ -21,7 +21,7 @@ type ParamProps = {
 
 const Post: FC = () => {
   const { id }: ParamProps = useParams();
-  const { data, isLoading } = useQuery([Query.GET_POST, id], () => requestGetPost(id));
+  const { data, isLoading } = useQuery([QUERY.GET_POST, id], () => requestGetPost(id));
 
   if (isLoading) return <Loader />;
 

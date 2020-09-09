@@ -9,7 +9,7 @@ import Posts from './posts';
 import Saved from './saved';
 import Tagged from './tagged';
 
-import { Container, Category, StyledTabs as Tabs, StyledTab as Tab, Content } from './profile-content.styles';
+import { Content, StyledTabs as Tabs, StyledTab as Tab } from './profile-content.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -57,25 +57,23 @@ const ProfileContent: FC<Props> = ({ profile }) => {
   };
 
   return (
-    <Container>
-      <Category>
-        <Tabs value={selectedTab} indicatorColor="primary" textColor="primary" centered onChange={handleChange}>
-          <Tab icon={<AppsIcon />} label="Posts" />
+    <Content>
+      <Tabs value={selectedTab} centered onChange={handleChange}>
+        <Tab icon={<AppsIcon />} label="Posts" />
 
-          <Tab icon={<BookmarkIcon />} label="Saved" display={profile.isCurrentUser ? 1 : 0} />
+        <Tab icon={<BookmarkIcon />} label="Saved" display={profile.isCurrentUser ? 1 : 0} />
 
-          <Tab icon={<AccountBoxIcon />} label="Tagged" />
-        </Tabs>
-      </Category>
+        <Tab icon={<AccountBoxIcon />} label="Tagged" />
+      </Tabs>
 
-      <Content>
+      <>
         {selectedTab === 0 && <Posts profile={profile} />}
 
         {selectedTab === 1 && <Saved profile={profile} />}
 
         {selectedTab === 2 && <Tagged profile={profile} />}
-      </Content>
-    </Container>
+      </>
+    </Content>
   );
 };
 

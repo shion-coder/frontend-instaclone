@@ -3,13 +3,9 @@ import Badge from '@material-ui/core/Badge';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled(Badge)`
-  margin-right: 1rem;
-  position: relative;
-  height: 100%;
-
-  .MuiBadge-anchorOriginTopRightRectangle {
-    top: 4px;
-    right: 4px;
+export const StyledBadge = styled(Badge)`
+  .MuiBadge-badge {
+    top: 12px;
+    right: 8px;
   }
 `;

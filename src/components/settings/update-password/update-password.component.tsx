@@ -39,9 +39,7 @@ const UpdatePassword: FC = () => {
 
           <Field name="confirmNewPassword" type="password" fullWidth required />
 
-          <Button type="submit" fullWidth>
-            Update Password
-          </Button>
+          <Button fullWidth>Update Password</Button>
         </Form>
       </Formik>
     </Container>

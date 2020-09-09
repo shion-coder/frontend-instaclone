@@ -3,7 +3,7 @@ import { useMutation, queryCache } from 'react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
-import { ReturnGetUserProps, Query, Toast } from 'types';
+import { ReturnGetUserProps, QUERY, TOAST } from 'types';
 import { requestFollow } from 'services';
 
 /* -------------------------------------------------------------------------- */
@@ -33,7 +33,7 @@ export const useFollow = (
 
   const [followUser, { isLoading }] = useMutation(() => requestFollow(username), {
     onError: (err: AxiosError) => {
-      toast.error(err.response?.data.error, { toastId: Toast.FOLLOW_ERROR });
+      toast.error(err.response?.data.error, { toastId: TOAST.FOLLOW_ERROR });
     },
     onSuccess: (data) => {
       /**
@@ -88,7 +88,7 @@ export const useFollow = (
        * Renew query cache of get user profile later
        */
 
-      return queryCache.invalidateQueries([Query.GET_USER, userProfile.user.username]);
+      return queryCache.invalidateQueries([QUERY.GET_USER, userProfile.user.username]);
     },
   });
 

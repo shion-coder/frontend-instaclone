@@ -1,23 +1,25 @@
 import React, { FC, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, ButtonProps } from '@material-ui/core';
+import { ButtonProps } from '@material-ui/core';
 
 import { ReturnAuthProps } from 'types';
 import { addUser } from 'store';
 import { useCustomHistory, usePopup } from 'hooks';
 import { useSocketListener } from 'contexts/socket';
+import Button from 'components/common/button';
 
 /* -------------------------------------------------------------------------- */
 
 type Props = ButtonProps & {
-  provider: string;
+  children: string;
+  provider: 'google' | 'facebook';
   state?: {
     from: Location;
   };
-  children: string;
+  layer?: 'dark' | 'light';
 };
 
-const OauthButton: FC<Props> = ({ provider, state, children, ...otherProps }) => {
+const OauthButton: FC<Props> = ({ children, provider, state, layer, ...otherProps }) => {
   const popup = useRef<Window | null>(null);
 
   const dispatch = useDispatch();
@@ -46,7 +48,7 @@ const OauthButton: FC<Props> = ({ provider, state, children, ...otherProps }) =>
   });
 
   return (
-    <Button variant="contained" color="primary" onClick={handlePopup} {...otherProps}>
+    <Button layer={layer} onClick={handlePopup} {...otherProps}>
       {children}
     </Button>
   );

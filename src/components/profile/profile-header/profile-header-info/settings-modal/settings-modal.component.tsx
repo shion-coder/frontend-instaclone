@@ -2,8 +2,9 @@ import React, { FC } from 'react';
 
 import { ReturnGetUserProps } from 'types';
 import { useCustomHistory, useLogout } from 'hooks';
+import Avatar from 'components/common/avatar';
 
-import { Container, Image, StyledAvatar as Avatar, Name, Item, Text } from './settings-modal.styles';
+import { Container, Image, Name, Item, Text } from './settings-modal.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -24,7 +25,7 @@ const SettingsModal: FC<Props> = ({
   return (
     <Container>
       <Image>
-        <Avatar src={avatar} />
+        <Avatar src={avatar} width="8rem" height="8rem" />
 
         <Name>{fullName}</Name>
       </Image>

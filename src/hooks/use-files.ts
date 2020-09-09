@@ -2,7 +2,7 @@ import { RefObject, ChangeEvent, ReactText, useState } from 'react';
 import axios, { CancelTokenSource } from 'axios';
 import { toast } from 'react-toastify';
 
-import { Toast } from 'types';
+import { TOAST } from 'types';
 import { MAX_FILE_UPLOAD } from 'config';
 import { toastMessage, imageTypes } from 'utils';
 
@@ -45,7 +45,7 @@ export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData
       if (fileArray.length > 1) {
         setError(true);
 
-        return toast.error(toastMessage.maxImages, { toastId: Toast.UPLOAD_ERROR });
+        return toast.error(toastMessage.maxImages, { toastId: TOAST.UPLOAD_ERROR });
       }
 
       const data = new FormData();
@@ -62,7 +62,7 @@ export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData
             ref.current.value = '';
           }
 
-          return toast.error(toastMessage.fileType, { toastId: Toast.UPLOAD_ERROR });
+          return toast.error(toastMessage.fileType, { toastId: TOAST.UPLOAD_ERROR });
         }
 
         /**
@@ -76,7 +76,7 @@ export const useFiles = (ref?: RefObject<HTMLInputElement>, fn?: (data: FormData
             ref.current.value = '';
           }
 
-          return toast.error(toastMessage.fileSize, { toastId: Toast.UPLOAD_ERROR });
+          return toast.error(toastMessage.fileSize, { toastId: TOAST.UPLOAD_ERROR });
         }
 
         data.append('image', file);

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Tabs, Tab } from '@material-ui/core';
+import { Grid, Tabs, Tab } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
@@ -7,20 +7,20 @@ type TabProps = {
   display?: number;
 };
 
-export const Container = styled.div`
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
+export const Content = styled(Grid)`
+  padding: ${({ theme }) => theme.material.spacing(5, 0, 0)};
 `;
 
-export const Category = styled.div``;
-
-export const StyledTabs = styled(Tabs)``;
+export const StyledTabs = styled(Tabs)`
+  @media screen and (max-width: 599px) {
+    .MuiTabs-flexContainer {
+      justify-content: space-around;
+    }
+  }
+`;
 
 export const StyledTab = styled(Tab)<TabProps>`
-  text-transform: capitalize;
   font-weight: bold;
+  text-transform: capitalize;
   display: ${({ display }) => (display === 0 ? 'none' : 'inline')};
 `;
-
-export const Content = styled.div``;

@@ -9,6 +9,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 3rem;
+  grid-column: span 3;
 `;
 
 export const Icon = styled(BookmarkBorderIcon)`

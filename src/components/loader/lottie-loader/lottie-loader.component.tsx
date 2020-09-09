@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 
+import Lottie from 'components/common/lottie';
 import meow from 'assets/animations/loading-meow.json';
 
-import { Container, StyledLottie as Lottie } from './lottie-loader.styles';
+import { Wrapper } from './lottie-loader.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -11,10 +12,10 @@ type Props = {
   height?: string;
 };
 
-const LoaderLottie: FC<Props> = ({ width, height }) => (
-  <Container>
-    <Lottie play loop animationData={meow} width={width} height={height} />
-  </Container>
+const LottieLoader: FC<Props> = ({ width, height }) => (
+  <Wrapper>
+    <Lottie animation={meow} width={width ? width : '15rem'} height={height ? height : '15rem'} />
+  </Wrapper>
 );
 
-export default LoaderLottie;
+export default LottieLoader;

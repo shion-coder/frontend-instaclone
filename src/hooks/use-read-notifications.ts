@@ -1,6 +1,6 @@
 import { MutateFunction, useMutation, queryCache } from 'react-query';
 
-import { ReturnReadNotificationsProps, ReturnGetNotificationsProps, Query } from 'types';
+import { ReturnReadNotificationsProps, ReturnGetNotificationsProps, QUERY } from 'types';
 import { useUser } from 'hooks';
 import { requestReadNotifications } from 'services';
 
@@ -24,7 +24,7 @@ export const useReadNotifications = (): ReturnProps => {
        */
 
       const previousResult = queryCache.getQueryData<ReturnGetNotificationsProps[]>([
-        Query.GET_NOTIFICATIONS,
+        QUERY.GET_NOTIFICATIONS,
         username,
       ]);
 
@@ -38,10 +38,10 @@ export const useReadNotifications = (): ReturnProps => {
         return { ...queryResult, notifications: newNotifications, unread: 0 };
       });
 
-      queryCache.setQueryData([Query.GET_NOTIFICATIONS, username], newResult);
+      queryCache.setQueryData([QUERY.GET_NOTIFICATIONS, username], newResult);
     },
     onSuccess: () => {
-      queryCache.invalidateQueries([Query.GET_NOTIFICATIONS, username]);
+      queryCache.invalidateQueries([QUERY.GET_NOTIFICATIONS, username]);
     },
   });
 

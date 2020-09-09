@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Form } from 'formik';
 import { Button } from '@material-ui/core';
 
-import FormikButton from 'components/common/formik-button';
+import FormikButton from 'components/common/button/formik-button';
 
 /* -------------------------------------------------------------------------- */
 
