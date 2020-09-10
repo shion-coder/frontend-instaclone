@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled.footer`
+export const Wrapper = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;

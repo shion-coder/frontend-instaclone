@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Grid } from '@material-ui/core';
 
 import { ReturnGetUserProps } from 'types';
 import { useGetSaved } from 'hooks';
@@ -6,7 +7,7 @@ import Post from '../posts/post';
 import { PostsLoading, Loading } from '../posts/posts.loading';
 import EmptySaved from './empty-saved';
 
-import { Container, LoadMore } from './saved.styles';
+import { Content, Load } from './saved.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -44,15 +45,17 @@ const Saved: FC<Props> = ({
   };
 
   return (
-    <>
-      <Container>{renderPosts()}</Container>
+    <Content>
+      <Grid container spacing={2}>
+        {renderPosts()}
+      </Grid>
 
       {canFetchMore && (
-        <LoadMore ref={ref}>
+        <Load ref={ref}>
           <PostsLoading />
-        </LoadMore>
+        </Load>
       )}
-    </>
+    </Content>
   );
 };
 

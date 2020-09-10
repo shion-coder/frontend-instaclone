@@ -3,10 +3,10 @@ import { IconButton } from '@material-ui/core';
 import ExploreIcon from '@material-ui/icons/Explore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-import NewPost from 'components/new-post/new-post-button';
+import NewPostButton from 'components/new-post/new-post-button';
 import Notifications from 'components/notifications';
 
-import { Container } from './auth.styles';
+import { Wrapper } from './auth.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -16,8 +16,8 @@ type Props = {
 };
 
 const Auth: FC<Props> = ({ goExplore, goUser }) => (
-  <Container>
-    <NewPost />
+  <Wrapper>
+    <NewPostButton />
 
     <IconButton onClick={goExplore}>
       <ExploreIcon />
@@ -28,7 +28,7 @@ const Auth: FC<Props> = ({ goExplore, goUser }) => (
     <IconButton onClick={goUser}>
       <AccountCircleIcon />
     </IconButton>
-  </Container>
+  </Wrapper>
 );
 
 export default Auth;

@@ -4,7 +4,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 /* -------------------------------------------------------------------------- */
 
 type ReadProps = {
-  read?: 'read' | 'unread';
+  read?: boolean;
 };
 
 export const Container = styled.div<ReadProps>`
@@ -12,7 +12,7 @@ export const Container = styled.div<ReadProps>`
   align-items: center;
   padding: 0.8rem 1.5rem;
   width: 100%;
-  background: ${({ theme, read }) => (read === 'unread' ? theme.colors.unread : theme.colors.light)};
+  background: ${({ theme, read }) => (!read ? theme.colors.dark.main : 'inherit')};
 `;
 
 export const AvatarSkeleton = styled(Skeleton).attrs(() => ({
@@ -28,9 +28,9 @@ export const Info = styled.div`
   margin-left: 1.5rem;
 `;
 
-export const Text = styled.span<ReadProps>`
+export const Text = styled.span`
   font-size: 0.8rem;
-  color: ${({ theme, read }) => (read === 'unread' ? theme.colors.light : theme.colors.dark)};
+  color: ${({ theme }) => theme.material.palette.text.primary};
 `;
 
 export const TextSkeleton = styled(Skeleton).attrs(() => ({
@@ -46,10 +46,10 @@ export const Name = styled.span`
   cursor: pointer;
 `;
 
-export const Date = styled.span<ReadProps>`
+export const Date = styled.span`
   font-size: 0.8rem;
   margin-top: 0.3rem;
-  color: ${({ theme, read }) => (read === 'unread' ? theme.colors.light : theme.colors.medium)};
+  color: ${({ theme }) => theme.material.palette.text.secondary};
 `;
 
 export const DateSkeleton = styled(Skeleton).attrs(() => ({

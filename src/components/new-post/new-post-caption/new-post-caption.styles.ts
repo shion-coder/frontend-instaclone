@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Paper, Grid } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
@@ -12,73 +13,74 @@ type LoadingProps = {
   loading?: number;
 };
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: white;
-  padding: 1rem;
-  border-radius: 4px;
-  max-width: 80vw;
-  max-height: 80vh;
+export const StyledPaper = styled(Paper)`
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem 0px ${({ theme }) => theme.colors.grey};
 `;
 
-export const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
+export const Wrapper = styled(Grid)`
+  padding: 1rem;
+`;
+
+export const Header = styled(Grid)`
   margin-bottom: 1rem;
 `;
 
 export const Back = styled(ArrowBackIosIcon)<LoadingProps>`
   cursor: ${({ loading }) => (loading === 1 ? 'auto' : 'pointer')};
   pointer-events: ${({ loading }) => (loading === 1 ? 'none' : 'auto')};
+  color: ${({ theme }) => theme.material.palette.text.secondary};
+
+  :hover {
+    color: ${({ theme }) => theme.material.palette.text.primary};
+  }
 `;
 
 export const Title = styled.span`
   font-weight: bold;
   letter-spacing: 1px;
-  color: ${({ theme }) => theme.colors.dark};
+  color: ${({ theme }) => theme.material.palette.text.primary};
 `;
 
 export const Submit = styled(CameraAltIcon)<LoadingProps>`
   cursor: ${({ loading }) => (loading === 1 ? 'auto' : 'pointer')};
   pointer-events: ${({ loading }) => (loading === 1 ? 'none' : 'auto')};
+  color: ${({ theme }) => theme.material.palette.text.secondary};
+
+  :hover {
+    color: ${({ theme }) => theme.material.palette.text.primary};
+  }
 `;
 
-export const Body = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const Body = styled(Grid)`
   padding: 1rem;
-  border: ${({ theme }) => `1px solid ${theme.colors.solitude}`};
-  border-radius: 4px;
+  border: ${({ theme }) => `1px solid ${theme.material.palette.divider}`};
+  border-radius: 0.5rem;
   position: relative;
-`;
-
-export const Layer = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: ${({ theme }) => theme.colors.lightLayer};
-  z-index: 1;
 `;
 
 export const Text = styled.textarea`
   height: 3rem;
-  width: 30vw;
-  margin: 0 1rem;
+  flex: 1;
+  margin: 0 1.5rem;
   resize: none;
   border: none;
   outline: none;
   background: white;
   font-family: inherit;
+  color: ${({ theme }) => theme.material.palette.text.primary};
+  background: ${({ theme }) => theme.material.palette.background.paper};
+
+  ::placeholder {
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+  }
 `;
 
 export const Preview = styled.img<PreviewProps>`
   width: 4rem;
   height: 3rem;
   object-fit: cover;
-  border-radius: 2px;
+  border-radius: 0.25rem;
   filter: ${({ filter }) => (filter ? filter : 'none')};
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Paper, Grid, GridList, GridListTile, GridListTileBar } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
@@ -6,64 +7,75 @@ type PreviewProps = {
   filter?: string;
 };
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: white;
+type FilterProps = {
+  filter?: string;
+};
+
+type StyledGridListTileBarProps = {
+  selected?: boolean;
+};
+
+export const StyledPaper = styled(Paper)`
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem 0px ${({ theme }) => theme.colors.grey};
+`;
+
+export const Wrapper = styled(Grid)`
   padding: 1rem;
-  border-radius: 4px;
-  max-width: 80vw;
   max-height: 80vh;
 `;
 
-export const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-`;
-
-export const Title = styled.span`
-  font-weight: bold;
-  letter-spacing: 1px;
-  color: ${({ theme }) => theme.colors.dark};
+export const Header = styled(Grid)`
+  margin-bottom: 1.5rem;
 `;
 
 export const Button = styled.span`
+  cursor: pointer;
   font-weight: bold;
   letter-spacing: 1px;
-  color: ${({ theme }) => theme.material.palette.primary.main};
-  cursor: pointer;
+  color: ${({ theme }) => theme.material.palette.text.secondary};
+
+  :hover {
+    color: ${({ theme }) => theme.material.palette.text.primary};
+  }
 `;
 
 export const Preview = styled.img<PreviewProps>`
   object-fit: contain;
-  min-width: 40vw;
-  max-width: 80vw;
-  max-height: calc(80vh - 8.6rem - 24px);
+  max-width: 100%;
+  max-height: 40vh;
   filter: ${({ filter }) => (filter ? filter : 'none')};
 `;
 
-export const FilterList = styled.div`
+export const FilterList = styled(Grid)`
   margin-top: 1rem;
-  display: flex;
-  overflow-x: auto;
+`;
 
-  /**
-   * Center by margin instead of justify content to prevent cutoff with overflow
-   */
+export const StyledGridList = styled(GridList)`
+  flex-wrap: nowrap;
+  transform: translateZ(0);
+`;
 
-  ::before,
-  ::after {
-    content: '';
-  }
-  ::before {
-    margin-left: auto;
-  }
-  ::after {
-    margin-right: auto;
-  }
+export const StyledGridListTile = styled(GridListTile)`
+  max-height: 15vh;
+  cursor: pointer;
+`;
 
-  div:last-of-type {
-    margin-right: 0;
+export const StyledGridListTileBar = styled(GridListTileBar)<StyledGridListTileBarProps>`
+  max-height: 1.8rem;
+  background: ${({ theme, selected }) => (selected ? theme.material.palette.common.black : theme.colors.dark.main)};
+
+  .MuiGridListTileBar-title {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: ${({ theme }) => theme.material.palette.text.primary};
   }
+`;
+
+export const Filter = styled.img<FilterProps>`
+  top: 50%;
+  width: 100%;
+  position: relative;
+  transform: translateY(-50%);
+  filter: ${({ filter }) => (filter ? filter : 'none')};
 `;

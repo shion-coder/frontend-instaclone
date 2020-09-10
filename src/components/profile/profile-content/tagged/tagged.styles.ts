@@ -1,18 +1,12 @@
 import styled from 'styled-components';
+import { Grid } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
-  padding: 2rem;
+export const Content = styled.div`
+  padding-top: ${({ theme }) => theme.material.spacing(5) + 'px'};
 `;
 
-export const LoadMore = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
-  margin-top: -1rem;
-  padding: 0 2rem;
+export const Load = styled(Grid)`
+  margin-top: ${({ theme }) => theme.material.spacing(1) + 'px'};
 `;

@@ -33,7 +33,7 @@ const Notification: FC<Props> = ({
   };
 
   return (
-    <Container read={read ? 'read' : 'unread'}>
+    <Container read={read}>
       <Avatar src={avatar} width="3rem" height="3rem" cursor onClick={handleClick} />
 
       <Info>

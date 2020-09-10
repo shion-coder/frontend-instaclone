@@ -11,6 +11,10 @@ export const StyledContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0 2rem;
+
+  @media screen and (max-width: 599px) {
+    padding: 1rem;
+  }
 `;
 
 export const StyledForm = styled(Form)`

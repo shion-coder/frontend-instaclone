@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import NewPost from 'components/new-post/new-post-button';
 
-import { Container, Icon, Title, Text } from './empty-post.styles';
+import { Wrapper, Icon, Title, Text } from './empty-post.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -12,7 +12,7 @@ type Props = {
 };
 
 const EmptyPost: FC<Props> = ({ isCurrentUser, fullName }) => (
-  <Container>
+  <Wrapper container direction="column" alignItems="center">
     {isCurrentUser ? (
       <>
         <Icon />
@@ -32,7 +32,7 @@ const EmptyPost: FC<Props> = ({ isCurrentUser, fullName }) => (
         <Text>When {fullName} posts, you'll see their photos here</Text>
       </>
     )}
-  </Container>
+  </Wrapper>
 );
 
 export default EmptyPost;

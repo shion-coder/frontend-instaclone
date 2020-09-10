@@ -1,7 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-import { MEDIA_QUERY } from 'types';
+import { useTheme, useMediaQuery } from '@material-ui/core';
 
 import { StyledButton as Button } from './stage-styles';
 
@@ -16,11 +14,11 @@ type Props = {
 };
 
 const StageButton: FC<Props> = ({ icon, complete, active, label, toggleStage }) => {
-  const matches = useMediaQuery(MEDIA_QUERY.MAX_XS);
+  const matchesXS = useMediaQuery(useTheme().breakpoints.down('xs'));
 
   return (
     <Button
-      size={!matches ? 'large' : 'medium'}
+      size={!matchesXS ? 'large' : 'medium'}
       startIcon={icon}
       color={complete ? 'primary' : 'default'}
       disabled={!active && !complete}

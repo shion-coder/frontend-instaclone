@@ -1,11 +1,12 @@
 import React, { FC, useEffect } from 'react';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import { useGetNotifications, useReadNotifications } from 'hooks';
 import { NotificationsPopupLoading } from './notifications-popup.loading';
 import EmptyNotification from './empty-notification';
 import Notification, { NotificationLoading } from './notification';
 
-import { Container, Title, Name, Icon, Content, LoadMore } from './notifications-popup.styles';
+import { Container, Title, Name, Content, LoadMore } from './notifications-popup.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -67,10 +68,10 @@ const NotificationsPopup: FC<Props> = ({ handleClose }) => {
 
   return (
     <Container>
-      <Title>
+      <Title container alignItems="center">
         <Name>Notifications</Name>
 
-        <Icon />
+        <NotificationsIcon />
       </Title>
 
       <Content>

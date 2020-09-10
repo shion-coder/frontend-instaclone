@@ -4,7 +4,7 @@ import { Typography, Box } from '@material-ui/core';
 
 import { ReturnGetUserProps } from 'types';
 import { useModal } from 'hooks';
-import UsersModal from './users-modal';
+import UsersModal from 'components/modal/users-modal';
 
 import { Content } from './follow.styles';
 

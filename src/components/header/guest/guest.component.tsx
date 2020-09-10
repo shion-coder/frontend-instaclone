@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Container, Register, Login } from './guest.styles';
+import { Wrapper, Register, Login } from './guest.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Guest: FC<Props> = ({ goRegister, goLogin }) => (
-  <Container>
+  <Wrapper>
     <Register variant="outlined" onClick={goRegister}>
       Register
     </Register>
@@ -18,7 +18,7 @@ const Guest: FC<Props> = ({ goRegister, goLogin }) => (
     <Login variant="outlined" onClick={goLogin}>
       Login
     </Login>
-  </Container>
+  </Wrapper>
 );
 
 export default Guest;

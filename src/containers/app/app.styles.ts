@@ -8,7 +8,7 @@ export const StyledParticles = styled(Particles).attrs(({ theme }) => ({
   params: {
     particles: {
       number: {
-        value: 50,
+        value: 40,
       },
       color: {
         value: theme.material.palette.text.secondary,
@@ -17,7 +17,7 @@ export const StyledParticles = styled(Particles).attrs(({ theme }) => ({
         color: theme.material.palette.text.secondary,
       },
       size: {
-        value: 3,
+        value: 2,
       },
     },
   },

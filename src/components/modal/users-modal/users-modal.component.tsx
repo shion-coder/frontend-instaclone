@@ -1,4 +1,5 @@
 import React, { FC, Dispatch, SetStateAction } from 'react';
+import { Grid } from '@material-ui/core';
 
 import { ReturnGetUserProps } from 'types';
 import { useGetFollow } from 'hooks';
@@ -6,7 +7,7 @@ import { UsersModalLoading } from './users-modal.loading';
 import EmptyUser from './empty-user';
 import UserCard, { UserCardLoading } from './user-card';
 
-import { Container, Title, Name, Cancel, Content, LoadMore } from './users-modal.styles';
+import { Wrapper, Title, Name, Cancel, Content, LoadMore } from './users-modal.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -59,23 +60,25 @@ const UsersModal: FC<Props> = ({ route, profile, setUserProfile, closeModal }) =
   };
 
   return (
-    <Container>
-      <Title>
-        <Name>{route}</Name>
+    <Wrapper elevation={2}>
+      <Grid container direction="column">
+        <Title>
+          <Name>{route}</Name>
 
-        <Cancel onClick={closeModal} />
-      </Title>
+          <Cancel onClick={closeModal} />
+        </Title>
 
-      <Content>
-        {renderFollow()}
+        <Content>
+          {renderFollow()}
 
-        {canFetchMore && (
-          <LoadMore ref={ref}>
-            <UserCardLoading />
-          </LoadMore>
-        )}
-      </Content>
-    </Container>
+          {canFetchMore && (
+            <LoadMore ref={ref}>
+              <UserCardLoading />
+            </LoadMore>
+          )}
+        </Content>
+      </Grid>
+    </Wrapper>
   );
 };
 

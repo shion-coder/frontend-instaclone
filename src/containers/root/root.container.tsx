@@ -9,7 +9,7 @@ import Contexts from 'containers/contexts';
 import Theme from 'containers/theme';
 import App from 'containers/app';
 
-import { StyledToastContainer as ToastContainer } from './root.styles';
+import { StyledToastContainer as ToastContainer, StyledModal } from './root.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -17,7 +17,7 @@ const Root: FC = () => (
   <Store>
     <Contexts>
       <Theme>
-        <Modal>
+        <Modal backgroundComponent={StyledModal}>
           <ToastContainer limit={3} />
 
           <Router history={history}>

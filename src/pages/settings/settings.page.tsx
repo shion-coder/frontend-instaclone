@@ -1,12 +1,12 @@
 import React, { FC, ChangeEvent, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
+import { useMediaQuery, useTheme, Container, Grid } from '@material-ui/core';
 
 import { PATH } from 'types';
 import UpdateProfile from 'components/settings/update-profile';
 import UpdatePassword from 'components/settings/update-password';
 
-import { Wrapper, Container, StyledTabs as Tabs, StyledTab as Tab } from './settings.styles';
+import { StyledPaper as Paper, StyledTabs as Tabs, StyledTab as Tab } from './settings.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -17,6 +17,7 @@ type ParamsProps = {
 const Setting: FC = () => {
   const history = useHistory();
   const { page }: ParamsProps = useParams();
+  const matchesXS = useMediaQuery(useTheme().breakpoints.down('xs'));
 
   /**
    * Create material ui tab with router
@@ -47,23 +48,29 @@ const Setting: FC = () => {
   };
 
   return (
-    <Wrapper>
-      <Container container spacing={3}>
-        <Grid item xs={4}>
-          <Tabs orientation="vertical" indicatorColor="primary" value={selectedTab} onChange={handleChange}>
-            <Tab label="Edit Profile" />
+    <Container maxWidth="lg">
+      <Grid container justify="center">
+        <Grid item xs={12} sm={11} md={10}>
+          <Paper elevation={4}>
+            <Grid container justify="center" direction={matchesXS ? 'column' : 'row'}>
+              <Grid item xs={12} sm={4}>
+                <Tabs orientation={matchesXS ? 'horizontal' : 'vertical'} value={selectedTab} onChange={handleChange}>
+                  <Tab label="Edit Profile" />
 
-            <Tab label="Change Password" />
-          </Tabs>
+                  <Tab label="Change Password" />
+                </Tabs>
+              </Grid>
+
+              <Grid item xs={12} sm={8}>
+                {selectedTab === 0 && <UpdateProfile />}
+
+                {selectedTab === 1 && <UpdatePassword />}
+              </Grid>
+            </Grid>
+          </Paper>
         </Grid>
-
-        <Grid item xs={8}>
-          {selectedTab === 0 && <UpdateProfile />}
-
-          {selectedTab === 1 && <UpdatePassword />}
-        </Grid>
-      </Container>
-    </Wrapper>
+      </Grid>
+    </Container>
   );
 };
 

@@ -5,7 +5,7 @@ import { Container, AvatarSkeleton, Info, TextSkeleton, DateSkeleton } from './n
 /* -------------------------------------------------------------------------- */
 
 export const NotificationLoading: FC = () => (
-  <Container>
+  <Container read>
     <AvatarSkeleton />
 
     <Info>

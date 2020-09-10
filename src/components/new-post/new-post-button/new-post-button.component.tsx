@@ -4,7 +4,7 @@ import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { useFiles } from 'hooks';
-import NewPostModal from 'components/new-post/new-post-modal';
+import NewPostModal from 'components/modal/new-post-modal';
 
 import { Container, Input, Text } from './new-post-button.styles';
 

@@ -3,10 +3,10 @@ import { Button } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled.div``;
+export const Wrapper = styled.nav``;
 
 export const Register = styled(Button)`
-  margin-right: 10px;
+  margin-right: 1rem;
   font-weight: bold;
 `;
 

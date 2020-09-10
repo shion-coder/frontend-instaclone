@@ -1,15 +1,23 @@
 import React, { FC, useState, useEffect } from 'react';
 import Modal from 'styled-react-modal';
-import { Grid, IconButton, Typography, Box, Link } from '@material-ui/core';
+import { Grid, IconButton, Typography, Box } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import { ReturnGetUserProps } from 'types';
 import { useCustomHistory, useModal, useFollow } from 'hooks';
 import FollowButton from 'components/common/button/follow-button';
-import SettingsModal from './settings-modal';
+import SettingsModal from 'components/modal/settings-modal';
 import Follow from './follow';
 
-import { Name, Settings, StyledButton as Button, Stats, Count, Other } from './profile-header-info.styles';
+import {
+  Name,
+  Settings,
+  StyledButton as Button,
+  Stats,
+  Count,
+  Other,
+  StyledLink as Link,
+} from './profile-header-info.styles';
 
 /* -------------------------------------------------------------------------- */
 

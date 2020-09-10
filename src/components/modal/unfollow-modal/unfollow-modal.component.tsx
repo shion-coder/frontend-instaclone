@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
+import { Grid, Box } from '@material-ui/core';
 
 import Avatar from 'components/common/avatar';
+import Item from 'components/common/list-item-button';
 
-import { Container, Image, Name, Item, Text } from './unfollow-modal.styles';
+import { Wrapper, Image } from './unfollow-modal.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -14,21 +16,25 @@ type Props = {
 };
 
 const UnfollowModal: FC<Props> = ({ avatar, fullName, handleFollow, closeUnfollowModal }) => (
-  <Container>
-    <Image>
-      <Avatar src={avatar} width="8rem" height="8rem" />
+  <Wrapper elevation={2}>
+    <Grid container direction="column">
+      <Image item container direction="column" justify="center" alignItems="center">
+        <Avatar src={avatar} width="8rem" height="8rem" />
 
-      <Name>{fullName}</Name>
-    </Image>
+        <Box component="p" fontWeight="bold" letterSpacing={1}>
+          {fullName}
+        </Box>
+      </Image>
 
-    <Item button onClick={handleFollow}>
-      <Text primary="Unfollow" />
-    </Item>
+      <Grid item onClick={handleFollow}>
+        <Item text="Unfollow" border={1} />
+      </Grid>
 
-    <Item button onClick={closeUnfollowModal}>
-      <Text primary="Cancel" />
-    </Item>
-  </Container>
+      <Grid item onClick={closeUnfollowModal}>
+        <Item text="Cancel" />
+      </Grid>
+    </Grid>
+  </Wrapper>
 );
 
 export default UnfollowModal;

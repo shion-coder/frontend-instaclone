@@ -27,7 +27,7 @@ export const Name = styled.span`
   font-weight: bold;
   letter-spacing: 0.4px;
   font-size: 0.8rem;
-  color: ${({ theme }) => theme.colors.dark};
+  color: ${({ theme }) => theme.material.palette.text.primary};
   cursor: pointer;
 `;
 
@@ -40,7 +40,7 @@ export const NameSkeleton = styled(Skeleton).attrs(() => ({
 export const Username = styled.span`
   font-size: 0.8rem;
   margin-top: 0.2rem;
-  color: ${({ theme }) => theme.colors.medium};
+  color: ${({ theme }) => theme.material.palette.text.secondary};
 `;
 
 export const Button = styled.div`

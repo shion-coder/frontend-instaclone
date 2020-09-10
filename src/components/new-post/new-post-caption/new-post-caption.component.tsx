@@ -1,4 +1,5 @@
 import React, { FC, Dispatch, SetStateAction, ChangeEvent, useState } from 'react';
+import { Grid } from '@material-ui/core';
 import { useMutation } from 'react-query';
 import { AxiosError, CancelTokenSource } from 'axios';
 import { toast } from 'react-toastify';
@@ -9,7 +10,17 @@ import { requestCreatePost } from 'services';
 import Avatar from 'components/common/avatar';
 import Loader from 'components/loader/layer-loader';
 
-import { Container, Header, Back, Title, Submit, Body, Text, Preview } from './new-post-caption.styles';
+import {
+  StyledPaper as Paper,
+  Wrapper,
+  Header,
+  Back,
+  Title,
+  Submit,
+  Body,
+  Text,
+  Preview,
+} from './new-post-caption.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -62,25 +73,29 @@ const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, fil
   };
 
   return (
-    <Container>
-      <Header>
-        <Back fontSize="small" color="primary" onClick={handleBack} loading={isLoading ? 1 : 0} />
+    <Grid item xs={11} sm={10} md={8} lg={6}>
+      <Paper>
+        <Wrapper>
+          <Header container justify="space-between">
+            <Back fontSize="small" onClick={handleBack} loading={isLoading ? 1 : 0} />
 
-        <Title>New Post</Title>
+            <Title>New Post</Title>
 
-        <Submit fontSize="small" color="primary" onClick={handleSubmit} loading={isLoading ? 1 : 0} />
-      </Header>
+            <Submit fontSize="small" onClick={handleSubmit} loading={isLoading ? 1 : 0} />
+          </Header>
 
-      <Body>
-        {isLoading && <Loader color="light" width="60px" height="60px" />}
+          <Body container alignItems="center">
+            {isLoading && <Loader color="dark" width="60px" height="60px" radius="0.5rem" />}
 
-        <Avatar alt="avatar" src={avatar} />
+            <Avatar alt="avatar" src={avatar} />
 
-        <Text placeholder="Write a caption ..." onChange={handleChange} disabled={isLoading} />
+            <Text placeholder="Write a caption ..." onChange={handleChange} disabled={isLoading} />
 
-        <Preview alt="preview" src={preview} filter={filter} />
-      </Body>
-    </Container>
+            <Preview alt="preview" src={preview} filter={filter} />
+          </Body>
+        </Wrapper>
+      </Paper>
+    </Grid>
   );
 };
 

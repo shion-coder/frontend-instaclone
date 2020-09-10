@@ -1,10 +1,9 @@
 import React, { FC, useState } from 'react';
-import { Grid } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme, useMediaQuery, Grid } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 
-import { FormCarouselStage, RegisterProps, MEDIA_QUERY } from 'types';
+import { FormCarouselStage, RegisterProps } from 'types';
 import StageButton from './stage-button';
 import StageForm from './stage-form';
 
@@ -38,7 +37,7 @@ const FormCarousel: FC<Props> = ({ stages }) => {
     confirmPassword: '',
   });
 
-  const matches = useMediaQuery(MEDIA_QUERY.MAX_XS);
+  const matchesXS = useMediaQuery(useTheme().breakpoints.down('xs'));
 
   /**
    * Handle toggle active stage and set stage completed
@@ -58,7 +57,7 @@ const FormCarousel: FC<Props> = ({ stages }) => {
           <React.Fragment key={index}>
             {index > 0 && (
               <Grid item xs={12} sm={1} container justify="center">
-                {!matches ? <DoubleArrowIcon fontSize="small" /> : <KeyboardArrowDownIcon fontSize="small" />}
+                {!matchesXS ? <DoubleArrowIcon fontSize="small" /> : <KeyboardArrowDownIcon fontSize="small" />}
               </Grid>
             )}
 

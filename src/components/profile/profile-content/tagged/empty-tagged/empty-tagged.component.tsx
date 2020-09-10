@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Container, Icon, Title, Text } from './empty-tagged.styles';
+import { Wrapper, Icon, Title, Text } from './empty-tagged.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const EmptyTagged: FC<Props> = ({ isCurrentUser, fullName }) => (
-  <Container>
+  <Wrapper container direction="column" alignItems="center">
     {isCurrentUser ? (
       <>
         <Icon />
@@ -32,7 +32,7 @@ const EmptyTagged: FC<Props> = ({ isCurrentUser, fullName }) => (
         <Text bold>This feature is not yet implemented</Text>
       </>
     )}
-  </Container>
+  </Wrapper>
 );
 
 export default EmptyTagged;

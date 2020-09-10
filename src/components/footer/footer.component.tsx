@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Divider } from '@material-ui/core';
 
-import { Container, Span } from './footer.styles';
+import { Wrapper, Span } from './footer.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -9,7 +9,7 @@ const Footer: FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <Container>
+    <Wrapper>
       <Span variant="subtitle2" color="textSecondary">
         &copy; {year}
       </Span>
@@ -19,7 +19,7 @@ const Footer: FC = () => {
       <Span variant="subtitle2" color="textSecondary">
         Shion
       </Span>
-    </Container>
+    </Wrapper>
   );
 };
 

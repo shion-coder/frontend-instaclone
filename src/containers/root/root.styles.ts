@@ -22,3 +22,16 @@ export const StyledToastContainer = styled(ToastContainer)`
     background: ${({ theme }) => theme.material.palette.secondary.main};
   }
 `;
+
+export const StyledModal = styled.div`
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.69);
+`;

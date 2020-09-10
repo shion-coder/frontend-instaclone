@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid } from '@material-ui/core';
+import { Grid, Link } from '@material-ui/core';
 
 import Button from 'components/common/button';
 
@@ -36,4 +36,8 @@ export const Other = styled(Grid)`
   @media screen and (max-width: 599px) {
     text-align: center;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  word-break: break-all;
 `;

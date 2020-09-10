@@ -11,5 +11,9 @@ export const Input = styled.input`
 export const Text = styled.p`
   cursor: pointer;
   font-weight: bold;
-  color: ${({ theme }) => theme.material.palette.primary.main};
+  color: ${({ theme }) => theme.material.palette.secondary.main};
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
