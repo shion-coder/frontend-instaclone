@@ -27,6 +27,14 @@ export const Container = styled.div`
   }
 
   @media screen and (max-width: 599px) {
+    left: 110%;
+
+    :before {
+      transform: translateX(-140%);
+    }
+  }
+
+  @media screen and (max-width: 340px) {
     left: 150%;
 
     :before {
@@ -54,6 +62,10 @@ export const Content = styled.div`
   overflow: auto;
 
   @media screen and (max-width: 599px) {
+    width: 25rem;
+  }
+
+  @media screen and (max-width: 450px) {
     width: 19rem;
   }
 `;
