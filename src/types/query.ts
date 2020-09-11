@@ -5,5 +5,6 @@ export enum QUERY {
   GET_USER = 'get-user',
   GET_POSTS = 'get-posts',
   GET_SAVED = 'get-saved',
+  GET_TAGGED = 'get-tagged',
   GET_POST = 'get-post',
 }

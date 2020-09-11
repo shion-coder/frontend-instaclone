@@ -98,6 +98,13 @@ export const requestGetSaved = (username: string, offset: unknown): Promise<Retu
   http.get<ReturnGetPostsProps>(`${ENDPOINT.GET_USER}/${username}/saved/${offset}`).then((res) => res.data);
 
 /**
+ * Request get tagged
+ */
+
+export const requestGetTagged = (username: string, offset: unknown): Promise<ReturnGetPostsProps> =>
+  http.get<ReturnGetPostsProps>(`${ENDPOINT.GET_USER}/${username}/tagged/${offset}`).then((res) => res.data);
+
+/**
  * Request get post
  */
 

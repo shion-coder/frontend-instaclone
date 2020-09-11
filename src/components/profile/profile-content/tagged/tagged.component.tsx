@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
 
 import { ReturnGetUserProps } from 'types';
-import { useGetSaved } from 'hooks';
+import { useGetTagged } from 'hooks';
 import Post from '../posts/post';
 import { PostsLoading, Loading } from '../posts/posts.loading';
 import EmptyTagged from './empty-tagged';
@@ -21,7 +21,7 @@ const Tagged: FC<Props> = ({
     isCurrentUser,
   },
 }) => {
-  const { ref, data, isLoading, canFetchMore } = useGetSaved(username);
+  const { ref, data, isLoading, canFetchMore } = useGetTagged(username);
 
   /**
    * Render posts

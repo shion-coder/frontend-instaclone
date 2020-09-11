@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import DefaultCommentIcon from '@material-ui/icons/Comment';
+import ModeCommentIcon from '@material-ui/icons/ModeComment';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 /* -------------------------------------------------------------------------- */
@@ -69,7 +69,7 @@ export const Icon = styled.div`
 
 export const LikeIcon = styled(FavoriteIcon)``;
 
-export const CommentIcon = styled(DefaultCommentIcon)``;
+export const CommentIcon = styled(ModeCommentIcon)``;
 
 export const Number = styled.span`
   margin-left: 0.5rem;

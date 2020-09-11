@@ -17,13 +17,13 @@ const Post: FC<Props> = ({ post: { thumbnail, filter, likeCount, commentCount } 
     <Overlay>
       <Content>
         <Icon>
-          <LikeIcon color="inherit" />
+          <LikeIcon color="inherit" fontSize="small" />
 
           <Number>{likeCount}</Number>
         </Icon>
 
         <Icon>
-          <CommentIcon color="inherit" />
+          <CommentIcon color="inherit" fontSize="small" />
 
           <Number>{commentCount}</Number>
         </Icon>
