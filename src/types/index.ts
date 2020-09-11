@@ -8,8 +8,6 @@ export * from './socket';
 
 export * from './post-modal';
 
-export * from './media-query';
-
 export * from './form';
 
 export * from './form-carousel';
