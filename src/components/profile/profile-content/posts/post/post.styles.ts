@@ -35,6 +35,7 @@ export const ImageSkeleton = styled(Skeleton).attrs(() => ({
 
 export const Overlay = styled.div`
   position: absolute;
+  margin: 0.5rem;
   border-radius: 4px;
   top: 0;
   left: 0;
