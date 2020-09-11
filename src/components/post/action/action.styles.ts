@@ -1,22 +1,13 @@
 import styled from 'styled-components';
+import { Grid, IconButton } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled.div`
-  padding: 1rem;
+export const Wrapper = styled(Grid)`
+  padding: 0.5rem;
   display: flex;
 `;
 
-export const Like = styled.div`
-  margin-right: 1rem;
-`;
-
-export const Comment = styled.div`
-  margin-right: 1rem;
-`;
-
-export const Share = styled.div``;
-
-export const Save = styled.div`
+export const SavedButton = styled(IconButton)`
   margin-left: auto;
 `;

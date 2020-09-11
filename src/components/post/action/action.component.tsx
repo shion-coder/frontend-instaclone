@@ -1,28 +1,32 @@
 import React, { FC } from 'react';
-import { LikeIcon, CommentIcon, ShareIcon, SaveIcon } from 'components/common/icon';
+import { IconButton } from '@material-ui/core';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
+import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
+import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 
-import { Container, Like, Comment, Share, Save } from './action.styles';
+import { Wrapper, SavedButton } from './action.styles';
 
 /* -------------------------------------------------------------------------- */
 
 const Action: FC = () => (
-  <Container>
-    <Like>
-      <LikeIcon />
-    </Like>
+  <Wrapper container>
+    <IconButton>
+      <FavoriteBorderIcon fontSize="small" />
+    </IconButton>
 
-    <Comment>
-      <CommentIcon />
-    </Comment>
+    <IconButton>
+      <ModeCommentOutlinedIcon fontSize="small" />
+    </IconButton>
 
-    <Share>
-      <ShareIcon />
-    </Share>
+    <IconButton>
+      <ShareOutlinedIcon fontSize="small" />
+    </IconButton>
 
-    <Save>
-      <SaveIcon />
-    </Save>
-  </Container>
+    <SavedButton>
+      <BookmarkBorderOutlinedIcon fontSize="small" />
+    </SavedButton>
+  </Wrapper>
 );
 
 export default Action;

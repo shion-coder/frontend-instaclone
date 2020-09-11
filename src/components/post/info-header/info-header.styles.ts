@@ -1,15 +1,14 @@
 import styled from 'styled-components';
+import { Grid } from '@material-ui/core';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0.6rem 1.5rem;
+export const Wrapper = styled(Grid)`
+  padding: ${({ theme }) => theme.material.spacing(1.5, 2)};
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  border-bottom: 1px solid ${({ theme }) => theme.material.palette.divider};
 `;
 
 export const AvatarSkeleton = styled(Skeleton).attrs(() => ({
@@ -21,10 +20,11 @@ export const AvatarSkeleton = styled(Skeleton).attrs(() => ({
 
 export const Name = styled.span`
   font-weight: bold;
-  letter-spacing: 0.4px;
+  letter-spacing: 1px;
   font-size: 0.8rem;
-  color: ${({ theme }) => theme.colors.dark};
   cursor: pointer;
+  margin-left: 1rem;
+  color: ${({ theme }) => theme.material.palette.text.primary};
 `;
 
 export const NameSkeleton = styled(Skeleton).attrs(() => ({

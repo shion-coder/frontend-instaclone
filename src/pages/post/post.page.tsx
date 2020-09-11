@@ -1,17 +1,18 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import useDimensions from 'react-use-dimensions';
 import { Grid } from '@material-ui/core';
 
 import { QUERY } from 'types';
 import { requestGetPost } from 'services';
-import Loader from 'components/loader/lottie-loader';
 import NotFound from 'pages/not-found';
+import Loader from 'components/loader/lottie-loader';
 import InfoHeader from 'components/post/info-header';
 import Comment from 'components/post/comment';
 import Action from 'components/post/action';
 
-import { Container, ImageContainer, Image, PostInfo } from './post.styles';
+import { StyledContainer as Container, Wrapper, Image } from './post.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -20,8 +21,13 @@ type ParamProps = {
 };
 
 const Post: FC = () => {
+  /**
+   * useDimension to get height of wrapper and set it to container base on responsive image
+   */
+
   const { id }: ParamProps = useParams();
   const { data, isLoading } = useQuery([QUERY.GET_POST, id], () => requestGetPost(id));
+  const [ref, { height }] = useDimensions();
 
   if (isLoading) return <Loader />;
 
@@ -32,27 +38,23 @@ const Post: FC = () => {
   } = data;
 
   return (
-    <Grid container>
-      <Grid item xs={1} md={2} />
+    <Container maxWidth="lg" height={height}>
+      <Grid container justify="center">
+        <Wrapper item xs={12} md={11} container ref={ref}>
+          <Grid item xs={12} sm={7}>
+            <Image src={image} filter={filter} />
+          </Grid>
 
-      <Container item container xs={10} md={8}>
-        <ImageContainer item xs={7}>
-          <Image alt="post-image" src={image} filter={filter} />
-        </ImageContainer>
-
-        <Grid item xs={5}>
-          <PostInfo>
+          <Grid item xs={12} sm={5} container direction="column">
             <InfoHeader data={data} />
 
             <Comment />
 
             <Action />
-          </PostInfo>
-        </Grid>
-      </Container>
-
-      <Grid item xs={1} md={2} />
-    </Grid>
+          </Grid>
+        </Wrapper>
+      </Grid>
+    </Container>
   );
 };
 
