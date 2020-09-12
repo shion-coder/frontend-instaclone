@@ -56,7 +56,7 @@ const Post: FC<Props> = ({ postId }) => {
 
             <Comment />
 
-            <Action />
+            <Action id={idQuery} />
 
             <Field />
           </Grid>
