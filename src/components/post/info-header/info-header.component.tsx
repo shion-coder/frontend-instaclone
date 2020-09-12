@@ -17,6 +17,7 @@ type Props = {
 const InfoHeader: FC<Props> = ({
   data: {
     post: {
+      _id,
       author: { fullName, username, avatar },
     },
   },
@@ -33,7 +34,7 @@ const InfoHeader: FC<Props> = ({
       <More onClick={openModal} />
 
       <Modal isOpen={isOpen} onBackgroundClick={closeModal} onEscapeKeydown={closeModal}>
-        <PostModal closeModal={closeModal} />
+        <PostModal id={_id} closeModal={closeModal} />
       </Modal>
     </Wrapper>
   );

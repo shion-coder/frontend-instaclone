@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Modal from 'styled-react-modal';
 
 import { PostProps } from 'types';
-import { useUser, useModal } from 'hooks';
+import { useModal } from 'hooks';
 import PostDetail from 'pages/post';
 
 import { Container, Image, Overlay, Content, Icon, LikeIcon, CommentIcon, Number } from './post.styles';
@@ -15,7 +15,6 @@ type Props = {
 
 const Post: FC<Props> = ({ post: { _id, thumbnail, filter, likeCount, commentCount, author } }) => {
   const { isOpen, openModal, closeModal } = useModal();
-  const { username } = useUser();
 
   /**
    * Handle open and close modal and change url without reload page
@@ -30,7 +29,7 @@ const Post: FC<Props> = ({ post: { _id, thumbnail, filter, likeCount, commentCou
   const handleClose = () => {
     closeModal();
 
-    window.history.pushState(null, '', `/${username}`);
+    window.history.pushState(null, '', `/${author.username}`);
   };
 
   return (
