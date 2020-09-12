@@ -19,3 +19,5 @@ export * from './return';
 export * from './endpoint';
 
 export * from './query';
+
+export * from './notification';

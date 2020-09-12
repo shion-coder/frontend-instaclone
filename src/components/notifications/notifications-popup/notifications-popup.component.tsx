@@ -1,7 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
+import { NOTIFICATION_TYPE } from 'types';
 import { useGetNotifications, useReadNotifications } from 'hooks';
+import { notificationMessage } from 'utils';
 import { NotificationsPopupLoading } from './notifications-popup.loading';
 import EmptyNotification from './empty-notification';
 import Notification, { NotificationLoading } from './notification';
@@ -48,8 +50,10 @@ const NotificationsPopup: FC<Props> = ({ handleClose }) => {
             page.notifications.map((notification) => {
               let text = '';
 
-              if (notification.notificationType === 'follow') {
-                text = 'started following you';
+              if (notification.notificationType === NOTIFICATION_TYPE.FOLLOW) {
+                text = notificationMessage.follow;
+              } else if (notification.notificationType === NOTIFICATION_TYPE.LIKE) {
+                text = notificationMessage.like;
               }
 
               return (

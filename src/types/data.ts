@@ -51,7 +51,11 @@ export type CommentProps = {
 export type NotificationProps = {
   _id: string;
   notificationType: string;
-  notificationData: Record<string, unknown>;
+  notificationData: {
+    postId: string;
+    image: string;
+    filter: string;
+  };
   sender: UserProps;
   receiver: string;
   read: boolean;
