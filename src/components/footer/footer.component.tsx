@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Divider } from '@material-ui/core';
+import { Divider, Link } from '@material-ui/core';
 
 import { Wrapper, Span } from './footer.styles';
 
@@ -16,9 +16,11 @@ const Footer: FC = () => {
 
       <Divider orientation="vertical" variant="middle" flexItem />
 
-      <Span variant="subtitle2" color="textSecondary">
-        Shion
-      </Span>
+      <Link href="https://github.com/shion-coder" target="_blank">
+        <Span variant="subtitle2" color="textSecondary">
+          Shion
+        </Span>
+      </Link>
     </Wrapper>
   );
 };

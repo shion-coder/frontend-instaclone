@@ -7,6 +7,10 @@ import { Wrapper, Form, StyledInputBase as InputBase } from './field.styles';
 /* -------------------------------------------------------------------------- */
 
 const Field: FC = () => {
+  /**
+   * Handlee comment form
+   */
+
   const [value, setValue] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);

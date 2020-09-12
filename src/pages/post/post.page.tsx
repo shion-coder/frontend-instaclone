@@ -20,13 +20,20 @@ type ParamProps = {
   id: string;
 };
 
-const Post: FC = () => {
+type Props = {
+  postId?: string;
+};
+
+const Post: FC<Props> = ({ postId }) => {
+  const { id }: ParamProps = useParams();
+
   /**
-   * useDimension to get height of wrapper and set it to container base on responsive image
+   * If postId passed from upper container then use it, otherwise use id in params
    */
 
-  const { id }: ParamProps = useParams();
-  const { data, isLoading } = useQuery([QUERY.GET_POST, id], () => requestGetPost(id));
+  const idQuery = postId ? postId : id;
+
+  const { data, isLoading } = useQuery([QUERY.GET_POST, idQuery], () => requestGetPost(idQuery));
 
   if (isLoading) return <Loader />;
 

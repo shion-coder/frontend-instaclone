@@ -11,6 +11,7 @@ export const StyledContainer = styled(Container)``;
 
 export const Wrapper = styled(Grid)`
   border: 1px solid ${({ theme }) => theme.material.palette.divider};
+  background: ${({ theme }) => theme.material.palette.background.paper};
 
   @media screen and (min-width: 600px) {
     height: 500px;
@@ -18,6 +19,8 @@ export const Wrapper = styled(Grid)`
 `;
 
 export const ImageContainer = styled(Grid)`
+  border-right: 1px solid ${({ theme }) => theme.material.palette.divider};
+
   @media screen and (min-width: 600px) {
     width: 100%;
     height: 100%;
