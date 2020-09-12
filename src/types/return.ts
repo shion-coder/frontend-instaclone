@@ -42,6 +42,9 @@ export type ReturnGetPostProps = {
   post: PostProps & {
     author: { isFollowing: boolean };
   };
+  isMine: boolean;
+  isLiked: boolean;
+  isSaved: boolean;
 };
 
 export type ReturnCreatePost = {

@@ -166,3 +166,10 @@ export const requestResendEmail = (): Promise<ReturnResendEmailProps> =>
 
 export const requestFollow = (username: string): Promise<ReturnFollowProps> =>
   http.post<ReturnFollowProps>(`${ENDPOINT.GET_USER}/${username}/follow`).then((res) => res.data);
+
+/**
+ * Request delete post
+ */
+
+export const requestDeletePost = (id: string): Promise<null> =>
+  http.delete(`${ENDPOINT.POST}/${id}`).then((res) => res.data);

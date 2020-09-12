@@ -32,6 +32,6 @@ export const StyledModal = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
+  z-index: 1111;
   background-color: rgba(0, 0, 0, 0.69);
 `;

@@ -2,10 +2,13 @@ import React, { FC } from 'react';
 import Modal from 'styled-react-modal';
 import { IconButton } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 
+import { ReturnGetPostProps } from 'types';
 import { useModal } from 'hooks';
 import ShareModal from 'components/modal/share-modal';
 
@@ -14,18 +17,23 @@ import { Wrapper, SavedButton } from './action.styles';
 /* -------------------------------------------------------------------------- */
 
 type Props = {
-  id: string;
+  data: ReturnGetPostProps;
   focus: () => void | undefined;
 };
 
-const Action: FC<Props> = ({ id, focus }) => {
+const Action: FC<Props> = ({
+  data: {
+    post: { _id },
+    isLiked,
+    isSaved,
+  },
+  focus,
+}) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <Wrapper container>
-      <IconButton>
-        <FavoriteBorderIcon fontSize="small" />
-      </IconButton>
+      <IconButton>{isLiked ? <FavoriteIcon fontSize="small" /> : <FavoriteBorderIcon fontSize="small" />}</IconButton>
 
       <IconButton onClick={focus}>
         <ModeCommentOutlinedIcon fontSize="small" />
@@ -36,11 +44,11 @@ const Action: FC<Props> = ({ id, focus }) => {
       </IconButton>
 
       <Modal isOpen={isOpen} onBackgroundClick={closeModal} onEscapeKeydown={closeModal}>
-        <ShareModal id={id} closeModal={closeModal} />
+        <ShareModal id={_id} closeModal={closeModal} />
       </Modal>
 
       <SavedButton>
-        <BookmarkBorderOutlinedIcon fontSize="small" />
+        {isSaved ? <BookmarkIcon fontSize="small" /> : <BookmarkBorderOutlinedIcon fontSize="small" />}
       </SavedButton>
     </Wrapper>
   );

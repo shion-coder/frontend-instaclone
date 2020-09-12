@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useTheme, useMediaQuery } from '@material-ui/core';
 import Modal from 'styled-react-modal';
 
 import { PostProps } from 'types';
@@ -14,6 +16,8 @@ type Props = {
 };
 
 const Post: FC<Props> = ({ post: { _id, thumbnail, filter, likeCount, commentCount, author } }) => {
+  const history = useHistory();
+  const matchesXS = useMediaQuery(useTheme().breakpoints.down('xs'));
   const { isOpen, openModal, closeModal } = useModal();
 
   /**
@@ -21,6 +25,10 @@ const Post: FC<Props> = ({ post: { _id, thumbnail, filter, likeCount, commentCou
    */
 
   const handleOpen = () => {
+    if (matchesXS) {
+      return history.push(`/post/${_id}`);
+    }
+
     openModal();
 
     window.history.pushState(null, '', `/post/${_id}`);

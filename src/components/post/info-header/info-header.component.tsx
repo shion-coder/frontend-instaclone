@@ -20,6 +20,7 @@ const InfoHeader: FC<Props> = ({
       _id,
       author: { fullName, username, avatar },
     },
+    isMine,
   },
 }) => {
   const { goUser } = useCustomHistory(username);
@@ -34,7 +35,7 @@ const InfoHeader: FC<Props> = ({
       <More onClick={openModal} />
 
       <Modal isOpen={isOpen} onBackgroundClick={closeModal} onEscapeKeydown={closeModal}>
-        <PostModal id={_id} closeModal={closeModal} />
+        <PostModal id={_id} isMine={isMine} closeModal={closeModal} />
       </Modal>
     </Wrapper>
   );

@@ -64,7 +64,7 @@ const Post: FC<Props> = ({ postId }) => {
 
             <Comment />
 
-            <Action id={idQuery} focus={focusInput} />
+            <Action data={data} focus={focusInput} />
 
             <Field inputRef={ref} />
           </Grid>

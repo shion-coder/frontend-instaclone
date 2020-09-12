@@ -42,4 +42,6 @@ export * from './use-read-notifications';
 
 export * from './use-resend-email';
 
+export * from './use-delete-post';
+
 export * from './use-logout';
