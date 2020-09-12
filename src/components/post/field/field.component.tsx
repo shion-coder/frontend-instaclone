@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import React, { RefObject, ChangeEvent, FC, FormEvent, useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
@@ -6,7 +6,11 @@ import { Wrapper, Form, StyledInputBase as InputBase } from './field.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const Field: FC = () => {
+type Props = {
+  inputRef: RefObject<HTMLInputElement>;
+};
+
+const Field: FC<Props> = ({ inputRef }) => {
   /**
    * Handlee comment form
    */
@@ -24,7 +28,13 @@ const Field: FC = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Wrapper container alignItems="center">
-        <InputBase placeholder="Add a comment ..." fullWidth value={value} onChange={handleChange} />
+        <InputBase
+          inputRef={inputRef}
+          placeholder="Add a comment ..."
+          fullWidth
+          value={value}
+          onChange={handleChange}
+        />
 
         <IconButton type="submit">
           <SendIcon fontSize="small" />

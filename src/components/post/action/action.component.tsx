@@ -15,9 +15,10 @@ import { Wrapper, SavedButton } from './action.styles';
 
 type Props = {
   id: string;
+  focus: () => void | undefined;
 };
 
-const Action: FC<Props> = ({ id }) => {
+const Action: FC<Props> = ({ id, focus }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
@@ -26,7 +27,7 @@ const Action: FC<Props> = ({ id }) => {
         <FavoriteBorderIcon fontSize="small" />
       </IconButton>
 
-      <IconButton>
+      <IconButton onClick={focus}>
         <ModeCommentOutlinedIcon fontSize="small" />
       </IconButton>
 

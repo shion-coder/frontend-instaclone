@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Grid } from '@material-ui/core';
@@ -25,7 +25,15 @@ type Props = {
 };
 
 const Post: FC<Props> = ({ postId }) => {
+  const ref = useRef<HTMLInputElement | null>(null);
+
   const { id }: ParamProps = useParams();
+
+  /**
+   * Focus comment input function to use when click comment icon
+   */
+
+  const focusInput = () => ref.current?.focus();
 
   /**
    * If postId passed from upper container then use it, otherwise use id in params
@@ -47,7 +55,7 @@ const Post: FC<Props> = ({ postId }) => {
     <Container maxWidth="lg">
       <Grid container justify="center">
         <Wrapper item xs={12} md={11} container>
-          <ImageContainer item xs={12} sm={7}>
+          <ImageContainer item xs={12} sm={7} onClick={focusInput}>
             <Image src={image} filter={filter} />
           </ImageContainer>
 
@@ -56,9 +64,9 @@ const Post: FC<Props> = ({ postId }) => {
 
             <Comment />
 
-            <Action id={idQuery} />
+            <Action id={idQuery} focus={focusInput} />
 
-            <Field />
+            <Field inputRef={ref} />
           </Grid>
         </Wrapper>
       </Grid>
