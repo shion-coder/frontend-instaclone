@@ -1,4 +1,4 @@
-import { formatDistanceStrict } from 'date-fns';
+import { formatDistanceStrict, format, isToday } from 'date-fns';
 
 /* -------------------------------------------------------------------------- */
 
@@ -26,4 +26,14 @@ export const formatDateDistance = (endDate: string): string => {
   }
 
   return duration.join('');
+};
+
+/**
+ * Convert time to display in post time
+ */
+
+export const formatDate = (date: string): string => {
+  const newDate = new Date(date);
+
+  return isToday(newDate) ? formatDateDistance(date) : format(newDate, 'MMMM d');
 };

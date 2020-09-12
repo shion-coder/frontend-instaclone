@@ -14,7 +14,7 @@ export const Wrapper = styled(Grid)`
   background: ${({ theme }) => theme.material.palette.background.paper};
 
   @media screen and (min-width: 600px) {
-    height: 500px;
+    height: 550px;
   }
 `;
 
