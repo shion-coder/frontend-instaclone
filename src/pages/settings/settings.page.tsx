@@ -2,7 +2,6 @@ import React, { FC, ChangeEvent, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMediaQuery, useTheme, Container, Grid } from '@material-ui/core';
 
-import { PATH } from 'types';
 import UpdateProfile from 'components/settings/update-profile';
 import UpdatePassword from 'components/settings/update-password';
 
@@ -42,7 +41,7 @@ const Setting: FC = () => {
    */
 
   const handleChange = (_event: ChangeEvent<Record<string, unknown>>, newValue: 0 | 1) => {
-    history.push(`${PATH.SETTINGS}/${tabNameToIndex[newValue]}`);
+    history.push(`/settings/${tabNameToIndex[newValue]}`);
 
     setSelectedTab(newValue);
   };

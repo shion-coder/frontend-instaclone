@@ -4,7 +4,7 @@ import { Formik, FormikHelpers } from 'formik';
 import { UpdatePasswordProps } from 'types';
 import { useUpdatePassword } from 'hooks';
 import { validateUpdatePassword } from 'utils';
-import Field from 'components/common/formik-field';
+import PasswordField from 'components/common/formik-field/password';
 
 import {
   StyledContainer as Container,
@@ -33,11 +33,11 @@ const UpdatePassword: FC = () => {
         <Form noValidate>
           <HiddenField name="hidden" />
 
-          <Field name="password" type="password" fullWidth required />
+          <PasswordField name="password" />
 
-          <Field name="newPassword" type="password" fullWidth required />
+          <PasswordField name="newPassword" />
 
-          <Field name="confirmNewPassword" type="password" fullWidth required />
+          <PasswordField name="confirmNewPassword" />
 
           <Button fullWidth>Update Password</Button>
         </Form>

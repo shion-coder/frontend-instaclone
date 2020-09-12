@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 
 import { RegisterProps, RegisterPasswordStageProps } from 'types';
 import { validateRegisterPassword } from 'utils';
-import Field from 'components/common/formik-field';
+import PasswordField from 'components/common/formik-field/password';
 
 import {
   StyledTypography as Typography,
@@ -44,9 +44,9 @@ const RegisterPasswordStage: FC<Props> = ({ toggleStage, setCompleted, setRegist
       <Grid item sm={12} md={6}>
         <Formik initialValues={initialValues} validationSchema={validateRegisterPassword} onSubmit={handleSubmit}>
           <Form noValidate>
-            <Field name="password" type="password" fullWidth required />
+            <PasswordField name="password" />
 
-            <Field name="confirmPassword" type="password" fullWidth required />
+            <PasswordField name="confirmPassword" />
 
             <Button fullWidth>Continue</Button>
           </Form>

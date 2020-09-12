@@ -5,7 +5,7 @@ export enum PATH {
   CONFIRM = '/confirm/:id',
   POST = '/post/:id',
   EXPLORE = '/explore',
-  SETTINGS = '/settings',
+  SETTINGS = '/settings/:page?',
   SETTING_EDIT = '/settings/edit',
   PROFILE = '/:username/:page?',
   TEST = '/test',
