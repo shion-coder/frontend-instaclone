@@ -10,6 +10,7 @@ import Loader from 'components/loader/lottie-loader';
 import InfoHeader from 'components/post/info-header';
 import Comment from 'components/post/comment';
 import Action from 'components/post/action';
+import Field from 'components/post/field';
 
 import { StyledContainer as Container, Wrapper, ImageContainer, Image } from './post.styles';
 
@@ -49,6 +50,8 @@ const Post: FC = () => {
             <Comment />
 
             <Action />
+
+            <Field />
           </Grid>
         </Wrapper>
       </Grid>
