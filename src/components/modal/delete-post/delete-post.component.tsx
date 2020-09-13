@@ -30,7 +30,7 @@ const DeletePost: FC<Props> = ({ id, closeModal, closeDeleteModal }) => {
           <Content>This post will be deleted and you won't be able to find it anymore</Content>
         </ModalContent>
 
-        <ModalButton item container justify="flex-end">
+        <ModalButton item container justify="center">
           <StyledButton variant="outlined" onClick={handleDelete} isLoading={isLoading}>
             Yes
           </StyledButton>

@@ -6,6 +6,7 @@ import { CommentProps } from 'types';
 import { useCustomHistory, useModal } from 'hooks';
 import { formatDate } from 'utils';
 import Avatar from 'components/common/avatar';
+import CommentModal from 'components/modal/comment-modal';
 
 import {
   Wrapper,
@@ -29,6 +30,7 @@ type Props = {
 
 const Comment: FC<Props> = ({
   data: {
+    _id,
     message,
     author: { avatar, username, fullName },
     date,
@@ -65,7 +67,7 @@ const Comment: FC<Props> = ({
       </Buttons>
 
       <Modal isOpen={isOpen} onBackgroundClick={closeModal} onEscapeKeydown={closeModal}>
-        <></>
+        <CommentModal id={_id} isMine={isMine} closeModal={closeModal} />
       </Modal>
     </Wrapper>
   );
