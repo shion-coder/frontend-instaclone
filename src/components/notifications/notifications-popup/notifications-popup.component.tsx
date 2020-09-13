@@ -52,9 +52,9 @@ const NotificationsPopup: FC<Props> = ({ handleClose }) => {
 
               if (notification.notificationType === NOTIFICATION_TYPE.FOLLOW) {
                 text = notificationMessage.follow;
-              } else if (notification.notificationType === NOTIFICATION_TYPE.LIKE) {
+              } else if (notification.notificationType === NOTIFICATION_TYPE.LIKE_POST) {
                 text = notificationMessage.like;
-              } else if (notification.notificationType === NOTIFICATION_TYPE.COMMENT) {
+              } else if (notification.notificationType === NOTIFICATION_TYPE.COMMENT_POST) {
                 text = notificationMessage.comment;
               }
 

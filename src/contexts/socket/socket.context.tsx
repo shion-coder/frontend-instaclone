@@ -36,9 +36,9 @@ export const SocketProvider: FC = ({ children }) => {
 
           if (notificationType === NOTIFICATION_TYPE.FOLLOW) {
             queryCache.invalidateQueries([QUERY.GET_USER, username]);
-          } else if (notificationType === NOTIFICATION_TYPE.LIKE) {
+          } else if (notificationType === NOTIFICATION_TYPE.LIKE_POST) {
             queryCache.invalidateQueries([QUERY.GET_POST, postId]);
-          } else if (notificationType === NOTIFICATION_TYPE.COMMENT) {
+          } else if (notificationType === NOTIFICATION_TYPE.COMMENT_POST) {
             queryCache.invalidateQueries([QUERY.GET_COMMENTS, postId]);
           }
         },
