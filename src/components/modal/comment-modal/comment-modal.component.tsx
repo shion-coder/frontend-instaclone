@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 
 import { useModal } from 'hooks';
 import Item from 'components/common/list-item-button';
-import DeletePost from 'components/modal/delete-post';
+import DeleteComment from 'components/modal/delete-comment';
 
 import { Wrapper } from './comment-modal.styles';
 
@@ -12,11 +12,12 @@ import { Wrapper } from './comment-modal.styles';
 
 type Props = {
   id: string;
+  postId: string;
   isMine: boolean;
   closeModal: () => void;
 };
 
-const CommentModal: FC<Props> = ({ id, isMine, closeModal }) => {
+const CommentModal: FC<Props> = ({ id, postId, isMine, closeModal }) => {
   /**
    * Handle delete post modal
    */
@@ -33,7 +34,7 @@ const CommentModal: FC<Props> = ({ id, isMine, closeModal }) => {
         )}
 
         <Modal isOpen={isOpen} onBackgroundClick={closeDeleteModal} onEscapeKeydown={closeDeleteModal}>
-          <DeletePost id={id} closeModal={closeModal} closeDeleteModal={closeDeleteModal} />
+          <DeleteComment id={id} postId={postId} closeModal={closeModal} closeDeleteModal={closeDeleteModal} />
         </Modal>
 
         <Grid item onClick={closeModal}>

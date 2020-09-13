@@ -24,11 +24,12 @@ import {
 /* -------------------------------------------------------------------------- */
 
 type Props = {
+  postId: string;
   data: CommentProps & { isMine: boolean };
-  isCaption?: boolean;
 };
 
 const Comment: FC<Props> = ({
+  postId,
   data: {
     _id,
     message,
@@ -67,7 +68,7 @@ const Comment: FC<Props> = ({
       </Buttons>
 
       <Modal isOpen={isOpen} onBackgroundClick={closeModal} onEscapeKeydown={closeModal}>
-        <CommentModal id={_id} isMine={isMine} closeModal={closeModal} />
+        <CommentModal id={_id} postId={postId} isMine={isMine} closeModal={closeModal} />
       </Modal>
     </Wrapper>
   );

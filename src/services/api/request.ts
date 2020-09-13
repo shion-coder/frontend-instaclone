@@ -206,3 +206,10 @@ export const requestSavePost = (id: string): Promise<ReturnSavePost> =>
 
 export const requestCreateComment = (id: string, values: CreateCommentProps): Promise<ReturnCreateComment> =>
   http.post<ReturnCreateComment>(`${ENDPOINT.POST}/${id}/comment`, values).then((res) => res.data);
+
+/**
+ * Request deleteComment
+ */
+
+export const requestDeleteComment = (id: string): Promise<null> =>
+  http.delete(`${ENDPOINT.POST}/comments/${id}`).then((res) => res.data);

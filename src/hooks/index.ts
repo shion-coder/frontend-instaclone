@@ -52,4 +52,6 @@ export * from './use-save-post';
 
 export * from './use-create-comment';
 
+export * from './use-delete-comment';
+
 export * from './use-logout';

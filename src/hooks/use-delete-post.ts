@@ -14,7 +14,7 @@ export const useDeletePost = (closeModal: () => void, closeDeleteModal: () => vo
   const { goHome } = useCustomHistory();
 
   /**
-   * Get read notifications function and handle it on error or on success
+   * Get delete post function and handle it on error or on success
    */
 
   const [deletePost, { isLoading }] = useMutation((id: string) => requestDeletePost(id), {

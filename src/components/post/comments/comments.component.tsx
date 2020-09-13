@@ -51,7 +51,7 @@ const Comments: FC<Props> = ({
         <React.Fragment key={i}>
           {page.comments &&
             page.comments.map((comment) => {
-              return <Comment key={comment._id} data={comment} />;
+              return <Comment key={comment._id} postId={_id} data={comment} />;
             })}
         </React.Fragment>
       ));
