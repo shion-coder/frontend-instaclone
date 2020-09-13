@@ -1,4 +1,4 @@
-import { UserProps, NotificationProps, PostProps } from './data';
+import { UserProps, NotificationProps, PostProps, CommentProps } from './data';
 
 /* -------------------------------------------------------------------------- */
 
@@ -49,6 +49,10 @@ export type ReturnGetPostProps = {
 
 export type ReturnCreatePost = {
   post: PostProps;
+};
+
+export type ReturnCreateComment = {
+  comment: CommentProps;
 };
 
 export type ReturnUpdateAvatarProps = {

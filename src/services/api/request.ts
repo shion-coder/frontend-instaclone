@@ -10,6 +10,7 @@ import {
   ReturnGetPostsProps,
   ReturnGetPostProps,
   ReturnCreatePost,
+  ReturnCreateComment,
   ReturnUpdateAvatarProps,
   ReturnUpdateProfileProps,
   ReturnReadNotificationsProps,
@@ -22,6 +23,7 @@ import {
   LoginProps,
   UpdateProfileProps,
   UpdatePasswordProps,
+  CreateCommentProps,
   ENDPOINT,
 } from 'types';
 
@@ -189,3 +191,10 @@ export const requestLikePost = (id: string): Promise<ReturnLikePost> =>
 
 export const requestSavePost = (id: string): Promise<ReturnSavePost> =>
   http.post<ReturnSavePost>(`${ENDPOINT.POST}/${id}/save`).then((res) => res.data);
+
+/**
+ * Request create new comment
+ */
+
+export const requestCreateComment = (id: string, values: CreateCommentProps): Promise<ReturnCreateComment> =>
+  http.post<ReturnCreateComment>(`${ENDPOINT.POST}/${id}/comment`, values).then((res) => res.data);

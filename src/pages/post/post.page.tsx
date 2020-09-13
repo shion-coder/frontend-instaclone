@@ -66,7 +66,7 @@ const Post: FC<Props> = ({ postId }) => {
 
             <Action data={data} focus={focusInput} />
 
-            <Field inputRef={ref} />
+            <Field data={data} inputRef={ref} />
           </Grid>
         </Wrapper>
       </Grid>

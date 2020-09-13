@@ -38,3 +38,7 @@ export type UpdatePasswordProps = {
   newPassword: string;
   confirmNewPassword: string;
 };
+
+export type CreateCommentProps = {
+  message: string;
+};

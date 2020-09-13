@@ -14,7 +14,7 @@ type ReturnProps = {
 
 export const useLikePost = (id: string, username: string): ReturnProps => {
   /**
-   * Get like post and handle it on error, on mutate or on success
+   * Get like post function and handle it on error, on mutate or on success
    */
 
   const [likePost, { isLoading }] = useMutation(() => requestLikePost(id), {

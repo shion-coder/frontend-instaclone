@@ -48,4 +48,6 @@ export * from './use-like-post';
 
 export * from './use-save-post';
 
+export * from './use-create-comment';
+
 export * from './use-logout';
