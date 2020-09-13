@@ -27,7 +27,7 @@ const Comments: FC<Props> = ({
   },
 }) => {
   const { goUser } = useCustomHistory(username);
-  const { data, isLoading, isFetching, fetchMore, canFetchMore } = useGetComments(_id);
+  const { data, isLoading, isFetchingMore, fetchMore, canFetchMore } = useGetComments(_id);
 
   const handleLoadComments = () => fetchMore();
 
@@ -88,7 +88,7 @@ const Comments: FC<Props> = ({
         </LoadComments>
       )}
 
-      {isFetching && <CommentLoading />}
+      {isFetchingMore === 'next' && <CommentLoading />}
 
       {renderComments()}
     </Container>

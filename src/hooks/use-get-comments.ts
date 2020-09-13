@@ -8,7 +8,7 @@ import { requestGetComments } from 'services';
 type ReturnProps = {
   data: ReturnGetCommentsProps[] | undefined;
   isLoading: boolean;
-  isFetching: boolean;
+  isFetchingMore: false | 'previous' | 'next' | undefined;
   fetchMore: () => Promise<ReturnGetCommentsProps[] | undefined>;
   canFetchMore: boolean | undefined;
 };
@@ -18,7 +18,7 @@ export const useGetComments = (id: string): ReturnProps => {
    * Infinite get comments query
    */
 
-  const { data, isLoading, isFetching, fetchMore, canFetchMore } = useInfiniteQuery(
+  const { data, isLoading, isFetchingMore, fetchMore, canFetchMore } = useInfiniteQuery(
     [QUERY.GET_COMMENTS, id],
     (_key, id: string, offset = 0) => requestGetComments(id, offset),
     {
@@ -26,7 +26,5 @@ export const useGetComments = (id: string): ReturnProps => {
     },
   );
 
-  // canFetchMore && fetchMore();
-
-  return { data, isLoading, isFetching, fetchMore, canFetchMore };
+  return { data, isLoading, isFetchingMore, fetchMore, canFetchMore };
 };
