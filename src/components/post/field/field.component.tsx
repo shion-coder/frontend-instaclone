@@ -36,7 +36,7 @@ const Field: FC<Props> = ({ inputRef }) => {
           onChange={handleChange}
         />
 
-        <IconButton type="submit">
+        <IconButton type="submit" disabled={value.length === 0}>
           <SendIcon fontSize="small" />
         </IconButton>
       </Wrapper>

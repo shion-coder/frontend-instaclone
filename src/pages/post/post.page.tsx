@@ -8,7 +8,7 @@ import { requestGetPost } from 'services';
 import NotFound from 'pages/not-found';
 import Loader from 'components/loader/lottie-loader';
 import InfoHeader from 'components/post/info-header';
-import Comment from 'components/post/comment';
+import Comment from 'components/post/comments';
 import Action from 'components/post/action';
 import Field from 'components/post/field';
 
