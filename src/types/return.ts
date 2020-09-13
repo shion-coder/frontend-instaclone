@@ -70,3 +70,7 @@ export type ReturnResendEmailProps = {
 export type ReturnFollowProps = {
   isFollowing: boolean;
 };
+
+export type ReturnLikePost = {
+  isLiked: boolean;
+};

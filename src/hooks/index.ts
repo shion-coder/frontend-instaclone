@@ -44,4 +44,6 @@ export * from './use-resend-email';
 
 export * from './use-delete-post';
 
+export * from './use-like-post';
+
 export * from './use-logout';

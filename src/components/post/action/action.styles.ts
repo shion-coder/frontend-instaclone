@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Grid, IconButton } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 /* -------------------------------------------------------------------------- */
 
@@ -21,4 +22,8 @@ export const Count = styled.span`
 
 export const Date = styled.span`
   margin: 0.5rem 0.75rem 0.75rem;
+`;
+
+export const StyledFavoriteIcon = styled(FavoriteIcon)`
+  color: ${({ theme }) => theme.material.palette.secondary.light};
 `;

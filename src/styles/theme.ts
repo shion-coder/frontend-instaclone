@@ -37,6 +37,7 @@ export const theme: DefaultTheme = {
         },
         secondary: {
           main: '#903749',
+          light: '#ED4956',
         },
       },
     }),

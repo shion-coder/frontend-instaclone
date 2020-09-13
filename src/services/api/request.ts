@@ -15,6 +15,7 @@ import {
   ReturnReadNotificationsProps,
   ReturnResendEmailProps,
   ReturnFollowProps,
+  ReturnLikePost,
   RegisterInformationStageProps,
   RegisterProps,
   LoginProps,
@@ -173,3 +174,10 @@ export const requestFollow = (username: string): Promise<ReturnFollowProps> =>
 
 export const requestDeletePost = (id: string): Promise<null> =>
   http.delete(`${ENDPOINT.POST}/${id}`).then((res) => res.data);
+
+/**
+ * Request like post
+ */
+
+export const requestLikePost = (id: string): Promise<ReturnLikePost> =>
+  http.post<ReturnLikePost>(`${ENDPOINT.POST}/${id}/like`).then((res) => res.data);
