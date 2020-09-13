@@ -8,7 +8,7 @@ import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutline
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 import { ReturnGetPostProps } from 'types';
-import { useModal, useLikePost } from 'hooks';
+import { useModal, useLikePost, useSavePost } from 'hooks';
 import { formatDate } from 'utils';
 import ShareModal from 'components/modal/share-modal';
 
@@ -36,6 +36,7 @@ const Action: FC<Props> = ({
 }) => {
   const { isOpen, openModal, closeModal } = useModal();
   const { likePost } = useLikePost(_id, username);
+  const { savePost } = useSavePost(_id, username);
 
   return (
     <Wrapper container>
@@ -56,7 +57,7 @@ const Action: FC<Props> = ({
           <ShareModal id={_id} closeModal={closeModal} />
         </Modal>
 
-        <SavedButton>
+        <SavedButton onClick={savePost}>
           {isSaved ? <BookmarkIcon fontSize="small" /> : <BookmarkBorderOutlinedIcon fontSize="small" />}
         </SavedButton>
       </Grid>

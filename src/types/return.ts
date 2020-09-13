@@ -74,3 +74,7 @@ export type ReturnFollowProps = {
 export type ReturnLikePost = {
   isLiked: boolean;
 };
+
+export type ReturnSavePost = {
+  isSaved: boolean;
+};
