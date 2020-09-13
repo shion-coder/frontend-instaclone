@@ -25,6 +25,8 @@ export const useCreateComment = (id: string, setValue: Dispatch<SetStateAction<s
     onSuccess: () => {
       queryCache.invalidateQueries([QUERY.GET_POST, id]);
 
+      queryCache.invalidateQueries([QUERY.GET_COMMENTS, id]);
+
       setValue('');
     },
   });

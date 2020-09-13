@@ -47,6 +47,11 @@ export type ReturnGetPostProps = {
   isSaved: boolean;
 };
 
+export type ReturnGetCommentsProps = {
+  comments: (CommentProps & { isMine: boolean })[];
+  next?: number;
+};
+
 export type ReturnCreatePost = {
   post: PostProps;
 };

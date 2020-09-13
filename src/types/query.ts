@@ -7,4 +7,5 @@ export enum QUERY {
   GET_SAVED = 'get-saved',
   GET_TAGGED = 'get-tagged',
   GET_POST = 'get-post',
+  GET_COMMENTS = 'get-comments',
 }

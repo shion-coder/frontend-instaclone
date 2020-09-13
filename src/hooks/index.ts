@@ -30,6 +30,8 @@ export * from './use-get-saved';
 
 export * from './use-get-tagged';
 
+export * from './use-get-comments';
+
 export * from './use-follow';
 
 export * from './use-update-avatar';

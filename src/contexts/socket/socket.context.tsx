@@ -2,7 +2,7 @@ import React, { FC, createContext, useState, useContext, useEffect } from 'react
 import { queryCache } from 'react-query';
 import socketIo from 'socket.io-client';
 
-import { SOCKET_EVENT, QUERY } from 'types';
+import { NotificationProps, NOTIFICATION_TYPE, SOCKET_EVENT, QUERY } from 'types';
 import { API_URL } from 'config';
 import { useUser } from 'hooks';
 
@@ -13,7 +13,7 @@ const SocketContext = createContext<SocketIOClient.Socket | null>(null);
 export const SocketProvider: FC = ({ children }) => {
   const [io, setIo] = useState<SocketIOClient.Socket | null>(null);
 
-  const { token } = useUser();
+  const { username, token } = useUser();
 
   /**
    * Set socket and listen for new notification event
@@ -29,9 +29,20 @@ export const SocketProvider: FC = ({ children }) => {
         query: { token },
       });
 
-      socket.on(SOCKET_EVENT.NEW_NOTIFICATION, () => {
-        queryCache.invalidateQueries(QUERY.GET_NOTIFICATIONS);
-      });
+      socket.on(
+        SOCKET_EVENT.NEW_NOTIFICATION,
+        ({ notificationData: { postId }, notificationType }: NotificationProps) => {
+          queryCache.invalidateQueries([QUERY.GET_NOTIFICATIONS, username]);
+
+          if (notificationType === NOTIFICATION_TYPE.FOLLOW) {
+            queryCache.invalidateQueries([QUERY.GET_USER, username]);
+          } else if (notificationType === NOTIFICATION_TYPE.LIKE) {
+            queryCache.invalidateQueries([QUERY.GET_POST, postId]);
+          } else if (notificationType === NOTIFICATION_TYPE.COMMENT) {
+            queryCache.invalidateQueries([QUERY.GET_COMMENTS, postId]);
+          }
+        },
+      );
     }
 
     setIo(socket);
@@ -39,7 +50,7 @@ export const SocketProvider: FC = ({ children }) => {
     return () => {
       socket.disconnect();
     };
-  }, [token]);
+  }, [username, token]);
 
   return <SocketContext.Provider value={io}>{children}</SocketContext.Provider>;
 };

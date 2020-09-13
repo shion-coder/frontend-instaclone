@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Grid } from '@material-ui/core';
 import Modal from 'styled-react-modal';
 
 import { ReturnGetPostProps } from 'types';
@@ -6,7 +7,7 @@ import { useCustomHistory, useModal } from 'hooks';
 import Avatar from 'components/common/avatar';
 import PostModal from 'components/modal/post-modal';
 
-import { Wrapper, Name, More } from './info-header.styles';
+import { Wrapper, Body, Name, More } from './info-header.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -28,9 +29,13 @@ const InfoHeader: FC<Props> = ({
 
   return (
     <Wrapper container alignItems="center">
-      <Avatar src={avatar} width="2.5rem" height="2.5rem" cursor onClick={goUser} />
+      <Grid item>
+        <Avatar src={avatar} width="2.5rem" height="2.5rem" cursor onClick={goUser} />
+      </Grid>
 
-      <Name onClick={goUser}>{fullName}</Name>
+      <Body item>
+        <Name onClick={goUser}>{fullName}</Name>
+      </Body>
 
       <More onClick={openModal} />
 

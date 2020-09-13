@@ -9,6 +9,7 @@ import {
   ReturnGetFollowProps,
   ReturnGetPostsProps,
   ReturnGetPostProps,
+  ReturnGetCommentsProps,
   ReturnCreatePost,
   ReturnCreateComment,
   ReturnUpdateAvatarProps,
@@ -114,6 +115,13 @@ export const requestGetTagged = (username: string, offset: unknown): Promise<Ret
 
 export const requestGetPost = (id: string): Promise<ReturnGetPostProps> =>
   http.get<ReturnGetPostProps>(`${ENDPOINT.POST}/${id}`).then((res) => res.data);
+
+/**
+ * Request get comments
+ */
+
+export const requestGetComments = (id: string, offset: unknown): Promise<ReturnGetCommentsProps> =>
+  http.get<ReturnGetCommentsProps>(`${ENDPOINT.POST}/${id}/comments/${offset}`).then((res) => res.data);
 
 /**
  * Request create new post
