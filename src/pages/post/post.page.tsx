@@ -52,24 +52,22 @@ const Post: FC<Props> = ({ postId }) => {
   } = data;
 
   return (
-    <Container maxWidth="lg">
-      <Grid container justify="center">
-        <Wrapper item xs={12} md={11} container>
-          <ImageContainer item xs={12} sm={7} onClick={focusInput}>
-            <Image src={image} filter={filter} />
-          </ImageContainer>
+    <Container maxWidth="md">
+      <Wrapper item xs={12} container>
+        <ImageContainer item xs={12} sm={7} onClick={focusInput}>
+          <Image src={image} filter={filter} />
+        </ImageContainer>
 
-          <Grid item xs={12} sm={5} container direction="column">
-            <InfoHeader data={data} />
+        <Grid item xs={12} sm={5} container direction="column">
+          <InfoHeader data={data} />
 
-            <Comments data={data} />
+          <Comments data={data} />
 
-            <Action data={data} focus={focusInput} />
+          <Action data={data} focus={focusInput} />
 
-            <Field data={data} inputRef={ref} />
-          </Grid>
-        </Wrapper>
-      </Grid>
+          <Field data={data} inputRef={ref} />
+        </Grid>
+      </Wrapper>
     </Container>
   );
 };
