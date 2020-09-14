@@ -7,9 +7,7 @@ type ImageProps = {
   filter: string;
 };
 
-export const StyledContainer = styled(Container)`
-  padding: 0;
-`;
+export const StyledContainer = styled(Container)``;
 
 export const Wrapper = styled(Grid)`
   border: 1px solid ${({ theme }) => theme.material.palette.divider};
