@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { Container } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
 import { QUERY } from 'types';
 import { requestGetUser } from 'services';
@@ -33,15 +33,17 @@ const Dashboard: FC = () => {
   if (isError || !data) return <NotFound />;
 
   return (
-    <>
-      <Container maxWidth="lg">
-        <ProfileHeader profile={data} />
-      </Container>
+    <Container maxWidth="lg">
+      <Grid container justify="center">
+        <Grid item xs={12}>
+          <ProfileHeader profile={data} />
+        </Grid>
 
-      <Container maxWidth="md">
-        <ProfileContent profile={data} />
-      </Container>
-    </>
+        <Grid item xs={12} sm={11} md={10}>
+          <ProfileContent profile={data} />
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 

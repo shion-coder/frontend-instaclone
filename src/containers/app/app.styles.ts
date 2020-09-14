@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Particles from 'react-particles-js';
-import { Grid } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
@@ -30,11 +29,13 @@ export const StyledParticles = styled(Particles).attrs(({ theme }) => ({
   z-index: -1;
 `;
 
-export const Wrapper = styled(Grid)`
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 `;
 
-export const Main = styled.main`
+export const Main = styled.div`
   flex: 1;
   padding: ${({ theme }) => theme.material.spacing(8, 0, 6)};
 `;

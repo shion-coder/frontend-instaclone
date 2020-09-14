@@ -29,20 +29,17 @@ export const SocketProvider: FC = ({ children }) => {
         query: { token },
       });
 
-      socket.on(
-        SOCKET_EVENT.NEW_NOTIFICATION,
-        ({ notificationData: { postId }, notificationType }: NotificationProps) => {
-          queryCache.invalidateQueries([QUERY.GET_NOTIFICATIONS, username]);
+      socket.on(SOCKET_EVENT.NEW_NOTIFICATION, ({ notificationData, notificationType }: NotificationProps) => {
+        queryCache.invalidateQueries([QUERY.GET_NOTIFICATIONS, username]);
 
-          if (notificationType === NOTIFICATION_TYPE.FOLLOW) {
-            queryCache.invalidateQueries([QUERY.GET_USER, username]);
-          } else if (notificationType === NOTIFICATION_TYPE.LIKE_POST) {
-            queryCache.invalidateQueries([QUERY.GET_POST, postId]);
-          } else if (notificationType === NOTIFICATION_TYPE.COMMENT_POST) {
-            queryCache.invalidateQueries([QUERY.GET_COMMENTS, postId]);
-          }
-        },
-      );
+        if (notificationType === NOTIFICATION_TYPE.FOLLOW) {
+          queryCache.invalidateQueries([QUERY.GET_USER, username]);
+        } else if (notificationType === NOTIFICATION_TYPE.LIKE_POST) {
+          queryCache.invalidateQueries([QUERY.GET_POST, notificationData.postId]);
+        } else if (notificationType === NOTIFICATION_TYPE.COMMENT_POST) {
+          queryCache.invalidateQueries([QUERY.GET_COMMENTS, notificationData.postId]);
+        }
+      });
     }
 
     setIo(socket);

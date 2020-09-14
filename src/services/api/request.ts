@@ -8,6 +8,7 @@ import {
   ReturnGetUserProps,
   ReturnGetFollowProps,
   ReturnGetPostsProps,
+  ReturnGetSuggestedPostsProps,
   ReturnGetPostProps,
   ReturnGetCommentsProps,
   ReturnCreatePost,
@@ -88,6 +89,13 @@ export const requestGetUser = (username: string): Promise<ReturnGetUserProps> =>
 
 export const requestGetFollow = (username: string, offset: unknown, route: string): Promise<ReturnGetFollowProps> =>
   http.get<ReturnGetFollowProps>(`${ENDPOINT.GET_USER}/${username}/${offset}/${route}`).then((res) => res.data);
+
+/**
+ * Request get suggested posts
+ */
+
+export const requestGetSuggestedPosts = (offset: unknown): Promise<ReturnGetSuggestedPostsProps> =>
+  http.get<ReturnGetSuggestedPostsProps>(`${ENDPOINT.POST}/suggested/${offset}`).then((res) => res.data);
 
 /**
  * Request get posts

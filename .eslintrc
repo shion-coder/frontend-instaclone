@@ -11,7 +11,8 @@
   ],
   "rules": {
     "no-console": 1,
-    "prettier/prettier": 2
+    "prettier/prettier": 2,
+    "@typescript-eslint/no-non-null-assertion": 0
   },
   "settings": {
     "react": {

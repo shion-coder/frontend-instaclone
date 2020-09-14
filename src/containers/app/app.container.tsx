@@ -50,7 +50,7 @@ const App: FC = () => (
   <>
     <Particles />
 
-    <Wrapper container direction="column">
+    <Wrapper>
       <Header />
 
       <Main>
