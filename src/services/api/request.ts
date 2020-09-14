@@ -18,6 +18,7 @@ import {
   ReturnResendEmailProps,
   ReturnFollowProps,
   ReturnLikePost,
+  ReturnLikeComment,
   ReturnSavePost,
   RegisterInformationStageProps,
   RegisterProps,
@@ -192,6 +193,13 @@ export const requestDeletePost = (id: string): Promise<null> =>
 
 export const requestLikePost = (id: string): Promise<ReturnLikePost> =>
   http.post<ReturnLikePost>(`${ENDPOINT.POST}/${id}/like`).then((res) => res.data);
+
+/**
+ * Request like comment
+ */
+
+export const requestLikeComment = (id: string): Promise<ReturnLikeComment> =>
+  http.post<ReturnLikeComment>(`${ENDPOINT.POST}/comments/${id}/like`).then((res) => res.data);
 
 /**
  * Request save post

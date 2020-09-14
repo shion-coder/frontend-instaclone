@@ -44,6 +44,10 @@ export type CommentProps = {
   _id: string;
   message: string;
   post: PostProps;
+  likes: UserProps[];
+  likeCount: number;
+  comments: CommentProps[];
+  commentCount: number;
   author: UserProps;
   date: string;
 };

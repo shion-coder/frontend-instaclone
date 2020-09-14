@@ -48,7 +48,7 @@ export type ReturnGetPostProps = {
 };
 
 export type ReturnGetCommentsProps = {
-  comments: (CommentProps & { isMine: boolean })[];
+  comments: (CommentProps & { isMine: boolean; isLiked: boolean })[];
   next?: number;
 };
 
@@ -81,6 +81,10 @@ export type ReturnFollowProps = {
 };
 
 export type ReturnLikePost = {
+  isLiked: boolean;
+};
+
+export type ReturnLikeComment = {
   isLiked: boolean;
 };
 

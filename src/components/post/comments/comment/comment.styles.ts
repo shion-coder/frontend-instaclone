@@ -48,7 +48,13 @@ export const Stats = styled.div`
   margin-top: 0.5rem;
 `;
 
-export const Date = styled.span``;
+export const Date = styled.span`
+  margin-right: 0.5rem;
+`;
+
+export const Likes = styled.span`
+  font-weight: bold;
+`;
 
 export const DateSkeleton = styled(Skeleton).attrs(() => ({
   animation: 'wave',
@@ -69,6 +75,7 @@ export const More = styled(MoreHorizIcon)`
 
 export const StyledFavoriteIcon = styled(FavoriteIcon)`
   color: ${({ theme }) => theme.material.palette.secondary.light};
+  font-size: 0.6rem;
 `;
 
 export const StyledFavoriteBorderIcon = styled(FavoriteBorderIcon)`
