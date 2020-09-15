@@ -23,11 +23,11 @@ const DeletePost: FC<Props> = ({ id, closeModal, closeDeleteModal }) => {
     <Wrapper elevation={2}>
       <Grid container direction="column">
         <ModalTitle item container justify="center">
-          <Title>Are you sure ?</Title>
+          <Title>Delete</Title>
         </ModalTitle>
 
-        <ModalContent>
-          <Content>This post will be deleted and you won't be able to find it anymore</Content>
+        <ModalContent container justify="center">
+          <Content>Are you sure you want to delete this post ?</Content>
         </ModalContent>
 
         <ModalButton item container justify="center">

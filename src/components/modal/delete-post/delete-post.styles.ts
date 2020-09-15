@@ -5,7 +5,7 @@ import Button from 'components/common/button';
 /* -------------------------------------------------------------------------- */
 
 export const Wrapper = styled(Paper)`
-  width: 30rem;
+  width: 25rem;
   border-radius: 0.8rem;
   overflow: hidden;
   box-shadow: 0 0 0.5rem 0px ${({ theme }) => theme.colors.grey};
@@ -28,7 +28,7 @@ export const ModalContent = styled(Grid)`
   padding: 1rem;
 `;
 
-export const Content = styled.p`
+export const Content = styled.span`
   font-size: 0.9rem;
 `;
 
