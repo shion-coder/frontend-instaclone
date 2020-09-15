@@ -9,4 +9,5 @@ export enum QUERY {
   GET_TAGGED = 'get-tagged',
   GET_POST = 'get-post',
   GET_COMMENTS = 'get-comments',
+  GET_SEARCH_USERNAME = 'get-search-username',
 }

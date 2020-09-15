@@ -4,15 +4,19 @@ import { InputBase } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
+type SearchProps = {
+  search: string;
+};
+
 export const Wrapper = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export const Search = styled.div`
+export const Search = styled.div<SearchProps>`
   position: relative;
-  border-radius: 0.25rem;
+  border-radius: ${({ search }) => (search ? '0.25rem 0.25rem 0 0' : '0.25rem')};
   background-color: ${({ theme }) => fade(theme.material.palette.common.white, 0.15)};
   margin-right: ${({ theme }) => theme.material.spacing(4) + 'px'};
   width: auto;

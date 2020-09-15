@@ -22,6 +22,11 @@ export type ReturnGetUserProps = {
   isCurrentUser: boolean;
 };
 
+export type ReturnSearchUsernameProps = {
+  users: UserProps[];
+  next?: number;
+};
+
 export type ReturnGetFollowProps = {
   users: ReturnGetUserProps[];
   next?: number;

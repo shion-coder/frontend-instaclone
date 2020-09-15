@@ -58,4 +58,6 @@ export * from './use-create-comment';
 
 export * from './use-delete-comment';
 
+export * from './use-search-username';
+
 export * from './use-logout';
