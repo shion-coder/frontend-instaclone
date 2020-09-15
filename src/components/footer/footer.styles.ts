@@ -8,7 +8,7 @@ export const Wrapper = styled.footer`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.material.palette.background.paper};
-  padding: ${({ theme }) => theme.material.spacing(2, 2)};
+  padding: ${({ theme }) => theme.material.spacing(1.5, 2)};
 `;
 
 export const Span = styled(Typography)`

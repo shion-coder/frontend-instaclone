@@ -14,7 +14,7 @@ const Header: FC = () => {
   const { goHome, goRegister, goLogin, goExplore, goUser } = useCustomHistory(username);
 
   return (
-    <AppBar position="relative" color="transparent">
+    <AppBar position="sticky" color="transparent">
       <Container maxWidth="lg">
         <Toolbar>
           <LogoContainer onClick={goHome}>
