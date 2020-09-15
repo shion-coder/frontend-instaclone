@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState, useRef, useCallback } from 'react';
+import React, { FC, ChangeEvent, FocusEvent, useState, useRef, useCallback } from 'react';
 import { IconButton } from '@material-ui/core';
 import { debounce } from 'lodash-es';
 import SearchIcon from '@material-ui/icons/Search';
@@ -29,18 +29,16 @@ const Auth: FC<Props> = ({ goExplore, goUser }) => {
   );
 
   /**
-   * Handle search result popup
+   * Handle search field and popup
    */
 
   const handleClose = () => setSearchValue('');
 
-  useClickOutside(ref, handleClose);
-
-  /**
-   * Handle input search change
-   */
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => debounceFetch(e.target.value);
+
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => setSearchValue(e.target.value);
+
+  useClickOutside(ref, handleClose);
 
   return (
     <Wrapper>
@@ -49,7 +47,7 @@ const Auth: FC<Props> = ({ goExplore, goUser }) => {
           <SearchIcon fontSize="small" />
         </SearchIconContainer>
 
-        <InputBase placeholder="Search …" onChange={handleChange} />
+        <InputBase placeholder="Search …" onChange={handleChange} onFocus={handleFocus} />
 
         {searchValue && <Popup searchValue={searchValue} handleClose={handleClose} />}
       </Search>
