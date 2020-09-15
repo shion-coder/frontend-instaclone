@@ -26,4 +26,6 @@ export const NotFound = styled.div`
   font-size: 0.8rem;
 `;
 
-export const LoadMore = styled.div``;
+export const LoadMore = styled.div`
+  width: 100%;
+`;

@@ -56,7 +56,7 @@ const App: FC = () => (
       <Main>
         <Suspense fallback={<Loader />}>
           <Switch>
-            <Route exact path={PATH.HOME} component={Home} />
+            <ProtectedRoute exact path={PATH.HOME} component={Home} />
             <Route exact path={PATH.CONFIRM} component={Confirm} />
             <Route exact path={PATH.TEST} component={Test} />
 
