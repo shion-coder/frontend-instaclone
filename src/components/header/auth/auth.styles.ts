@@ -16,7 +16,7 @@ export const Wrapper = styled.nav`
 
 export const Search = styled.div<SearchProps>`
   position: relative;
-  border-radius: ${({ search }) => (search ? '0.25rem 0.25rem 0 0' : '0.25rem')};
+  border-radius: ${({ search }) => (search ? '0.5rem 0.5rem 0 0' : '0.5rem')};
   background-color: ${({ theme }) => fade(theme.material.palette.common.white, 0.15)};
   margin-right: ${({ theme }) => theme.material.spacing(4) + 'px'};
   width: auto;
@@ -42,8 +42,17 @@ export const SearchIconContainer = styled.div`
 
 export const StyledInputBase = styled(InputBase)`
   padding: ${({ theme }) => theme.material.spacing(0.5, 1, 0.5, 6)};
-  width: 15rem;
   font-size: 0.8rem;
+  transition: ${({ theme }) => theme.material.transitions.create('width')};
+
+  .MuiInputBase-input {
+    transition: ${({ theme }) => theme.material.transitions.create('width')};
+    width: 6rem;
+
+    :focus {
+      width: 12rem;
+    }
+  }
 
   @media screen and (max-width: 959px) {
     width: 12rem;

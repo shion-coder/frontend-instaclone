@@ -7,10 +7,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  width: 15rem;
+  width: 15.5rem;
   max-height: 10.5rem;
   overflow-y: auto;
-  border-radius: 0 0 0.25rem 0.25rem;
+  border-radius: 0 0 0.5rem 0.5rem;
   z-index: 10;
   background-color: ${({ theme }) => theme.material.palette.background.paper};
   border: ${({ theme }) => `1px solid ${theme.material.palette.divider}`};
