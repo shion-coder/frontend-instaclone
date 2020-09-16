@@ -15,9 +15,7 @@ const Suggestion: FC = () => {
   const { isLoading, data } = useQuery([QUERY.GET_SUGGESTED_USERS, username], requestGetSuggestedUsers);
 
   const renderSuggestList = () => {
-    return !data ? (
-      <></>
-    ) : data.users.length ? (
+    return !data ? null : data.users.length ? (
       data?.users.map((user) => <UserSuggest key={user._id} user={user} />)
     ) : (
       <NoUsers>No available users</NoUsers>

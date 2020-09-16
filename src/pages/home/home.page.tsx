@@ -1,25 +1,28 @@
 import React, { FC } from 'react';
-import { Container, Grid } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 
+import Feed from 'components/home/feed';
 import User from 'components/home/user';
 import Suggestion from 'components/home/suggestion';
+
+import { Wrapper, Content, SideBar } from './home.styles';
 
 /* -------------------------------------------------------------------------- */
 
 const Home: FC = () => {
   return (
     <Container maxWidth="lg">
-      <Grid container justify="center">
-        <Grid item xs={12} sm={8}>
-          <></>
-        </Grid>
+      <Wrapper container direction="row-reverse">
+        <Content>
+          <Feed />
+        </Content>
 
-        <Grid item xs={12} sm={4} container direction="column">
+        <SideBar>
           <User />
 
           <Suggestion />
-        </Grid>
-      </Grid>
+        </SideBar>
+      </Wrapper>
     </Container>
   );
 };

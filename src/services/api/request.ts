@@ -5,6 +5,7 @@ import {
   ReturnConfirmProps,
   ReturnMeProps,
   ReturnGetNotificationsProps,
+  ReturnGetPostsFeed,
   ReturnGetSuggestedUsers,
   ReturnGetUserProps,
   ReturnSearchUsernameProps,
@@ -105,6 +106,13 @@ export const requestSearchUsername = (username: string, offset: unknown): Promis
 
 export const requestGetFollow = (username: string, offset: unknown, route: string): Promise<ReturnGetFollowProps> =>
   http.get<ReturnGetFollowProps>(`${ENDPOINT.GET_USER}/${username}/${offset}/${route}`).then((res) => res.data);
+
+/**
+ * Request get posts feed
+ */
+
+export const requestGetPostsFeed = (offset: unknown): Promise<ReturnGetPostsFeed> =>
+  http.get<ReturnGetPostsFeed>(`${ENDPOINT.POST}/feed/${offset}`).then((res) => res.data);
 
 /**
  * Request get suggested posts

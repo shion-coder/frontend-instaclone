@@ -42,6 +42,11 @@ export type ReturnGetNotificationsProps = {
   next?: number;
 };
 
+export type ReturnGetPostsFeed = {
+  posts: ReturnGetPostProps[];
+  next?: number;
+};
+
 export type ReturnGetSuggestedPostsProps = {
   posts: PostProps[];
   next?: number;

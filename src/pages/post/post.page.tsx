@@ -54,7 +54,7 @@ const Post: FC<Props> = ({ postId }) => {
   return (
     <Container maxWidth="md">
       <Wrapper item xs={12} container>
-        <ImageContainer item xs={12} sm={7} onClick={focusInput}>
+        <ImageContainer item xs={12} sm={7}>
           <Image src={image} filter={filter} />
         </ImageContainer>
 

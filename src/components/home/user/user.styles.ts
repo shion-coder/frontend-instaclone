@@ -9,10 +9,6 @@ export const UserContainer = styled(Grid)`
   padding: 1.25rem 2rem;
   border-radius: 0.5rem;
   margin-bottom: 2rem;
-
-  @media screen and (max-width: 959px) {
-    padding: 1.25rem 1rem;
-  }
 `;
 
 export const AvatarSkeleton = styled(Skeleton).attrs(() => ({

@@ -24,6 +24,8 @@ export * from './use-get-follow';
 
 export * from './use-get-notifications';
 
+export * from './use-get-posts-feed';
+
 export * from './use-get-suggested-posts';
 
 export * from './use-get-posts';
