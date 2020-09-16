@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState, useRef, useEffect } from 'react';
 import { useMutation, queryCache } from 'react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
@@ -23,9 +23,23 @@ export const useFollow = (
   const {
     user: { username },
   } = userToFollow;
+
   const { isCurrentUser } = userProfile;
 
   const [newUserToFollow, setNewUserToFollow] = useState(userToFollow);
+  const isMounted = useRef<boolean | null>(null);
+
+  /**
+   * Set isMounted value to prevent update state on unmounted component
+   */
+
+  useEffect(() => {
+    isMounted.current = true;
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   /**
    * Get follow function and handle it on error or on success
@@ -36,6 +50,14 @@ export const useFollow = (
       toast.error(err.response?.data.error, { toastId: TOAST.FOLLOW_ERROR });
     },
     onSuccess: (data) => {
+      /**
+       * Check if modal is close or not
+       */
+
+      if (!isMounted.current) {
+        return queryCache.invalidateQueries([QUERY.GET_USER, userProfile.user.username]);
+      }
+
       /**
        * If use follow button in profile page not in followers or following modal, update followerCount number and isFollowing state
        */
