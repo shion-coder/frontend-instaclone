@@ -11,7 +11,7 @@ import { Wrapper, Content, SideBar } from './home.styles';
 
 const Home: FC = () => {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <Wrapper container direction="row-reverse">
         <Content>
           <Feed />
