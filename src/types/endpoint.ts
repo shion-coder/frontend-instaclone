@@ -4,6 +4,7 @@ export enum ENDPOINT {
   LOGIN = '/auth/login',
   CONFIRM = '/users/email/confirm',
   NOTIFICATIONS = '/notifications',
+  GET_SUGGESTED_USERS = '/users/suggested',
   GET_USER = '/users',
   GET_ME = '/users/me',
   UPDATE_AVATAR = '/users/avatar',

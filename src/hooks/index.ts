@@ -36,6 +36,8 @@ export * from './use-get-comments';
 
 export * from './use-follow';
 
+export * from './use-suggested-follow';
+
 export * from './use-update-avatar';
 
 export * from './use-update-profile';

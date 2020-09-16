@@ -10,5 +10,5 @@ export const AvatarContainer = styled(Grid)`
 `;
 
 export const InfoContainer = styled(Grid)`
-  padding: ${({ theme }) => theme.material.spacing(3, 3)};
+  padding: ${({ theme }) => theme.material.spacing(4, 3)};
 `;

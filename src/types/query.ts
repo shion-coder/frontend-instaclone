@@ -10,4 +10,5 @@ export enum QUERY {
   GET_POST = 'get-post',
   GET_COMMENTS = 'get-comments',
   GET_SEARCH_USERNAME = 'get-search-username',
+  GET_SUGGESTED_USERS = 'get-suggested-users',
 }

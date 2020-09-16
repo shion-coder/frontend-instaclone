@@ -27,6 +27,10 @@ export type ReturnSearchUsernameProps = {
   next?: number;
 };
 
+export type ReturnGetSuggestedUsers = {
+  users: UserProps[];
+};
+
 export type ReturnGetFollowProps = {
   users: ReturnGetUserProps[];
   next?: number;

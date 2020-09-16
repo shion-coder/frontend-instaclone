@@ -5,6 +5,7 @@ import {
   ReturnConfirmProps,
   ReturnMeProps,
   ReturnGetNotificationsProps,
+  ReturnGetSuggestedUsers,
   ReturnGetUserProps,
   ReturnSearchUsernameProps,
   ReturnGetFollowProps,
@@ -83,6 +84,13 @@ export const requestGetNotifications = (offset: unknown): Promise<ReturnGetNotif
 
 export const requestGetUser = (username: string): Promise<ReturnGetUserProps> =>
   http.get<ReturnGetUserProps>(`${ENDPOINT.GET_USER}/${username}`).then((res) => res.data);
+
+/**
+ * Request get suggested users
+ */
+
+export const requestGetSuggestedUsers = (): Promise<ReturnGetSuggestedUsers> =>
+  http.get<ReturnGetSuggestedUsers>(ENDPOINT.GET_SUGGESTED_USERS).then((res) => res.data);
 
 /**
  * Request search user with username
