@@ -53,8 +53,4 @@ export const StyledInputBase = styled(InputBase)`
       width: 12rem;
     }
   }
-
-  @media screen and (max-width: 959px) {
-    width: 12rem;
-  }
 `;

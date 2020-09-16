@@ -9,6 +9,10 @@ export const UserContainer = styled(Grid)`
   padding: 1.5rem 2rem;
   border-radius: 0.5rem;
   margin-bottom: 2rem;
+
+  @media screen and (max-width: 959px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 export const AvatarSkeleton = styled(Skeleton).attrs(() => ({
@@ -25,6 +29,10 @@ export const Info = styled.div`
   justify-content: center;
   margin-left: 2rem;
   font-size: 0.9rem;
+
+  @media screen and (max-width: 959px) {
+    margin-left: 1.5rem;
+  }
 `;
 
 export const Text = styled.span`
