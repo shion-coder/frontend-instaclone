@@ -19,13 +19,13 @@ const Post: FC<Props> = ({ data }) => {
     post: { image, filter },
   } = data;
 
-  const ref = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   /**
    * Focus comment input function to use when click comment icon
    */
 
-  const focusInput = () => ref.current?.focus();
+  const focusInput = () => inputRef.current?.focus();
 
   return (
     <Container>
@@ -33,11 +33,11 @@ const Post: FC<Props> = ({ data }) => {
 
       <Image src={image} filter={filter} />
 
-      <Comments data={data} />
+      <Comments data={data} height="210px" />
 
       <Action data={data} focus={focusInput} />
 
-      <Field data={data} inputRef={ref} />
+      <Field data={data} inputRef={inputRef} />
     </Container>
   );
 };

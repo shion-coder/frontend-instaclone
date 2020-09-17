@@ -28,6 +28,7 @@ export const useSuggestedFollow = (usernameToFollow: string, toggleFollow: () =>
       toggleFollow();
 
       queryCache.invalidateQueries([QUERY.GET_SUGGESTED_USERS, username]);
+      queryCache.invalidateQueries([QUERY.GET_POSTS_FEED, username]);
     },
   });
 

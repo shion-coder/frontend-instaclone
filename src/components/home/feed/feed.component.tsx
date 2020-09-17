@@ -1,23 +1,43 @@
 import React, { FC } from 'react';
 
+import { PATH } from 'types';
 import { useGetPostsFeed } from 'hooks';
-import Post from './post';
+import Post, { PostLoading } from './post';
 
-import { Container } from './feed.styles';
+import { Container, LoadMore, NoContent, Icon, Title, Text, StyledLink as Link } from './feed.styles';
 
 /* -------------------------------------------------------------------------- */
 
 const Feed: FC = () => {
-  const { data, isLoading, canFetchMore } = useGetPostsFeed();
+  const { ref, data, isLoading, canFetchMore } = useGetPostsFeed();
 
   const renderPosts = () => {
     if (isLoading) {
-      return <></>;
+      return (
+        <>
+          <PostLoading />
+          <PostLoading />
+          <PostLoading />
+          <PostLoading />
+        </>
+      );
     }
 
     if (data) {
       if (data[0].posts?.length === 0) {
-        return <></>;
+        return (
+          <NoContent>
+            <Icon />
+
+            <Title>No content available</Title>
+
+            <Text>Your feed will display all posts of you and from accounts you follow</Text>
+
+            <Text>
+              Follow some user or go to <Link to={PATH.EXPLORE}>explore page</Link> to view new post
+            </Text>
+          </NoContent>
+        );
       }
 
       return data.map((page, i) => (
@@ -28,7 +48,17 @@ const Feed: FC = () => {
     }
   };
 
-  return <Container>{renderPosts()}</Container>;
+  return (
+    <Container>
+      {renderPosts()}
+
+      {canFetchMore && (
+        <LoadMore ref={ref}>
+          <PostLoading />
+        </LoadMore>
+      )}
+    </Container>
+  );
 };
 
 export default Feed;

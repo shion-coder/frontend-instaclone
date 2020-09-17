@@ -14,6 +14,7 @@ import { Container, Caption, Body, Content, Name, Message, Stats, Date, LoadComm
 
 type Props = {
   data: ReturnGetPostProps;
+  height?: string;
 };
 
 const Comments: FC<Props> = ({
@@ -25,6 +26,7 @@ const Comments: FC<Props> = ({
       date,
     },
   },
+  height,
 }) => {
   const { goUser } = useCustomHistory(username);
   const { data, isLoading, isFetchingMore, fetchMore, canFetchMore } = useGetComments(_id);
@@ -59,7 +61,7 @@ const Comments: FC<Props> = ({
   };
 
   return (
-    <Container>
+    <Container height={height} id="comments-container">
       {caption && (
         <Caption container alignItems="center">
           <Grid item>

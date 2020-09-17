@@ -3,9 +3,13 @@ import { Grid } from '@material-ui/core';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled(Grid)`
+type ContainerProps = {
+  height?: string;
+};
+
+export const Container = styled(Grid)<ContainerProps>`
   flex: 1;
-  max-height: 310px;
+  max-height: ${({ height }) => (height ? height : '310px')};
   border-bottom: 1px solid ${({ theme }) => theme.material.palette.divider};
   overflow: auto;
 `;

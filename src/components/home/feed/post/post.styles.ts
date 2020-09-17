@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 /* -------------------------------------------------------------------------- */
 
@@ -20,3 +21,10 @@ export const Image = styled.img<ImageProps>`
   display: block;
   filter: ${({ filter }) => (filter ? filter : 'none')};
 `;
+
+export const ImageSkeleton = styled(Skeleton).attrs(() => ({
+  animation: 'wave',
+  variant: 'rect',
+  width: '100%',
+  height: '25rem',
+}))``;
