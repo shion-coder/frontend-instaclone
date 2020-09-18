@@ -29,3 +29,15 @@ export const ImageSkeleton = styled(Skeleton).attrs(() => ({
   width: '100%',
   height: '25rem',
 }))``;
+
+export const MoreComments = styled.p`
+  font-weight: bold;
+  margin: 1rem 1.25rem 0.5rem;
+  cursor: pointer;
+`;
+
+export const Comments = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.material.palette.divider};
+  max-height: 12.75rem;
+  overflow-y: auto;
+`;

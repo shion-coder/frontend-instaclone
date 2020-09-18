@@ -1,11 +1,13 @@
 import { useInfiniteQuery } from 'react-query';
 
 import { ReturnGetCommentsProps, QUERY } from 'types';
+import { useIntersectionObserver } from 'hooks';
 import { requestGetComments } from 'services';
 
 /* -------------------------------------------------------------------------- */
 
 type ReturnProps = {
+  ref: (node: HTMLDivElement) => void;
   data: ReturnGetCommentsProps[] | undefined;
   isLoading: boolean;
   isFetchingMore: false | 'previous' | 'next' | undefined;
@@ -26,5 +28,13 @@ export const useGetComments = (id: string): ReturnProps => {
     },
   );
 
-  return { data, isLoading, isFetchingMore, fetchMore, canFetchMore };
+  /**
+   * Infinite scroll enabled when entry is visible and query can fetch more
+   */
+
+  const [ref, entry] = useIntersectionObserver({});
+
+  entry?.isVisible && canFetchMore && fetchMore();
+
+  return { ref, data, isLoading, isFetchingMore, fetchMore, canFetchMore };
 };

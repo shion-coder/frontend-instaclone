@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, Dispatch, SetStateAction } from 'react';
 import { Grid } from '@material-ui/core';
 
+import { CommentProps } from 'types';
 import { useDeleteComment } from 'hooks';
 import Button from 'components/common/button';
 
@@ -13,12 +14,13 @@ type Props = {
   postId: string;
   closeModal: () => void;
   closeDeleteModal: () => void;
+  setComments?: Dispatch<SetStateAction<CommentProps[]>>;
 };
 
-const DeletePost: FC<Props> = ({ id, postId, closeModal, closeDeleteModal }) => {
-  const { deletePost, isLoading } = useDeleteComment(postId, closeModal, closeDeleteModal);
+const DeletePost: FC<Props> = ({ id, postId, closeModal, closeDeleteModal, setComments }) => {
+  const { deleteComment, isLoading } = useDeleteComment(postId, closeModal, closeDeleteModal, setComments);
 
-  const handleDelete = () => deletePost(id);
+  const handleDelete = () => deleteComment(id);
 
   return (
     <Wrapper elevation={2}>

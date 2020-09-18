@@ -47,3 +47,5 @@ export const Date = styled.span``;
 export const LoadComments = styled(Grid)`
   margin: ${({ theme }) => theme.material.spacing(1, 1)};
 `;
+
+export const LoadMore = styled.div``;

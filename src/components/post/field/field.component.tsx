@@ -1,8 +1,8 @@
-import React, { RefObject, ChangeEvent, FC, FormEvent, useState } from 'react';
+import React, { Dispatch, SetStateAction, RefObject, ChangeEvent, FC, FormEvent, useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
-import { ReturnGetPostProps } from 'types';
+import { ReturnGetPostProps, CommentProps } from 'types';
 import { useCreateComment } from 'hooks';
 
 import { Wrapper, Form, StyledInputBase as InputBase } from './field.styles';
@@ -12,6 +12,7 @@ import { Wrapper, Form, StyledInputBase as InputBase } from './field.styles';
 type Props = {
   data: ReturnGetPostProps;
   inputRef: RefObject<HTMLInputElement>;
+  setComments?: Dispatch<SetStateAction<CommentProps[]>>;
 };
 
 const Field: FC<Props> = ({
@@ -19,10 +20,11 @@ const Field: FC<Props> = ({
     post: { _id },
   },
   inputRef,
+  setComments,
 }) => {
   const [value, setValue] = useState('');
 
-  const { createComment, isLoading } = useCreateComment(_id, setValue);
+  const { createComment, isLoading } = useCreateComment(_id, setValue, setComments);
 
   /**
    * Handle comment form

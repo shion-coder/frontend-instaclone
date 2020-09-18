@@ -50,6 +50,8 @@ export type CommentProps = {
   commentCount: number;
   author: UserProps;
   date: string;
+  isMine: boolean;
+  isLiked: boolean;
 };
 
 export type NotificationProps = {

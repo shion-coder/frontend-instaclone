@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, Dispatch, SetStateAction, useState } from 'react';
 import Modal from 'styled-react-modal';
 import { Grid, IconButton } from '@material-ui/core';
 
@@ -27,7 +27,8 @@ import {
 
 type Props = {
   postId: string;
-  data: CommentProps & { isMine: boolean; isLiked: boolean };
+  data: CommentProps;
+  setComments?: Dispatch<SetStateAction<CommentProps[]>>;
 };
 
 const Comment: FC<Props> = ({
@@ -41,6 +42,7 @@ const Comment: FC<Props> = ({
     isMine,
     isLiked,
   },
+  setComments,
 }) => {
   const [isNewLiked, setIsNewLiked] = useState(isLiked);
   const [newLikeCount, setNewLikeCount] = useState(likeCount);
@@ -83,7 +85,7 @@ const Comment: FC<Props> = ({
       </Buttons>
 
       <Modal isOpen={isOpen} onBackgroundClick={closeModal} onEscapeKeydown={closeModal}>
-        <CommentModal id={_id} postId={postId} isMine={isMine} closeModal={closeModal} />
+        <CommentModal id={_id} postId={postId} isMine={isMine} closeModal={closeModal} setComments={setComments} />
       </Modal>
     </Wrapper>
   );

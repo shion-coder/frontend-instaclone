@@ -110,3 +110,7 @@ export type ReturnLikeComment = {
 export type ReturnSavePost = {
   isSaved: boolean;
 };
+
+export type ReturnDeleteComment = {
+  id: string;
+};

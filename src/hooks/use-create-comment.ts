@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useMutation, queryCache } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { CreateCommentProps, QUERY, TOAST } from 'types';
+import { CreateCommentProps, CommentProps, QUERY, TOAST } from 'types';
 import { requestCreateComment } from 'services';
 import { errorMessage } from 'utils';
 
@@ -13,7 +13,11 @@ type ReturnProps = {
   isLoading: boolean;
 };
 
-export const useCreateComment = (id: string, setValue: Dispatch<SetStateAction<string>>): ReturnProps => {
+export const useCreateComment = (
+  id: string,
+  setValue: Dispatch<SetStateAction<string>>,
+  setComments?: Dispatch<SetStateAction<CommentProps[]>>,
+): ReturnProps => {
   /**
    * Get creat comment function and handle it on error, on mutate or on success
    */
@@ -22,10 +26,15 @@ export const useCreateComment = (id: string, setValue: Dispatch<SetStateAction<s
     onError: () => {
       toast.error(errorMessage.wrong, { toastId: TOAST.WRONG });
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryCache.invalidateQueries([QUERY.GET_POST, id]);
 
       queryCache.invalidateQueries([QUERY.GET_COMMENTS, id]);
+
+      setComments &&
+        setComments((previous) => {
+          return [data.comment, ...previous];
+        });
 
       setValue('');
     },

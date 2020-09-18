@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Grid, IconButton } from '@material-ui/core';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { Grid } from '@material-ui/core';
 
 import { ReturnGetPostProps } from 'types';
 import { useCustomHistory, useGetComments } from 'hooks';
@@ -8,7 +7,7 @@ import { formatDate } from 'utils';
 import Avatar from 'components/common/avatar';
 import Comment, { CommentLoading } from './comment';
 
-import { Container, Caption, Body, Content, Name, Message, Stats, Date, LoadComments } from './comments.styles';
+import { Container, Caption, Body, Content, Name, Message, Stats, Date, LoadMore } from './comments.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -29,9 +28,7 @@ const Comments: FC<Props> = ({
   height,
 }) => {
   const { goUser } = useCustomHistory(username);
-  const { data, isLoading, isFetchingMore, fetchMore, canFetchMore } = useGetComments(_id);
-
-  const handleLoadComments = () => fetchMore();
+  const { ref, data, isLoading, canFetchMore } = useGetComments(_id);
 
   const renderComments = () => {
     if (isLoading) {
@@ -61,7 +58,7 @@ const Comments: FC<Props> = ({
   };
 
   return (
-    <Container height={height} id="comments-container">
+    <Container height={height}>
       {caption && (
         <Caption container alignItems="center">
           <Grid item>
@@ -82,17 +79,13 @@ const Comments: FC<Props> = ({
         </Caption>
       )}
 
-      {canFetchMore && (
-        <LoadComments item container justify="center">
-          <IconButton onClick={handleLoadComments} disabled={isLoading}>
-            <AddCircleOutlineIcon />
-          </IconButton>
-        </LoadComments>
-      )}
-
-      {isFetchingMore === 'next' && <CommentLoading />}
-
       {renderComments()}
+
+      {canFetchMore && (
+        <LoadMore ref={ref}>
+          <CommentLoading />
+        </LoadMore>
+      )}
     </Container>
   );
 };

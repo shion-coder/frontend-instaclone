@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, Dispatch, SetStateAction } from 'react';
 import Modal from 'styled-react-modal';
 import { Grid } from '@material-ui/core';
 
+import { CommentProps } from 'types';
 import { useModal } from 'hooks';
 import Item from 'components/common/list-item-button';
 import DeleteComment from 'components/modal/delete-comment';
@@ -15,9 +16,10 @@ type Props = {
   postId: string;
   isMine: boolean;
   closeModal: () => void;
+  setComments?: Dispatch<SetStateAction<CommentProps[]>>;
 };
 
-const CommentModal: FC<Props> = ({ id, postId, isMine, closeModal }) => {
+const CommentModal: FC<Props> = ({ id, postId, isMine, closeModal, setComments }) => {
   /**
    * Handle delete post modal
    */
@@ -34,7 +36,13 @@ const CommentModal: FC<Props> = ({ id, postId, isMine, closeModal }) => {
         )}
 
         <Modal isOpen={isOpen} onBackgroundClick={closeDeleteModal} onEscapeKeydown={closeDeleteModal}>
-          <DeleteComment id={id} postId={postId} closeModal={closeModal} closeDeleteModal={closeDeleteModal} />
+          <DeleteComment
+            id={id}
+            postId={postId}
+            closeModal={closeModal}
+            closeDeleteModal={closeDeleteModal}
+            setComments={setComments}
+          />
         </Modal>
 
         <Grid item onClick={closeModal}>

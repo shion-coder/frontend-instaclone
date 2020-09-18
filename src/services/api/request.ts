@@ -24,6 +24,7 @@ import {
   ReturnLikePost,
   ReturnLikeComment,
   ReturnSavePost,
+  ReturnDeleteComment,
   RegisterInformationStageProps,
   RegisterProps,
   LoginProps,
@@ -251,5 +252,5 @@ export const requestCreateComment = (id: string, values: CreateCommentProps): Pr
  * Request deleteComment
  */
 
-export const requestDeleteComment = (id: string): Promise<null> =>
-  http.delete(`${ENDPOINT.POST}/comments/${id}`).then((res) => res.data);
+export const requestDeleteComment = (id: string): Promise<ReturnDeleteComment> =>
+  http.delete<ReturnDeleteComment>(`${ENDPOINT.POST}/comments/${id}`).then((res) => res.data);
