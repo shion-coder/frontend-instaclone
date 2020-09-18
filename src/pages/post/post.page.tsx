@@ -6,13 +6,13 @@ import { Grid } from '@material-ui/core';
 import { QUERY } from 'types';
 import { requestGetPost } from 'services';
 import NotFound from 'pages/not-found';
-import Loader from 'components/loader/lottie-loader';
 import InfoHeader from 'components/post/info-header';
 import Comments from 'components/post/comments';
 import Action from 'components/post/action';
 import Field from 'components/post/field';
+import { PostLoading } from './post-loading';
 
-import { StyledContainer as Container, Wrapper, ImageContainer, Image } from './post.styles';
+import { StyledContainer as Container, Wrapper, ImageContainer, Image, ImageSkeleton } from './post.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -43,7 +43,7 @@ const Post: FC<Props> = ({ postId }) => {
 
   const { data, isLoading } = useQuery([QUERY.GET_POST, idQuery], () => requestGetPost(idQuery));
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <PostLoading />;
 
   if (!data) return <NotFound />;
 
@@ -55,7 +55,7 @@ const Post: FC<Props> = ({ postId }) => {
     <Container maxWidth="md">
       <Wrapper item xs={12} container>
         <ImageContainer item xs={12} sm={7}>
-          <Image src={image} filter={filter} />
+          <Image src={image} filter={filter} effect="blur" width="100%" height="100%" placeholder={<ImageSkeleton />} />
         </ImageContainer>
 
         <Grid item xs={12} sm={5} container direction="column">

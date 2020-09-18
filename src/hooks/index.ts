@@ -58,6 +58,8 @@ export * from './use-like-comment';
 
 export * from './use-save-post';
 
+export * from './use-create-post';
+
 export * from './use-create-comment';
 
 export * from './use-delete-comment';

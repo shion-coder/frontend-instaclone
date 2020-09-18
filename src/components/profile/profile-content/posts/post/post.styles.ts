@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Grid } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ModeCommentIcon from '@material-ui/icons/ModeComment';
@@ -14,7 +15,7 @@ export const Container = styled(Grid)`
   position: relative;
 `;
 
-export const Image = styled.img<ImageProps>`
+export const Image = styled(LazyLoadImage)<ImageProps>`
   width: 100%;
   height: 100%;
   border-radius: 4px;

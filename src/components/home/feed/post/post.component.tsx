@@ -6,7 +6,7 @@ import Comments from 'components/post/comments';
 import Action from 'components/post/action';
 import Field from 'components/post/field';
 
-import { Container, Image } from './post.styles';
+import { Container, Image, ImageSkeleton } from './post.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -31,7 +31,7 @@ const Post: FC<Props> = ({ data }) => {
     <Container>
       <InfoHeader data={data} />
 
-      <Image src={image} filter={filter} />
+      <Image src={image} filter={filter} effect="blur" width="100%" placeholder={<ImageSkeleton />} />
 
       <Comments data={data} height="210px" />
 

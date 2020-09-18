@@ -1,6 +1,7 @@
-import { MutateFunction, useMutation } from 'react-query';
+import { MutateFunction, useMutation, queryCache } from 'react-query';
 
-import { useCustomHistory } from 'hooks';
+import { QUERY } from 'types';
+import { useUser, useCustomHistory } from 'hooks';
 import { requestDeletePost } from 'services';
 
 /* -------------------------------------------------------------------------- */
@@ -11,6 +12,7 @@ type ReturnProps = {
 };
 
 export const useDeletePost = (closeModal: () => void, closeDeleteModal: () => void): ReturnProps => {
+  const { username } = useUser();
   const { goHome } = useCustomHistory();
 
   /**
@@ -22,6 +24,8 @@ export const useDeletePost = (closeModal: () => void, closeDeleteModal: () => vo
       closeDeleteModal();
       closeModal();
       goHome();
+
+      queryCache.invalidateQueries([QUERY.GET_POSTS_FEED, username]);
     },
   });
 

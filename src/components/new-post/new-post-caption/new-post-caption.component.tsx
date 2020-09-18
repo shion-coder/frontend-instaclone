@@ -1,12 +1,9 @@
 import React, { FC, Dispatch, SetStateAction, ChangeEvent, useState } from 'react';
 import { Grid } from '@material-ui/core';
-import { useMutation } from 'react-query';
-import { AxiosError, CancelTokenSource } from 'axios';
-import { toast } from 'react-toastify';
+import { CancelTokenSource } from 'axios';
 
-import { POST_MODAL, TOAST } from 'types';
-import { useUser, useCustomHistory } from 'hooks';
-import { requestCreatePost } from 'services';
+import { POST_MODAL } from 'types';
+import { useUser, useCreatePost } from 'hooks';
 import Avatar from 'components/common/avatar';
 import Loader from 'components/loader/layer-loader';
 
@@ -37,25 +34,7 @@ const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, fil
   const [caption, setCaption] = useState('');
 
   const { avatar } = useUser();
-  const { goHome } = useCustomHistory();
-
-  /**
-   * Create new post and handle it on error or on success
-   */
-
-  const [createNewPost, { isLoading }] = useMutation(
-    (formData: FormData | undefined) => requestCreatePost(formData, source),
-    {
-      onError: (err: AxiosError) => {
-        toast.error(err.response?.data.error, { toastId: TOAST.UPLOAD_ERROR });
-      },
-      onSuccess: () => {
-        handleClose();
-
-        goHome();
-      },
-    },
-  );
+  const { createPost, isLoading } = useCreatePost(source, handleClose);
 
   /**
    * Handle back to filter modal, change caption and submit post
@@ -69,7 +48,7 @@ const NewPostCaption: FC<Props> = ({ formData, preview, handleClose, source, fil
     formData?.set('filter', filter);
     formData?.set('caption', caption);
 
-    createNewPost(formData);
+    createPost(formData);
   };
 
   return (

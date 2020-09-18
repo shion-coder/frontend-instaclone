@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 /* -------------------------------------------------------------------------- */
@@ -14,7 +15,7 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
-export const Image = styled.img<ImageProps>`
+export const Image = styled(LazyLoadImage)<ImageProps>`
   width: 100%;
   height: auto;
   object-fit: cover;

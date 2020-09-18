@@ -7,7 +7,7 @@ import { PostProps } from 'types';
 import { useModal } from 'hooks';
 import PostDetail from 'pages/post';
 
-import { Container, Image, Overlay, Content, Icon, LikeIcon, CommentIcon, Number } from './post.styles';
+import { Container, Image, ImageSkeleton, Overlay, Content, Icon, LikeIcon, CommentIcon, Number } from './post.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -42,7 +42,7 @@ const Post: FC<Props> = ({ post: { _id, thumbnail, filter, likeCount, commentCou
 
   return (
     <Container item xs={6} sm={4}>
-      <Image src={thumbnail} filter={filter} />
+      <Image src={thumbnail} filter={filter} effect="blur" width="100%" placeholder={<ImageSkeleton />} />
 
       <Overlay onClick={handleOpen}>
         <Content>

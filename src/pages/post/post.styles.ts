@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Container, Grid } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 /* -------------------------------------------------------------------------- */
 
@@ -27,7 +29,7 @@ export const ImageContainer = styled(Grid)`
   }
 `;
 
-export const Image = styled.img<ImageProps>`
+export const Image = styled(LazyLoadImage)<ImageProps>`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -36,5 +38,17 @@ export const Image = styled.img<ImageProps>`
 
   @media screen and (max-width: 599px) {
     height: auto;
+  }
+`;
+
+export const ImageSkeleton = styled(Skeleton).attrs(() => ({
+  animation: 'wave',
+  variant: 'rect',
+}))`
+  width: 100%;
+  height: 100%;
+
+  @media screen and (max-width: 599px) {
+    height: 25rem;
   }
 `;
