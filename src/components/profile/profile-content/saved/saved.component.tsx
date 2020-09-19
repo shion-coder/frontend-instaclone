@@ -51,7 +51,7 @@ const Saved: FC<Props> = ({
       </Grid>
 
       {canFetchMore && (
-        <Load ref={ref}>
+        <Load container spacing={2} ref={ref}>
           <PostsLoading />
         </Load>
       )}
