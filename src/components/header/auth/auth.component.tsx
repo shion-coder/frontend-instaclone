@@ -47,7 +47,7 @@ const Auth: FC<Props> = ({ goExplore, goUser }) => {
           <SearchIcon fontSize="small" />
         </SearchIconContainer>
 
-        <InputBase placeholder="Search …" onChange={handleChange} onFocus={handleFocus} />
+        <InputBase placeholder="Search …" onChange={handleChange} onFocus={handleFocus} search={searchValue ? 1 : 0} />
 
         {searchValue && <Popup searchValue={searchValue} handleClose={handleClose} />}
       </Search>

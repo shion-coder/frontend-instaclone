@@ -8,6 +8,10 @@ type SearchProps = {
   search: string;
 };
 
+type InputBaseProps = {
+  search?: number;
+};
+
 export const Wrapper = styled.nav`
   display: flex;
   justify-content: center;
@@ -40,14 +44,14 @@ export const SearchIconContainer = styled.div`
   justify-content: center;
 `;
 
-export const StyledInputBase = styled(InputBase)`
+export const StyledInputBase = styled(InputBase)<InputBaseProps>`
   padding: ${({ theme }) => theme.material.spacing(0.5, 1, 0.5, 6)};
   font-size: 0.8rem;
   transition: ${({ theme }) => theme.material.transitions.create('width')};
 
   .MuiInputBase-input {
     transition: ${({ theme }) => theme.material.transitions.create('width')};
-    width: 6rem;
+    width: ${({ search }) => (search === 1 ? '12rem' : '6rem')};
 
     :focus {
       width: 12rem;
