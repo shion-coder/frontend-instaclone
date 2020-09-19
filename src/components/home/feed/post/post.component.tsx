@@ -1,17 +1,32 @@
 import React, { FC, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useTheme, useMediaQuery } from '@material-ui/core';
+import { useTheme, useMediaQuery, Grid } from '@material-ui/core';
 import Modal from 'styled-react-modal';
 
 import { ReturnGetPostProps } from 'types';
-import { useModal } from 'hooks';
+import { useCustomHistory, useModal } from 'hooks';
+import { formatDate } from 'utils';
 import PostDetail from 'pages/post';
+import Avatar from 'components/common/avatar';
 import InfoHeader from 'components/post/info-header';
 import Comment from 'components/post/comments/comment';
 import Action from 'components/post/action';
 import Field from 'components/post/field';
 
-import { Container, Image, ImageSkeleton, MoreComments, Comments } from './post.styles';
+import {
+  Container,
+  Image,
+  ImageSkeleton,
+  MoreComments,
+  Comments,
+  Caption,
+  Body,
+  Content,
+  Name,
+  Message,
+  Stats,
+  Date,
+} from './post.styles';
 
 /* -------------------------------------------------------------------------- */
 
@@ -21,7 +36,16 @@ type Props = {
 
 const Post: FC<Props> = ({ data }) => {
   const {
-    post: { _id, image, filter, comments, commentCount },
+    post: {
+      _id,
+      image,
+      filter,
+      comments,
+      commentCount,
+      caption,
+      author: { fullName, avatar },
+      date,
+    },
   } = data;
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -32,6 +56,7 @@ const Post: FC<Props> = ({ data }) => {
    */
 
   const history = useHistory();
+  const { goUser } = useCustomHistory();
   const matchesXS = useMediaQuery(useTheme().breakpoints.down('xs'));
   const { isOpen, openModal, closeModal } = useModal();
 
@@ -64,6 +89,26 @@ const Post: FC<Props> = ({ data }) => {
       <Image src={image} filter={filter} effect="blur" width="100%" placeholder={<ImageSkeleton />} />
 
       <Action data={data} focus={focusInput} />
+
+      {caption && (
+        <Caption container alignItems="center">
+          <Grid item>
+            <Avatar src={avatar} width="2.5rem" height="2.5rem" cursor onClick={goUser} />
+          </Grid>
+
+          <Body item>
+            <Content>
+              <Name onClick={goUser}>{fullName}</Name>
+
+              <Message>{caption}</Message>
+            </Content>
+
+            <Stats>
+              <Date>{formatDate(date)}</Date>
+            </Stats>
+          </Body>
+        </Caption>
+      )}
 
       {commentCount > 2 && <MoreComments onClick={handleOpen}>View all {commentCount} comments</MoreComments>}
 
