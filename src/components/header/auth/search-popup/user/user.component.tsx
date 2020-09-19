@@ -11,14 +11,16 @@ import { Container, Info, Name, Text, Username } from './user.styles';
 type Props = {
   user: UserProps;
   handleClose: () => void;
+  clearSearch: () => void;
 };
 
-const Notification: FC<Props> = ({ user: { username, fullName, avatar }, handleClose }) => {
+const Notification: FC<Props> = ({ user: { username, fullName, avatar }, handleClose, clearSearch }) => {
   const history = useHistory();
 
   const handleClickUser = () => {
     history.push(`/${username}`);
 
+    clearSearch();
     handleClose();
   };
 

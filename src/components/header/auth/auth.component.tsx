@@ -21,6 +21,7 @@ type Props = {
 
 const Auth: FC<Props> = ({ goExplore, goUser }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
 
   const debounceFetch = useCallback(
@@ -32,9 +33,16 @@ const Auth: FC<Props> = ({ goExplore, goUser }) => {
    * Handle search field and popup
    */
 
-  const handleClose = () => setSearchValue('');
+  const clearSearch = () => setValue('');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => debounceFetch(e.target.value);
+  const handleClose = () => {
+    setSearchValue('');
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    debounceFetch(e.target.value);
+  };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => setSearchValue(e.target.value);
 
@@ -47,9 +55,15 @@ const Auth: FC<Props> = ({ goExplore, goUser }) => {
           <SearchIcon fontSize="small" />
         </SearchIconContainer>
 
-        <InputBase placeholder="Search …" onChange={handleChange} onFocus={handleFocus} search={searchValue ? 1 : 0} />
+        <InputBase
+          placeholder="Search …"
+          value={value}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          search={searchValue ? 1 : 0}
+        />
 
-        {searchValue && <Popup searchValue={searchValue} handleClose={handleClose} />}
+        {searchValue && <Popup searchValue={searchValue} handleClose={handleClose} clearSearch={clearSearch} />}
       </Search>
 
       <NewPostButton />

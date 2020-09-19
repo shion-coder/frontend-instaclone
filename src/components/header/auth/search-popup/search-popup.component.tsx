@@ -10,9 +10,10 @@ import { Container, NotFound, LoadMore } from './search-popup.styles';
 type Props = {
   searchValue: string;
   handleClose: () => void;
+  clearSearch: () => void;
 };
 
-const SearchPopup: FC<Props> = ({ searchValue, handleClose }) => {
+const SearchPopup: FC<Props> = ({ searchValue, handleClose, clearSearch }) => {
   const { ref, data, isLoading, canFetchMore } = useSearchUsername(searchValue);
 
   /**
@@ -38,7 +39,7 @@ const SearchPopup: FC<Props> = ({ searchValue, handleClose }) => {
         <React.Fragment key={i}>
           {page.users &&
             page.users.map((user) => {
-              return <User key={user._id} user={user} handleClose={handleClose} />;
+              return <User key={user._id} user={user} handleClose={handleClose} clearSearch={clearSearch} />;
             })}
         </React.Fragment>
       ));
