@@ -22,6 +22,8 @@ Instagram clone using Typescript with my own flavors
 
 - Infinite scroll, loading skeleton, lazy loading image ...
 
+- Responsive
+
 # Technology: 
 
 - Backend: TypeScript, Node.js, Express, JWT, Passport
