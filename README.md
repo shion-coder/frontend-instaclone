@@ -4,7 +4,7 @@ Instagram clone using Typescript with my own flavors
 
 # Feature
 
-- Signup ( with email verification ), Login, Login with Google account
+- Signup with form carousel and email verification, login, quick login with Google account
 
 - Edit Profile, Password, Avatar
 
@@ -12,9 +12,11 @@ Instagram clone using Typescript with my own flavors
 
 - Follow, unfollow
 
-- Like, comment, save post
+- Like, comment, share, save post
 
 - Explore to photos
+
+- Search user
 
 - Get notified when your post being liked, commented or someone follow
 
@@ -23,6 +25,8 @@ Instagram clone using Typescript with my own flavors
 - Infinite scroll, loading skeleton, lazy loading image ...
 
 - Responsive
+
+...
 
 # Technology: 
 
