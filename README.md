@@ -1,4 +1,4 @@
-# Instaclone
+# Instaclone ( frontend )
 
 Instagram clone using Typescript with my own flavors
 
