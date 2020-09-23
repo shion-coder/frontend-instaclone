@@ -28,7 +28,7 @@ Instagram clone using Typescript with my own flavors
 
 - ...
 
-# Technology: 
+# Technology:
 
 - Backend: TypeScript, Node.js, Express, JWT, Passport
 
@@ -47,3 +47,5 @@ Instagram clone using Typescript with my own flavors
 - State Management: Redux with Redux Toolkit
 
 - Form management: Formik
+
+- Handle error: Sentry
