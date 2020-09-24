@@ -48,4 +48,4 @@ Instagram clone using Typescript with my own flavors
 
 - Form management: Formik
 
-- Handle error: Sentry
+- Handle error: Sentry, Winston
