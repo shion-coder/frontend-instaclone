@@ -44,7 +44,7 @@ Instagram clone using Typescript with my own flavors
 
 - Style: Material UI, styled-component,
 
-- State Management: Redux with Redux Toolkit
+- State Management: Redux with Redux Toolkitt
 
 - Form management: Formik
 
