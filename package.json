@@ -65,7 +65,7 @@
     "@types/node": "^12.12.53",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "axios-retry": "^3.1.8",
     "date-fns": "^2.16.0",
     "formik": "^2.1.5",
